@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spectroscopy & Lasers — KD Sir / JC Sir Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --bg2: #13161e;
+    --bg3: #1a1e2a;
+    --bg4: #20253380;
+    --border: #2a3045;
+    --border-bright: #3d4a6a;
+    --text: #d8dde8;
+    --text-dim: #8892a8;
+    --text-bright: #edf0f7;
+    --accent: #5b8dee;
+    --accent2: #7c6af5;
+    --accent3: #3ecf8e;
+    --accent4: #f5a623;
+    --accent5: #e05c7a;
+    --glow: rgba(91,141,238,0.15);
+    --font-body: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-display: 'DM Serif Display', serif;
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  #topnav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(13,15,20,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 56px;
+    flex-wrap: wrap;
+    overflow-x: auto;
+  }
+
+  #topnav .nav-brand {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--accent);
+    white-space: nowrap;
+    margin-right: 14px;
+    letter-spacing: 0.01em;
+  }
+
+  #topnav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.73rem;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  #topnav a:hover {
+    color: var(--text-bright);
+    background: var(--bg3);
+    border-color: var(--border);
+  }
+  #topnav a.active {
+    color: var(--accent);
+    background: rgba(91,141,238,0.1);
+    border-color: rgba(91,141,238,0.3);
+  }
+
+  /* HERO */
+  #hero {
+    padding: 120px 24px 60px;
+    text-align: center;
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(91,141,238,0.08) 0%, transparent 70%);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  #hero::before {
+    content:'';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 80px,
+      rgba(91,141,238,0.02) 80px,
+      rgba(91,141,238,0.02) 81px
+    );
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--accent3);
+    border: 1px solid rgba(62,207,142,0.3);
+    background: rgba(62,207,142,0.06);
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  #hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    color: var(--text-bright);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  #hero h1 em { color: var(--accent); font-style: italic; }
+  #hero p {
+    color: var(--text-dim);
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .hero-meta span {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--text-dim);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 6px;
+  }
+
+  /* LAYOUT */
+  main { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* SECTION HEADINGS */
+  .lecture-section {
+    margin-top: 72px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .lec-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    background: rgba(91,141,238,0.1);
+    border: 1px solid rgba(91,141,238,0.25);
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    color: var(--text-bright);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  h2.section-title .sub { font-size: 0.55em; color: var(--text-dim); font-family: var(--font-body); font-style: normal; font-weight: 400; display: block; margin-top: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  h3.subsection {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 36px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h3.subsection::before {
+    content:'';
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  h4.sub4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent4);
+    margin: 24px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* MATH DISPLAY */
+  .math-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    overflow-x: auto;
+    font-size: 1.05em;
+  }
+  .math-block .label {
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* CALLOUT BOXES */
+  .callout {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .callout.key { border-left: 3px solid var(--accent3); background: rgba(62,207,142,0.04); }
+  .callout.warn { border-left: 3px solid var(--accent4); background: rgba(245,166,35,0.04); }
+  .callout.deriv { border-left: 3px solid var(--accent2); background: rgba(124,106,245,0.04); }
+  .callout.tip { border-left: 3px solid var(--accent5); background: rgba(224,92,122,0.04); }
+
+  .callout .callout-title {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .callout.key .callout-title { color: var(--accent3); }
+  .callout.warn .callout-title { color: var(--accent4); }
+  .callout.deriv .callout-title { color: var(--accent2); }
+  .callout.tip .callout-title { color: var(--accent5); }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.88rem; }
+  th {
+    background: var(--bg3);
+    color: var(--accent);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border-bright);
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  tr:hover td { background: var(--bg3); }
+  td:first-child { color: var(--accent4); font-family: var(--font-mono); font-size: 0.83rem; }
+
+  /* SVG DIAGRAMS */
+  .diagram-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin: 24px 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .diagram-wrap figcaption {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 12px;
+    font-style: italic;
+  }
+
+  /* QUESTION BOX */
+  .qbox {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 28px 0;
+    overflow: hidden;
+  }
+  .qbox-header {
+    background: var(--bg3);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .qbadge {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 9px;
+    border-radius: 4px;
+    background: rgba(91,141,238,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(91,141,238,0.3);
+  }
+  .qbox-header .qtitle { font-size: 0.9rem; font-weight: 500; color: var(--text-bright); }
+  .qbox-body { padding: 16px 18px; }
+  .q-answer {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .q-answer-label {
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    color: var(--accent3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .q-answer-label::before { content: '✓'; }
+
+  /* MNEMONIC */
+  .mnemonic {
+    background: rgba(245,166,35,0.07);
+    border: 1px dashed rgba(245,166,35,0.4);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin: 16px 0;
+  }
+  .mnemonic .mn-label {
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    color: var(--accent4);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mnemonic .mn-label::before { content: '🔑'; }
+  .mnemonic strong { color: var(--accent4); }
+
+  /* FORMULA CARD */
+  .formula-card {
+    background: var(--bg3);
+    border: 1px solid var(--border-bright);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin: 12px 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .formula-card .fc-label {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    min-width: 140px;
+    padding-top: 4px;
+  }
+  .formula-card .fc-eq { flex: 1; font-size: 1em; }
+
+  /* FORMULA SECTION */
+  #formulas .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+  #formulas .fcard {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    transition: border-color 0.2s;
+  }
+  #formulas .fcard:hover { border-color: var(--accent); }
+  #formulas .fcard .ftag {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  #formulas .fcard .feq {
+    font-size: 0.98em;
+    color: var(--text-bright);
+    overflow-x: auto;
+  }
+  #formulas .fcard .fdesc {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* STEPS */
+  .steps { counter-reset: step-counter; list-style: none; margin: 16px 0; }
+  .steps li {
+    counter-increment: step-counter;
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 12px;
+  }
+  .steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+  }
+
+  ul.bullet, ol.bullet {
+    padding-left: 22px;
+    margin: 10px 0;
+  }
+  ul.bullet li, ol.bullet li { margin-bottom: 6px; }
+  ul.bullet li::marker { color: var(--accent); }
+
+  /* CODE */
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: var(--accent3);
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+
+  /* KATEX FIX */
+  .katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+  .katex { color: var(--text-bright); font-size: 1em; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    #topnav { gap: 4px; padding: 8px 12px; }
+    #topnav a { font-size: 0.67rem; padding: 4px 7px; }
+    main { padding: 32px 16px 60px; }
+    .math-block { font-size: 0.9em; }
+    .formula-card { flex-direction: column; }
+    .formula-card .fc-label { min-width: unset; }
+  }
+
+  /* SVG styles */
+  svg text { font-family: var(--font-mono); fill: var(--text-dim); }
+  svg .label-bright { fill: var(--text-bright); }
+  svg .accent { fill: var(--accent); }
+  svg .accent3 { fill: var(--accent3); }
+  svg .accent4 { fill: var(--accent4); }
+  svg .accent5 { fill: var(--accent5); }
+  svg line, svg path, svg rect, svg circle, svg polygon { stroke-width: 1.5; }
+  svg .grid { stroke: var(--border); stroke-width: 0.5; }
+  svg .axis { stroke: var(--border-bright); }
+  svg .curve-blue { stroke: var(--accent); fill: none; }
+  svg .curve-green { stroke: var(--accent3); fill: none; }
+  svg .curve-yellow { stroke: var(--accent4); fill: none; }
+  svg .curve-red { stroke: var(--accent5); fill: none; }
+  svg .arrow { stroke: var(--text-dim); fill: none; marker-end: url(#arrow); }
+</style>
+</head>
+<body>
+
+<!-- TOP NAVIGATION -->
+<nav id="topnav">
+  <span class="nav-brand">Spec & Lasers</span>
+  <a href="#hero">Home</a>
+  <a href="#intro">Intro</a>
+  <a href="#bornoppenheimer">Born-Opp.</a>
+  <a href="#molecular-types">Mol. Types</a>
+  <a href="#rotational">Rotational</a>
+  <a href="#selection-rules">Selection Rules</a>
+  <a href="#non-rigid">Non-Rigid</a>
+  <a href="#symmetric-top">Sym. Top</a>
+  <a href="#vibrational">Vibrational</a>
+  <a href="#anharmonic">Anharmonic</a>
+  <a href="#vibrating-rotor">Vib. Rotor</a>
+  <a href="#lasers">Lasers</a>
+  <a href="#laser-theory">Laser Theory</a>
+  <a href="#laser-types">Laser Types</a>
+  <a href="#formulas">Formulas</a>
+</nav>
+
+<!-- HERO -->
+<header id="hero">
+  <div class="hero-tag">Physics · Advanced Undergraduate</div>
+  <h1>Spectroscopy <em>&</em> Lasers</h1>
+  <p>KD Sir · JC Sir · Class Notes Expanded — Complete derivations, diagrams, selection rules, centrifugal distortion, laser rate equations & more.</p>
+  <div class="hero-meta">
+    <span>Rotational Spectroscopy</span>
+    <span>Vibrational Spectroscopy</span>
+    <span>Anharmonic Oscillator</span>
+    <span>Laser Physics</span>
+    <span>Rate Equations</span>
+    <span>Line Broadening</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== SECTION 1: INTRO ===================== -->
+<section class="lecture-section" id="intro">
+  <div class="lec-label">L-1 · KD Sir · 10/02/26</div>
+  <h2 class="section-title">Introduction to Spectroscopy
+    <span class="sub">What is a spectrum? Atomic vs Molecular</span>
+  </h2>
+
+  <p>A <strong>spectrum</strong> is a plot of intensity vs. wavelength, frequency, or wavenumber for radiation emitted/absorbed by matter. When electromagnetic radiation interacts with matter, the result — absorption, emission, or scattering — is <em>spectroscopy</em>.</p>
+
+  <h3 class="subsection">Emission vs. Absorption</h3>
+  <ul class="bullet">
+    <li><strong>Emission spectrum:</strong> atoms/molecules lose energy and emit photons. Seen as bright lines on a dark background. Comes from the inner part of the sun.</li>
+    <li><strong>Absorption spectrum (Dark lines / Fraunhofer lines):</strong> radiation passes through a cool gas and is absorbed at specific frequencies. Seen as dark lines on a continuous background. Acts as a <em>fingerprint</em> of the absorbing element.</li>
+  </ul>
+
+  <div class="callout key">
+    <div class="callout-title">Historical Significance</div>
+    Elements <strong>Cs</strong> and <strong>Rb</strong> were discovered through spectroscopy — unknown lines seen in flames that didn't match any known element. Spectroscopy enables analysis of distant stars and galaxies (composition, velocity, temperature) without touching them.
+  </div>
+
+  <h3 class="subsection">Applications of Spectroscopy</h3>
+  <ul class="bullet">
+    <li>Forensic science — compositional analysis of trace samples</li>
+    <li>Food safety — detecting adulterants and contaminants</li>
+    <li>Material science — probing electronic structure and bonding</li>
+    <li>Astronomy — studying extra-terrestrial objects remotely</li>
+    <li>Medical diagnostics — IR/NMR/fluorescence spectroscopy</li>
+  </ul>
+
+  <h3 class="subsection">Atomic vs. Molecular Spectroscopy</h3>
+  <table>
+    <tr><th>Feature</th><th>Atomic</th><th>Molecular</th></tr>
+    <tr><td>Line shape</td><td>Sharp, delta-function-like lines</td><td>Broad <em>bands</em> (overlapping lines)</td></tr>
+    <tr><td>Origin</td><td>Electronic transitions only, $E_2 - E_1 = h\nu$</td><td>Electronic + vibrational + rotational transitions</td></tr>
+    <tr><td>Complexity</td><td>Simpler to interpret</td><td>Complex — band spectra due to multiple levels</td></tr>
+    <tr><td>Interaction</td><td>EM radiation with electron cloud</td><td>EM wave interacts with oscillating dipole</td></tr>
+  </table>
+
+  <div class="callout warn">
+    <div class="callout-title">Why Molecular Spectroscopy is Complex</div>
+    In a molecule, the EM wave interacts with an <strong>oscillating dipole</strong>. The molecule can have rotational and vibrational motion that modulates this dipole. This leads to many more energy levels, hence overlapping spectral lines forming <em>bands</em> instead of sharp lines.
+  </div>
+
+  <h3 class="subsection">Types of Molecular Transitions &amp; Spectral Regions</h3>
+  <table>
+    <tr><th>Transition</th><th>Energy Scale</th><th>Spectral Region</th><th>Technique</th></tr>
+    <tr><td>Electronic</td><td>$10^4$–$10^5$ cm$^{-1}$ (eV range)</td><td>UV-Visible</td><td>UV-Vis spectroscopy</td></tr>
+    <tr><td>Vibrational</td><td>$10^2$–$10^3$ cm$^{-1}$</td><td>Infrared (IR)</td><td>IR spectroscopy, Raman</td></tr>
+    <tr><td>Rotational</td><td>$10^{-1}$–$10$ cm$^{-1}$</td><td>Microwave/Far-IR</td><td>Microwave spectroscopy</td></tr>
+    <tr><td>Nuclear spin</td><td>$\sim 10^{-4}$ cm$^{-1}$ (RF)</td><td>Radiowave</td><td>NMR</td></tr>
+  </table>
+
+  <div class="callout key">
+    <div class="callout-title">Wavenumber Convention</div>
+    In spectroscopy, energy is almost always reported as <strong>wavenumber</strong> $\tilde{\nu}$ (cm$^{-1}$):
+    $$\tilde{\nu} = \frac{1}{\lambda} = \frac{\nu}{c} = \frac{E}{hc}$$
+    Since $hc\tilde{\nu} = E$, wavenumber is directly proportional to energy. The range $10^4$–$10^5$ cm$^{-1}$ is easy to plot and covers most interesting spectroscopy.
+  </div>
+</section>
+
+<!-- ===================== SECTION 2: BORN-OPPENHEIMER ===================== -->
+<section class="lecture-section" id="bornoppenheimer">
+  <div class="lec-label">L-2 · KD Sir · 17/02/26</div>
+  <h2 class="section-title">The Born-Oppenheimer Approximation
+    <span class="sub">Decoupling electronic, vibrational and rotational motion</span>
+  </h2>
+
+  <p>For a molecule like H₂ (2 nuclei, 2 electrons), the full Schrödinger equation involves <em>all</em> particles simultaneously — it cannot be solved analytically because of the large number of interaction terms. The Born-Oppenheimer approximation is the key trick that makes molecular quantum mechanics tractable.</p>
+
+  <h3 class="subsection">The Physical Idea</h3>
+  <p>Electrons are about 1836 times lighter than protons and move roughly 1836 times faster. When an electron makes one orbit, the nucleus has barely moved. So from the electron's perspective, the nucleus is essentially <strong>stationary</strong>. Conversely, when the nucleus vibrates, the electrons instantaneously rearrange.</p>
+
+  <div class="callout key">
+    <div class="callout-title">Key Insight</div>
+    Because the nuclear motion is so much slower than electronic motion, we can <strong>decouple</strong> them. Solve for electrons first (with fixed nuclei), then solve for nuclei in the resulting potential. This is the Born-Oppenheimer approximation.
+  </div>
+
+  <h3 class="subsection">Mathematical Formulation</h3>
+
+  <p>The total molecular wavefunction factorises into independent parts:</p>
+
+  <div class="math-block">
+    <span class="label">Born-Oppenheimer Factorisation</span>
+    $$\Psi_\text{mol} = \Psi_e \cdot \Psi_v \cdot \Psi_r$$
+    <p style="font-size:0.82rem;margin-top:8px;color:var(--text-dim)">where $\Psi_e$ = electronic, $\Psi_v$ = vibrational, $\Psi_r$ = rotational wavefunction</p>
+  </div>
+
+  <p>Similarly, the total Hamiltonian separates:</p>
+
+  <div class="math-block">
+    <span class="label">Separated Hamiltonian</span>
+    $$\hat{H}_\text{mol} = \hat{H}_e + \hat{H}_v + \hat{H}_r$$
+  </div>
+
+  <p>Since each $\hat{H}_i$ operates only on its own $\Psi_i$:</p>
+
+  <div class="math-block">
+    <span class="label">Energy Addition</span>
+    $$\hat{H}_\text{mol}\Psi_\text{mol} = (E_e + E_v + E_r)\Psi_\text{mol}$$
+    $$E_\text{total} = E_e + E_v + E_r$$
+  </div>
+
+  <p>This is why "zooming in" on an electronic absorption band reveals vibrational structure, and zooming further reveals rotational structure — the energy scales are all different and separable.</p>
+
+  <div class="callout deriv">
+    <div class="callout-title">Why Can Translational Motion Be Ignored?</div>
+    <ul class="bullet">
+      <li>A nucleus has <strong>spin motion</strong> (spin angular momentum) and <strong>vibrational motion</strong> between bonds.</li>
+      <li>The whole nucleus also has <strong>translational motion</strong> (center-of-mass motion).</li>
+      <li>Translational motion only gains energy when an external electric field is applied (i.e., it couples to electrostatics). In a field-free spectroscopy experiment, it's <em>negligible</em> — except it appears as <strong>Doppler broadening</strong>.</li>
+      <li>So: $\Psi_\text{nuc} = \Psi_t \cdot \Psi_v \cdot \Psi_r$, and since $\Psi_t$ doesn't appear in spectroscopy (only Doppler shift), we drop it.</li>
+    </ul>
+  </div>
+
+  <h3 class="subsection">Hierarchy of Energy Scales</h3>
+  <div class="diagram-wrap">
+    <svg width="560" height="200" viewBox="0 0 560 200">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#8892a8"/>
+        </marker>
+      </defs>
+      <!-- axis -->
+      <line x1="40" y1="160" x2="530" y2="160" class="axis" stroke="#3d4a6a"/>
+      <text x="40" y="180" font-size="10" fill="#5b8dee">Rotational</text>
+      <text x="148" y="180" font-size="10" fill="#5b8dee">Vibrational</text>
+      <text x="290" y="180" font-size="10" fill="#5b8dee">Electronic</text>
+      <!-- blocks -->
+      <rect x="50" y="120" width="80" height="35" rx="4" fill="rgba(91,141,238,0.15)" stroke="#5b8dee"/>
+      <text x="90" y="142" font-size="9" text-anchor="middle" fill="#d8dde8">0.01–10 cm⁻¹</text>
+      <rect x="160" y="80" width="100" height="35" rx="4" fill="rgba(62,207,142,0.15)" stroke="#3ecf8e"/>
+      <text x="210" y="102" font-size="9" text-anchor="middle" fill="#d8dde8">100–3000 cm⁻¹</text>
+      <rect x="290" y="30" width="130" height="35" rx="4" fill="rgba(245,166,35,0.15)" stroke="#f5a623"/>
+      <text x="355" y="52" font-size="9" text-anchor="middle" fill="#d8dde8">10⁴–10⁵ cm⁻¹</text>
+      <!-- arrows showing zoom -->
+      <path d="M130 137 C150 137 150 97 160 97" class="arrow" stroke="#8892a8" fill="none" marker-end="url(#arrow)"/>
+      <text x="142" y="112" font-size="8" fill="#8892a8">zoom</text>
+      <path d="M260 97 C275 97 275 47 290 47" class="arrow" stroke="#8892a8" fill="none" marker-end="url(#arrow)"/>
+      <text x="268" y="68" font-size="8" fill="#8892a8">zoom</text>
+      <!-- labels on left -->
+      <text x="38" y="145" font-size="9" text-anchor="end" fill="#8892a8">microwave</text>
+      <text x="38" y="100" font-size="9" text-anchor="end" fill="#8892a8">IR</text>
+      <text x="38" y="52" font-size="9" text-anchor="end" fill="#8892a8">UV-Vis</text>
+    </svg>
+    <figcaption>Fig 1 — Hierarchy of molecular energy scales. Zooming into an electronic band reveals vibrational structure; zooming further reveals rotational structure.</figcaption>
+  </div>
+</section>
+
+<!-- ===================== SECTION 3: MOLECULAR TYPES ===================== -->
+<section class="lecture-section" id="molecular-types">
+  <div class="lec-label">L-2 · KD Sir · 17/02/26 (cont.)</div>
+  <h2 class="section-title">Classification of Molecules as Rotors
+    <span class="sub">Moments of inertia and molecular topology</span>
+  </h2>
+
+  <p>Rotational spectroscopy depends critically on the <strong>moment of inertia</strong> of the molecule. For rotation about 3 principal axes A, B, C, we define $I_A$, $I_B$, $I_C$ (with convention $I_A \leq I_B \leq I_C$).</p>
+
+  <div class="math-block">
+    <span class="label">Moment of Inertia (general)</span>
+    $$I = \sum_i m_i r_i^2$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">where $r_i$ is the perpendicular distance of mass $m_i$ from the rotation axis.</p>
+  </div>
+
+  <h3 class="subsection">Five Types of Tops (Molecular Rotors)</h3>
+
+  <h4 class="sub4">1. Linear Molecule</h4>
+  <p>All atoms along one axis. Rotation about the molecular axis has negligible inertia since all mass is on the axis.</p>
+  <div class="math-block">$$I_A = I_B, \quad I_C \approx 0$$</div>
+  <p>Examples: CO, HCl, CO₂, HCN, N₂</p>
+
+  <h4 class="sub4">2. Symmetric Top</h4>
+  <p>Two of the three moments are equal.</p>
+  <div class="math-block">$$I_A = I_B \neq I_C$$</div>
+  <p>Sub-types:</p>
+  <ul class="bullet">
+    <li><strong>Prolate symmetric top</strong> ($I_A = I_B > I_C$): shaped like a rugby ball / cigar. Example: CH₃Cl, NH₃. The unique axis C has <em>smaller</em> inertia (spins fastest).</li>
+    <li><strong>Oblate symmetric top</strong> ($I_A = I_B < I_C$): shaped like a frisbee/disc. Example: BCl₃, benzene. The unique axis C has <em>larger</em> inertia.</li>
+  </ul>
+
+  <h4 class="sub4">3. Spherical Top</h4>
+  <div class="math-block">$$I_A = I_B = I_C$$</div>
+  <p>Rotation is equivalent in all directions. No net change in dipole moment with rotation → <strong>no pure rotational spectrum</strong>. Examples: CH₄, SF₆, CCl₄ (hydrocarbons).</p>
+
+  <h4 class="sub4">4. Asymmetric Top</h4>
+  <div class="math-block">$$I_A \neq I_B \neq I_C$$</div>
+  <p>The most common and most complicated case. No two moments are equal. Examples: H₂O, SO₂, most complex organic molecules. No simple closed-form energy expression.</p>
+
+  <div class="diagram-wrap">
+    <svg width="520" height="200" viewBox="0 0 520 200">
+      <!-- Linear -->
+      <circle cx="60" cy="100" r="18" fill="rgba(91,141,238,0.3)" stroke="#5b8dee"/>
+      <circle cx="100" cy="100" r="12" fill="rgba(62,207,142,0.3)" stroke="#3ecf8e"/>
+      <circle cx="130" cy="100" r="18" fill="rgba(91,141,238,0.3)" stroke="#5b8dee"/>
+      <text x="95" y="140" font-size="9" text-anchor="middle" fill="#8892a8">Linear (CO₂)</text>
+      <text x="95" y="155" font-size="8" text-anchor="middle" fill="#5b8dee">IA=IB, IC≈0</text>
+      <!-- Prolate -->
+      <ellipse cx="230" cy="100" rx="40" ry="22" fill="rgba(245,166,35,0.15)" stroke="#f5a623"/>
+      <text x="230" y="140" font-size="9" text-anchor="middle" fill="#8892a8">Prolate (cigar)</text>
+      <text x="230" y="155" font-size="8" text-anchor="middle" fill="#f5a623">IA=IB &gt; IC</text>
+      <!-- Oblate -->
+      <ellipse cx="380" cy="105" rx="48" ry="18" fill="rgba(224,92,122,0.15)" stroke="#e05c7a"/>
+      <text x="380" y="140" font-size="9" text-anchor="middle" fill="#8892a8">Oblate (disc)</text>
+      <text x="380" y="155" font-size="8" text-anchor="middle" fill="#e05c7a">IA=IB &lt; IC</text>
+      <!-- Spherical -->
+      <circle cx="480" cy="100" r="28" fill="rgba(124,106,245,0.15)" stroke="#7c6af5"/>
+      <text x="480" y="140" font-size="9" text-anchor="middle" fill="#8892a8">Spherical</text>
+      <text x="480" y="155" font-size="8" text-anchor="middle" fill="#7c6af5">IA=IB=IC</text>
+    </svg>
+    <figcaption>Fig 2 — Four molecular rotor types visualised by shape. Each shape determines the symmetry of the rotational spectrum.</figcaption>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mn-label">Mnemonic — Prolate vs Oblate</div>
+    <strong>Prolate = Pointer</strong> — thin and pointy like a pen/cigar (unique axis is the long symmetry axis, smallest I). <br>
+    <strong>Oblate = Obese/disc</strong> — fat like a discus (unique axis perpendicular to the plane, largest I). <br>
+    Remember: for prolate $I_C < I_A = I_B$ and for oblate $I_C > I_A = I_B$.
+  </div>
+</section>
+
+<!-- ===================== SECTION 4: ROTATIONAL SPECTROSCOPY ===================== -->
+<section class="lecture-section" id="rotational">
+  <div class="lec-label">L-3 · KD Sir · 24/02/26</div>
+  <h2 class="section-title">Rotational Spectroscopy — Rigid Diatomic Rotor
+    <span class="sub">Quantum energy levels, wavefunctions, and the microwave spectrum</span>
+  </h2>
+
+  <h3 class="subsection">The Rigid Rotor Model</h3>
+  <p>Model: a diatomic molecule is two masses $m_1$, $m_2$ separated by a <em>fixed</em> bond length $r_e$ (no vibration). The system reduces to a single particle of <strong>reduced mass</strong> $\mu$ rotating at distance $r_e$:</p>
+
+  <div class="math-block">
+    <span class="label">Reduced Mass</span>
+    $$\mu = \frac{m_1 m_2}{m_1 + m_2}$$
+  </div>
+
+  <p>The moment of inertia:</p>
+  <div class="math-block">$$I = \mu r_e^2$$</div>
+
+  <p>Since the bond length is fixed, there is <strong>no potential energy</strong> (no vibration), so the Hamiltonian is <em>purely kinetic</em>:</p>
+
+  <div class="math-block">
+    <span class="label">Rigid Rotor Hamiltonian</span>
+    $$\hat{H} = \frac{\hat{L}^2}{2I}$$
+  </div>
+
+  <h3 class="subsection">Solving the Schrödinger Equation</h3>
+
+  <p>The SE in 3D using spherical polar coordinates $(r, \theta, \phi)$:</p>
+
+  <div class="math-block">
+    <span class="label">Rigid Rotor SE</span>
+    $$-\frac{\hbar^2}{2I}\left[\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial}{\partial\theta}\right) + \frac{1}{\sin^2\theta}\frac{\partial^2}{\partial\phi^2}\right]\Psi = E\Psi$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">Note: the $r$ term vanishes since $r$ is fixed for a rigid rotor. $\nabla^2$ reduces to just the angular part.</p>
+  </div>
+
+  <div class="callout deriv">
+    <div class="callout-title">Step-by-Step Derivation of Energy Levels</div>
+    <ol class="steps">
+      <li>Assume separable solution: $\Psi(\theta,\phi) = \Theta(\theta)\Phi(\phi)$</li>
+      <li>Substitute into SE and divide by $\Theta\Phi$. The $\phi$-dependent part separates:
+        $$\frac{1}{\Phi}\frac{\partial^2\Phi}{\partial\phi^2} = -m^2 \quad \Rightarrow \quad \Phi = \frac{1}{\sqrt{2\pi}}e^{im\phi}$$
+        where $m = 0, \pm1, \pm2, \ldots$ is the <strong>magnetic quantum number</strong>.</li>
+      <li>The $\theta$-equation becomes the associated Legendre equation:
+        $$\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial\Theta}{\partial\theta}\right)\Theta = m^2\Theta$$
+        Solutions are Associated Legendre Polynomials $P_J^{|m|}(\cos\theta)$.</li>
+      <li>For physical (normalizable, single-valued) solutions, we require the <strong>rotational quantum number</strong> $J = 0, 1, 2, \ldots$ with $|m| \leq J$.</li>
+      <li>The combined solution $\Psi = \Theta\Phi$ are the <strong>spherical harmonics</strong> $Y_J^m(\theta,\phi)$.</li>
+      <li>Substituting back gives the energy eigenvalue:
+        $$E_J = \frac{\hbar^2}{2I}J(J+1)$$</li>
+    </ol>
+  </div>
+
+  <div class="math-block">
+    <span class="label">Rigid Rotor Energy Levels</span>
+    $$\boxed{E_J = \frac{\hbar^2}{2I}J(J+1), \qquad J = 0, 1, 2, \ldots}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:8px">In spectroscopy, we convert to wavenumbers (divide by $hc$):</p>
+    $$\boxed{\varepsilon_J = \frac{E_J}{hc} = \frac{h}{8\pi^2 Ic}J(J+1) = B\,J(J+1) \quad \text{cm}^{-1}}$$
+  </div>
+
+  <div class="math-block">
+    <span class="label">Rotational Constant B</span>
+    $$\boxed{B = \frac{h}{8\pi^2 Ic} = \frac{\hbar}{4\pi Ic} \quad \text{cm}^{-1}}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">$B$ contains $I = \mu r_e^2$. <strong>Measuring $B$ from spectroscopy gives us the bond length $r_e$.</strong> This is why rotational spectroscopy is so powerful for structural chemistry.</p>
+  </div>
+
+  <h3 class="subsection">Degeneracy of Rotational Levels</h3>
+  <p>For each value of $J$, the magnetic quantum number $m$ (or $m_J$) can take $2J+1$ values: $m = -J, -J+1, \ldots, 0, \ldots, J-1, J$. Each $(J, m)$ pair is a distinct state with the <em>same</em> energy (in field-free space). Therefore:</p>
+
+  <div class="math-block">
+    <span class="label">Degeneracy of Level J</span>
+    $$g_J = 2J + 1$$
+  </div>
+
+  <p>This degeneracy is <em>crucial</em> for understanding the intensity pattern of the rotational spectrum.</p>
+
+  <div class="diagram-wrap">
+    <svg width="400" height="240" viewBox="0 0 400 240">
+      <!-- Energy levels -->
+      <line x1="50" y1="210" x2="350" y2="210" class="axis" stroke="#3d4a6a"/>
+      <!-- J=0 -->
+      <line x1="80" y1="208" x2="200" y2="208" stroke="#5b8dee" stroke-width="2.5"/>
+      <text x="210" y="212" font-size="10" fill="#8892a8">J=0, ε=0</text>
+      <text x="60" y="212" font-size="9" fill="#5b8dee" text-anchor="end">0</text>
+      <!-- J=1 -->
+      <line x1="80" y1="178" x2="200" y2="178" stroke="#5b8dee" stroke-width="2.5"/>
+      <text x="210" y="182" font-size="10" fill="#8892a8">J=1, ε=2B</text>
+      <text x="60" y="182" font-size="9" fill="#5b8dee" text-anchor="end">2B</text>
+      <!-- J=2 -->
+      <line x1="80" y1="128" x2="200" y2="128" stroke="#5b8dee" stroke-width="2.5"/>
+      <text x="210" y="132" font-size="10" fill="#8892a8">J=2, ε=6B</text>
+      <text x="60" y="132" font-size="9" fill="#5b8dee" text-anchor="end">6B</text>
+      <!-- J=3 -->
+      <line x1="80" y1="58" x2="200" y2="58" stroke="#5b8dee" stroke-width="2.5"/>
+      <text x="210" y="62" font-size="10" fill="#8892a8">J=3, ε=12B</text>
+      <text x="60" y="62" font-size="9" fill="#5b8dee" text-anchor="end">12B</text>
+      <!-- transitions -->
+      <line x1="160" y1="205" x2="160" y2="181" stroke="#3ecf8e" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="168" y="196" font-size="9" fill="#3ecf8e">2B</text>
+      <line x1="170" y1="175" x2="170" y2="131" stroke="#3ecf8e" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="178" y="156" font-size="9" fill="#3ecf8e">4B</text>
+      <line x1="180" y1="125" x2="180" y2="61" stroke="#3ecf8e" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="188" y="96" font-size="9" fill="#3ecf8e">6B</text>
+      <!-- spacing labels -->
+      <text x="200" y="30" font-size="9" fill="#8892a8">Energy levels spread out as J increases</text>
+      <text x="200" y="42" font-size="9" fill="#8892a8">Separation = 2B(J+1)</text>
+    </svg>
+    <figcaption>Fig 3 — Rigid rotor energy levels. Spacing between adjacent levels increases linearly: $\Delta\varepsilon = 2B(J+1)$. The spectrum shows equally spaced lines separated by $2B$.</figcaption>
+  </div>
+
+  <h3 class="subsection">The Microwave Absorption Spectrum</h3>
+
+  <p>The transition frequency for $J \to J+1$ absorption:</p>
+
+  <div class="math-block">
+    <span class="label">Transition Wavenumber (Rigid Rotor)</span>
+    $$\tilde{\nu}_{J \to J+1} = \varepsilon_{J+1} - \varepsilon_J = B(J+2)(J+1) - BJ(J+1) = 2B(J+1)$$
+    $$\boxed{\tilde{\nu}_{J \to J+1} = 2B(J+1)}$$
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">Key Result: Equally Spaced Spectrum</div>
+    For $J = 0 \to 1$: $\tilde{\nu} = 2B$; for $J = 1 \to 2$: $\tilde{\nu} = 4B$; for $J = 2 \to 3$: $\tilde{\nu} = 6B$, etc.
+    The spectrum consists of <strong>equally spaced lines at $2B, 4B, 6B, \ldots$</strong> with spacing $2B$ between consecutive lines.
+    Measuring this spacing gives $B$, and hence the bond length!
+  </div>
+
+  <h3 class="subsection">Intensity and Population — Maxwell-Boltzmann Distribution</h3>
+  <p>The intensity of a spectral line depends on the <em>population</em> of the initial state. At temperature $T$, population of level $J$ is:</p>
+
+  <div class="math-block">
+    <span class="label">Population of Level J</span>
+    $$N_J = N_0 \cdot (2J+1) \cdot e^{-Bhc\,J(J+1)/kT}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">The $(2J+1)$ factor is the degeneracy; it increases population for low $J$. The exponential Boltzmann factor suppresses high $J$. Their competition creates a maximum.</p>
+  </div>
+
+  <p>The level with maximum population is found by differentiating $N_J$ with respect to $J$ and setting to zero:</p>
+
+  <div class="math-block">
+    <span class="label">Most Populated Level</span>
+    $$\boxed{J_\text{max} = \sqrt{\frac{kT}{2Bhc}} - \frac{1}{2}}$$
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title">Why Intensity Peaks Then Falls</div>
+    At low $J$: few states (small degeneracy) but high population per state → some intensity. At high $J$: many states but Boltzmann factor kills them. In between, the product $(2J+1)e^{-E_J/kT}$ has a maximum at $J_\text{max}$, giving the characteristic bell-shaped envelope of the rotational spectrum.
+  </div>
+
+  <div class="qbox">
+    <div class="qbox-header">
+      <span class="qbadge">Q1</span>
+      <span class="qtitle">HCl has $B = 10.6$ cm$^{-1}$. Where will the first absorption line appear and what is the bond length?</span>
+    </div>
+    <div class="qbox-body">
+      <p>First line: $J = 0 \to 1$, so $\tilde{\nu} = 2B = 21.2$ cm$^{-1}$ (microwave region).</p>
+      <div class="q-answer">
+        <div class="q-answer-label">Solution</div>
+        <p>Bond length from $B$: $B = h/(8\pi^2 Ic)$ so $I = h/(8\pi^2 Bc)$</p>
+        <p>$I = \frac{6.626\times10^{-34}}{8\pi^2 \times 10.6 \times 100 \times 2.998\times10^{10}} = 2.65\times10^{-47}$ kg·m²</p>
+        <p>Reduced mass of HCl: $\mu = \frac{1\times35}{36}\times1.66\times10^{-27} = 1.63\times10^{-27}$ kg</p>
+        <p>$r_e = \sqrt{I/\mu} = \sqrt{2.65\times10^{-47}/1.63\times10^{-27}} = 1.27$ Å ✓ (known value ~1.274 Å)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 5: SELECTION RULES ===================== -->
+<section class="lecture-section" id="selection-rules">
+  <div class="lec-label">L-4 · KD Sir · 10/03/26</div>
+  <h2 class="section-title">Selection Rules for Rotational Spectroscopy
+    <span class="sub">Which transitions are allowed? The physical and mathematical basis.</span>
+  </h2>
+
+  <h3 class="subsection">Physical Prerequisite: Permanent Dipole Moment</h3>
+  <p>For a molecule to have a <strong>pure rotational spectrum</strong>, it must possess a <em>permanent electric dipole moment</em>. The interaction energy between a dipole $\vec{\mu}$ and an external electric field $\vec{E}$ is:</p>
+  <div class="math-block">$$U = -\vec{\mu}\cdot\vec{E} = -\mu E \cos\theta$$</div>
+  <p>When the molecule rotates, the direction of $\vec{\mu}$ changes with time → the oscillating dipole interacts with the oscillating EM field. When the dipole's rotation frequency matches the field frequency: <strong>resonance → absorption/emission</strong>.</p>
+
+  <div class="callout key">
+    <div class="callout-title">Condition for Pure Rotational Spectrum</div>
+    The molecule must have a <strong>permanent dipole moment $\mu \neq 0$</strong>. Molecules like O₂, N₂, CO₂, H₂ (homonuclear diatomics or symmetric molecules) have $\mu = 0$ and show <strong>no pure rotational spectrum</strong>. However, they can still show <em>vibrational and electronic</em> spectra.
+  </div>
+
+  <table>
+    <tr><th>Molecule</th><th>Dipole?</th><th>Pure Rotational Spectrum?</th><th>Why</th></tr>
+    <tr><td>HCl, CO, HF</td><td>Yes</td><td>Yes</td><td>Heteronuclear → asymmetric charge</td></tr>
+    <tr><td>O₂, N₂, H₂</td><td>No</td><td>No</td><td>Homonuclear → symmetric charge dist.</td></tr>
+    <tr><td>CO₂</td><td>No</td><td>No</td><td>Linear, symmetric → dipoles cancel</td></tr>
+    <tr><td>H₂O, SO₂</td><td>Yes</td><td>Yes</td><td>Bent molecule → net dipole</td></tr>
+    <tr><td>CH₄, CCl₄</td><td>No</td><td>No</td><td>Spherical top → all dipoles cancel</td></tr>
+  </table>
+
+  <h3 class="subsection">Mathematical Derivation of the Selection Rule</h3>
+
+  <p>A transition from state $\Psi_{J',m'}$ to state $\Psi_{J,m}$ occurs only if the <strong>transition dipole moment</strong> is non-zero:</p>
+
+  <div class="math-block">
+    <span class="label">Transition Dipole Moment (must be non-zero)</span>
+    $$\langle\Psi_{J'}^{m'} | \hat{\mu}_z | \Psi_J^m\rangle = \int\int Y_{J'}^{m'*}(\theta,\phi)\,\mu\cos\theta\,Y_J^m(\theta,\phi)\sin\theta\,d\theta\,d\phi \neq 0$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">Here $\mu_z = \mu\cos\theta$ because the $z$-component of the dipole in the lab frame is $\mu$ (fixed body) times $\cos\theta$ (projection). The wavefunctions are spherical harmonics $Y_J^m$.</p>
+  </div>
+
+  <div class="callout deriv">
+    <div class="callout-title">Deriving $\Delta m = 0$ Condition (Step by Step)</div>
+    <ol class="steps">
+      <li>Separate the integral into $\theta$-part and $\phi$-part:
+        $$= N'N\mu \int_0^{2\pi} e^{-im'\phi}e^{im\phi}\,d\phi \;\times\; \int_0^\pi P_{J'}^{|m'|}(\cos\theta)\,\cos\theta\,P_J^{|m|}(\cos\theta)\sin\theta\,d\theta$$</li>
+      <li>Evaluate the $\phi$ integral:
+        $$\int_0^{2\pi} e^{i(m-m')\phi}\,d\phi = \begin{cases} 2\pi & \text{if } m = m' \\ 0 & \text{if } m \neq m' \end{cases}$$</li>
+      <li>Therefore: the integral is zero unless $m = m'$, i.e., $\Delta m = m' - m = 0$.</li>
+      <li>This gives the <strong>first selection rule: $\Delta m = 0$</strong>.</li>
+    </ol>
+  </div>
+
+  <div class="callout deriv">
+    <div class="callout-title">Deriving $\Delta J = \pm 1$ Condition (Step by Step)</div>
+    <ol class="steps">
+      <li>With $\Delta m = 0$, the integral reduces to:
+        $$2\pi N'N\mu \int_{-1}^{+1} P_{J'}^{|m|}(x)\cdot x \cdot P_J^{|m|}(x)\,dx \quad \text{(where } x = \cos\theta\text{)}$$</li>
+      <li>Use the recurrence identity for Associated Legendre polynomials:
+        $$(2J+1)\,x\,P_J^{|m|}(x) = (J-|m|+1)\,P_{J+1}^{|m|}(x) + (J+|m|)\,P_{J-1}^{|m|}(x)$$</li>
+      <li>Substitute this identity into the integral. The orthogonality of Legendre polynomials says:
+        $$\int_{-1}^{1} P_{J'}^{|m|}(x)\,P_J^{|m|}(x)\,dx = 0 \quad \text{unless } J' = J$$</li>
+      <li>After substitution, the integral is non-zero only if $J' = J+1$ or $J' = J-1$, i.e., $\Delta J = \pm 1$.</li>
+      <li>$\Delta J = +1$: absorption (molecule goes to higher $J$). $\Delta J = -1$: emission.</li>
+    </ol>
+  </div>
+
+  <div class="math-block">
+    <span class="label">Selection Rules for Pure Rotational Spectroscopy</span>
+    $$\boxed{\Delta J = \pm 1, \quad \Delta m = 0}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">$\Delta J = +1$ for absorption, $\Delta J = -1$ for emission. Only adjacent $J$ levels can be connected.</p>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mn-label">Mnemonic — Selection Rules</div>
+    <strong>"One Step at a Time"</strong> — the rotational quantum number can only change by <strong>one</strong> ($\Delta J = \pm 1$). Think of it like climbing stairs — you can only go up or down one step, never jump two.
+    The dipole "projects" onto the lab $z$-axis via $\cos\theta$, so $m$ cannot change ($\Delta m = 0$).
+  </div>
+
+  <div class="qbox">
+    <div class="qbox-header">
+      <span class="qbadge">Q2</span>
+      <span class="qtitle">Why does CO₂ show no pure rotational spectrum even though it has C=O bonds which are individually polar?</span>
+    </div>
+    <div class="qbox-body">
+      <div class="q-answer">
+        <div class="q-answer-label">Answer</div>
+        <p>CO₂ is a linear, <em>symmetric</em> molecule: O=C=O. The two C=O dipole moments point in opposite directions along the molecular axis and are equal in magnitude. They exactly cancel, giving a net permanent dipole $\mu = 0$. With no permanent dipole, no oscillating dipole is created by rotation, so no interaction with the EM field is possible → no rotational spectrum. CO₂ can still show vibrational (IR) and electronic (UV-Vis) spectra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 6: NON-RIGID ROTOR / CENTRIFUGAL DISTORTION ===================== -->
+<section class="lecture-section" id="non-rigid">
+  <div class="lec-label">L-5 · KD Sir · 12/03/26</div>
+  <h2 class="section-title">Non-Rigid Rotor &amp; Centrifugal Distortion
+    <span class="sub">Why the spectrum isn't perfectly equally spaced — the most misunderstood correction</span>
+  </h2>
+
+  <div class="callout warn">
+    <div class="callout-title">The Problem with the Rigid Rotor</div>
+    The rigid rotor predicts <strong>perfectly equally-spaced spectral lines</strong> at $2B, 4B, 6B, \ldots$. But in reality, the spectrum lines get slightly <em>closer together</em> at higher $J$. The rigid rotor model is wrong because real bonds <strong>stretch</strong> when the molecule rotates fast (like a spinning ball on a rubber string).
+  </div>
+
+  <h3 class="subsection">Physical Mechanism of Centrifugal Distortion</h3>
+
+  <p>Consider the molecule spinning. The centrifugal force $\mu\omega^2 r$ acts outward, trying to stretch the bond. The restoring force of the bond (treated as a spring with force constant $k$) acts inward. In equilibrium:</p>
+
+  <div class="math-block">
+    <span class="label">Force Balance for Non-Rigid Rotor</span>
+    $$k(r - r_e) = \mu\omega^2 r$$
+  </div>
+
+  <p>Solving for $r$ in terms of $r_e$:</p>
+
+  <div class="math-block">
+    <span class="label">Stretched Bond Length</span>
+    $$r = \frac{r_e}{1 - \mu\omega^2/k}$$
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">Why Does $B$ Change?</div>
+    The rotational constant $B \propto 1/r^2$. When the molecule rotates faster (higher $J$), the centrifugal force stretches the bond: $r > r_e$. So $r^2 > r_e^2$ and $B = \hbar/(4\pi\mu r^2 c) < B_e$. <strong>$B$ decreases as rotation speed increases.</strong>
+    <br><br>Also: $\langle 1/r^2\rangle \neq 1/r_e^2$ for the average over vibrational motion. So $B$ is not exactly $B_e$ even in the vibrational ground state.
+  </div>
+
+  <h3 class="subsection">Energy of the Non-Rigid Rotor — Detailed Derivation</h3>
+
+  <p>We need to compute the total energy including the <em>potential energy</em> of the stretched spring, not just kinetic energy.</p>
+
+  <div class="callout deriv">
+    <div class="callout-title">Full Derivation (KD Sir's approach)</div>
+    <ol class="steps">
+      <li><strong>Kinetic energy:</strong> $\text{KE} = L^2/2I$ where $I = \mu r^2$ (bond is now stretched to $r$, not $r_e$)</li>
+      <li><strong>Potential energy:</strong> $\text{PE} = \frac{1}{2}k(r-r_e)^2 = \frac{1}{2}k\left(\frac{\mu\omega^2 r}{k}\right)^2 = \frac{\mu^2\omega^2r^2}{2k}$</li>
+      <li>Now, $L = I\omega = \mu r^2\omega$, so $\omega = L/\mu r^2$. Thus $\mu\omega^2 r^2 = L^2/\mu r^2$, and:
+        $$\text{PE} = \frac{1}{2}\frac{L^4}{\mu^2r^4 \cdot k} \cdot \frac{\mu^2}{\mu^2} = \frac{L^4\mu}{2kI^3}$$</li>
+      <li>Also: KE with stretched $r$:
+        $$\text{KE} = \frac{L^2}{2I} - \frac{L^2\omega^2}{r_e^2 k} = \frac{L^2}{2I} - \frac{L^2\omega^2\mu}{k}$$
+        After careful expansion keeping first-order correction in $\mu\omega^2/k$:
+        $$\text{KE} = \frac{L^2}{2I} - \frac{L^2\omega^2\mu}{k} \approx \frac{L^2}{2I} - \frac{L^4\mu}{I^2 r_e^2 k}$$</li>
+      <li>Total energy: $E = \text{KE} + \text{PE}$:
+        $$E = \frac{L^2}{2I} - \frac{L^4\mu}{I^2 r_e^2 k} + \frac{L^4\mu}{2kI^3}$$
+        Combining terms (using $I = \mu r_e^2$):
+        $$\boxed{E = \frac{L^2}{2I} - \frac{\mu L^4}{2kI^3}}$$</li>
+      <li>Quantise: $L^2 \to J(J+1)\hbar^2$. Convert to wavenumbers:
+        $$\varepsilon_J = B\,J(J+1) - D\,J^2(J+1)^2$$</li>
+    </ol>
+  </div>
+
+  <div class="math-block">
+    <span class="label">Non-Rigid Rotor Energy</span>
+    $$\boxed{\varepsilon_J = B\,J(J+1) - D\,J^2(J+1)^2 \quad \text{cm}^{-1}}$$
+  </div>
+
+  <div class="math-block">
+    <span class="label">Centrifugal Distortion Constant D</span>
+    $$D = \frac{4B^3}{\tilde{\omega}_e^2}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">where $\tilde{\omega}_e$ is the vibrational frequency of the bond (in cm$^{-1}$). Note: $D \approx 10^{-3}$ cm$^{-1}$ while $B \approx 10$ cm$^{-1}$, so $D \ll B$. The correction is tiny at low $J$ but becomes significant at high $J$ because of the $J^2(J+1)^2$ dependence.</p>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">Why D is Always Positive and Small</div>
+    $D > 0$ always, because centrifugal force always <em>stretches</em> the bond (never compresses it). The $-D\,J^2(J+1)^2$ term lowers the energy levels compared to the rigid rotor. At high $J$, where $J^2(J+1)^2$ is large, the levels are pulled closer together, making spectral lines converge slightly. Typical values: $B \sim 1$–$20$ cm$^{-1}$, $D \sim 10^{-3}$–$10^{-4}$ cm$^{-1}$.
+  </div>
+
+  <h3 class="subsection">Transition Frequencies for the Non-Rigid Rotor</h3>
+
+  <p>Calculate $\tilde{\nu}_{J \to J+1} = \varepsilon_{J+1} - \varepsilon_J$:</p>
+
+  <div class="callout deriv">
+    <div class="callout-title">Derivation of Transition Frequency</div>
+    <ol class="steps">
+      <li>$\varepsilon_{J+1} = B(J+1)(J+2) - D(J+1)^2(J+2)^2$</li>
+      <li>$\varepsilon_J = BJ(J+1) - DJ^2(J+1)^2$</li>
+      <li>$\tilde{\nu} = \varepsilon_{J+1} - \varepsilon_J = B(J+1)[(J+2)-(J)] - D(J+1)^2[(J+2)^2 - J^2]$</li>
+      <li>$= 2B(J+1) - D(J+1)^2[(J+2+J)(J+2-J)]$</li>
+      <li>$= 2B(J+1) - D(J+1)^2[(2J+2)(2)]$</li>
+      <li>$= 2B(J+1) - 4D(J+1)^3$</li>
+    </ol>
+  </div>
+
+  <div class="math-block">
+    <span class="label">Non-Rigid Rotor Transition Frequency</span>
+    $$\boxed{\tilde{\nu}_{J \to J+1} = 2B(J+1) - 4D(J+1)^3}$$
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">Physical Interpretation</div>
+    The $-4D(J+1)^3$ term means lines are no longer equally spaced — they converge slightly at high $J$. Rewrite:
+    $$\tilde{\nu} = 2(J+1)\left[B - 2D(J+1)^2\right]$$
+    So the effective $B$ decreases with $J$. At low $J$, the $D$ term is negligible. At high $J$ (high excited states), the $J^3$ term dominates and the spectrum visibly converges.
+  </div>
+
+  <h3 class="subsection">Extracting Both B and D from the Spectrum</h3>
+
+  <p>If both $B$ and $D$ are unknown, rewrite the transition formula:</p>
+  <div class="math-block">
+    $$\frac{\tilde{\nu}}{(J+1)} = 2B - 4D(J+1)^2$$
+  </div>
+  <p>Plot $\tilde{\nu}/(J+1)$ vs $(J+1)^2$: this gives a <strong>straight line</strong> with intercept $2B$ and slope $-4D$. Both constants can be extracted!</p>
+
+  <div class="diagram-wrap">
+    <svg width="480" height="200" viewBox="0 0 480 200">
+      <!-- axes -->
+      <line x1="60" y1="160" x2="420" y2="160" class="axis" stroke="#3d4a6a"/>
+      <line x1="60" y1="20" x2="60" y2="160" class="axis" stroke="#3d4a6a"/>
+      <text x="430" y="163" font-size="10" fill="#8892a8">(J+1)²</text>
+      <text x="20" y="90" font-size="10" fill="#8892a8" transform="rotate(-90,20,90)">ν/(J+1)</text>
+      <!-- rigid rotor line -->
+      <line x1="70" y1="60" x2="410" y2="60" stroke="#5b8dee" stroke-width="1.5" stroke-dasharray="6,3"/>
+      <text x="350" y="52" font-size="9" fill="#5b8dee">Rigid rotor (slope=0)</text>
+      <!-- non-rigid line -->
+      <line x1="70" y1="60" x2="410" y2="130" stroke="#3ecf8e" stroke-width="2"/>
+      <text x="310" y="148" font-size="9" fill="#3ecf8e">Non-rigid rotor</text>
+      <!-- intercept -->
+      <circle cx="70" cy="60" r="4" fill="#f5a623"/>
+      <text x="72" y="50" font-size="9" fill="#f5a623">2B</text>
+      <!-- slope annotation -->
+      <line x1="290" y1="100" x2="390" y2="100" stroke="#8892a8" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="390" y1="100" x2="390" y2="128" stroke="#8892a8" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="392" y="118" font-size="9" fill="#8892a8">slope=-4D</text>
+    </svg>
+    <figcaption>Fig 4 — Graphical method to extract B and D. Plot $\tilde{\nu}/(J+1)$ vs $(J+1)^2$: intercept $= 2B$, slope $= -4D$.</figcaption>
+  </div>
+
+  <div class="qbox">
+    <div class="qbox-header">
+      <span class="qbadge">Q3</span>
+      <span class="qtitle">Explain physically why centrifugal distortion makes spectral lines converge at higher J.</span>
+    </div>
+    <div class="qbox-body">
+      <div class="q-answer">
+        <div class="q-answer-label">Answer</div>
+        <p>At higher $J$, the molecule rotates faster. The centrifugal force $\mu\omega^2 r$ is larger. This stretches the bond further: $r > r_e$. Since $I = \mu r^2$ increases, and $B \propto 1/I$, the effective $B$ decreases. The transition energy $2B(J+1)$ is therefore smaller than the rigid rotor prediction. The $-4D(J+1)^3$ correction captures this: it grows rapidly with $J$, pulling successive lines closer together. Think of it as the molecule becoming "lazier to rotate" as it expands.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mn-label">Mnemonic — Centrifugal Distortion</div>
+    <strong>"Spin fast, stretch far, slow down"</strong>: <br>
+    Fast spin → centrifugal stretch → bigger $I$ → smaller $B$ → smaller transition frequency → lines converge.<br>
+    $D$ = <strong>D</strong>istortion. $D > 0$ always. The $-DJ^2(J+1)^2$ term always <em>lowers</em> energy levels relative to rigid rotor.
+  </div>
+</section>
+
+<!-- ===================== SECTION 7: SYMMETRIC TOP ===================== -->
+<section class="lecture-section" id="symmetric-top">
+  <div class="lec-label">L-6 &amp; L-7 · KD Sir · 16/03/26 &amp; 01/04/26</div>
+  <h2 class="section-title">Symmetric Top Rotational Spectroscopy
+    <span class="sub">Two quantum numbers J and k — the projection quantum number</span>
+  </h2>
+
+  <h3 class="subsection">Energy Levels of the Symmetric Top</h3>
+
+  <p>For a symmetric top, two axes have equal moments ($I_A = I_B$), but the third ($I_C$) is different. The classical energy is:</p>
+
+  <div class="math-block">
+    $$E = \frac{L_A^2}{2I_A} + \frac{L_B^2}{2I_B} + \frac{L_C^2}{2I_C} = \frac{L^2 - L_C^2}{2I_A} + \frac{L_C^2}{2I_C}$$
+  </div>
+
+  <p>Quantising: $L^2 \to J(J+1)\hbar^2$. The component along the symmetry axis $C$ is quantised separately — we need a new quantum number $k$ (the <em>projection</em> of $J$ on the molecular symmetry axis).</p>
+
+  <div class="callout key">
+    <div class="callout-title">The k Quantum Number</div>
+    $k$ represents the component of angular momentum along the molecule's own symmetry axis (body-fixed axis). It takes integer values: $k = 0, \pm1, \pm2, \ldots, \pm J$.
+    This is analogous to $m$ (which is projection on the space-fixed axis). The molecule's rotation can be described as: the angular momentum vector precesses around the space-fixed axis (characterised by $m$) <em>and</em> around the body-fixed symmetry axis (characterised by $k$).
+  </div>
+
+  <div class="math-block">
+    <span class="label">Symmetric Top Energy Levels</span>
+    $$\boxed{\varepsilon_{J,k} = B\,J(J+1) + (A-B)\,k^2}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">where $A = \hbar/(4\pi I_C hc)$ (rotational constant for unique axis) and $B = \hbar/(4\pi I_A hc)$. For <strong>prolate</strong>: $I_A > I_C$ so $A > B$ → $(A-B) > 0$ → energy increases with $|k|$. For <strong>oblate</strong>: $I_A < I_C$ so $A < B$ → $(A-B) < 0$ → energy decreases with $|k|$.</p>
+  </div>
+
+  <h3 class="subsection">Selection Rules for the Symmetric Top</h3>
+  <div class="math-block">
+    <span class="label">Symmetric Top Selection Rules</span>
+    $$\Delta J = \pm 1, \quad \Delta k = 0$$
+  </div>
+
+  <p>Since $\Delta k = 0$, transitions occur between levels with the same $k$. The transition frequency:</p>
+
+  <div class="math-block">
+    <span class="label">Symmetric Top Transition Frequency</span>
+    $$\tilde{\nu}_{J,k \to J+1,k} = 2B(J+1)$$
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">Key Insight: Why $\Delta k = 0$?</div>
+    $k$ represents rotation about the symmetry axis. The dipole moment lies <em>along</em> the symmetry axis for a symmetric top. Rotation about the symmetry axis doesn't change the orientation of the dipole in space — the field "sees" the same dipole regardless of $k$. Therefore, $k$ cannot change via electric dipole interaction.
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title">Important Consequence</div>
+    Even though the energy depends on $k$ ($\varepsilon_{J,k} \neq \varepsilon_{J,k'}$ for $k \neq k'$), the <em>transition frequency</em> $2B(J+1)$ is independent of $k$! So the spectrum looks the same as for a linear molecule (equally spaced), but with <strong>$k$-degeneracy</strong> (more states contributing to each line). The $A$ constant is <em>hidden</em> from pure rotational spectra — you need other techniques to find $I_C$.
+  </div>
+
+  <h3 class="subsection">Degeneracy of Symmetric Top Levels</h3>
+  <p>For each $(J,k)$: $k$ can be $\pm k$ (same energy due to $(A-B)k^2$, so twofold degeneracy for $k \neq 0$) and $m$ can be $2J+1$ values. Total degeneracy:</p>
+  <div class="math-block">
+    $$g_{J,k} = \begin{cases} 2J+1 & k = 0 \\ 2(2J+1) & k \neq 0 \end{cases}$$
+  </div>
+
+  <h3 class="subsection">Centrifugal Distortion in the Symmetric Top</h3>
+  <p>Including distortion, the energy of the symmetric top becomes:</p>
+  <div class="math-block">
+    <span class="label">Distorted Symmetric Top Energy</span>
+    $$\varepsilon_{J,k} = BJ(J+1) + (A-B)k^2 - D_J J^2(J+1)^2 - D_{JK}J(J+1)k^2 - D_K k^4$$
+  </div>
+  <p>There are now <em>three</em> centrifugal distortion constants: $D_J$ (purely rotational distortion), $D_{JK}$ (coupled rotation–$k$ distortion), and $D_K$ (purely $k$-axis distortion). The transition frequency becomes:</p>
+  <div class="math-block">
+    $$\tilde{\nu}_{J\to J+1} = 2B(J+1) - 4D_J(J+1)^3 - 2D_{JK}(J+1)k^2$$
+  </div>
+  <p>Now the spectral lines for different $k$ are split slightly — the $D_{JK}$ term gives $k$-dependence to the line positions, allowing $D_{JK}$ to be measured.</p>
+</section>
+
+<!-- ===================== SECTION 8: VIBRATIONAL SPECTROSCOPY ===================== -->
+<section class="lecture-section" id="vibrational">
+  <div class="lec-label">L-7 · KD Sir · 01/04/26</div>
+  <h2 class="section-title">Vibrational Spectroscopy — Harmonic Oscillator
+    <span class="sub">Infrared absorption, selection rules, and the quantum harmonic oscillator</span>
+  </h2>
+
+  <h3 class="subsection">The Harmonic Oscillator Model</h3>
+  <p>Model the bond as a spring obeying Hooke's Law. Define the vibrational coordinate $q = r - r_e$ (displacement from equilibrium).</p>
+
+  <div class="math-block">
+    <span class="label">Restoring Force</span>
+    $$F = -k(r - r_e) = -kq$$
+  </div>
+
+  <p>The Schrödinger equation with the harmonic potential $V = \frac{1}{2}kq^2$ leads to Hermite polynomial solutions. The energy eigenvalues are <em>equally spaced</em>:</p>
+
+  <div class="math-block">
+    <span class="label">Harmonic Oscillator Energy</span>
+    $$\boxed{E_v = \left(v + \frac{1}{2}\right)\hbar\omega_\text{osc}, \qquad v = 0, 1, 2, \ldots}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">where $\omega_\text{osc} = \sqrt{k/\mu}$ is the classical angular frequency of the oscillator, and $v$ is the vibrational quantum number.</p>
+  </div>
+
+  <div class="math-block">
+    <span class="label">In Wavenumbers</span>
+    $$\tilde{\omega}_e = \frac{1}{2\pi c}\sqrt{\frac{k}{\mu}} \quad \text{cm}^{-1}$$
+    $$\varepsilon_v = \left(v + \frac{1}{2}\right)\tilde{\omega}_e$$
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">Zero-Point Energy</div>
+    Even in the ground state ($v = 0$), the molecule has energy $\frac{1}{2}\hbar\omega$. This is the <strong>zero-point energy</strong> (ZPE). It's a purely quantum mechanical effect — the molecule can never be completely at rest, consistent with the Heisenberg uncertainty principle.
+  </div>
+
+  <h3 class="subsection">Selection Rule for Harmonic Oscillator</h3>
+
+  <p>Using the transition dipole moment matrix element with harmonic oscillator wavefunctions (Hermite polynomials), the selection rule is:</p>
+
+  <div class="math-block">
+    $$\boxed{\Delta v = \pm 1}$$
+  </div>
+
+  <p>All transitions jump exactly one vibrational level. The transition frequency:</p>
+
+  <div class="math-block">
+    $$\tilde{\nu}_{v \to v+1} = \varepsilon_{v+1} - \varepsilon_v = \tilde{\omega}_e \quad \text{(independent of } v\text{!)}$$
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">Key Result: One Line</div>
+    In the ideal harmonic case, <em>all</em> vibrational transitions ($0\to1$, $1\to2$, $2\to3$, ...) have the same frequency $\tilde{\omega}_e$. The IR spectrum shows exactly <strong>one absorption line</strong> at the fundamental frequency!
+  </div>
+
+  <h3 class="subsection">Condition for Infrared Activity</h3>
+  <p>The molecule must have a changing dipole moment during vibration. Dipole operator: $\mu(q) \approx \mu_0 + (\partial\mu/\partial q)q + \ldots$. The transition integral involves $(\partial\mu/\partial q)$. Non-zero only if the dipole <em>changes</em> during the vibration.</p>
+
+  <div class="callout warn">
+    <div class="callout-title">IR Active vs Inactive</div>
+    A vibration is IR active if $\partial\mu/\partial q \neq 0$: the dipole moment must <em>change</em> during the vibration. For CO₂, the symmetric stretch doesn't change $\mu$ (IR inactive), but the asymmetric stretch and bending modes do (IR active). Compare with Raman: complementary selection rules (Raman active if polarisability changes).
+  </div>
+
+  <div class="diagram-wrap">
+    <svg width="440" height="200" viewBox="0 0 440 200">
+      <!-- Harmonic potential -->
+      <path d="M 80,170 Q 180,10 280,170" stroke="#5b8dee" stroke-width="2" fill="rgba(91,141,238,0.05)"/>
+      <!-- Energy levels -->
+      <line x1="105" y1="148" x2="255" y2="148" stroke="#5b8dee" stroke-width="1.5"/>
+      <text x="265" y="152" font-size="9" fill="#8892a8">v=0, ZPE=½ω</text>
+      <line x1="100" y1="119" x2="260" y2="119" stroke="#5b8dee" stroke-width="1.5"/>
+      <text x="265" y="123" font-size="9" fill="#8892a8">v=1</text>
+      <line x1="93" y1="90" x2="267" y2="90" stroke="#5b8dee" stroke-width="1.5"/>
+      <text x="270" y="94" font-size="9" fill="#8892a8">v=2</text>
+      <line x1="85" y1="61" x2="275" y2="61" stroke="#5b8dee" stroke-width="1.5"/>
+      <text x="278" y="65" font-size="9" fill="#8892a8">v=3</text>
+      <!-- transitions — all same spacing -->
+      <line x1="150" y1="145" x2="150" y2="122" stroke="#3ecf8e" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="155" y1="116" x2="155" y2="93" stroke="#3ecf8e" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="160" y1="87" x2="160" y2="64" stroke="#3ecf8e" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="120" y="135" font-size="9" fill="#3ecf8e">ω̃ₑ</text>
+      <text x="120" y="108" font-size="9" fill="#3ecf8e">ω̃ₑ</text>
+      <text x="120" y="79" font-size="9" fill="#3ecf8e">ω̃ₑ</text>
+      <text x="180" y="190" font-size="10" fill="#8892a8">All gaps equal → one spectral line</text>
+    </svg>
+    <figcaption>Fig 5 — Harmonic oscillator: equally spaced energy levels. All transitions ($\Delta v = \pm 1$) have the same frequency → single IR absorption line.</figcaption>
+  </div>
+</section>
+
+<!-- ===================== SECTION 9: ANHARMONIC OSCILLATOR ===================== -->
+<section class="lecture-section" id="anharmonic">
+  <div class="lec-label">L-8 &amp; L-9 · KD Sir · 08/04/26</div>
+  <h2 class="section-title">Anharmonic Oscillator &amp; the Morse Potential
+    <span class="sub">Real bonds, overtones, dissociation, and the hot band</span>
+  </h2>
+
+  <h3 class="subsection">Why Anharmonicity?</h3>
+  <p>The harmonic model predicts equally spaced levels continuing to infinity. But real molecules:</p>
+  <ul class="bullet">
+    <li>Have bonds that can break (dissociation) → energy levels must be bounded</li>
+    <li>Show higher-order transitions ($\Delta v = \pm 2, \pm 3$...) — called overtones</li>
+    <li>Have unequally spaced levels that converge near dissociation</li>
+  </ul>
+
+  <h3 class="subsection">The Morse Potential</h3>
+  <p>A better potential energy curve proposed by P. Morse:</p>
+
+  <div class="math-block">
+    <span class="label">Morse Potential</span>
+    $$U(q) = D_e\left(1 - e^{-aq}\right)^2$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">where $D_e$ = dissociation energy (from bottom of well), $a = \sqrt{k/2D_e}$ controls well width, and $q = r - r_e$.</p>
+  </div>
+
+  <p>Solving the SE with the Morse potential gives:</p>
+
+  <div class="math-block">
+    <span class="label">Anharmonic Oscillator Energy</span>
+    $$\boxed{\varepsilon_v = \left(v+\frac{1}{2}\right)\tilde{\omega}_e - \left(v+\frac{1}{2}\right)^2 x_e\tilde{\omega}_e}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">where $x_e$ is the <strong>anharmonicity constant</strong> (dimensionless, $x_e \ll 1$). The first term is the harmonic result; the second term is the anharmonic correction that lowers the energy levels.</p>
+  </div>
+
+  <h3 class="subsection">Unequally Spaced Levels and Dissociation</h3>
+
+  <p>The gap between consecutive levels:</p>
+  <div class="math-block">
+    $$\Delta\varepsilon_v = \varepsilon_{v+1} - \varepsilon_v = \tilde{\omega}_e - 2x_e\tilde{\omega}_e(v+1) = \tilde{\omega}_e[1 - 2x_e(v+1)]$$
+  </div>
+
+  <p>The gap <em>decreases</em> as $v$ increases (levels converge). Setting $\Delta\varepsilon_v = 0$ gives the last bound state level:</p>
+  <div class="math-block">
+    <span class="label">Last Bound Vibrational Level</span>
+    $$v_F = \frac{1}{2x_e} - 1 \quad (\text{or equivalently, } v_\text{max} \approx \frac{\tilde{\omega}_e}{2x_e\tilde{\omega}_e} - \frac{1}{2} = \frac{1}{2x_e} - \frac{1}{2})$$
+  </div>
+
+  <h3 class="subsection">Dissociation Energies $D_0$ and $D_e$</h3>
+
+  <div class="math-block">
+    <span class="label">Spectroscopic vs. Thermodynamic Dissociation Energy</span>
+    $$D_0 = \varepsilon_v(v=v_F) - \varepsilon_v(v=0)$$
+    $$D_e = D_0 + \frac{1}{2}\tilde{\omega}_e \quad \text{(adding back ZPE)}$$
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">$D_e$ vs $D_0$</div>
+    $D_e$ is measured from the <em>bottom</em> of the potential well. $D_0$ is the actual bond dissociation energy measured from $v=0$ (the real lowest state). Since ZPE $= \frac{1}{2}\tilde{\omega}_e$ lifts the ground state above the bottom: $D_e = D_0 + \frac{1}{2}\tilde{\omega}_e$. Always $D_e > D_0$.
+  </div>
+
+  <h3 class="subsection">Overtones and Combination Bands</h3>
+
+  <p>For anharmonic oscillator, the selection rule relaxes: $\Delta v = \pm 1, \pm 2, \pm 3, \ldots$ (though intensity decreases rapidly for $|\Delta v| > 1$).</p>
+
+  <div class="math-block">
+    <span class="label">Fundamental and Overtone Frequencies</span>
+    $$\tilde{\nu}_{0\to1} = \tilde{\omega}_e - 2x_e\tilde{\omega}_e = \tilde{\omega}_e(1-2x_e) \quad\text{(fundamental)}$$
+    $$\tilde{\nu}_{0\to2} = 2\tilde{\omega}_e - 6x_e\tilde{\omega}_e = 2\tilde{\omega}_e(1-3x_e) \quad\text{(first overtone)}$$
+    $$\tilde{\nu}_{0\to3} = 3\tilde{\omega}_e(1-4x_e) \quad\text{(second overtone)}$$
+  </div>
+
+  <h3 class="subsection">The "Hot Band"</h3>
+
+  <p>The $v=1 \to v=2$ transition gives:</p>
+  <div class="math-block">
+    $$\tilde{\nu}_{1\to2} = \tilde{\omega}_e(1-4x_e)$$
+  </div>
+  <p>This is slightly red-shifted compared to the fundamental $\tilde{\omega}_e(1-2x_e)$. It's called a <strong>hot band</strong> because it's only visible when $v=1$ is thermally populated (at higher temperatures). At room temperature, $v=1$ has very low population (Maxwell-Boltzmann), so hot bands are usually weak and only visible at high $T$.</p>
+
+  <div class="qbox">
+    <div class="qbox-header">
+      <span class="qbadge">Q4</span>
+      <span class="qtitle">HCl shows a fundamental band at 2886 cm⁻¹ and first overtone at 5668 cm⁻¹. Find $\tilde{\omega}_e$ and $x_e$.</span>
+    </div>
+    <div class="qbox-body">
+      <div class="q-answer">
+        <div class="q-answer-label">Solution</div>
+        <p>$\tilde{\nu}_{0\to1} = \tilde{\omega}_e(1-2x_e) = 2886$ cm$^{-1}$ ... (i)</p>
+        <p>$\tilde{\nu}_{0\to2} = 2\tilde{\omega}_e(1-3x_e) = 5668$ cm$^{-1}$ ... (ii)</p>
+        <p>From (ii): $\tilde{\omega}_e(1-3x_e) = 2834$ cm$^{-1}$ ... (ii')</p>
+        <p>Subtract (ii') from (i): $\tilde{\omega}_e x_e = 52$ cm$^{-1}$</p>
+        <p>From (i): $\tilde{\omega}_e - 2(52) = 2886 \Rightarrow \tilde{\omega}_e = 2990$ cm$^{-1}$</p>
+        <p>$x_e = 52/2990 = 0.0174$</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <svg width="440" height="220" viewBox="0 0 440 220">
+      <!-- Morse potential curve -->
+      <path d="M 80,200 C 120,200 130,50 170,35 Q 240,20 350,28 Q 400,30 430,32" stroke="#5b8dee" stroke-width="2" fill="none"/>
+      <!-- Dissociation line -->
+      <line x1="80" y1="30" x2="430" y2="30" stroke="#e05c7a" stroke-width="1" stroke-dasharray="5,3"/>
+      <text x="320" y="24" font-size="9" fill="#e05c7a">Dissociation (continuum)</text>
+      <!-- De arrow -->
+      <line x1="370" y1="200" x2="370" y2="32" stroke="#3ecf8e" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="374" y="120" font-size="9" fill="#3ecf8e">Dₑ</text>
+      <!-- D0 arrow -->
+      <line x1="355" y1="183" x2="355" y2="32" stroke="#f5a623" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="335" y="110" font-size="9" fill="#f5a623">D₀</text>
+      <!-- levels -->
+      <line x1="113" y1="183" x2="227" y2="183" stroke="#5b8dee" stroke-width="1.5"/>
+      <text x="230" y="187" font-size="8" fill="#8892a8">v=0</text>
+      <line x1="105" y1="161" x2="235" y2="161" stroke="#5b8dee" stroke-width="1.5"/>
+      <text x="237" y="165" font-size="8" fill="#8892a8">v=1</text>
+      <line x1="98" y1="140" x2="242" y2="140" stroke="#5b8dee" stroke-width="1.5"/>
+      <text x="245" y="144" font-size="8" fill="#8892a8">v=2</text>
+      <line x1="91" y1="118" x2="249" y2="118" stroke="#5b8dee" stroke-width="1.5"/>
+      <line x1="85" y1="93" x2="255" y2="93" stroke="#5b8dee" stroke-width="1"/>
+      <line x1="82" y1="68" x2="258" y2="68" stroke="#5b8dee" stroke-width="0.8"/>
+      <line x1="80" y1="50" x2="260" y2="50" stroke="#5b8dee" stroke-width="0.5"/>
+      <!-- ZPE -->
+      <line x1="80" y1="200" x2="113" y2="200" stroke="#8892a8" stroke-dasharray="2,2"/>
+      <line x1="80" y1="183" x2="113" y2="183" stroke="#8892a8" stroke-dasharray="2,2"/>
+      <text x="25" y="195" font-size="8" fill="#8892a8">rₑ</text>
+      <text x="18" y="185" font-size="8" fill="#3ecf8e">ZPE</text>
+    </svg>
+    <figcaption>Fig 6 — Morse potential showing converging vibrational levels, ZPE, $D_0$ (from $v=0$) and $D_e$ (from potential minimum). The continuum begins at dissociation.</figcaption>
+  </div>
+</section>
+
+<!-- ===================== SECTION 10: VIBRATING ROTOR ===================== -->
+<section class="lecture-section" id="vibrating-rotor">
+  <div class="lec-label">L-10 · Classmate Notes · 27/04/26</div>
+  <h2 class="section-title">The Vibrating Rotor (Rotation-Vibration Coupling)
+    <span class="sub">P, Q, R branches and the combination band structure</span>
+  </h2>
+
+  <h3 class="subsection">Combined Energy: Vibration + Rotation</h3>
+  <p>A real molecule vibrates <em>and</em> rotates simultaneously. In the Born-Oppenheimer approximation, the energy is additive:</p>
+
+  <div class="math-block">
+    <span class="label">Combined Energy</span>
+    $$\varepsilon = \varepsilon_\text{vib} + \varepsilon_\text{rot} = BJ(J+1) - DJ^2(J+1)^2 + \left(v+\frac{1}{2}\right)\tilde{\omega}_e - \left(v+\frac{1}{2}\right)^2 x_e\tilde{\omega}_e$$
+  </div>
+
+  <p>However, there is a subtlety: the rotational constant $B$ depends on the vibrational state $v$, because the average bond length $\langle r^2 \rangle$ changes with $v$:</p>
+
+  <div class="math-block">
+    $$B_v = B_e - \alpha_e\left(v+\frac{1}{2}\right)$$
+  </div>
+
+  <p>where $\alpha_e$ is the vibration-rotation coupling constant. Higher vibrational states have slightly longer average bond lengths → slightly smaller $B_v$.</p>
+
+  <h3 class="subsection">Selection Rules for the Vibrating Rotor</h3>
+  <div class="math-block">
+    $$\Delta v = \pm 1 \quad \text{(vibrational)} \qquad \Delta J = 0, \pm 1 \quad \text{(rotational)}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">Note: for a diatomic, $\Delta J = 0$ is forbidden (no Q branch). For polyatomic molecules, $\Delta J = 0$ (Q branch) is allowed when the vibration changes the moment of inertia.</p>
+  </div>
+
+  <h3 class="subsection">P, Q, R Branches</h3>
+  <p>For $v = 0 \to 1$ transition (fundamental band), considering both vibrational and rotational changes:</p>
+
+  <div class="math-block">
+    <span class="label">R branch ($\Delta J = +1$)</span>
+    $$\tilde{\nu}_R = \tilde{\omega}_e + (B_1+B_0)(J+1) + (B_1-B_0)(J+1)^2 \approx \tilde{\omega}_e + 2B(J+1) \quad (J=0,1,2\ldots)$$
+  </div>
+  <div class="math-block">
+    <span class="label">P branch ($\Delta J = -1$)</span>
+    $$\tilde{\nu}_P = \tilde{\omega}_e - (B_1+B_0)J + (B_1-B_0)J^2 \approx \tilde{\omega}_e - 2BJ \quad (J=1,2,3\ldots)$$
+  </div>
+  <div class="math-block">
+    <span class="label">Q branch ($\Delta J = 0$, if allowed)</span>
+    $$\tilde{\nu}_Q = \tilde{\omega}_e + (B_1-B_0)J(J+1) \approx \tilde{\omega}_e \quad \text{(all collapse near } \tilde{\omega}_e\text{)}$$
+  </div>
+
+  <div class="mnemonic">
+    <div class="mn-label">Mnemonic — P Q R Branches</div>
+    <strong>P = Previous</strong> (lower $J$, lower frequency, to the left of center)<br>
+    <strong>Q = Quiet/central</strong> (same $J$, frequency ≈ $\tilde{\omega}_e$, central line, missing for diatomics)<br>
+    <strong>R = Rising/right</strong> (higher $J$, higher frequency, to the right of center)
+  </div>
+</section>
+
+<!-- ===================== SECTION 11: LASERS (JC SIR) ===================== -->
+<section class="lecture-section" id="lasers">
+  <div class="lec-label">L-1 · JC Sir · 06/03/26</div>
+  <h2 class="section-title">Introduction to Laser Physics
+    <span class="sub">Einstein coefficients, stimulated emission, population inversion</span>
+  </h2>
+
+  <h3 class="subsection">What is a Laser?</h3>
+  <p><strong>LASER</strong> = <em>L</em>ight <em>A</em>mplification by <em>S</em>timulated <em>E</em>mission of <em>R</em>adiation. It produces a highly coherent, monochromatic, collimated beam of light through the process of stimulated emission.</p>
+
+  <h3 class="subsection">Three Radiative Processes — Einstein's Analysis</h3>
+
+  <p>Consider a two-level system with states $|1\rangle$ (lower) and $|2\rangle$ (upper), with populations $N_1$ and $N_2$. There are exactly three ways the system can interact with radiation:</p>
+
+  <div class="diagram-wrap">
+    <svg width="480" height="180" viewBox="0 0 480 180">
+      <!-- Spontaneous emission -->
+      <line x1="40" y1="40" x2="120" y2="40" stroke="#5b8dee" stroke-width="2"/>
+      <text x="80" y="32" font-size="9" text-anchor="middle" fill="#5b8dee">|2⟩</text>
+      <line x1="40" y1="120" x2="120" y2="120" stroke="#3ecf8e" stroke-width="2"/>
+      <text x="80" y="140" font-size="9" text-anchor="middle" fill="#3ecf8e">|1⟩</text>
+      <line x1="80" y1="43" x2="80" y2="117" stroke="#f5a623" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M90,80 Q100,70 110,80" stroke="#f5a623" stroke-width="1.5" fill="none"/>
+      <text x="80" y="168" font-size="9" text-anchor="middle" fill="#f5a623">Spontaneous (A₂₁)</text>
+
+      <!-- Absorption -->
+      <line x1="185" y1="40" x2="265" y2="40" stroke="#5b8dee" stroke-width="2"/>
+      <text x="225" y="32" font-size="9" text-anchor="middle" fill="#5b8dee">|2⟩</text>
+      <line x1="185" y1="120" x2="265" y2="120" stroke="#3ecf8e" stroke-width="2"/>
+      <text x="225" y="140" font-size="9" text-anchor="middle" fill="#3ecf8e">|1⟩</text>
+      <line x1="225" y1="117" x2="225" y2="43" stroke="#e05c7a" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M170,80 Q160,70 155,80" stroke="#e05c7a" stroke-width="1.5" fill="none"/>
+      <text x="225" y="168" font-size="9" text-anchor="middle" fill="#e05c7a">Absorption (B₁₂)</text>
+
+      <!-- Stimulated emission -->
+      <line x1="330" y1="40" x2="440" y2="40" stroke="#5b8dee" stroke-width="2"/>
+      <text x="385" y="32" font-size="9" text-anchor="middle" fill="#5b8dee">|2⟩</text>
+      <line x1="330" y1="120" x2="440" y2="120" stroke="#3ecf8e" stroke-width="2"/>
+      <text x="385" y="140" font-size="9" text-anchor="middle" fill="#3ecf8e">|1⟩</text>
+      <line x1="385" y1="43" x2="385" y2="117" stroke="#7c6af5" stroke-width="2" marker-end="url(#arrow)"/>
+      <!-- two photons out -->
+      <path d="M330,80 Q320,70 310,80" stroke="#7c6af5" stroke-width="1.5" fill="none"/>
+      <path d="M440,80 Q450,70 460,80" stroke="#7c6af5" stroke-width="1.5" fill="none"/>
+      <path d="M330,90 Q320,80 310,90" stroke="#7c6af5" stroke-width="1.5" fill="none"/>
+      <text x="385" y="168" font-size="9" text-anchor="middle" fill="#7c6af5">Stimulated (B₂₁) ← KEY</text>
+    </svg>
+    <figcaption>Fig 7 — Three radiative processes. Stimulated emission (right) produces a photon identical to the stimulating photon (same direction, phase, frequency) — this is the quantum basis of lasing.</figcaption>
+  </div>
+
+  <h3 class="subsection">Einstein's Detailed Derivation of the A and B Coefficients</h3>
+
+  <p>Einstein's brilliant insight was to derive the relationship between $A$ and $B$ from thermodynamic equilibrium — without knowing quantum mechanics in detail!</p>
+
+  <div class="callout deriv">
+    <div class="callout-title">Full Derivation of Einstein Relations (JC Sir, Lecture 1)</div>
+    <ol class="steps">
+      <li>At thermal equilibrium, the rate of upward transitions = rate of downward transitions:
+        $$B_{12}\,u(\omega)\,N_1 = B_{21}\,u(\omega)\,N_2 + A_{21}\,N_2$$
+        where $u(\omega)$ is the radiation energy density per unit frequency.</li>
+      <li>Solving for $u(\omega)$:
+        $$u(\omega) = \frac{A_{21}/B_{21}}{\frac{B_{12}}{B_{21}}\frac{N_1}{N_2} - 1}$$</li>
+      <li>From Boltzmann statistics at temperature $T$: $N_1/N_2 = e^{\hbar\omega/k_BT}$ (since $E_2 > E_1$). Also, for non-degenerate levels, $B_{12} = B_{21}$ (detailed balance).</li>
+      <li>So: $u(\omega) = \frac{A_{21}/B_{21}}{e^{\hbar\omega/k_BT} - 1}$</li>
+      <li>But we know the Planck blackbody distribution: $u(\omega) = \frac{\hbar\omega^3 n_0^3}{\pi^2 c^3}\frac{1}{e^{\hbar\omega/k_BT}-1}$</li>
+      <li>Comparing: $\frac{A_{21}}{B_{21}} = \frac{\hbar\omega^3 n_0^3}{\pi^2 c^3}$ and $B_{12} = B_{21}$</li>
+    </ol>
+  </div>
+
+  <div class="math-block">
+    <span class="label">Einstein Relations (Key Results)</span>
+    $$\boxed{\frac{A_{21}}{B_{21}} = \frac{\hbar\omega^3 n_0^3}{\pi^2 c^3}}$$
+    $$\boxed{B_{12} = B_{21} \equiv B}$$
+    $$\boxed{B_{21} = \frac{\pi^2 c^3}{\hbar\omega^3 n_0^3 \tau_{sp}}}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">where $\tau_{sp} = 1/A_{21}$ is the spontaneous emission lifetime. The ratio $A/B \propto \omega^3$ — at higher frequencies (X-rays), spontaneous emission strongly dominates over stimulated; at lower frequencies (microwaves), stimulated emission dominates.</p>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">Physical Meaning of Einstein Relations</div>
+    <ul class="bullet">
+      <li><strong>$B_{12} = B_{21}$</strong>: Absorption and stimulated emission are equally probable per photon per atom. This is a deep result — the quantum mechanics "doesn't care" which direction the transition goes.</li>
+      <li><strong>$A/B \propto \omega^3$</strong>: At optical frequencies, $A \gg B\cdot u(\omega)$ in thermal light. Spontaneous emission completely dominates. To get stimulated emission to dominate, we need an intense coherent field (laser cavity) and population inversion.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== SECTION 12: LASER THEORY ===================== -->
+<section class="lecture-section" id="laser-theory">
+  <div class="lec-label">L-2 · JC Sir · 01/04/26</div>
+  <h2 class="section-title">Laser Theory — Rate Equations, Gain, and Lasing Condition
+    <span class="sub">The complete mathematical treatment of laser amplification</span>
+  </h2>
+
+  <h3 class="subsection">The Line Shape Function $g(\omega)$</h3>
+
+  <p>Not all atoms interact equally with all photon frequencies. The <strong>line shape function</strong> $g(\omega)$ describes the probability that an atom interacts with radiation at frequency $\omega$. It's normalised:</p>
+
+  <div class="math-block">
+    $$\int_\omega g(\omega)\,d\omega = 1 \quad \Rightarrow \quad g(\omega) \sim \frac{1}{\Delta\omega}$$
+  </div>
+
+  <p>A narrower line width ($\Delta\omega$ small) means $g(\omega)$ is taller and more peaked — stronger interaction at the resonance frequency. This is why narrower transitions are better for lasers: higher gain at line center.</p>
+
+  <h3 class="subsection">Transition Rate with Line Shape</h3>
+
+  <div class="math-block">
+    <span class="label">Absorption Rate (corrected for line shape)</span>
+    $$\Gamma_{12} = \int B_{12}\,u(\omega)\,N_1\,g(\omega)\,d\omega = \frac{\pi^2 c^3}{\hbar\omega^3 n_0^3 \tau_{sp}}\cdot\frac{N_1\,u(\omega)}{g(\omega)^{-1}}$$
+  </div>
+
+  <p>For nearly monochromatic radiation where $u(\omega)$ is essentially constant over the linewidth of $g(\omega)$:</p>
+
+  <div class="math-block">
+    $$\boxed{\Gamma_{12} = \frac{\pi^2 c^3 N_1 u(\omega)}{\hbar\omega^3 n_0^3 \tau_{sp}}}$$
+  </div>
+
+  <h3 class="subsection">Beer-Lambert Law from First Principles</h3>
+
+  <p>Consider a beam propagating along $z$ through a medium. In a thin slice $dz$ with area $S$:</p>
+
+  <div class="callout deriv">
+    <div class="callout-title">Derivation of Beer-Lambert / Gain Equation (JC Sir, L2)</div>
+    <ol class="steps">
+      <li>Number of upward transitions per unit time (absorption) in slice $S\,dz$: $\Gamma_{12}\,\hbar\omega\,S\,dz$</li>
+      <li>Number of downward transitions (stimulated emission) in slice: $\Gamma_{21}\,\hbar\omega\,S\,dz$</li>
+      <li>Net energy absorbed by matter from field per unit time = $(\Gamma_{12} - \Gamma_{21})\hbar\omega\,S\,dz$</li>
+      <li>This equals the intensity change: $[I(z) - I(z+dz)]\,S = -\frac{dI}{dz}\,S\,dz$</li>
+      <li>Using $I = u(\omega)\cdot c/n_0 = u\cdot c/n_0$ and $\Gamma_{21} = \Gamma_{12}\cdot N_2/N_1$ (since $B_{12}=B_{21}$):
+        $$-\frac{dI}{dz} = \frac{\pi^2 c^2 g(\omega)(N_1-N_2)}{n_0^2\,\omega^2\,\tau_{sp}} \cdot I$$</li>
+      <li>This gives the key equation:
+        $$\frac{dI}{dz} = -\alpha\,I$$
+        where the gain/absorption coefficient is:
+        $$\alpha = \frac{\pi^2 c^2\,g(\omega)\,(N_1 - N_2)}{n_0^2\,\omega^2\,\tau_{sp}}$$</li>
+      <li>Solution: $I(z) = I(0)\,e^{-\alpha z}$ — Beer-Lambert Law.</li>
+    </ol>
+  </div>
+
+  <div class="math-block">
+    <span class="label">Beer-Lambert Law</span>
+    $$\boxed{I(z) = I(0)\,e^{-\alpha z}}$$
+    $$\alpha = \frac{\pi^2 c^2\,g(\omega)\,(N_1 - N_2)}{n_0^2\,\omega^2\,\tau_{sp}}$$
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">The Magic of Population Inversion</div>
+    Normally, $N_1 > N_2$ (Boltzmann). Then $\alpha > 0$ and $I(z) = I(0)e^{-\alpha z}$ — intensity <strong>decays</strong> (attenuation/absorption). 
+    <br>But if we can achieve $N_2 > N_1$ (<strong>population inversion</strong>), then $N_1 - N_2 < 0$, so $\alpha < 0$! Then $I(z) = I(0)e^{|\alpha|z}$ — intensity grows exponentially. <strong>This is optical amplification / laser action!</strong>
+  </div>
+
+  <h3 class="subsection">Rate Equations for the Two-Level System</h3>
+
+  <div class="math-block">
+    <span class="label">Rate Equations</span>
+    $$\frac{dN_2}{dt} = W_{12}(N_1 - N_2) - \Gamma_{21}N_2 = W_{12}(N_1-N_2) - (S_{21}+A_{21})N_2$$
+    $$\frac{dN_1}{dt} = -W_{12}(N_1-N_2) + \Gamma_{21}N_2$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">where $W_{12}$ = stimulated transition rate per atom (both $B_{12}$ and $B_{21}$ are equal), $S_{21}$ = non-radiative decay, $A_{21}$ = spontaneous emission. Note $N_1 + N_2 = N$ (constant).</p>
+  </div>
+
+  <h3 class="subsection">Steady-State Solution and Population Inversion Impossibility in Two-Level Systems</h3>
+
+  <p>Setting $dN_2/dt = 0$ for steady state, and assuming ideal laser (no non-radiative decay):</p>
+
+  <div class="math-block">
+    <span class="label">Steady-State Population Ratio</span>
+    $$\frac{N_2}{N_1} = \frac{W_{12}}{A_{21} + W_{12}}$$
+    $$\Rightarrow \frac{N_2}{N_1} < 1 \quad \text{always!}$$
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title">Why Two-Level Systems Cannot Lase!</div>
+    The maximum achievable in a two-level system is $N_2 = N_1$ (when $W_{12} \to \infty$, i.e., pumping infinitely hard). You can <em>never</em> get $N_2 > N_1$ in a two-level system at steady state. This is because every photon that pumps the system up also stimulates it back down with equal probability ($B_{12} = B_{21}$). The system bleaches — it reaches transparency but never gain.
+  </div>
+
+  <h3 class="subsection">Saturation of Population Inversion</h3>
+
+  <p>Define the inversion density $\Delta N = N_2 - N_1$ and the normalised line shape function $\tilde{g}(\omega) = g(\omega)/g(\omega_0)$. The population inversion in steady state:</p>
+
+  <div class="math-block">
+    <span class="label">Saturation of Inversion</span>
+    $$\frac{\Delta N}{N} = \frac{-1}{1 + \frac{2W_{12}}{A_{21}}} = \frac{-1}{1 + I/I_s\,\tilde{g}(\omega)}$$
+  </div>
+
+  <div class="math-block">
+    <span class="label">Saturation Intensity</span>
+    $$\boxed{I_s = \frac{\hbar\omega_0^3 n_0^2}{2\pi^2 c^2\,g(\omega_0)}}$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">$I_s$ is the intensity at which the inversion is reduced to half its small-signal value. At $I \ll I_s$: $\Delta N/N \approx -1$ (full inversion). At $I \gg I_s$: $\Delta N/N \to 0$ (saturation/bleaching).</p>
+  </div>
+
+  <h3 class="subsection">The Lasing Threshold Condition</h3>
+
+  <p>For a laser cavity with gain medium of length $d$, and mirrors of reflectivity $R_1$, $R_2$: a round trip must give net gain ≥ 1.</p>
+
+  <div class="callout deriv">
+    <div class="callout-title">Derivation of Lasing Condition (JC Sir's Cavity Analysis)</div>
+    <ol class="steps">
+      <li>Intensity after traversing gain medium of length $d$ (one way): $I = I_0 e^{-\alpha d}$</li>
+      <li>Reflection from mirrors $R_1$ and $R_2$: intensity becomes $I_0 e^{-\alpha d} \cdot R_1 \cdot e^{-\alpha d} \cdot R_2 = I_0 R_1 R_2 e^{-2\alpha d}$</li>
+      <li>Including extra passive losses (scattering, diffraction) $\alpha_1$ per pass: $I_0 R_1 R_2 e^{-2(\alpha+\alpha_1)d}$</li>
+      <li>For sustained oscillation (threshold), the round-trip intensity must equal the starting intensity:
+        $$R_1 R_2\,e^{-2(\alpha+\alpha_1)d} \geq 1$$</li>
+      <li>Taking logarithm: $\ln R_1 R_2 \geq 2(\alpha+\alpha_1)d$, i.e., $-\alpha \geq \alpha_1 - \frac{\ln R_1 R_2}{2d}$</li>
+      <li>Passive cavity lifetime: $1/\tau_c = c\alpha_1/n_0 - c\ln R_1 R_2/(2dn_0)$, giving $n_0/c\tau_c = \alpha_1 - \ln R_1 R_2/(2d)$</li>
+      <li>Threshold condition: $|\alpha| \geq n_0/(c\tau_c)$, i.e.:
+        $$\frac{\pi^2 c^2\,g(\omega)\,(N_2-N_1)}{n_0^2\,\omega^2\,\tau_{sp}} \geq \frac{n_0}{c\tau_c}$$</li>
+      <li>Rearranging:
+        $$\boxed{(N_2-N_1) \geq \frac{n_0^3\omega^2\tau_{sp}}{\pi^2 c^3\,g(\omega)\,\tau_c}}$$</li>
+    </ol>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">What the Lasing Condition Tells Us</div>
+    To lower the threshold (make lasing easier):
+    <ul class="bullet">
+      <li><strong>Low $\omega^2$</strong>: lower frequency lasers have lower threshold (less spontaneous emission). This is why CO₂ (IR) lasers have low threshold.</li>
+      <li><strong>Long $\tau_c$ (high cavity Q)</strong>: better mirrors (high $R_1, R_2$), lower losses → more time for photons to build up.</li>
+      <li><strong>Short $\tau_{sp}$</strong>: faster spontaneous decay rate (stronger transition) → more coupling.</li>
+      <li><strong>Large $g(\omega)$ at line center</strong>: narrow linewidth → stronger interaction with resonant photons.</li>
+    </ul>
+  </div>
+
+  <h3 class="subsection">Line Broadening Mechanisms in Lasers</h3>
+
+  <h4 class="sub4">Homogeneous Broadening</h4>
+  <p>All atoms interact identically with the radiation field. The line shape is <strong>Lorentzian</strong> (derived below).</p>
+
+  <div class="callout deriv">
+    <div class="callout-title">Derivation of Lorentzian Line Shape (JC Sir)</div>
+    <ol class="steps">
+      <li>Model the radiating atom as a damped harmonic oscillator. The electric field decays exponentially: $\mathcal{E}(t) = \mathcal{E}_0\,e^{i\omega_0 t}\,e^{-t/2\tau_{sp}}$</li>
+      <li>The spectrum is the Fourier transform: $\tilde{\mathcal{E}}(\omega) = \int_0^\infty \mathcal{E}(t)\,e^{i\omega t}\,dt$</li>
+      <li>$\tilde{\mathcal{E}}(\omega) = \frac{\mathcal{E}_0}{\frac{1}{2\tau_{sp}} - i(\omega_0 - \omega)}$</li>
+      <li>The power spectrum (line shape) $g(\omega) \propto |\tilde{\mathcal{E}}(\omega)|^2$:
+        $$g(\omega) = \frac{k}{\frac{1}{4\tau_{sp}^2} + (\omega-\omega_0)^2}$$</li>
+      <li>Normalising ($\int g\,d\omega = 1$): $k = 1/(2\pi\tau_{sp})$, giving:
+        $$\boxed{g(\omega) = \frac{2\tau_{sp}/\pi}{1 + 4\tau_{sp}^2(\omega-\omega_0)^2}} \quad \leftarrow \text{Lorentzian}$$</li>
+      <li>The FWHM is $\Delta\omega = 1/\tau_{sp}$. Narrower linewidth → larger $g(\omega_0)$ → lower lasing threshold.</li>
+    </ol>
+  </div>
+
+  <h4 class="sub4">Inhomogeneous Broadening (Doppler)</h4>
+  <p>Different atoms have different velocities → different Doppler shifts → each atom "sees" a different resonance frequency. The aggregate line shape is <strong>Gaussian</strong>. Atoms in a gas laser (like He-Ne) experience primarily Doppler broadening. Solid-state lasers typically have homogeneous broadening.</p>
+
+  <div class="qbox">
+    <div class="qbox-header">
+      <span class="qbadge">Q5</span>
+      <span class="qtitle">Why can population inversion not be achieved with a two-level system? What is the minimum system needed?</span>
+    </div>
+    <div class="qbox-body">
+      <div class="q-answer">
+        <div class="q-answer-label">Answer</div>
+        <p>In a two-level system: $B_{12} = B_{21}$, so every photon pumping the system up has the same probability of stimulating a transition back down. In steady state, the maximum achievable is $N_2 = N_1$ (transparency), never inversion ($N_2 > N_1$). You would need to pump infinitely fast to just reach equality, not surpass it.</p>
+        <p>The <strong>minimum is a three-level system</strong> (like Ruby laser). The pump excites atoms to level 3. Atoms rapidly decay non-radiatively to long-lived level 2 (metastable, $\tau \sim 10^{-3}$ s for Ruby). This accumulates population in level 2 faster than stimulated emission depletes it → inversion between levels 2 and 1.</p>
+        <p>A <strong>four-level system</strong> (like Nd:YAG) is even better: the lower lasing level (level 1') is above the ground state, so it's nearly empty at all times. Much easier to invert. This is why 4-level lasers have lower threshold than 3-level lasers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 13: LASER TYPES ===================== -->
+<section class="lecture-section" id="laser-types">
+  <div class="lec-label">L-3 · JC Sir · 08/04/26</div>
+  <h2 class="section-title">Types of Lasers
+    <span class="sub">Ruby, He-Ne, CO₂, and the principles behind them</span>
+  </h2>
+
+  <h3 class="subsection">Ruby Laser (First SS Laser — 1960)</h3>
+  <p>Ruby = Al₂O₃ (sapphire) doped with Cr³⁺ chromium ions (which give ruby its red color). It is a <strong>three-level system</strong>.</p>
+
+  <div class="diagram-wrap">
+    <svg width="380" height="200" viewBox="0 0 380 200">
+      <!-- Levels -->
+      <line x1="60" y1="40" x2="200" y2="40" stroke="#f5a623" stroke-width="2"/>
+      <text x="210" y="44" font-size="9" fill="#f5a623">E₃ (broad band, τ≈10⁻¹³ s)</text>
+      <line x1="60" y1="90" x2="200" y2="90" stroke="#3ecf8e" stroke-width="2.5"/>
+      <text x="210" y="94" font-size="9" fill="#3ecf8e">E₂ metastable (τ≈3×10⁻³ s)</text>
+      <line x1="60" y1="170" x2="200" y2="170" stroke="#5b8dee" stroke-width="2"/>
+      <text x="210" y="174" font-size="9" fill="#5b8dee">E₁ ground state</text>
+      <!-- Pump -->
+      <line x1="90" y1="167" x2="90" y2="43" stroke="#f5a623" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="50" y="110" font-size="8" fill="#f5a623">Pump</text>
+      <text x="40" y="120" font-size="8" fill="#f5a623">(Xe lamp</text>
+      <text x="40" y="130" font-size="8" fill="#f5a623">550nm)</text>
+      <!-- NR decay -->
+      <path d="M100,43 Q130,60 130,87" stroke="#8892a8" stroke-dasharray="4,2" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+      <text x="130" y="68" font-size="8" fill="#8892a8">fast NR</text>
+      <!-- Laser -->
+      <line x1="160" y1="87" x2="160" y2="167" stroke="#e05c7a" stroke-width="2.5" marker-end="url(#arrow)"/>
+      <text x="170" y="135" font-size="9" fill="#e05c7a">694nm</text>
+      <text x="170" y="147" font-size="8" fill="#e05c7a">LASER</text>
+    </svg>
+    <figcaption>Fig 8 — Ruby laser energy levels. Atoms pumped to E₃ (broad absorption band), rapidly decay to metastable E₂, then lase to ground state E₁.</figcaption>
+  </div>
+
+  <ul class="bullet">
+    <li>Pumped by a xenon flash lamp (broad spectrum, matches E₃ absorption band)</li>
+    <li>Rapid non-radiative decay ($10^{-13}$ s) to metastable E₂</li>
+    <li>Population inversion between E₂ and E₁</li>
+    <li>Lasing at 694 nm (red)</li>
+    <li><strong>Pulsed</strong> operation (since E₁ is ground state → needs more than 50% of atoms in E₂)</li>
+  </ul>
+
+  <h3 class="subsection">He-Ne Laser (First Gas Laser)</h3>
+  <p>A <strong>four-level system</strong> gas laser. Gas mixture: He:Ne ≈ 10:1 by volume, at ~1 torr (He) and 0.1 torr (Ne) pressure. High pressure avoided to reduce mean free path collisions.</p>
+
+  <ul class="bullet">
+    <li>Electrical discharge excites He atoms to metastable states ($2^3S$ and $2^1S$)</li>
+    <li>He transfers energy to Ne via <strong>collision</strong> (resonance energy transfer) — He and Ne have nearly matching excited state energies</li>
+    <li>Ne achieves population inversion between $3s$ and $2p$ levels</li>
+    <li>Three laser lines: $3s \to 3p$ (3.39 μm IR), $2s \to 2p$ (1.15 μm IR), $3s \to 2p$ (<strong>632.8 nm</strong> visible red)</li>
+    <li><strong>Continuous wave (CW)</strong> operation</li>
+  </ul>
+
+  <h3 class="subsection">CO₂ Laser (IR Molecular Laser)</h3>
+  <ul class="bullet">
+    <li>Lases in the IR (10.6 μm) — vibrational-rotational transitions of CO₂</li>
+    <li>Lasing entity: CO₂ molecule. Auxiliary gases: N₂ (pumped by discharge, transfers energy to CO₂ asymmetric stretch mode) and He (cools gas)</li>
+    <li>Very high efficiency (~20%) and high power (kW range)</li>
+    <li>Used for cutting and welding metals</li>
+  </ul>
+
+  <h3 class="subsection">Gas vs Solid-State Lasers</h3>
+  <table>
+    <tr><th>Feature</th><th>Gas Laser (He-Ne)</th><th>Solid-State (Ruby, Nd:YAG)</th></tr>
+    <tr><td>Energy levels</td><td>Discrete (atomic/molecular)</td><td>Continuous energy bands</td></tr>
+    <tr><td>Coherence time</td><td>Very long (sharp lines)</td><td>Shorter (phonon broadening)</td></tr>
+    <tr><td>Operation</td><td>Usually CW</td><td>Pulsed or CW</td></tr>
+    <tr><td>Power</td><td>Low (mW to W)</td><td>High (kW pulsed)</td></tr>
+    <tr><td>Application</td><td>Holography, interferometry</td><td>Cutting, welding, surgery</td></tr>
+  </table>
+
+  <h3 class="subsection">Lambert-Beer Law in Absorption Spectroscopy</h3>
+  <p>For a sample of concentration $c$ (mol/L) and path length $l$ (cm):</p>
+
+  <div class="math-block">
+    <span class="label">Lambert-Beer Law</span>
+    $$\ln\left(\frac{I_0}{I}\right) = \alpha_\nu c l \quad \Rightarrow \quad \log\left(\frac{I_0}{I}\right) = \varepsilon_\nu c l$$
+    <p style="color:var(--text-dim);font-size:0.82rem;margin-top:6px">where $\varepsilon_\nu = \alpha_\nu/2.303$ is the <strong>molar absorption coefficient (extinction coefficient)</strong> in units of L·mol$^{-1}$·cm$^{-1}$. The quantity $\log(I_0/I) = $ <strong>Optical Density (OD)</strong> or Absorbance $A$.</p>
+  </div>
+
+  <div class="callout key">
+    <div class="callout-title">Practical Use</div>
+    The OD (Optical Density) is dimensionless and additive. Beer-Lambert law is linear in concentration — the basis of quantitative spectrophotometry (measuring unknown concentrations). It fails at high concentrations (aggregation, scattering, saturation effects).
+  </div>
+
+  <div class="qbox">
+    <div class="qbox-header">
+      <span class="qbadge">Q6</span>
+      <span class="qtitle">What is population inversion and why is it thermodynamically unusual?</span>
+    </div>
+    <div class="qbox-body">
+      <div class="q-answer">
+        <div class="q-answer-label">Answer</div>
+        <p>In thermal equilibrium, the Boltzmann distribution dictates that the ground state has more population than excited states: $N_1 > N_2$ (assuming $E_1 < E_2$). Population inversion ($N_2 > N_1$) corresponds to a <em>negative temperature</em> in the Boltzmann distribution — physically impossible in true equilibrium.</p>
+        <p>Therefore, population inversion is a <strong>non-equilibrium state</strong> that must be actively maintained by continuous pumping (energy input). When the pumping stops, the system relaxes back to equilibrium (Boltzmann distribution) with $N_1 > N_2$. This is why lasers need continuous pump power to maintain CW operation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 14: IMPORTANT FORMULAS ===================== -->
+<section class="lecture-section" id="formulas">
+  <div class="lec-label">Reference Sheet</div>
+  <h2 class="section-title">Important Formulas
+    <span class="sub">Complete formula sheet for Spectroscopy &amp; Lasers</span>
+  </h2>
+
+  <h3 class="subsection">Rotational Spectroscopy</h3>
+  <div id="formulas" class="form-grid">
+
+    <div class="fcard">
+      <div class="ftag">Rigid Rotor Energy</div>
+      <div class="feq">$\varepsilon_J = B\,J(J+1)$ cm$^{-1}$</div>
+      <div class="fdesc">$J=0,1,2,\ldots$; $B = h/(8\pi^2 Ic)$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Rotational Constant</div>
+      <div class="feq">$B = \dfrac{\hbar}{4\pi I c}$ cm$^{-1}$</div>
+      <div class="fdesc">$I = \mu r_e^2$; $\mu = m_1 m_2/(m_1+m_2)$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Transition Frequency (Rigid)</div>
+      <div class="feq">$\tilde{\nu} = 2B(J+1)$</div>
+      <div class="fdesc">Equally spaced lines at $2B, 4B, 6B, \ldots$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Degeneracy</div>
+      <div class="feq">$g_J = 2J+1$</div>
+      <div class="fdesc">$(2J+1)$-fold degeneracy due to $m_J$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Population of Level J</div>
+      <div class="feq">$N_J = N_0(2J+1)e^{-BhcJ(J+1)/kT}$</div>
+      <div class="fdesc">Maxwell-Boltzmann with degeneracy</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Most Populated Level</div>
+      <div class="feq">$J_\text{max} = \sqrt{\dfrac{kT}{2Bhc}} - \dfrac{1}{2}$</div>
+      <div class="fdesc">From $dN_J/dJ = 0$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Non-Rigid Rotor Energy</div>
+      <div class="feq">$\varepsilon_J = BJ(J+1) - DJ^2(J+1)^2$</div>
+      <div class="fdesc">$D = 4B^3/\tilde{\omega}_e^2$; $D \ll B$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Transition (Non-Rigid)</div>
+      <div class="feq">$\tilde{\nu} = 2B(J+1) - 4D(J+1)^3$</div>
+      <div class="fdesc">Lines converge at high $J$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Symmetric Top Energy</div>
+      <div class="feq">$\varepsilon_{J,k} = BJ(J+1) + (A-B)k^2$</div>
+      <div class="fdesc">$k = 0, \pm1, \ldots, \pm J$; $\Delta k = 0$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Symmetric Top Transition</div>
+      <div class="feq">$\tilde{\nu} = 2B(J+1)$</div>
+      <div class="fdesc">Independent of $k$! Only $B$ measurable from pure rot. spec.</div>
+    </div>
+  </div>
+
+  <h3 class="subsection">Vibrational Spectroscopy</h3>
+  <div class="form-grid">
+    <div class="fcard">
+      <div class="ftag">Harmonic Oscillator Energy</div>
+      <div class="feq">$\varepsilon_v = (v+\tfrac{1}{2})\tilde{\omega}_e$</div>
+      <div class="fdesc">$\tilde{\omega}_e = \frac{1}{2\pi c}\sqrt{k/\mu}$; $\Delta v = \pm 1$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Anharmonic Energy</div>
+      <div class="feq">$\varepsilon_v = (v+\tfrac{1}{2})\tilde{\omega}_e - (v+\tfrac{1}{2})^2 x_e\tilde{\omega}_e$</div>
+      <div class="fdesc">$x_e$ = anharmonicity constant ($\ll 1$)</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Level Spacing (Anharmonic)</div>
+      <div class="feq">$\Delta\varepsilon_v = \tilde{\omega}_e[1-2x_e(v+1)]$</div>
+      <div class="fdesc">Decreasing spacing → converges at dissociation</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Dissociation Energy</div>
+      <div class="feq">$D_e = D_0 + \dfrac{1}{2}\tilde{\omega}_e$</div>
+      <div class="fdesc">$D_e$ from potential minimum; $D_0$ from $v=0$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Fundamental</div>
+      <div class="feq">$\tilde{\nu}_{0\to1} = \tilde{\omega}_e(1-2x_e)$</div>
+      <div class="fdesc">Main IR absorption band</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">First Overtone</div>
+      <div class="feq">$\tilde{\nu}_{0\to2} = 2\tilde{\omega}_e(1-3x_e)$</div>
+      <div class="fdesc">$\Delta v = 2$; weak intensity</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Last Vibrational Level</div>
+      <div class="feq">$v_F = \dfrac{1}{2x_e} - 1$</div>
+      <div class="fdesc">From $\Delta\varepsilon_v = 0$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Vibrating Rotor $B_v$</div>
+      <div class="feq">$B_v = B_e - \alpha_e(v+\tfrac{1}{2})$</div>
+      <div class="fdesc">$B$ decreases with vibrational excitation</div>
+    </div>
+  </div>
+
+  <h3 class="subsection">Laser Physics</h3>
+  <div class="form-grid">
+    <div class="fcard">
+      <div class="ftag">Einstein A/B Ratio</div>
+      <div class="feq">$\dfrac{A_{21}}{B_{21}} = \dfrac{\hbar\omega^3 n_0^3}{\pi^2 c^3}$</div>
+      <div class="fdesc">From Planck distribution comparison</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Symmetry of B Coefficients</div>
+      <div class="feq">$B_{12} = B_{21}$</div>
+      <div class="fdesc">Non-degenerate levels; absorption = stimulated emission rate per atom</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Beer-Lambert Law</div>
+      <div class="feq">$I(z) = I(0)\,e^{-\alpha z}$</div>
+      <div class="fdesc">$\alpha < 0$ for inversion → amplification</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Gain/Loss Coefficient</div>
+      <div class="feq">$\alpha = \dfrac{\pi^2 c^2\,g(\omega)\,(N_1-N_2)}{n_0^2\,\omega^2\,\tau_{sp}}$</div>
+      <div class="fdesc">$\alpha > 0$: absorption; $\alpha < 0$: gain (inversion)</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Lasing Threshold</div>
+      <div class="feq">$(N_2-N_1) \geq \dfrac{n_0^3\omega^2\tau_{sp}}{\pi^2 c^3\,g(\omega)\,\tau_c}$</div>
+      <div class="fdesc">$\tau_c$ = passive cavity lifetime</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Saturation Intensity</div>
+      <div class="feq">$I_s = \dfrac{\hbar\omega_0^3 n_0^2}{2\pi^2 c^2\,g(\omega_0)}$</div>
+      <div class="fdesc">Intensity at which inversion is halved</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Lorentzian Line Shape</div>
+      <div class="feq">$g(\omega) = \dfrac{2\tau_{sp}/\pi}{1+4\tau_{sp}^2(\omega-\omega_0)^2}$</div>
+      <div class="fdesc">FWHM $= 1/\tau_{sp}$; homogeneous broadening</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Lambert-Beer (Practical)</div>
+      <div class="feq">$A = \log(I_0/I) = \varepsilon_\nu c l$</div>
+      <div class="fdesc">$A$ = absorbance/OD; $\varepsilon$ in L·mol$^{-1}$·cm$^{-1}$</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Two-Level Steady State</div>
+      <div class="feq">$\dfrac{N_2}{N_1} = \dfrac{W_{12}}{A_{21}+W_{12}} < 1$</div>
+      <div class="fdesc">Max achievable: $N_2 = N_1$ (never inversion)</div>
+    </div>
+
+    <div class="fcard">
+      <div class="ftag">Quantum Yield</div>
+      <div class="feq">$\Theta = \dfrac{\Gamma}{\Gamma + K_{nr}}$</div>
+      <div class="fdesc">$\Gamma$ = radiative rate; $K_{nr}$ = non-radiative constant</div>
+    </div>
+  </div>
+
+  <h3 class="subsection">Selection Rules Summary</h3>
+  <table>
+    <tr><th>System</th><th>$\Delta J$</th><th>$\Delta v$</th><th>$\Delta k / \Delta m$</th><th>Condition</th></tr>
+    <tr><td>Pure Rotational</td><td>$\pm 1$</td><td>—</td><td>$\Delta m = 0$</td><td>Permanent dipole required</td></tr>
+    <tr><td>Vibrational (Harmonic)</td><td>$\pm 1$</td><td>$\pm 1$</td><td>—</td><td>$\partial\mu/\partial q \neq 0$</td></tr>
+    <tr><td>Vibrational (Anharmonic)</td><td>$\pm 1$</td><td>$\pm 1, \pm 2, \ldots$</td><td>—</td><td>Overtones allowed</td></tr>
+    <tr><td>Vibrating Rotor</td><td>$0, \pm 1$</td><td>$\pm 1$</td><td>—</td><td>$\Delta J = 0$ (Q branch) only for polyatomics</td></tr>
+    <tr><td>Symmetric Top</td><td>$\pm 1$</td><td>—</td><td>$\Delta k = 0$</td><td>Dipole along sym. axis</td></tr>
+  </table>
+
+</section>
+
+</main>
+
+<script>
+// Active nav link highlighting on scroll
+const sections = document.querySelectorAll('section[id], header[id]');
+const navLinks = document.querySelectorAll('#topnav a[href^="#"]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('active'));
+      const id = entry.target.getAttribute('id');
+      const activeLink = document.querySelector(`#topnav a[href="#${id}"]`);
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -50% 0px' });
+
+sections.forEach(section => observer.observe(section));
+</script>
+</body>
+</html>

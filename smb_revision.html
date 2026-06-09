@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMB Sir — Exam Cram Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #10101a;
+  --bg3: #181825;
+  --border: #2a2a3e;
+  --accent: #7c6af7;
+  --accent2: #e87c5a;
+  --accent3: #5ae8b4;
+  --accent4: #e8d45a;
+  --text: #e8e8f0;
+  --muted: #7878a0;
+  --danger: #e85a7c;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  padding: 0 0 80px 0;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+nav .logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--accent);
+  margin-right: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+  font-family: 'DM Mono', monospace;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+nav a:hover {
+  color: var(--text);
+  border-color: var(--border);
+  background: var(--bg3);
+}
+
+/* HEADER */
+header {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 24px 40px;
+}
+header h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.15;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+header p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 10px;
+  font-family: 'DM Mono', monospace;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  border: 1px solid;
+  letter-spacing: 0.04em;
+}
+.tag-purple { color: var(--accent); border-color: var(--accent); background: rgba(124,106,247,0.08); }
+.tag-orange { color: var(--accent2); border-color: var(--accent2); background: rgba(232,124,90,0.08); }
+.tag-green { color: var(--accent3); border-color: var(--accent3); background: rgba(90,232,180,0.08); }
+.tag-yellow { color: var(--accent4); border-color: var(--accent4); background: rgba(232,212,90,0.08); }
+
+/* MAIN LAYOUT */
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* SECTION */
+.section {
+  scroll-margin-top: 70px;
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+.section-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* CARDS */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+}
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+.card p { color: var(--text); margin-bottom: 8px; }
+.card p:last-child { margin-bottom: 0; }
+
+/* MNEMONIC BOX */
+.mnemonic {
+  background: linear-gradient(135deg, rgba(124,106,247,0.12), rgba(90,232,180,0.06));
+  border: 1px solid rgba(124,106,247,0.35);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 14px 0;
+}
+.mnemonic-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.mnemonic-content {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: var(--accent3);
+  font-weight: 500;
+  line-height: 1.8;
+}
+.mnemonic-explain {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* EQUATION */
+.eq {
+  background: var(--bg3);
+  border-left: 3px solid var(--accent2);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: var(--accent4);
+  overflow-x: auto;
+  white-space: pre;
+}
+.eq-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ALERT */
+.alert {
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-size: 13.5px;
+  border: 1px solid;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.alert-warn { background: rgba(232,212,90,0.07); border-color: rgba(232,212,90,0.3); color: var(--accent4); }
+.alert-info { background: rgba(90,232,180,0.07); border-color: rgba(90,232,180,0.3); color: var(--accent3); }
+.alert-key  { background: rgba(232,90,124,0.07); border-color: rgba(232,90,124,0.3); color: var(--danger); }
+
+/* TWO COL */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+/* TABLE */
+.tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 14px 0; }
+.tbl th {
+  background: var(--bg3);
+  color: var(--accent);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--border);
+}
+.tbl td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: var(--bg3); }
+
+/* STEP LIST */
+.steps { list-style: none; padding: 0; }
+.steps li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.steps li:last-child { border-bottom: none; }
+.step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-content { flex: 1; }
+.step-title { font-weight: 500; color: var(--text); margin-bottom: 3px; font-family: 'Syne', sans-serif; font-size: 14px; }
+.step-desc { font-size: 13px; color: var(--muted); }
+
+/* BULLET LIST */
+ul.bl { padding-left: 0; list-style: none; }
+ul.bl li {
+  padding: 5px 0 5px 22px;
+  position: relative;
+  color: var(--text);
+  font-size: 14px;
+}
+ul.bl li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent2);
+  font-family: 'DM Mono', monospace;
+}
+
+/* HIGHLIGHT */
+.hi { color: var(--accent); font-weight: 500; }
+.hi2 { color: var(--accent2); font-weight: 500; }
+.hi3 { color: var(--accent3); font-weight: 500; }
+.hi4 { color: var(--accent4); font-weight: 500; }
+
+/* DIVIDER */
+hr.div { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+/* TRANSITION DIAGRAM */
+.trans-diagram {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  overflow-x: auto;
+}
+.trans-level {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 6px 0;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.lv3 { background: rgba(124,106,247,0.12); color: var(--accent); }
+.lv2 { background: rgba(232,124,90,0.12); color: var(--accent2); }
+.lv1 { background: rgba(90,232,180,0.12); color: var(--accent3); }
+.arrow-down { color: var(--muted); font-size: 18px; text-align: center; }
+
+/* QUIZ TOGGLE */
+.quiz-q {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  user-select: none;
+}
+.quiz-q:hover { border-color: var(--accent); }
+.quiz-q-text {
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.quiz-q-text span { flex: 1; }
+.quiz-icon { color: var(--accent); font-size: 18px; transition: transform 0.2s; }
+.quiz-a {
+  display: none;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  color: var(--accent3);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.quiz-q.open .quiz-icon { transform: rotate(45deg); }
+.quiz-q.open .quiz-a { display: block; }
+
+/* SCROLL INDICATOR */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent);
+  width: 0%;
+  z-index: 200;
+  transition: width 0.1s;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="prog"></div>
+
+<nav>
+  <span class="logo">SMB Sir ⚡ Cram</span>
+  <a href="#s1">H-atom + EM</a>
+  <a href="#s2">Vector Potential</a>
+  <a href="#s3">Hamiltonian</a>
+  <a href="#s4">Perturbation</a>
+  <a href="#s5">Dipole Approx</a>
+  <a href="#s6">Selection Rules</a>
+  <a href="#s7">Many-e Atom</a>
+  <a href="#s8">Slater Det</a>
+  <a href="#s9">HF &amp; SCF</a>
+  <a href="#s10">Quiz</a>
+</nav>
+
+<header>
+  <h1>SMB Sir — Last Class Notes<br>Exam Survival Guide</h1>
+  <p>// pages 19–31 · 11/05/26 · complete coverage</p>
+  <div class="tag-row">
+    <span class="tag tag-purple">H-atom EM interaction</span>
+    <span class="tag tag-orange">Semi-classical treatment</span>
+    <span class="tag tag-green">Many-electron atoms</span>
+    <span class="tag tag-yellow">Slater determinant</span>
+    <span class="tag tag-purple">Hartree-Fock</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ====== SECTION 1 ====== -->
+<section class="section" id="s1">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <div>
+      <div class="section-title">H-atom Interacting with EM Radiation</div>
+      <div class="section-subtitle">Semi-classical treatment overview</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">The Setup</div>
+    <p>The <span class="hi">semi-classical treatment</span> treats the atom quantum mechanically but the EM field classically. The fully quantum treatment is called the <span class="hi2">Maxwell H-atom QM</span> approach.</p>
+    <ul class="bl" style="margin-top:10px">
+      <li>Atom has <strong>discrete energy levels</strong> (1s, 2s, …)</li>
+      <li>Moves lower → upper = <span class="hi3">absorption</span> (absorbs photon)</li>
+      <li>Bound state energies are <strong>negative</strong></li>
+      <li>Stationary state = probability is time-independent (energy perfectly defined)</li>
+    </ul>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Why does e⁻ jump from 2p → lower?</div>
+      <p>Statistical / <span class="hi">transition lifetime</span> argument. It's not a single definite time — it's a <em>statistical lifetime</em>.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Why spontaneous emission?</div>
+      <p><span class="hi2">QM cannot explain it</span> (though it can solve it mathematically). <span class="hi3">QFT (2nd quantisation)</span> properly explains spontaneous emission.</p>
+    </div>
+  </div>
+
+  <div class="card" style="border-color: rgba(232,212,90,0.3)">
+    <div class="card-title" style="color:var(--accent4)">QM vs QFT — Key Distinction</div>
+    <table class="tbl">
+      <tr><th>QM (1st quantisation)</th><th>QFT (2nd quantisation)</th></tr>
+      <tr><td>Atom structure quantised (energy levels)</td><td>EM field also quantised</td></tr>
+      <tr><td>Cannot explain spontaneous emission from first principles</td><td>Explains spontaneous emission via vacuum fluctuations</td></tr>
+    </table>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 Mnemonic</div>
+    <div class="mnemonic-content">QM = "One thing quantised (atom)"<br>QFT = "Two things quantised (atom + field)"</div>
+    <div class="mnemonic-explain">1st quantisation → atom structure. 2nd quantisation → field itself. QFT fixes what QM can't: spontaneous emission.</div>
+  </div>
+</section>
+
+<!-- ====== SECTION 2 ====== -->
+<section class="section" id="s2">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <div>
+      <div class="section-title">EM Field & Vector Potential</div>
+      <div class="section-subtitle">Fields, gauges, and the form of Ā</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Fields in terms of potentials</div>
+    <div class="eq-label">ELECTRIC FIELD</div>
+    <div class="eq">E(r,t) = −∇φ(r,t) − ∂A/∂t (r,t)</div>
+    <div class="eq-label">MAGNETIC FIELD</div>
+    <div class="eq">B(r,t) = ∇ × A(r,t)       ← A is the vector potential</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Form of the Vector Potential A</div>
+    <div class="eq">A(ω,r,t) = A₀(ω) [e^{i(k·r − ωt + δω)} + e^{−i(k·r − ωt + δω)}] ê</div>
+    <ul class="bl" style="margin-top:10px">
+      <li><span class="hi">ê</span> = direction of A = direction of polarisation</li>
+      <li><span class="hi2">Δω</span> = range (bandwidth) — different ω not in same phase</li>
+      <li>A₀(ω) has a peak at ω = ω₀ (nearly monochromatic)</li>
+    </ul>
+    <div class="alert alert-info">
+      <span class="alert-icon">ℹ</span>
+      <span>For simplest case: monochromatic wave with fixed ω. In general, φ = 0 and A(r,t) is superposition of plane waves.</span>
+    </div>
+    <div class="eq-label">GENERAL PULSE (linear polarisation, Δω bandwidth)</div>
+    <div class="eq">A(r,t) = ∫ ê A₀(ω) [e^{i(k·r−ωt+δω)} + e^{−i(k·r−ωt+δω)}] dω</div>
+    <p style="margin-top:8px; color:var(--muted); font-size:13px;">Nearly monochromatic → not strictly so, because of uncertainty principle.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Gauge Transformation (Coulomb Gauge)</div>
+    <p>We can add an arbitrary scalar χ to the potential and take curl(χ) = 0, so:</p>
+    <div class="eq">B' = ∇ × A' = ∇ × A + ∇ × (∇χ) = B       (gauge invariance)</div>
+    <p style="margin-top:8px">We choose χ such that <span class="hi">∇·A = 0</span> → this is the <span class="hi2">Coulomb gauge</span> (also called radiation gauge).</p>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 Remember</div>
+    <div class="mnemonic-content">"E comes from BOTH φ and A (time-deriv)"<br>"B comes ONLY from A (curl)"</div>
+    <div class="mnemonic-explain">E has two contributions; B has only one. Coulomb gauge: ∇·A = 0.</div>
+  </div>
+</section>
+
+<!-- ====== SECTION 3 ====== -->
+<section class="section" id="s3">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <div>
+      <div class="section-title">Hamiltonian of H-atom in EM Field</div>
+      <div class="section-subtitle">TDSE → perturbation split</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Hamiltonian — Charged Particle in EM field (spin ignored)</div>
+    <div class="alert alert-warn"><span class="alert-icon">⚠</span><span>"Spin not considered" does NOT mean spin = 0. It means the Schrödinger equation does not consider spin.</span></div>
+    <div class="eq">H = (1/2m)(p̂ − qA)² + eφ</div>
+    <p>For electron: q = −e, so:</p>
+    <div class="eq">H = (1/2m)(iℏ∇ + eA)² − eφ</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Under Coulomb Gauge + Weak Field Approximation</div>
+    <p>∇·A = 0 (Coulomb gauge), and we neglect the A² term (weak field approx).</p>
+    <p style="margin-top: 8px">The TDSE becomes:</p>
+    <div class="eq">−(ℏ²/2m)∇²ψ − (Ze²/4πε₀r)ψ − (eℏe/m) A·∇ψ = iℏ ∂ψ/∂t</div>
+    <hr class="div">
+    <p>We split this as: <span class="hi">H = H₀ + H'</span></p>
+    <table class="tbl">
+      <tr><th>H₀ (unperturbed)</th><th>H' (perturbation)</th></tr>
+      <tr>
+        <td>Unperturbed H-atom Hamiltonian<br>(kinetic + Coulomb attraction)</td>
+        <td style="color:var(--accent2)">H' = −(eℏ/m) A·∇ = (e/m) A·p̂<br><span style="font-size:12px;color:var(--muted)">(interaction with EM field)</span></td>
+      </tr>
+    </table>
+    <div class="alert alert-key"><span class="alert-icon">★</span><span>H' is the perturbation Hamiltonian — this drives transitions between states. We use Time-Dependent Perturbation Theory (TDPT).</span></div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 Mnemonic — The Split</div>
+    <div class="mnemonic-content">H = H₀ + H'<br>"Hydrogen Zero = old atom,  H-prime = EM hits it"</div>
+    <div class="mnemonic-explain">H₀ is what you already know (H-atom). H' is the NEW part from EM radiation. Only H' causes transitions.</div>
+  </div>
+</section>
+
+<!-- ====== SECTION 4 ====== -->
+<section class="section" id="s4">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <div>
+      <div class="section-title">Time-Dependent Perturbation Theory</div>
+      <div class="section-subtitle">Transition probability & absorption/emission conditions</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Expanding the perturbed wavefunction</div>
+    <p>Unperturbed eigenstates: φₖ(r) e^{−iEₖt/ℏ} with H₀φₖ = Eₖφₖ</p>
+    <p style="margin-top:8px">We expand the total wavefunction as:</p>
+    <div class="eq">ψ(r,t) = Σₖ Cₖ(t) φₖ(r) e^{−iEₖt/ℏ}</div>
+    <p>The Cₖ(t) are to be determined by <span class="hi">first-order perturbation</span>.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Initial Condition</div>
+    <p>At t = 0, electron is in state ψₐ:</p>
+    <div class="eq">Cₖ(t=0) = δₖₐ     →     Cₐ(0) = 1,  all others = 0</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">First-Order Perturbation: C_b(t)</div>
+    <p>After perturbation, probability of finding system in state ψ_b = |C_b(t)|²</p>
+    <div class="eq">C_b'(t) = (1/iℏ) ∫₀ᵗ H'_ba(t') e^{iω_ba t'} dt'</div>
+    <div class="eq-label">WHERE: ω_ba = (E_b − E_a)/ℏ</div>
+    <div class="eq">C_b'(t) = −(ie/2ℏm) ∫₀ᵗ ⟨ψ_b|A·∇|ψₐ⟩ e^{iω_ba t'} dt'</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">When Do Integrals Contribute? → Energy Conservation</div>
+    <p>After substituting A and integrating over ω and t':</p>
+    <table class="tbl">
+      <tr><th>Integral Term</th><th>Condition</th><th>Meaning</th></tr>
+      <tr>
+        <td>∫e^{i(ω_ba − ω)t'} dt'</td>
+        <td class="hi3">ω_ba = ω → E_b = Eₐ + ℏω</td>
+        <td style="color:var(--accent3)">ABSORPTION</td>
+      </tr>
+      <tr>
+        <td>∫e^{i(ω_ba + ω)t'} dt'</td>
+        <td class="hi2">ω_ba = −ω → E_b = Eₐ − ℏω</td>
+        <td style="color:var(--accent2)">EMISSION</td>
+      </tr>
+    </table>
+    <div class="alert alert-info"><span class="alert-icon">ℹ</span><span>This is the <strong>Principle of Detailed Balance</strong> — transitions happen only when energy is exactly conserved (within Δω bandwidth).</span></div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 Mnemonic — Absorption vs Emission</div>
+    <div class="mnemonic-content">ABS-orption: E_b = Eₐ + ℏω  (goes UP, gains energy)<br>EMI-ssion:   E_b = Eₐ − ℏω  (comes DOWN, loses energy)</div>
+    <div class="mnemonic-explain">+ℏω = absorbed a photon, went higher. −ℏω = emitted a photon, came down.</div>
+  </div>
+</section>
+
+<!-- ====== SECTION 5 ====== -->
+<section class="section" id="s5">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <div>
+      <div class="section-title">The Matrix Element M_ba & Dipole Approximation</div>
+      <div class="section-subtitle">Why e^{ik·r} ≈ 1</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">The Matrix Element M_ba</div>
+    <div class="eq">M_ba = ⟨ψ_b | e^{ik·r} ê·∇ | ψₐ⟩</div>
+    <p>We expand the exponential:</p>
+    <div class="eq">e^{ik·r} = 1 + i(k·r) + i²(k·r)²/2! + ···</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Why can we set e^{ik·r} ≈ 1?</div>
+    <p>Check the magnitude of <span class="hi">k·r</span>:</p>
+    <ul class="bl">
+      <li>For Bohr radius: r ~ ½ Å = 10⁻⁸ cm</li>
+      <li>For visible light: k = 2π/λ ~ 10⁵ cm⁻¹</li>
+      <li>So <span class="hi2">k·r ~ 10⁻³ ≪ 1</span></li>
+    </ul>
+    <div class="alert alert-key"><span class="alert-icon">★</span><span>Since k·r ≪ 1, we can approximate e^{ik·r} ≈ 1. This is the <strong>Electric Dipole Approximation</strong>.</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Result Under Dipole Approximation</div>
+    <div class="eq">M_ba = −(mω_ba/ℏ) eê·⟨ψ_b|r|ψₐ⟩</div>
+    <p style="margin-top:8px">The term <span class="hi">⟨ψ_b|r|ψₐ⟩</span> is the position matrix element — this is what determines if a transition is <span class="hi3">allowed or forbidden</span>.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Higher Approximations (expanding the series)</div>
+    <p>If we keep more terms in the expansion of e^{ik·r}, we get:</p>
+    <ul class="bl">
+      <li>1st term → <span class="hi">Electric Dipole (E1)</span> approximation</li>
+      <li>2nd term → <span class="hi2">Magnetic Dipole (M1) + Electric Quadrupole (E2)</span></li>
+      <li>3rd term → Quadrupole approximation, etc.</li>
+    </ul>
+    <p style="margin-top:8px; color:var(--muted); font-size:13px;">Note: The ⟨ψ_b|A|ψₐ⟩ term is ALWAYS present for all orders; it's the dominant one.</p>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 Key Numbers to Remember</div>
+    <div class="mnemonic-content">r ~ 10⁻⁸ cm  (Bohr radius ~ ½ Å)<br>k ~ 10⁵ cm⁻¹ (visible light)<br>k·r ~ 10⁻³ ≪ 1  → DIPOLE APPROX VALID</div>
+  </div>
+</section>
+
+<!-- ====== SECTION 6 ====== -->
+<section class="section" id="s6">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <div>
+      <div class="section-title">Selection Rules for Dipole Transitions</div>
+      <div class="section-subtitle">Δl = ±1 and Δm rules</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Setup</div>
+    <p>For H-atom: ψₐ ~ R_{n₁l₁} Y_{l₁}^{m₁}(θ,φ) and ψ_b ~ R_{n₂l₂} Y_{l₂}^{m₂}(θ,φ)</p>
+    <p style="margin-top:8px">The matrix element ⟨ψ_b|r|ψₐ⟩ is non-zero only for certain quantum number combinations.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="color:var(--accent3)">Angular Momentum Selection Rule</div>
+    <div class="eq">Δl = l₂ − l₁ = ±1</div>
+    <p>This comes from the angular integral ⟨ψ_b|r|ψₐ⟩ being non-zero only when Δl = ±1.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Magnetic Quantum Number Selection Rules</div>
+    <p>Depends on <span class="hi">ê</span> (polarisation vector direction):</p>
+    <div class="two-col">
+      <div style="background:var(--bg3); border-radius:8px; padding:16px;">
+        <div style="font-family:'DM Mono',monospace; font-size:11px; color:var(--accent); margin-bottom:8px;">CASE (i): ê ∥ z-axis</div>
+        <div style="font-family:'DM Mono',monospace; color:var(--accent4); font-size:14px;">Δm = m₂ − m₁ = 0</div>
+        <p style="font-size:13px; color:var(--muted); margin-top:8px;">π-lines (linear polarisation along z)</p>
+      </div>
+      <div style="background:var(--bg3); border-radius:8px; padding:16px;">
+        <div style="font-family:'DM Mono',monospace; font-size:11px; color:var(--accent2); margin-bottom:8px;">CASE (ii): ê ⊥ z-axis, k̂ ∥ z</div>
+        <div style="font-family:'DM Mono',monospace; color:var(--accent4); font-size:14px;">Δm = m₂ − m₁ = ±1</div>
+        <p style="font-size:13px; color:var(--muted); margin-top:8px;">σ-lines (circular polarisation)</p>
+      </div>
+    </div>
+    <div class="alert alert-warn" style="margin-top:14px"><span class="alert-icon">⚠</span><span>If there is no pulse, there is no interaction. We consider there is some pulse in the background which contributes to the field.</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Transition Diagram (from notes)</div>
+    <div class="trans-diagram">
+      <div style="font-size:11px; color:var(--muted); margin-bottom:12px;">n=3, l=2 (3d): m = 2, 1, 0, −1, −2</div>
+      <div class="trans-level lv3">
+        <span>m=2</span><span>m=1</span><span>m=0</span><span>m=−1</span><span>m=2</span>
+      </div>
+      <div style="color:var(--muted); font-size:11px; margin:4px 0">↓ transitions ↓</div>
+      <div class="trans-level lv2">
+        <span>n=2, l=1 (2p)</span>
+      </div>
+      <div style="color:var(--muted); font-size:11px; margin:4px 0">↓ transitions ↓</div>
+      <div class="trans-level lv1">
+        <span>n=1, l=0 (1s)</span>
+      </div>
+      <div style="margin-top:14px; display:flex; gap:20px; justify-content:center; font-size:12px;">
+        <span style="color:var(--accent4)">■ Δm=0 → π-lines (red lines in notes)</span>
+        <span style="color:var(--accent3)">■ Δm=±1 → σ-lines (diagonal lines)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 Selection Rules Summary</div>
+    <div class="mnemonic-content">DIPOLE:  Δl = ±1  (always)<br>π-lines: Δm = 0   (ê ∥ z)<br>σ-lines: Δm = ±1  (ê ⊥ z)</div>
+    <div class="mnemonic-explain">"Parallel polarisation → Pi (π) → Δm = 0. Perpendicular → Sigma (σ) → Δm = ±1"</div>
+  </div>
+</section>
+
+<!-- ====== SECTION 7 ====== -->
+<section class="section" id="s7">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <div>
+      <div class="section-title">Many-Electron Atoms</div>
+      <div class="section-subtitle">Central field approximation & effective potential</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">The Full Hamiltonian (after CM reduction)</div>
+    <div class="eq">H = Σᵢ [−(1/2)∇ᵢ² − Z/rᵢ] + Σᵢ&gt;ⱼ (e²/4πε₀ rᵢⱼ)</div>
+    <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:12px;">
+      <div style="background:rgba(124,106,247,0.1); border-radius:6px; padding:10px 14px; flex:1; min-width:160px;">
+        <div style="font-size:11px; color:var(--accent); font-family:'DM Mono',monospace; margin-bottom:4px;">1e PART</div>
+        <p style="font-size:13px;">Kinetic energy + nuclear attraction → Central potential</p>
+      </div>
+      <div style="background:rgba(232,124,90,0.1); border-radius:6px; padding:10px 14px; flex:1; min-width:160px;">
+        <div style="font-size:11px; color:var(--accent2); font-family:'DM Mono',monospace; margin-bottom:4px;">2e PART (pairs)</div>
+        <p style="font-size:13px;">Electron-electron repulsion → Non-central potential</p>
+      </div>
+    </div>
+    <div class="alert alert-warn" style="margin-top:12px"><span class="alert-icon">⚠</span><span>The non-central repulsion term makes the Schrödinger equation analytically unsolvable for many-electron atoms.</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">The Central Field Approximation</div>
+    <p>Based on the <span class="hi">independent particle model</span> — each electron behaves as if in H-atom with an effective potential:</p>
+    <div class="eq">V_eff(rᵢ) = −Z/rᵢ + S(rᵢ)       ← S(rᵢ) = screening function</div>
+    <p style="margin-top:8px; color:var(--muted); font-size:13px;">A single form is not enough → indistinguishable particles require antisymmetry.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Behaviour of V_eff(r)</div>
+    <table class="tbl">
+      <tr><th>Region</th><th>Behaviour</th><th>Reason</th></tr>
+      <tr><td>r → 0 (near nucleus)</td><td class="hi">V(r) ~ −Z/r</td><td>Electron sees full nuclear charge</td></tr>
+      <tr><td>r → ∞ (far from nucleus)</td><td class="hi2">V(r) ~ −Z−(N−1)/r = −1/r</td><td>Screened by (N−1) other electrons; N = number of electrons</td></tr>
+      <tr><td>r intermediate</td><td class="hi4">Complicated/difficult</td><td>Partial screening</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Central Field Hamiltonian Split</div>
+    <div class="eq">H = Hc + Hn</div>
+    <div class="eq">Hc = Σᵢ [−(1/2)∇ᵢ² − Z/rᵢ + S(rᵢ)]      (sum of H-like parts)</div>
+    <p style="margin-top:8px"><span class="hi2">Hn</span> = remaining part of repulsion potential (not accounted for by Hc)</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Solution: Product Wavefunction (Hartree)</div>
+    <p>For Hc, we use separation of variables. The complete solution:</p>
+    <div class="eq">Ψc(r₁,r₂,...,rN) = uc₁(r₁) uc₂(r₂) ... ucN(rN)    — (Eq. 2)</div>
+    <div class="eq">Ec = Ec₁ + Ec₂ + ··· + EcN</div>
+    <p style="margin-top:8px">Names: <span class="hi">Hartree, Fock, Slater</span> — key people associated with this approach.</p>
+    <div class="alert alert-key"><span class="alert-icon">★</span><span>This product wavefunction (Eq. 2) does NOT satisfy Pauli Exclusion Principle — it must be anti-symmetrised!</span></div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 Mnemonic — Central Field Key Points</div>
+    <div class="mnemonic-content">"Independent particles → Product wavefn → Anti-symmetrise → Slater Det"</div>
+    <div class="mnemonic-explain">The chain: independent particle model → product state → but must be antisymmetric → use Slater determinant.</div>
+  </div>
+</section>
+
+<!-- ====== SECTION 8 ====== -->
+<section class="section" id="s8">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <div>
+      <div class="section-title">Pauli Exclusion Principle & Slater Determinant</div>
+      <div class="section-subtitle">Anti-symmetrisation via permutation operator</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Why Anti-symmetrize?</div>
+    <p>According to PEP, the complete wave function of a many-electron system must be <span class="hi">anti-symmetric</span>. But the product wavefunction (Eq. 2) is NOT anti-symmetric.</p>
+    <p style="margin-top:8px">We anti-symmetrize using a <span class="hi2">permutation operator</span> — forming a <span class="hi3">determinantal wave function</span>.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">The Slater Determinant (with spin)</div>
+    <p>Each single-particle function includes spin: <span class="hi">φ_ci(qᵢ) = ucᵢ(rᵢ) χᵢ</span> where χᵢ is the spin part.</p>
+    <div class="eq-label">SLATER DETERMINANT (N×N)</div>
+    <div class="eq" style="font-size:12px; line-height:1.6">ΨA(q₁,...,qN) = (1/√N!) |φc₁(q₁)  φc₁(q₂) ... φc₁(qN)|
+                               |φc₂(q₁)  φc₂(q₂) ... φc₂(qN)|
+                               |  ...                         |
+                               |φcN(q₁)  φcN(q₂) ... φcN(qN)|</div>
+    <p style="margin-top:8px; color:var(--muted); font-size:13px;">For 3 electrons, there are 3! = 6 permutations. Normalization factor: 1/√N!</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="color:var(--accent4)">Properties of Slater Determinant (3 key properties)</div>
+    <ul class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Row exchange → sign change</div>
+          <div class="step-desc">If qᵢ ⇌ qⱼ (exchange two particle coordinates), the SD becomes <span style="color:var(--danger)">negative</span>. This establishes anti-symmetry. ✓</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Two identical rows → ΨA = 0</div>
+          <div class="step-desc">If two quantum number sets (Ci, Cj) are the same → SD = 0. This IS the Pauli Exclusion Principle: no two electrons can have identical quantum numbers.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Two identical columns → ΨA = 0</div>
+          <div class="step-desc">If rᵢ = rⱼ (two electrons at the same position): SD = 0. Two electrons cannot be at the same place — Coulomb repulsion. (qᵢ = qⱼ)</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 Mnemonic — 3 Properties of SD</div>
+    <div class="mnemonic-content">S.A.C. — "Swap, Anti, Collapse"<br>1. SWAP rows → sign flips (antisymmetry)<br>2. SAME rows → zero (Pauli: same q-numbers forbidden)<br>3. SAME cols → zero (Coulomb: same position forbidden)</div>
+  </div>
+</section>
+
+<!-- ====== SECTION 9 ====== -->
+<section class="section" id="s9">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <div>
+      <div class="section-title">Hartree-Fock & Self-Consistent Field</div>
+      <div class="section-subtitle">Variational method + iterative solution</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">The SCF Procedure</div>
+    <ul class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Start with a trial potential</div>
+          <div class="step-desc">Begin with a trial expression for the potential energy.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Variational method → solve SE</div>
+          <div class="step-desc">Using variational method, find the wavefunction ψ.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Get charge distribution</div>
+          <div class="step-desc">From ψ, obtain the charge distribution using electrostatics.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">New potential → feed back into SE</div>
+          <div class="step-desc">From charge distribution, determine the form of potential. Feed this back into SE iteratively.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Repeat until convergence</div>
+          <div class="step-desc">Repeat steps 2–4 until solution of desired accuracy is achieved. This is the <span class="hi">self-consistent field</span>.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Hartree-Fock Approach</div>
+    <p>The H-F method adopts SCF to solve a system of <span class="hi">integro-differential equations</span> to find the many-electron wave function.</p>
+    <div class="alert alert-key">
+      <span class="alert-icon">★</span>
+      <span><strong>Limitation of HF:</strong> The Hartree-Fock method does NOT account for electron correlation.<br>
+      ΔE_correlation = E_exact − E_HF   [Non-relativistic]<br>
+      This difference is measured experimentally: ΔE → E_expt</span>
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <div class="mnemonic-label">🧠 SCF Mnemonic — "TVCP Loop"</div>
+    <div class="mnemonic-content">Trial → Variational → Charge → Potential → (loop back)</div>
+    <div class="mnemonic-explain">T: trial potential. V: variational solve. C: charge distribution. P: new potential. Then loop. HF's big weakness: misses correlation energy.</div>
+  </div>
+</section>
+
+<!-- ====== SECTION 10 ====== -->
+<section class="section" id="s10">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <div>
+      <div class="section-title">Quick Quiz — Test Yourself</div>
+      <div class="section-subtitle">Click to reveal answers</div>
+    </div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q1. Why can't QM explain spontaneous emission? What can?</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a">QM can solve it mathematically but cannot explain it from first principles because it only quantises the atom (1st quantisation). <strong>QFT (2nd quantisation)</strong> explains spontaneous emission properly — it quantises the EM field itself, revealing vacuum fluctuations that drive emission.</div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q2. Write the two Maxwell equations for E and B in terms of potentials φ and A.</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a">E(r,t) = −∇φ(r,t) − ∂A/∂t(r,t)<br>B(r,t) = ∇ × A(r,t)</div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q3. Write H = H₀ + H'. What is H'?</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a">H' = −(eℏ/m) A·∇ = (e/m) A·p̂<br>It is the perturbation Hamiltonian — the interaction of the H-atom with the EM field. H₀ is the unperturbed H-atom Hamiltonian.</div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q4. What condition must hold for absorption? For emission?</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a"><strong>Absorption:</strong> ω_ba = ω → E_b = Eₐ + ℏω (upper state gains ℏω)<br><strong>Emission:</strong> ω_ba = −ω → E_b = Eₐ − ℏω (releases ℏω)<br>This comes from the Principle of Detailed Balance.</div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q5. Justify the dipole approximation using numbers.</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a">For visible light: k = 2π/λ ~ 10⁵ cm⁻¹. Bohr radius r ~ 10⁻⁸ cm.<br>So k·r ~ 10⁻³ ≪ 1.<br>Therefore e^{ik·r} ≈ 1 + i(k·r) + ... ≈ 1. This is the electric dipole approximation.</div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q6. State the selection rules for electric dipole transitions.</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a">Δl = ±1 (always, from angular integral)<br>Δm = 0 → π-lines (when ê ∥ z-axis)<br>Δm = ±1 → σ-lines (when ê ⊥ z-axis, k̂ ∥ z)</div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q7. State three properties of the Slater Determinant.</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a">1. Swap two rows (exchange two particle coordinates) → SD changes sign → anti-symmetry established.<br>2. Two rows equal (same quantum numbers Ci = Cj) → ΨA = 0 → Pauli Exclusion Principle.<br>3. Two columns equal (same position ri = rj) → ΨA = 0 → Coulomb repulsion prevents co-location.</div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q8. What is the limitation of the Hartree-Fock method?</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a">HF does NOT account for electron correlation.<br>ΔE_correlation = E_exact − E_HF (non-relativistic)<br>This correlation energy is the gap between the exact energy and what HF predicts.</div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q9. What does "self-consistent field" mean?</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a">Start with trial potential → use variational method to solve SE → get wavefunction → compute charge distribution → derive new potential → feed back into SE → iterate until solution converges to desired accuracy. This iterative convergence is the SCF.</div>
+  </div>
+
+  <div class="quiz-q" onclick="this.classList.toggle('open')">
+    <div class="quiz-q-text"><span>Q10. Why is the product wavefunction (Hartree) insufficient?</span><span class="quiz-icon">+</span></div>
+    <div class="quiz-a">The product wavefunction Ψc = uc₁(r₁)uc₂(r₂)...ucN(rN) does not satisfy the Pauli Exclusion Principle — it is not anti-symmetric under particle exchange. We must anti-symmetrise it using a permutation operator, which produces the Slater Determinant.</div>
+  </div>
+
+  <div style="background: linear-gradient(135deg, rgba(124,106,247,0.1), rgba(90,232,180,0.06)); border: 1px solid rgba(124,106,247,0.2); border-radius:10px; padding:22px; margin-top:20px; text-align:center;">
+    <div style="font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:var(--accent); margin-bottom:8px;">You've got this! 🔥</div>
+    <p style="color:var(--muted); font-size:13px;">H-atom EM interaction → Vector potential → Hamiltonian split → TDPT → Dipole approx → Selection rules → Many-e atoms → Slater det → HF &amp; SCF</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const total = doc.scrollHeight - doc.clientHeight;
+  const prog = (window.scrollY / total) * 100;
+  document.getElementById('prog').style.width = prog + '%';
+});
+</script>
+</body>
+</html>
