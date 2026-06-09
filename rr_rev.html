@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSP Study Guide – Free Electron Theory</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #131720;
+    --card: #1a2030;
+    --border: #2a3550;
+    --accent: #4fc3f7;
+    --accent2: #f9a825;
+    --accent3: #81c784;
+    --accent4: #ef5350;
+    --text: #e8eaf0;
+    --muted: #8896b3;
+    --math: #ffd54f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #1a2030 50%, #0f1825 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(79,195,247,0.08) 0%, transparent 70%);
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(79,195,247,0.15);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+
+  /* ── NAV TABS ── */
+  nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 14px 22px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav button.active, nav button:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ── LAYOUT ── */
+  main { max-width: 980px; margin: 0 auto; padding: 36px 24px 60px; }
+  section { display: none; }
+  section.active { display: block; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .num {
+    background: var(--accent);
+    color: var(--bg);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  /* ── MATH BLOCKS ── */
+  .math {
+    background: #0a0e18;
+    border-left: 3px solid var(--math);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    color: var(--math);
+    margin: 14px 0;
+    overflow-x: auto;
+    line-height: 2;
+  }
+  .math .label {
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* ── DIAGRAMS (SVG-based) ── */
+  .diagram {
+    background: #0a0e18;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  .diagram figcaption {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* ── TAGS ── */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+  .tag-success { background: rgba(129,199,132,0.15); color: var(--accent3); border: 1px solid rgba(129,199,132,0.4); }
+  .tag-warn    { background: rgba(249,168,37,0.15);  color: var(--accent2); border: 1px solid rgba(249,168,37,0.4); }
+  .tag-danger  { background: rgba(239,83,80,0.15);   color: var(--accent4); border: 1px solid rgba(239,83,80,0.4); }
+  .tag-info    { background: rgba(79,195,247,0.15);  color: var(--accent);  border: 1px solid rgba(79,195,247,0.4); }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.88rem; }
+  th { background: rgba(79,195,247,0.1); color: var(--accent); padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(42,53,80,0.5); color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(79,195,247,0.03); }
+
+  /* ── STEPS ── */
+  .steps { counter-reset: step; }
+  .step {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .step::before {
+    content: counter(step);
+    background: var(--border);
+    color: var(--accent);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 0.9rem;
+  }
+  .highlight.blue  { background: rgba(79,195,247,0.08);  border-left: 3px solid var(--accent); }
+  .highlight.gold  { background: rgba(249,168,37,0.08);  border-left: 3px solid var(--accent2); }
+  .highlight.green { background: rgba(129,199,132,0.08); border-left: 3px solid var(--accent3); }
+  .highlight.red   { background: rgba(239,83,80,0.08);   border-left: 3px solid var(--accent4); }
+
+  /* ── QUESTION CARDS ── */
+  .qcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .qcard .q-num {
+    color: var(--accent2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .qcard .q-text { font-weight: 400; color: var(--text); }
+  .qcard .q-hint {
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-top: 8px;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+  }
+
+  h3 { color: var(--accent2); font-family: 'Lato', sans-serif; font-weight: 700; font-size: 1rem; margin: 20px 0 10px; text-transform: uppercase; letter-spacing: 0.8px; }
+  p { margin-bottom: 10px; }
+  strong { color: var(--accent); font-weight: 700; }
+  em { color: var(--accent2); font-style: normal; font-weight: 600; }
+  ul, ol { padding-left: 22px; margin-bottom: 10px; }
+  li { margin-bottom: 5px; }
+
+  /* ── SVG diagrams ── */
+  svg text { font-family: 'Lato', sans-serif; }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 28px 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Solid State Physics</h1>
+  <p>Free Electron Theory · Drude Model · Sommerfeld Model · Quantum Treatment</p>
+  <div class="badge">Class Test Preparation</div>
+</header>
+
+<nav>
+  <button class="active" onclick="show('intro')">Overview</button>
+  <button onclick="show('drude')">Drude Model</button>
+  <button onclick="show('hall')">Hall Effect</button>
+  <button onclick="show('quantum')">Quantum Model</button>
+  <button onclick="show('sommerfeld')">Sommerfeld</button>
+  <button onclick="show('pauli')">Pauli Para.</button>
+  <button onclick="show('boltzmann')">Boltzmann Eq.</button>
+  <button onclick="show('questions')">Important Qs</button>
+</nav>
+
+<main>
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<section id="intro" class="active">
+  <div class="card">
+    <div class="card-title"><span class="num">0</span>Course Map & Energy Scales</div>
+    <p>Solid State Physics (SSP) is the study of how atoms arranged in solids give rise to bulk electrical, thermal, magnetic, and optical properties. Your course covers:</p>
+    <table>
+      <tr><th>CO</th><th>Topic</th><th>Covered by</th></tr>
+      <tr><td>CO-1 → PS → CO-3</td><td>Lattice Dynamics</td><td>PS</td></tr>
+      <tr><td>CO-4 → BSD</td><td>Dielectric + Superconductivity</td><td>BSD</td></tr>
+      <tr><td>CO-2 + CO-4</td><td>Magnetic Properties + Free Electron Theory</td><td>RR Ma'am</td></tr>
+    </table>
+    <h3>Energy Scales in Physics</h3>
+    <table>
+      <tr><th>Regime</th><th>Energy</th><th>What's probed</th><th>Example</th></tr>
+      <tr><td><span class="tag tag-success">Low</span></td><td>meV – keV</td><td>Electrons, bonds, phonons; nucleus = single entity</td><td>X-ray (λ = 1Å, hν ≈ keV); Optical (meV–eV)</td></tr>
+      <tr><td><span class="tag tag-warn">Intermediate</span></td><td>keV – MeV</td><td>Nucleus not single; nucleons probed</td><td>Gamma rays, nuclear physics</td></tr>
+      <tr><td><span class="tag tag-danger">High</span></td><td>MeV – GeV</td><td>Quarks, gluons</td><td>LHC</td></tr>
+    </table>
+    <div class="highlight blue">
+      <strong>Key fact:</strong> At room temperature (T = 300 K), thermal energy k<sub>B</sub>T ≈ 26 meV. Fermi energy of metals is ~5 eV — 200× larger. This is WHY quantum treatment is essential.
+    </div>
+    <h3>Chemical Bonding in Solids</h3>
+    <ul>
+      <li><strong>Ionic bond</strong> — NaCl; electron transfer, strong electrostatic attraction</li>
+      <li><strong>Covalent bond</strong> — Diamond; shared electrons, directional, hard</li>
+      <li><strong>Metallic bond</strong> — electron sea delocalised over lattice ions</li>
+      <li><strong>Van der Waals</strong> — weak induced-dipole forces (noble gases, graphite layers)</li>
+    </ul>
+    <h3>Conductivity Range</h3>
+    <div class="diagram">
+      <svg viewBox="0 0 680 100" width="100%" height="90">
+        <defs>
+          <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4fc3f7"/>
+            <stop offset="40%" style="stop-color:#81c784"/>
+            <stop offset="100%" style="stop-color:#ef5350"/>
+          </linearGradient>
+        </defs>
+        <rect x="40" y="38" width="580" height="18" rx="9" fill="url(#cg)" opacity="0.7"/>
+        <text x="40"  y="28" fill="#4fc3f7" font-size="11" text-anchor="middle">10⁶ Ω⁻¹cm⁻¹</text>
+        <text x="310" y="28" fill="#81c784" font-size="11" text-anchor="middle">Semi-conductor</text>
+        <text x="580" y="28" fill="#ef5350" font-size="11" text-anchor="middle">10⁻²⁰ Ω⁻¹cm⁻¹</text>
+        <text x="40"  y="72" fill="#4fc3f7" font-size="11" text-anchor="middle">Metal (Cu)</text>
+        <text x="310" y="72" fill="#81c784" font-size="11" text-anchor="middle">(Si, Ge)</text>
+        <text x="580" y="72" fill="#ef5350" font-size="11" text-anchor="middle">Insulator</text>
+        <text x="485" y="90" fill="#f9a825" font-size="10" text-anchor="middle">ITO → insulator + high conductivity</text>
+      </svg>
+      <figcaption>Conductivity spans 26 orders of magnitude from metals to insulators</figcaption>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ DRUDE ═══════════════ -->
+<section id="drude">
+  <div class="card">
+    <div class="card-title"><span class="num">1</span>Free Electron Gas Model – Drude (Classical)</div>
+    <p>Drude (1900) and Lorentz treated the conduction electrons in a metal as a <strong>classical ideal gas</strong> obeying Maxwell-Boltzmann statistics. Electrons collide with stationary ion cores.</p>
+
+    <h3>Packing Fractions (Context: Electron Density)</h3>
+    <div class="diagram">
+      <svg viewBox="0 0 560 160" width="100%" height="140">
+        <!-- SC cube -->
+        <rect x="30" y="30" width="80" height="80" fill="none" stroke="#2a3550" stroke-width="1.5"/>
+        <circle cx="30" cy="30" r="14" fill="#4fc3f7" opacity="0.5"/>
+        <circle cx="110" cy="30" r="14" fill="#4fc3f7" opacity="0.5"/>
+        <circle cx="30" cy="110" r="14" fill="#4fc3f7" opacity="0.5"/>
+        <circle cx="110" cy="110" r="14" fill="#4fc3f7" opacity="0.5"/>
+        <text x="70" y="150" fill="#8896b3" font-size="11" text-anchor="middle">SC — PF = 52%</text>
+
+        <!-- FCC -->
+        <rect x="220" y="30" width="80" height="80" fill="none" stroke="#2a3550" stroke-width="1.5"/>
+        <circle cx="220" cy="30"  r="12" fill="#81c784" opacity="0.5"/>
+        <circle cx="300" cy="30"  r="12" fill="#81c784" opacity="0.5"/>
+        <circle cx="220" cy="110" r="12" fill="#81c784" opacity="0.5"/>
+        <circle cx="300" cy="110" r="12" fill="#81c784" opacity="0.5"/>
+        <circle cx="260" cy="30"  r="12" fill="#f9a825" opacity="0.7"/>
+        <circle cx="260" cy="110" r="12" fill="#f9a825" opacity="0.7"/>
+        <circle cx="220" cy="70"  r="12" fill="#f9a825" opacity="0.7"/>
+        <circle cx="300" cy="70"  r="12" fill="#f9a825" opacity="0.7"/>
+        <text x="260" y="150" fill="#8896b3" font-size="11" text-anchor="middle">FCC — PF = 74%</text>
+
+        <!-- BCC -->
+        <rect x="420" y="30" width="80" height="80" fill="none" stroke="#2a3550" stroke-width="1.5"/>
+        <circle cx="420" cy="30"  r="12" fill="#ef5350" opacity="0.5"/>
+        <circle cx="500" cy="30"  r="12" fill="#ef5350" opacity="0.5"/>
+        <circle cx="420" cy="110" r="12" fill="#ef5350" opacity="0.5"/>
+        <circle cx="500" cy="110" r="12" fill="#ef5350" opacity="0.5"/>
+        <circle cx="460" cy="70"  r="16" fill="#ffd54f" opacity="0.7"/>
+        <text x="460" y="150" fill="#8896b3" font-size="11" text-anchor="middle">BCC — PF = 68%</text>
+      </svg>
+      <figcaption>Crystal structures and their packing fractions. Cu is FCC.</figcaption>
+    </div>
+
+    <h3>Free Electron Density — Example: Copper</h3>
+    <div class="math">
+      <div class="label">Number of free electrons per cm³ in Cu</div>
+      Atomic weight of Cu = 63.546 g/mol<br>
+      Density of Cu = 8.96 g/cc<br><br>
+      n = (6.023 × 10²³ / 63.546) × 8.96  ≈  <strong>8.5 × 10²² electrons/cc</strong><br><br>
+      → ~1000× denser than classical ideal gas at STP
+    </div>
+
+    <h3>Drude Equation of Motion</h3>
+    <p>When electric field <strong>E</strong> is applied, force on electron = eE. But there's a <em>resistive force</em> proportional to instantaneous velocity (mimicking collisions):</p>
+    <div class="math">
+      m dv/dt = eE − λv<br><br>
+      At steady state (dv/dt = 0):<br>
+      eE = λv_d  →  λ = eE/v_d<br><br>
+      Full solution:<br>
+      <strong>v(t) = v_d (1 − e^{−t/τ})</strong>  ← τ = relaxation/mean free time<br><br>
+      As t → ∞, v → v_d  (drift velocity)
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 400 160" width="100%" height="140">
+        <line x1="40" y1="130" x2="380" y2="130" stroke="#2a3550" stroke-width="1.5"/>
+        <line x1="40" y1="20"  x2="40"  y2="135" stroke="#2a3550" stroke-width="1.5"/>
+        <text x="390" y="134" fill="#8896b3" font-size="11">t</text>
+        <text x="20"  y="30"  fill="#8896b3" font-size="11">v/v_d</text>
+        <text x="42"  y="28"  fill="#4fc3f7" font-size="10">1</text>
+        <line x1="40" y1="25" x2="380" y2="25" stroke="#2a3550" stroke-dasharray="4,3" stroke-width="1"/>
+        <!-- saturation curve -->
+        <path d="M40,130 Q90,130 130,60 Q160,30 200,26 L380,26"
+              fill="none" stroke="#4fc3f7" stroke-width="2.5"/>
+        <!-- τ, 2τ, 3τ labels -->
+        <line x1="130" y1="25" x2="130" y2="135" stroke="#f9a825" stroke-dasharray="3,3" stroke-width="1"/>
+        <line x1="200" y1="25" x2="200" y2="135" stroke="#f9a825" stroke-dasharray="3,3" stroke-width="1"/>
+        <line x1="270" y1="25" x2="270" y2="135" stroke="#f9a825" stroke-dasharray="3,3" stroke-width="1"/>
+        <text x="128" y="148" fill="#f9a825" font-size="10">τ</text>
+        <text x="196" y="148" fill="#f9a825" font-size="10">2τ</text>
+        <text x="266" y="148" fill="#f9a825" font-size="10">3τ</text>
+        <text x="200" y="12" fill="#8896b3" font-size="10">v(t) = v_d(1 − e^{−t/τ})</text>
+      </svg>
+      <figcaption>Electron velocity builds up exponentially to drift velocity v<sub>d</sub> with time constant τ ~ 10⁻¹⁴ s</figcaption>
+    </div>
+
+    <h3>Electrical Conductivity Derivation</h3>
+    <div class="steps">
+      <div class="step"><div>Current density J = nevA/A = nev_d (n = electrons/vol, e = charge, v_d = drift vel.)</div></div>
+      <div class="step"><div>From eE = λv_d and λ = eE/v_d → v_d = eEτ/m</div></div>
+      <div class="step"><div>J = ne(eEτ/m) = (ne²τ/m)E</div></div>
+      <div class="step"><div>Since J = σE:</div></div>
+    </div>
+    <div class="math">
+      <strong>σ = ne²τ / m</strong>  ←  Drude formula<br><br>
+      Plugging in: n ~ 10²² /cc, e = 1.6×10⁻¹⁹ C, m = 9.1×10⁻³¹ kg, τ ~ 10⁻¹⁴ s<br>
+      → σ ~ 10⁶ Ω⁻¹cm⁻¹  ✓ matches experiment
+    </div>
+    <span class="tag tag-success">Success ✓</span> <span>Correctly gives room temperature conductivity</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="num">2</span>Thermal Conductivity (Drude)</div>
+    <p>Heat flows from hot to cold. In 1D, electron at position x carries energy E[T(x)]. Electrons travel ±vτ before colliding, bringing energy from their last collision point.</p>
+    <div class="math">
+      <div class="label">Thermal current density</div>
+      j_q = −k dT/dx   (Fourier's Law)<br><br>
+      From Drude: k = (nv²τ/3) · C_v^e<br><br>
+      With C_v^e = (3/2)k_B (classical) and ⟨v²⟩ = 8k_BT/πm:<br><br>
+      <strong>k = (4/π) k_B² (n/m) τ T</strong>
+    </div>
+
+    <h3>Wiedemann–Franz Law</h3>
+    <div class="math">
+      k / (σT) = (4/π)(k_B/e)²  ≈  constant (experimentally!)<br><br>
+      This is the <strong>Lorenz number L</strong> = k/(σT)
+    </div>
+    <span class="tag tag-success">Success ✓</span> <span>Drude correctly predicts W-F law</span>
+
+    <h3>Drawbacks of Drude Model</h3>
+    <div class="highlight red">
+      <strong>1. Low temperature failure:</strong> As T→0, ρ→∞ (τ→0), so 1/τ (scattering rate) → ∞. But experimentally, at very low T, mean free path λ becomes thousands of Å — Drude can't explain this.
+    </div>
+    <div class="highlight red">
+      <strong>2. Hall effect anomaly:</strong> For divalent/trivalent metals (Be, Al), R<sub>H</sub> is positive (Drude predicts always negative). Drude fails for multivalent metals.
+    </div>
+    <div class="highlight red">
+      <strong>3. Electronic specific heat:</strong> Drude predicts C_v = (3/2)Nk_B, but experiment gives ~100× less. Biggest failure.
+    </div>
+    <div class="highlight red">
+      <strong>4. Cannot explain insulators:</strong> At T→0, conductivity should → ∞ by Drude, but insulators have zero conductivity.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ HALL ═══════════════ -->
+<section id="hall">
+  <div class="card">
+    <div class="card-title"><span class="num">3</span>Hall Effect</div>
+    <p>When current flows in y-direction and magnetic field B is applied in z-direction, a transverse voltage (Hall voltage V<sub>H</sub>) develops in the x-direction.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 520 200" width="100%" height="180">
+        <!-- conductor block -->
+        <rect x="80" y="60" width="280" height="100" rx="4" fill="#1a2030" stroke="#2a3550" stroke-width="2"/>
+        <!-- current arrow -->
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#4fc3f7"/>
+          </marker>
+          <marker id="arrg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#81c784"/>
+          </marker>
+          <marker id="arry" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#f9a825"/>
+          </marker>
+          <marker id="arrr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#ef5350"/>
+          </marker>
+        </defs>
+        <!-- J arrow -->
+        <line x1="30" y1="110" x2="78" y2="110" stroke="#4fc3f7" stroke-width="2" marker-end="url(#arr)"/>
+        <text x="52" y="100" fill="#4fc3f7" font-size="11" text-anchor="middle">J (current)</text>
+        <!-- B arrow upward -->
+        <line x1="220" y1="170" x2="220" y2="52" stroke="#81c784" stroke-width="2" marker-end="url(#arrg)"/>
+        <text x="235" y="45" fill="#81c784" font-size="11">B (z-dir)</text>
+        <!-- electrons going left -->
+        <line x1="340" y1="115" x2="120" y2="115" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arry)"/>
+        <text x="230" y="130" fill="#f9a825" font-size="10" text-anchor="middle">e⁻ drift (−y)</text>
+        <!-- Lorentz force -->
+        <line x1="220" y1="110" x2="305" y2="110" stroke="#ef5350" stroke-width="2" marker-end="url(#arrr)"/>
+        <text x="320" y="108" fill="#ef5350" font-size="11">F = evB (x̂)</text>
+        <!-- +/- charges -->
+        <text x="96" y="85" fill="#ef5350" font-size="18">+ + +</text>
+        <text x="96" y="150" fill="#4fc3f7" font-size="18">− − −</text>
+        <!-- VH label -->
+        <text x="430" y="100" fill="#ffd54f" font-size="12" font-weight="bold">V_H</text>
+        <line x1="362" y1="70" x2="420" y2="85"  stroke="#ffd54f" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="362" y1="150" x2="420" y2="120" stroke="#ffd54f" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="425" y1="88" x2="425" y2="118" stroke="#ffd54f" stroke-width="2" marker-end="url(#arry)"/>
+      </svg>
+      <figcaption>Hall Effect Setup: J ∥ ŷ, B ∥ ẑ → Lorentz force deflects e⁻ along x̂, building up V<sub>H</sub></figcaption>
+    </div>
+
+    <h3>Microscopic Derivation (Drude Framework)</h3>
+    <div class="steps">
+      <div class="step"><div>Drude equation: m dv/dt = e[E + v×B] − mv/τ</div></div>
+      <div class="step"><div>Steady-state (dv/dt = 0): p/τ = e[E + v×B]</div></div>
+      <div class="step"><div>Using J = nev → v = J/ne, substitute into above</div></div>
+      <div class="step"><div>Separate x and y components of E</div></div>
+    </div>
+    <div class="math">
+      E⃗ = −(1/ne)(J⃗ × B⃗) + (m/ne²τ)J⃗<br><br>
+      x-component: E_x = −(1/ne)JB₀  ≡  ρ_H · J    ← Hall field<br>
+      y-component: E_y = (m/ne²τ)J    ≡  ρ · J      ← Ohmic field<br><br>
+      Hall resistivity:  <strong>ρ_H = −(1/ne)B₀</strong><br>
+      Hall coefficient:  <strong>R_H = ρ_H/B₀ = −1/ne</strong>
+    </div>
+
+    <h3>Experimental Results (R_H · ne)</h3>
+    <table>
+      <tr><th>Metal</th><th>Valence</th><th>R_H · ne (theory = −1)</th><th>Interpretation</th></tr>
+      <tr><td>Cu</td><td>1</td><td>−1.5</td><td><span class="tag tag-success">Drude OK</span></td></tr>
+      <tr><td>Ag</td><td>1</td><td>−1.5</td><td><span class="tag tag-success">Drude OK</span></td></tr>
+      <tr><td>Be</td><td>2</td><td>+0.2</td><td><span class="tag tag-danger">Positive! Holes dominate</span></td></tr>
+      <tr><td>Al</td><td>3</td><td>+0.3</td><td><span class="tag tag-danger">Positive! Band structure needed</span></td></tr>
+    </table>
+    <div class="highlight gold">
+      <strong>Key insight:</strong> Positive R<sub>H</sub> means charge carriers behave as <em>holes</em> (positive). This is a quantum band-structure effect — Drude treating carriers as electrons always predicts R<sub>H</sub> < 0.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ QUANTUM ═══════════════ -->
+<section id="quantum">
+  <div class="card">
+    <div class="card-title"><span class="num">4</span>Quantum Free Electron Model — Sommerfeld (1928)</div>
+    <p>Electrons are <em>quantum particles</em> (fermions) — they obey <strong>Fermi-Dirac statistics</strong>, NOT Maxwell-Boltzmann. Each state can hold at most 2 electrons (spin ↑ and ↓) by Pauli's exclusion principle.</p>
+
+    <h3>1D Particle in a Box → Stationary Wave BC</h3>
+    <div class="math">
+      SE: −(ℏ²/2m) d²ψ/dx² = Eψ   (V=0 inside)<br><br>
+      Solution: ψ(x) = A cos(kx) + B sin(kx)<br>
+      BC: ψ(0) = 0 → A = 0;  ψ(L) = 0 → kL = nπ<br><br>
+      <strong>k = nπ/L</strong>,  n = 1, 2, 3, ...<br><br>
+      ψ(x) = √(2/L) sin(nπx/L)<br><br>
+      Energy:  <strong>E = ℏ²k²/2m = n²π²ℏ²/(2mL²)</strong>  → E ∝ n²
+    </div>
+
+    <h3>Progressive Wave (Periodic BC) — More Physical for Solid</h3>
+    <p>Instead of a box with hard walls, treat the crystal as a ring (no boundary) — electron travels continuously:</p>
+    <div class="math">
+      ψ(x) = ψ(x+L)  →  e^{ikL} = 1  →  kL = 2πn<br><br>
+      <strong>k = 2πn/L</strong>,  n = 0, ±1, ±2, ...<br><br>
+      ψ(x,y,z) = (1/√V) exp(i k⃗·r⃗)   (3D plane wave)<br><br>
+      Energy:  E(k⃗) = ℏ²k²/2m = ℏ²(k_x² + k_y² + k_z²)/2m
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 500 200" width="100%" height="180">
+        <!-- k-space lattice -->
+        <text x="10" y="20" fill="#8896b3" font-size="11">k-space (reciprocal lattice)</text>
+        <!-- grid dots -->
+        <g fill="#4fc3f7" opacity="0.6">
+          <circle cx="100" cy="100" r="3"/>
+          <circle cx="150" cy="100" r="3"/>
+          <circle cx="200" cy="100" r="3"/>
+          <circle cx="250" cy="100" r="3"/>
+          <circle cx="300" cy="100" r="3"/>
+          <circle cx="100" cy="150" r="3"/>
+          <circle cx="150" cy="150" r="3"/>
+          <circle cx="200" cy="150" r="3"/>
+          <circle cx="250" cy="150" r="3"/>
+          <circle cx="300" cy="150" r="3"/>
+          <circle cx="100" cy="50" r="3"/>
+          <circle cx="150" cy="50" r="3"/>
+          <circle cx="200" cy="50" r="3"/>
+          <circle cx="250" cy="50" r="3"/>
+          <circle cx="300" cy="50" r="3"/>
+        </g>
+        <!-- Fermi circle -->
+        <circle cx="200" cy="100" r="60" fill="rgba(79,195,247,0.1)" stroke="#4fc3f7" stroke-width="2" stroke-dasharray="6,3"/>
+        <text x="200" y="104" fill="#4fc3f7" font-size="12" text-anchor="middle">Fermi sphere</text>
+        <!-- axes -->
+        <line x1="80" y1="100" x2="340" y2="100" stroke="#2a3550" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="200" y1="180" x2="200" y2="20" stroke="#2a3550" stroke-width="1.5" marker-end="url(#arrg)"/>
+        <text x="345" y="104" fill="#8896b3" font-size="11">k_x</text>
+        <text x="205" y="16" fill="#8896b3" font-size="11">k_y</text>
+        <!-- unit cell label -->
+        <rect x="100" y="100" width="50" height="50" fill="none" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="125" y="140" fill="#f9a825" font-size="9" text-anchor="middle">2π/L</text>
+        <!-- density explanation -->
+        <text x="380" y="60"  fill="#8896b3" font-size="10">Each dot = 1 state</text>
+        <text x="380" y="76"  fill="#8896b3" font-size="10">(k_x,k_y,k_z,m_s)</text>
+        <text x="380" y="92"  fill="#8896b3" font-size="10">Unit cell vol:</text>
+        <text x="380" y="108" fill="#ffd54f" font-size="10">(2π/L)³</text>
+      </svg>
+      <figcaption>k-space lattice with Fermi sphere. All states inside the sphere are filled at T = 0.</figcaption>
+    </div>
+
+    <h3>Density of States (3D) — D(E)</h3>
+    <p>D(E)dE = number of states with energy in [E, E+dE]</p>
+    <div class="math">
+      Volume of spherical shell in k-space: 4πk²dk<br>
+      Number of states = 2 × (4πk²dk) / (2π/L)³  [factor 2 for spin]<br>
+               = (V/π²) k² dk<br><br>
+      Using E = ℏ²k²/2m → k = √(2mE)/ℏ, dk = (m/ℏ²k)dE:<br><br>
+      <strong>D(E) = V/(2π²) (2m/ℏ²)^{3/2} E^{1/2} = C · E^{1/2}</strong><br><br>
+      where C = V/(2π²) (2m/ℏ²)^{3/2}
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 500 200" width="100%" height="180">
+        <!-- 3D DOS curve -->
+        <text x="10" y="20" fill="#8896b3" font-size="11">Density of States D(E) for different dimensions</text>
+        <line x1="40" y1="170" x2="40" y2="20"  stroke="#2a3550" stroke-width="1.5"/>
+        <line x1="40" y1="170" x2="200" y2="170" stroke="#2a3550" stroke-width="1.5"/>
+        <!-- 3D: E^1/2 curve -->
+        <path d="M40,170 Q80,168 100,140 Q130,100 160,60 L200,30"
+              fill="none" stroke="#4fc3f7" stroke-width="2.5"/>
+        <text x="170" y="28" fill="#4fc3f7" font-size="10">3D: D∝E^{½}</text>
+        <text x="42" y="180" fill="#8896b3" font-size="10">0</text>
+        <text x="198" y="180" fill="#8896b3" font-size="10">E</text>
+        <text x="20" y="24"  fill="#8896b3" font-size="10">D(E)</text>
+
+        <!-- 2D: flat line -->
+        <line x1="270" y1="170" x2="270" y2="20"  stroke="#2a3550" stroke-width="1.5"/>
+        <line x1="270" y1="170" x2="420" y2="170" stroke="#2a3550" stroke-width="1.5"/>
+        <line x1="270" y1="100" x2="420" y2="100" stroke="#81c784" stroke-width="2.5"/>
+        <text x="390" y="96" fill="#81c784" font-size="10">2D: D=const</text>
+        <text x="272" y="180" fill="#8896b3" font-size="10">0</text>
+        <text x="418" y="180" fill="#8896b3" font-size="10">E</text>
+
+        <!-- 1D: 1/sqrt(E) -->
+        <line x1="430" y1="170" x2="430" y2="20"  stroke="#2a3550" stroke-width="1.5"/>
+        <line x1="430" y1="170" x2="490" y2="170" stroke="#2a3550" stroke-width="1.5"/>
+        <path d="M432,20 Q450,50 460,80 Q470,120 480,155 L490,168"
+              fill="none" stroke="#f9a825" stroke-width="2.5"/>
+        <text x="432" y="180" fill="#8896b3" font-size="10">0</text>
+        <text x="445" y="16" fill="#f9a825" font-size="10">1D: D∝E^{−½}</text>
+      </svg>
+      <figcaption>D(E) shapes for 3D (∝E^½), 2D (constant), and 1D (∝E^{−½})</figcaption>
+    </div>
+
+    <h3>Fermi-Dirac Distribution</h3>
+    <div class="math">
+      <strong>f_D(E) = 1 / [1 + exp((E − E_F)/k_BT)]</strong><br><br>
+      At T = 0:  f_D = 1 for E &lt; E_F;  f_D = 0 for E &gt; E_F<br>
+      At T ≠ 0:  smearing over ~k_BT around E_F (≈ 26 meV at 300K)
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 500 180" width="100%" height="160">
+        <!-- T=0 step -->
+        <line x1="40" y1="160" x2="40"  y2="20"  stroke="#2a3550" stroke-width="1.5"/>
+        <line x1="40" y1="160" x2="480" y2="160" stroke="#2a3550" stroke-width="1.5"/>
+        <polyline points="40,160 40,40 200,40 200,160" fill="none" stroke="#4fc3f7" stroke-width="2.5" stroke-dasharray="0"/>
+        <text x="110" y="35" fill="#4fc3f7" font-size="11">T = 0 (step)</text>
+        <!-- T≠0 smooth -->
+        <path d="M40,40 L140,40 Q180,40 200,90 Q220,148 260,155 L480,156"
+              fill="none" stroke="#f9a825" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="260" y="140" fill="#f9a825" font-size="11">T ≠ 0</text>
+        <!-- labels -->
+        <line x1="200" y1="20" x2="200" y2="162" stroke="#8896b3" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="198" y="175" fill="#8896b3" font-size="11" text-anchor="middle">E_F ≈ 5 eV</text>
+        <text x="42" y="42" fill="#8896b3" font-size="11">1</text>
+        <text x="20" y="85" fill="#8896b3" font-size="11">f_D</text>
+        <text x="478" y="164" fill="#8896b3" font-size="11">E</text>
+      </svg>
+      <figcaption>Fermi-Dirac distribution. At room temperature, smearing ≈ 26 meV ≪ E_F ≈ 5 eV — nearly step-like.</figcaption>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SOMMERFELD ═══════════════ -->
+<section id="sommerfeld">
+  <div class="card">
+    <div class="card-title"><span class="num">5</span>Sommerfeld Theory — Key Results</div>
+
+    <h3>Fermi Energy at T = 0</h3>
+    <p>Total number of electrons N = ∫₀^{E_F₀} D(E) · 1 · dE (f=1 at T=0)</p>
+    <div class="math">
+      N = C ∫₀^{E_{F0}} E^{1/2} dE = (2/3)C E_{F0}^{3/2}<br><br>
+      Solving for E_{F0}:<br><br>
+      <strong>E_{F0} = (ℏ²/2m)(3π²n)^{2/3}</strong>  where n = N/V<br><br>
+      Typical values (in eV):  Li=4.72, Na=3.12, K=2.14, Cu=7.04, Ag=5.19
+    </div>
+    <div class="highlight gold">
+      <strong>Classical paradox:</strong> E_{F0} ~ 5 eV ≡ temperature ~58,000 K! But classically, T=0 means zero energy. The electrons have this energy purely due to Pauli exclusion — quantum zero-point pressure.
+    </div>
+
+    <h3>Average Energy at T = 0</h3>
+    <div class="math">
+      Ē₀ = (1/N) ∫₀^{E_{F0}} E · D(E) dE  =  (3/5) E_{F0}<br><br>
+      ← Average energy is 3/5 of Fermi energy, not zero!
+    </div>
+
+    <h3>Temperature Dependence of Fermi Energy</h3>
+    <div class="math">
+      E_F(T) = E_{F0} [1 − (π²/12)(kT/E_F)²]<br><br>
+      Correction is ~10⁻⁴ eV at 300 K — Fermi energy barely changes with T.
+    </div>
+
+    <h3>Average Energy at Temperature T</h3>
+    <div class="math">
+      ū(T) = U₀ [1 + (5π²/12)(kT/E_F)²]<br><br>
+      where U₀ = (3/5)N·E_{F0}
+    </div>
+
+    <h3>Electronic Specific Heat (CRITICAL)</h3>
+    <p>This resolves the biggest failure of Drude:</p>
+    <div class="math">
+      C_v^e = ∂U/∂T = U₀ · (5π²/12) · 2kT/E_F²  · k_B<br><br>
+      = (π²/2) nk_B · (k_BT/E_F)<br><br>
+      <strong>C_v^e / vol = γT</strong>   where  γ = (π²/2) nk_B²/E_F<br><br>
+      → C_v ∝ T  (NOT constant as Drude predicted!)
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 400 200" width="100%" height="180">
+        <line x1="40" y1="160" x2="40"  y2="20"  stroke="#2a3550" stroke-width="1.5"/>
+        <line x1="40" y1="160" x2="380" y2="160" stroke="#2a3550" stroke-width="1.5"/>
+        <!-- γT line -->
+        <line x1="40" y1="160" x2="300" y2="40" stroke="#4fc3f7" stroke-width="2.5"/>
+        <text x="280" y="36" fill="#4fc3f7" font-size="11">e⁻: γT</text>
+        <!-- AT³ curve -->
+        <path d="M40,160 Q100,158 160,130 Q220,90 280,40"
+              fill="none" stroke="#81c784" stroke-width="2.5"/>
+        <text x="250" y="38" fill="#81c784" font-size="11">Lattice: AT³</text>
+        <!-- total -->
+        <path d="M40,160 Q80,155 130,130 Q180,100 230,70 L270,42"
+              fill="none" stroke="#f9a825" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="240" y="60" fill="#f9a825" font-size="11">Total expt</text>
+        <text x="40" y="15" fill="#8896b3" font-size="11">C_v/T vs T²: slope=A (lattice), intercept=γ (electron)</text>
+        <text x="378" y="164" fill="#8896b3" font-size="11">T²</text>
+        <text x="20" y="90" fill="#8896b3" font-size="11">C_v/T</text>
+      </svg>
+      <figcaption>Low-temperature specific heat: C_v = γT + AT³. Plot C_v/T vs T² → straight line: intercept = γ (electronic), slope = A (lattice Debye contribution)</figcaption>
+    </div>
+
+    <h3>Why Drude Overestimated C_v by 100×</h3>
+    <div class="highlight blue">
+      In Drude: all N electrons absorb thermal energy → C_v = (3/2)Nk_B.<br>
+      In Sommerfeld: only electrons near E_F (within ~k_BT) can be excited. This is only ~(k_BT/E_F) fraction of electrons, so C_v is reduced by this factor → C_v ∝ T.
+    </div>
+
+    <h3>Electrical Conductivity (Sommerfeld)</h3>
+    <div class="math">
+      σ = ne²τ(E_F)/m<br><br>
+      Mean free path: λ = v_F · τ(E_F)<br><br>
+      <strong>σ = e²λm² / (12π³ℏ³) · S_F</strong><br><br>
+      where S_F = 4πk_F² is the <em>Fermi surface area</em><br><br>
+      Key difference: τ evaluated at E_F, not at average energy
+    </div>
+
+    <h3>Work Function</h3>
+    <div class="math">
+      The potential well confining electrons has finite depth E_s (vacuum level).<br><br>
+      <strong>φ = E_s − E_F</strong><br><br>
+      Work function = energy needed to pull an electron from E_F to vacuum
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PAULI ═══════════════ -->
+<section id="pauli">
+  <div class="card">
+    <div class="card-title"><span class="num">6</span>Pauli Spin Paramagnetism</div>
+    <p>Paramagnetism = magnetic property that appears only when external magnetic field B is present. Pauli Spin Paramagnetism (PSP) is due to <strong>conduction electrons</strong>, not ions.</p>
+
+    <h3>Magnetic Moment of Electron</h3>
+    <div class="math">
+      μ_B = eℏ/(2mc)  ←  Bohr magneton<br><br>
+      For spin-½ electrons:
+      spin +½ (↑): μ_z = −μ_B  (moment anti-parallel to B → energy = +μ_BB)
+      spin −½ (↓): μ_z = +μ_B  (moment parallel to B → energy = −μ_BB)
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 500 200" width="100%" height="180">
+        <!-- B=0 -->
+        <text x="100" y="20" fill="#8896b3" font-size="11" text-anchor="middle">B = 0</text>
+        <line x1="40" y1="160" x2="40"  y2="20"  stroke="#2a3550" stroke-width="1.5"/>
+        <line x1="40" y1="160" x2="200" y2="160" stroke="#2a3550" stroke-width="1.5"/>
+        <path d="M40,160 Q70,158 90,120 Q110,80 130,45 L145,25"
+              fill="rgba(79,195,247,0.15)" stroke="#4fc3f7" stroke-width="2"/>
+        <line x1="40" y1="80" x2="200" y2="80" stroke="#8896b3" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="205" y="84" fill="#8896b3" font-size="10">E_F</text>
+        <text x="100" y="175" fill="#8896b3" font-size="10">Symmetric N(E)</text>
+
+        <!-- B≠0: spin up shifted right, spin down shifted left -->
+        <text x="380" y="20" fill="#8896b3" font-size="11" text-anchor="middle">B ≠ 0</text>
+        <!-- up spin: energy raised by μ_BB, curve shifts right -->
+        <line x1="260" y1="160" x2="260" y2="20"  stroke="#2a3550" stroke-width="1.5"/>
+        <line x1="260" y1="160" x2="480" y2="160" stroke="#2a3550" stroke-width="1.5"/>
+        <path d="M260,160 Q290,158 315,105 Q335,65 355,30 L370,18"
+              fill="rgba(239,83,80,0.1)" stroke="#ef5350" stroke-width="2"/>
+        <text x="355" y="14" fill="#ef5350" font-size="10">↑ spin (E + μ_BB)</text>
+        <path d="M260,160 Q290,158 305,128 Q320,95 340,62 L358,38"
+              fill="rgba(79,195,247,0.1)" stroke="#4fc3f7" stroke-width="2"/>
+        <text x="340" y="35" fill="#4fc3f7" font-size="10">↓ spin (E − μ_BB)</text>
+        <line x1="260" y1="80" x2="480" y2="80" stroke="#8896b3" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="260" y1="90" x2="480" y2="90" stroke="#f9a825" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="484" y="84" fill="#8896b3" font-size="9">E_F₀</text>
+        <text x="484" y="94" fill="#f9a825" font-size="9">E_F'</text>
+        <text x="370" y="175" fill="#8896b3" font-size="10">Imbalance → Net M</text>
+      </svg>
+      <figcaption>B=0: equal spin-up and spin-down DOS. B≠0: sub-bands shift, creating imbalance → net magnetisation.</figcaption>
+    </div>
+
+    <h3>Pauli Susceptibility</h3>
+    <div class="math">
+      χ_P = nμ_B² / k_BT  (classical → wrong!)<br><br>
+      Quantum result: only electrons near E_F contribute<br><br>
+      <strong>χ_P = (3/2) nμ_B²/E_F = nμ_B²/k_BT_F</strong><br><br>
+      → Temperature INDEPENDENT (unlike classical paramagnets which go as 1/T)
+    </div>
+    <div class="highlight green">
+      <strong>Key experimental signature:</strong> Classical Curie paramagnetism χ ∝ 1/T, but metals like Na, K, Li show χ ≈ constant with temperature. This is Pauli paramagnetism — a quantum effect.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ BOLTZMANN ═══════════════ -->
+<section id="boltzmann">
+  <div class="card">
+    <div class="card-title"><span class="num">7</span>Boltzmann Transport Equation</div>
+    <p>Goes beyond Drude and Sommerfeld by tracking how the distribution function f(r⃗, p⃗, t) evolves under fields and collisions.</p>
+
+    <h3>What is f(r⃗, p⃗, t)?</h3>
+    <p>f(x, y, z, p_x, p_y, p_z, t) d³r d³p = number of particles in phase-space element d³r·d³p at time t. This is a 7-variable function (Cartesian + momentum + time).</p>
+
+    <h3>Derivation of BTE</h3>
+    <div class="steps">
+      <div class="step"><div>Particle at (r⃗, p⃗, t) moves to (r⃗+v⃗δt, p⃗+F⃗δt, t+δt) under external force F⃗ = −e(E⃗ + v⃗×B⃗)</div></div>
+      <div class="step"><div>By Liouville's theorem: phase-space volume is conserved → f(r⃗+v⃗δt, ..., t+δt) = f(r⃗, p⃗, t) (without collisions)</div></div>
+      <div class="step"><div>Taylor expand and divide by δt → total time derivative = 0 without collisions</div></div>
+      <div class="step"><div>Add collision term (∂f/∂t)|_coll to account for scattering</div></div>
+    </div>
+    <div class="math">
+      ∂f/∂t|_field = −v⃗·∇_r f − F⃗·∇_p f<br><br>
+      <strong>BTE:</strong>  ∂f/∂t|_field + ∂f/∂t|_coll = 0<br><br>
+      Relaxation time approximation:<br>
+      ∂f/∂t|_coll = −(f − f₀)/τ<br><br>
+      Steady state (∂f/∂t = 0):<br>
+      (f − f₀)/τ = −∂f/∂t|_field = −v⃗·∇_r f + eE⃗·∇_p f<br><br>
+      For E field in x-direction:<br>
+      f − f₀ = eE_x τ(E) v_x ∂f₀/∂E
+    </div>
+
+    <h3>Conductivity from BTE</h3>
+    <div class="math">
+      J = −(2e/h³) ∫∫∫ v_x (f − f₀) dp_x dp_y dp_z<br><br>
+      After integration (replacing v_x² → v²/3, converting to energy):<br><br>
+      <strong>J = (e²n τ(E_F)/m) E_x  →  σ = ne²τ(E_F)/m</strong><br><br>
+      Same form as Drude, but τ evaluated at Fermi energy — physically correct!
+    </div>
+    <div class="highlight blue">
+      <strong>Sommerfeld vs Drude σ:</strong> Identical formula, but Sommerfeld uses Fermi velocity v_F (not thermal velocity) and τ(E_F). This resolves the low-temperature behaviour correctly.
+    </div>
+
+    <h3>BTE — Collision Term (Detailed)</h3>
+    <div class="math">
+      ∂f/∂t|_coll = ∫ d³p' · P(p⃗,p⃗') · [f(p⃗')(1−f(p⃗)) − f(p⃗)(1−f(p⃗'))]<br><br>
+      Three factors determining scattering rate:<br>
+      1. f(p⃗) = occupancy at initial state (source)<br>
+      2. P(p⃗,p⃗') = transition probability p⃗→p⃗'<br>
+      3. (1−f(p⃗')) = vacancy at final state (Pauli blocking)
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ QUESTIONS ═══════════════ -->
+<section id="questions">
+  <div class="card">
+    <div class="card-title"><span class="num">★</span>Important Questions for Class Test</div>
+
+    <h3>Derivation-Based Questions</h3>
+    <div class="qcard">
+      <div class="q-num">Q1 — Drude Model</div>
+      <div class="q-text">Derive the expression for electrical conductivity using the Drude free electron gas model. Show that σ = ne²τ/m. What are the assumptions made?</div>
+      <div class="q-hint">Hint: Start from equation of motion m dv/dt = eE − λv. Steady state → drift velocity. Use J = nev_d = σE.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q2 — Hall Effect</div>
+      <div class="q-text">Starting from the Drude equation dp⃗/dt = fext − p⃗/τ with both E⃗ and B⃗ fields, derive the Hall coefficient R_H = −1/ne. Why is R_H positive for Be and Al?</div>
+      <div class="q-hint">Hint: Apply steady state condition. Separate x and y components. E_x = ρ_H · J (Hall). R_H = ρ_H/B₀.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q3 — Fermi Energy</div>
+      <div class="q-text">Derive the expression for Fermi energy E_{F0} = (ℏ²/2m)(3π²n)^{2/3}. Calculate it for copper and comment on its physical significance.</div>
+      <div class="q-hint">Hint: Use D(E) = C·E^½ for 3D. Integrate N = ∫₀^{E_F} D(E)dE at T=0. Solve for E_F.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q4 — Electronic Specific Heat</div>
+      <div class="q-text">Show that the electronic contribution to specific heat is C_v^e = γT where γ = π²nk_B²/(2E_F). How does this resolve the Drude model failure?</div>
+      <div class="q-hint">Hint: Differentiate Ū(T) = U₀[1 + (5π²/12)(kT/E_F)²] with respect to T.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q5 — Density of States</div>
+      <div class="q-text">Derive the density of states D(E) for a free electron gas in 3D. Sketch D(E) vs E for 1D, 2D, and 3D systems and comment on the differences.</div>
+      <div class="q-hint">Hint: 3D: D(k)dk = 4πk²dk/(2π/L)³ · 2 (spin). Convert using E = ℏ²k²/2m.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q6 — Thermal Conductivity</div>
+      <div class="q-text">Derive thermal conductivity k from the Drude model and hence prove the Wiedemann-Franz law k/σT = constant. State the Lorenz number.</div>
+      <div class="q-hint">Hint: Use 1D energy transport argument. Net thermal current = (n/2)v[E(T(x−vτ)) − E(T(x+vτ))]. Taylor expand T.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q7 — BTE</div>
+      <div class="q-text">Write the Boltzmann transport equation. Using the relaxation time approximation, show how it gives σ = ne²τ(E_F)/m.</div>
+      <div class="q-hint">Hint: ∂f/∂t|field + ∂f/∂t|coll = 0. Substitution f − f₀ = eEτv_x ∂f₀/∂E. Integrate to get J.</div>
+    </div>
+
+    <h3>Conceptual Questions</h3>
+    <div class="qcard">
+      <div class="q-num">Q8</div>
+      <div class="q-text">Discuss the successes and failures of the Drude model. Why does the Sommerfeld model succeed where Drude fails?</div>
+      <div class="q-hint">Successes: σ, Wiedemann-Franz. Failures: specific heat (100× off), low-T behaviour, positive Hall coefficient.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q9</div>
+      <div class="q-text">What is Pauli spin paramagnetism? Why is the susceptibility temperature-independent, unlike classical paramagnets?</div>
+      <div class="q-hint">Only electrons near E_F can flip spins. Their number ∝ D(E_F)·k_BT, but T cancels in χ. Classical: all electrons contribute → χ ∝ 1/T (Curie).</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q10</div>
+      <div class="q-text">Explain the difference between stationary wave BC and periodic (Born-von Kármán) BC for electrons in a solid. Which is more physical and why?</div>
+      <div class="q-hint">Stationary: ψ=0 at walls, standing waves, k=nπ/L. Periodic: travelling waves, k=2πn/L, each state doubly degenerate (±k). Periodic is more physical for bulk solids.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q11</div>
+      <div class="q-text">Define mean free path in the Drude model. Calculate it for Cu at room temperature and at ~2K. Why can't Drude explain the low-temperature value?</div>
+      <div class="q-hint">λ = vτ. At 300K: λ = 10⁵×10⁻¹⁴ ≈ 10Å. At 2K: τ~10⁻¹³s → λ ~ 1000Å. Drude assumed λ = lattice spacing — contradicted at low T.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q12</div>
+      <div class="q-text">What is the physical significance of the Fermi energy? Show that the average energy of electrons at T=0 is Ē = (3/5)E_F, not zero.</div>
+      <div class="q-hint">Fermi energy = highest occupied energy at T=0. Non-zero because Pauli exclusion forces electrons to fill up states. Ē = ∫₀^{E_F} E·D(E)dE / N.</div>
+    </div>
+
+    <h3>Numerical/Short Answer</h3>
+    <div class="qcard">
+      <div class="q-num">Q13</div>
+      <div class="q-text">Given n = 8.5×10²² /cc, τ = 4×10⁻¹⁴ s for Cu, calculate: (a) σ, (b) relaxation time at 2K given σ increases 10⁴×, (c) mean free path at 2K.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q14</div>
+      <div class="q-text">Sketch f_D(E) at T=0 and T=300K for a metal with E_F = 5eV. Explain why the distribution is essentially unchanged at room temperature.</div>
+      <div class="q-hint">k_BT = 26meV ≪ E_F = 5000meV. Only ~0.5% of electrons near E_F are affected.</div>
+    </div>
+
+    <div class="qcard">
+      <div class="q-num">Q15</div>
+      <div class="q-text">For a free electron gas, show the ratio γ_expt/γ_theory = m*/m_e (effective mass ratio). What are heavy fermions? Give examples.</div>
+      <div class="q-hint">γ ∝ D(E_F) ∝ m. In periodic potential, m replaces m_e. CeAl₃, CeCu₂Si₂ have m* ~ 1000m_e.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="num">!</span>Quick Formula Sheet</div>
+    <div class="math">
+      <div class="label">Drude</div>
+      σ = ne²τ/m  |  k/σT = Lorenz number  |  R_H = −1/ne<br>
+      v(t) = v_d(1−e^{−t/τ})  |  λ = vτ
+    </div>
+    <div class="math">
+      <div class="label">Sommerfeld / Quantum</div>
+      E_{F0} = (ℏ²/2m)(3π²n)^{2/3}  |  D(E) = C·E^{1/2}  (3D)<br>
+      f_D = 1/[1+exp((E−E_F)/k_BT)]  |  N(E)dE = D(E)f(E)dE<br>
+      Ē₀ = (3/5)E_F  |  E_F(T) = E_{F0}[1−(π²/12)(kT/E_F)²]<br>
+      C_v^e = γT  |  γ = π²nk_B²/2E_F  |  χ_P = nμ_B²/k_BT_F
+    </div>
+    <div class="math">
+      <div class="label">Crystal structures</div>
+      SC: PF=52%, a=2r  |  BCC: PF=68%  |  FCC: PF=74%, r=a√2/4
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+function show(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs = ['intro','drude','hall','quantum','sommerfeld','pauli','boltzmann','questions'];
+  document.querySelectorAll('nav button')[tabs.indexOf(id)].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thermodynamics · SKS Sir Class Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=JetBrains+Mono:wght@300;400;600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== ROOT VARIABLES ===== */
+:root {
+  --bg:        #0d0f14;
+  --bg2:       #12151c;
+  --bg3:       #181c26;
+  --card:      #1a1e2b;
+  --card2:     #1f2438;
+  --border:    #2a2f45;
+  --border2:   #35405c;
+  --text:      #d8dce8;
+  --text2:     #a0a8c0;
+  --text3:     #6b7599;
+  --accent:    #7ba3e0;
+  --accent2:   #5d87cc;
+  --gold:      #c8a96e;
+  --gold2:     #e8c98e;
+  --green:     #6ab08c;
+  --red:       #d07070;
+  --purple:    #9b89d4;
+  --teal:      #5ab8c0;
+  --head:      'IM Fell English', serif;
+  --body:      'Crimson Pro', serif;
+  --mono:      'JetBrains Mono', monospace;
+  --radius:    10px;
+  --nav-h:     56px;
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+/* ===== STICKY TOP NAV ===== */
+#topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(13, 15, 20, 0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 12px;
+}
+#topnav::-webkit-scrollbar { display: none; }
+
+.nav-brand {
+  font-family: var(--head);
+  font-size: 1.05rem;
+  color: var(--gold);
+  white-space: nowrap;
+  padding: 0 16px 0 6px;
+  border-right: 1px solid var(--border);
+  margin-right: 8px;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text2);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border-radius: 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-btn:hover { color: var(--text); background: var(--card); }
+.nav-btn.active { color: var(--gold); background: rgba(200,169,110,0.1); }
+.nav-num {
+  display: inline-block;
+  font-size: 0.6rem;
+  color: var(--text3);
+  background: var(--bg3);
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: calc(var(--nav-h) + 40px) 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(123,163,224,0.07) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 40% at 20% 80%, rgba(200,169,110,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-kicker {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.hero-title {
+  font-family: var(--head);
+  font-size: clamp(2.4rem, 7vw, 5.2rem);
+  color: var(--gold2);
+  line-height: 1.08;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 30px rgba(200,169,110,0.2);
+}
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--text2);
+  font-style: italic;
+  max-width: 560px;
+  margin-bottom: 40px;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--text3);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+.hero-toc {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  max-width: 880px;
+  width: 100%;
+}
+.toc-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  text-align: left;
+}
+.toc-btn:hover { background: var(--card2); border-color: var(--accent); transform: translateY(-2px); }
+.toc-num { color: var(--gold); font-size: 0.62rem; }
+.toc-label { color: var(--text2); }
+
+/* ===== MAIN LAYOUT ===== */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ===== SECTION HEADER ===== */
+.sec-header {
+  padding: calc(var(--nav-h) + 40px) 0 0;
+}
+.lec-tag {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--text3);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.lec-tag::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+h1.sec-title {
+  font-family: var(--head);
+  font-size: clamp(1.8rem, 5vw, 2.9rem);
+  color: var(--gold2);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+h2.sub-title {
+  font-family: var(--head);
+  font-size: clamp(1.3rem, 3.5vw, 1.95rem);
+  color: var(--accent);
+  margin: 40px 0 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+h3.sub3 {
+  font-family: var(--head);
+  font-size: 1.25rem;
+  color: var(--gold);
+  margin: 28px 0 10px;
+  font-style: italic;
+}
+p { margin-bottom: 14px; }
+
+/* ===== CONCEPT BOXES ===== */
+.box {
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin: 20px 0;
+  border-left: 3px solid;
+  font-size: 0.97rem;
+}
+.box-title {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.box.key { background: rgba(123,163,224,0.07); border-color: var(--accent2); }
+.box.key .box-title { color: var(--accent); }
+.box.warn { background: rgba(208,112,112,0.08); border-color: var(--red); }
+.box.warn .box-title { color: var(--red); }
+.box.tip { background: rgba(106,176,140,0.08); border-color: var(--green); }
+.box.tip .box-title { color: var(--green); }
+.box.gold { background: rgba(200,169,110,0.08); border-color: var(--gold); }
+.box.gold .box-title { color: var(--gold); }
+.box.purple { background: rgba(155,137,212,0.08); border-color: var(--purple); }
+.box.purple .box-title { color: var(--purple); }
+
+/* ===== EQUATIONS ===== */
+.eq-block {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 22px;
+  margin: 18px 0;
+  overflow-x: auto;
+}
+.eq-block .eq-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.eq {
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--gold2);
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+.eq-note {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text3);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* ===== DERIVATION STEPS ===== */
+.deriv {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 22px 0;
+  overflow: hidden;
+}
+.deriv-header {
+  background: var(--bg3);
+  padding: 12px 18px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.step {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  border-bottom: 1px solid var(--border);
+  min-height: 52px;
+}
+.step:last-child { border-bottom: none; }
+.step-n {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text3);
+  background: var(--bg3);
+  border-right: 1px solid var(--border);
+  padding: 12px 0;
+}
+.step-body {
+  padding: 12px 18px;
+  font-size: 0.97rem;
+}
+.step-eq {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  color: var(--gold2);
+  display: block;
+  margin-bottom: 4px;
+}
+.step-note { font-size: 0.83rem; color: var(--text3); font-style: italic; }
+
+/* ===== SVG DIAGRAMS ===== */
+.diagram-wrap {
+  margin: 26px 0;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  text-align: center;
+}
+.diagram-wrap svg { max-width: 100%; height: auto; }
+.diagram-cap {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text3);
+  margin-top: 12px;
+  letter-spacing: 0.05em;
+}
+
+/* ===== TABLES ===== */
+.table-wrap { overflow-x: auto; margin: 20px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+th {
+  background: var(--bg3);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  text-align: left;
+  border: 1px solid var(--border);
+}
+td {
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: top;
+}
+tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+td code, th code {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--gold);
+  background: rgba(200,169,110,0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ===== Q & A ===== */
+.qa-section {
+  margin: 40px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.qa-header {
+  background: var(--bg3);
+  padding: 14px 20px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.qa-item {
+  border-bottom: 1px solid var(--border);
+}
+.qa-item:last-child { border-bottom: none; }
+.qa-q {
+  padding: 14px 20px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: background 0.15s;
+}
+.qa-q:hover { background: rgba(255,255,255,0.03); }
+.qa-q::before {
+  content: 'Q.';
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.qa-a {
+  padding: 0 20px 16px 44px;
+  color: var(--text2);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.mnemonic {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(200,169,110,0.1);
+  border: 1px solid rgba(200,169,110,0.25);
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--gold);
+}
+.mnemonic::before { content: '⚡'; }
+
+/* ===== MAXWELL RELATIONS WHEEL ===== */
+.maxwell-wheel { margin: 24px 0; }
+
+/* ===== SEPARATOR ===== */
+.sep {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+  margin: 60px 0;
+}
+
+/* ===== INLINE HIGHLIGHT ===== */
+strong { color: var(--text); font-weight: 600; }
+em { color: var(--gold); font-style: italic; }
+code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: var(--gold);
+  background: rgba(200,169,110,0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 50px 20px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  border-top: 1px solid var(--border);
+}
+
+/* ===== PROGRESS BAR ===== */
+#progress-bar {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--accent));
+  width: 0%;
+  z-index: 999;
+  transition: width 0.1s linear;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .step { grid-template-columns: 28px 1fr; }
+  .eq { font-size: 0.82rem; }
+  .hero-toc { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- TOP NAV -->
+<nav id="topnav">
+  <span class="nav-brand">SKS Sir · Thermodynamics</span>
+  <a href="#sec-entropy" class="nav-btn"><span class="nav-num">01</span> Entropy</a>
+  <a href="#sec-perfect-gas" class="nav-btn"><span class="nav-num">02</span> Perfect Gas</a>
+  <a href="#sec-thermodynamic-fns" class="nav-btn"><span class="nav-num">03</span> Thermo Functions</a>
+  <a href="#sec-maxwell" class="nav-btn"><span class="nav-num">04</span> Maxwell's Eqs</a>
+  <a href="#sec-tds" class="nav-btn"><span class="nav-num">05</span> TdS Equations</a>
+  <a href="#sec-cv-cp" class="nav-btn"><span class="nav-num">06</span> Cv &amp; Cp</a>
+  <a href="#sec-clausius" class="nav-btn"><span class="nav-num">07</span> Clausius–Clapeyron</a>
+  <a href="#sec-jt" class="nav-btn"><span class="nav-num">08</span> Joule–Thomson</a>
+  <a href="#sec-phase" class="nav-btn"><span class="nav-num">09</span> Phase Transitions</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-kicker">Advanced Thermodynamics · Expanded Class Notes</p>
+  <h1 class="hero-title">Statistical &amp;<br>Classical Thermodynamics</h1>
+  <p class="hero-sub">Complete derivations, diagrams, conceptual depth, and exam questions — following SKS Sir's lectures</p>
+  <div class="hero-meta">
+    <span class="hero-tag">Lectures 1–3</span>
+    <span class="hero-tag">Entropy · Maxwell's Eqs · TdS</span>
+    <span class="hero-tag">Clausius–Clapeyron</span>
+    <span class="hero-tag">Joule–Thomson Effect</span>
+    <span class="hero-tag">Van der Waals Gas</span>
+  </div>
+  <div class="hero-toc">
+    <a href="#sec-entropy" class="toc-btn"><span class="toc-num">01</span><span class="toc-label">Entropy — concept &amp; meaning</span></a>
+    <a href="#sec-perfect-gas" class="toc-btn"><span class="toc-num">02</span><span class="toc-label">Entropy of perfect gas</span></a>
+    <a href="#sec-thermodynamic-fns" class="toc-btn"><span class="toc-num">03</span><span class="toc-label">H, F, G — potentials</span></a>
+    <a href="#sec-maxwell" class="toc-btn"><span class="toc-num">04</span><span class="toc-label">Maxwell's relations</span></a>
+    <a href="#sec-tds" class="toc-btn"><span class="toc-num">05</span><span class="toc-label">Three TdS equations</span></a>
+    <a href="#sec-cv-cp" class="toc-btn"><span class="toc-num">06</span><span class="toc-label">Cv, Cp &amp; differences</span></a>
+    <a href="#sec-clausius" class="toc-btn"><span class="toc-num">07</span><span class="toc-label">Clausius–Clapeyron eqn</span></a>
+    <a href="#sec-jt" class="toc-btn"><span class="toc-num">08</span><span class="toc-label">Joule–Thomson effect</span></a>
+    <a href="#sec-phase" class="toc-btn"><span class="toc-num">09</span><span class="toc-label">Phase transitions</span></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 1 — ENTROPY
+════════════════════════════════════════════════════════════ -->
+<main>
+<section id="sec-entropy">
+  <div class="sec-header">
+    <div class="lec-tag">Lecture 1</div>
+    <h1 class="sec-title">Entropy</h1>
+  </div>
+
+  <h2 class="sub-title">What is Entropy?</h2>
+
+  <p>Entropy is a <strong>real physical quantity</strong> — as real as pressure, volume, or temperature — but unlike those it cannot be directly <em>felt</em>. It is denoted by <em>S</em> and has SI units of J/K (joules per kelvin).</p>
+
+  <div class="box key">
+    <div class="box-title">🔑 Core Definition</div>
+    Entropy is a <strong>single-valued state function</strong> — it depends only on the current state of the system, not on the history of how the system arrived at that state. This makes it a thermodynamic potential in the same class as internal energy U.
+  </div>
+
+  <p>Entropy plays three fundamental roles in thermodynamics:</p>
+  <ul style="margin: 0 0 14px 24px; color: var(--text2);">
+    <li style="margin-bottom:6px"><strong>Distinguishes adiabatics:</strong> There are infinitely many adiabatic processes; entropy gives each one a unique label (its rank or level).</li>
+    <li style="margin-bottom:6px"><strong>Direction of processes:</strong> In an isolated system, entropy never decreases (Second Law). It increases for irreversible processes and remains constant for reversible ones.</li>
+    <li style="margin-bottom:6px"><strong>Unavailable energy:</strong> Part of the heat absorbed in any process becomes unavailable for conversion to work. Entropy quantifies this unavailability.</li>
+  </ul>
+
+  <h2 class="sub-title">The Boltzmann Entropy Formula</h2>
+
+  <p>Ludwig Boltzmann made the profound connection between entropy and the microscopic description of matter. He showed that entropy is a measure of the number of microscopic configurations (microstates) <em>W</em> consistent with the macroscopic state:</p>
+
+  <div class="eq-block">
+    <div class="eq-label">Boltzmann's Entropy (Microscopic Definition)</div>
+    <div class="eq">S = k<sub>B</sub> ln W</div>
+    <div class="eq-note">k<sub>B</sub> = 1.38 × 10⁻²³ J/K  (Boltzmann constant)
+W = thermodynamic probability (number of accessible microstates)</div>
+  </div>
+
+  <div class="box tip">
+    <div class="box-title">💡 Intuition: Order vs Disorder</div>
+    A highly ordered state has very few microstates (W is small → S is small). A disordered state has an enormous number of microstates (W is huge → S is large). When entropy increases, the system moves from a less probable (more ordered) to a more probable (more disordered) macrostate. This is why disorder spontaneously increases — it is overwhelmingly more likely. There are vastly more disordered arrangements than ordered ones.
+  </div>
+
+  <h2 class="sub-title">Entropy in a Carnot Cycle — The Origin of the State-Function Property</h2>
+
+  <p>Consider the P-V diagram showing multiple Carnot cycles operating between different isotherms. SKS Sir's notes (Lec-1) show two Carnot engines operating between temperatures T₁, T₂, T₃ on the same P-V diagram, with heat exchanges Q₁, Q₂, Q₃ along the adiabatics.</p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+      <!-- Axes -->
+      <line x1="50" y1="300" x2="460" y2="300" stroke="#2a2f45" stroke-width="1.5"/>
+      <line x1="50" y1="20" x2="50" y2="300" stroke="#2a2f45" stroke-width="1.5"/>
+      <text x="470" y="305" fill="#6b7599" font-size="13" font-family="JetBrains Mono">V</text>
+      <text x="38" y="15" fill="#6b7599" font-size="13" font-family="JetBrains Mono">P</text>
+
+      <!-- Isotherm T1 (highest) -->
+      <path d="M 90 60 Q 180 55 280 90 Q 360 115 430 165" fill="none" stroke="#7ba3e0" stroke-width="1.8" stroke-dasharray="5,3"/>
+      <text x="434" y="162" fill="#7ba3e0" font-size="12" font-family="JetBrains Mono">T₁</text>
+
+      <!-- Isotherm T2 -->
+      <path d="M 90 130 Q 200 125 300 158 Q 370 180 430 210" fill="none" stroke="#c8a96e" stroke-width="1.8" stroke-dasharray="5,3"/>
+      <text x="434" y="207" fill="#c8a96e" font-size="12" font-family="JetBrains Mono">T₂</text>
+
+      <!-- Isotherm T3 (lowest) -->
+      <path d="M 90 195 Q 200 192 300 218 Q 370 235 430 255" fill="none" stroke="#6ab08c" stroke-width="1.8" stroke-dasharray="5,3"/>
+      <text x="434" y="252" fill="#6ab08c" font-size="12" font-family="JetBrains Mono">T₃</text>
+
+      <!-- Adiabatics (solid) -->
+      <path d="M 120 65 Q 128 130 138 198" fill="none" stroke="#9b89d4" stroke-width="2"/>
+      <path d="M 220 73 Q 232 138 248 205" fill="none" stroke="#9b89d4" stroke-width="2"/>
+      <path d="M 340 105 Q 348 165 360 225" fill="none" stroke="#9b89d4" stroke-width="2"/>
+
+      <!-- Q arrows on adiabatics -->
+      <text x="88" y="130" fill="#d8dce8" font-size="13" font-family="JetBrains Mono" font-style="italic">↓Q₁</text>
+      <text x="200" y="140" fill="#d8dce8" font-size="13" font-family="JetBrains Mono" font-style="italic">↓Q₂</text>
+      <text x="320" y="168" fill="#d8dce8" font-size="13" font-family="JetBrains Mono" font-style="italic">↓Q₃</text>
+
+      <!-- Labels -->
+      <text x="55" y="295" fill="#5ab8c0" font-size="11" font-family="JetBrains Mono">Isotherms (dashed)  ·  Adiabatics (solid)</text>
+    </svg>
+    <div class="diagram-cap">Fig 1.1 — Multiple Carnot cycles on a P-V diagram. Each adiabatic line carries a fixed Q. For any Carnot engine: Q/T = const along each adiabatic.</div>
+  </div>
+
+  <p>For a Carnot engine between T₁ and T₂, the efficiency gives:</p>
+
+  <div class="eq-block">
+    <div class="eq-label">Carnot Heat Ratios</div>
+    <div class="eq">Q₁/Q₂ = T₁/T₂   ⟹   Q₁/T₁ = Q₂/T₂ = Q₃/T₃ = ... = const</div>
+    <div class="eq-note">The ratio Q/T is the same along any adiabatic line in a Carnot diagram</div>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">🔑 Entropy as Unavailable Energy</div>
+    For a reversible cycle: <code>Σ(Qᵢ/Tᵢ) = 0</code> and <code>Σδᵢ = 0</code>. This means the ratio dQ/T is an exact differential — its integral is path-independent. This is the entropy function <em>S</em>, defined by <code>dS = dQ_rev / T</code>.
+  </div>
+
+  <p>If the adiabatics are closed (form a complete cycle), the condition is:</p>
+  <div class="eq-block">
+    <div class="eq">∮ dQ/T = 0  (reversible cycle)
+∮ dS = 0   ⟹  dS = dQ_rev / T  is an exact differential</div>
+  </div>
+
+  <h2 class="sub-title">Entropy as Unavailable Energy — Physical Explanation</h2>
+
+  <p>Consider heat Q₁ absorbed at temperature T₁. The work extractable from a Carnot engine between T₁ and T₂ (the sink) is:</p>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Derivation — Entropy and Unavailable Energy</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">Q₁/T₁ = Q₂/T₂  ⟹  Q₂ = Q₁(T₂/T₁)</span>
+        <span class="step-note">Carnot relation. Q₂ is the heat rejected to the sink at T₂.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">W = Q₁ − Q₂ = Q₁(1 − T₂/T₁)</span>
+        <span class="step-note">Net work = heat absorbed minus heat rejected</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">W = Q₁ − (Q₁/T₁)·T₂</span>
+        <span class="step-note">Rewriting: the unavailable part is (Q₁/T₁)·T₂ = S·T₂</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">Unavailable energy = T₂ · ΔS</span>
+        <span class="step-note">As entropy ΔS increases (more disorder), more energy becomes unavailable for work. This is the thermodynamic price of irreversibility.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box warn">
+    <div class="box-title">⚠ Key Insight: Why Entropy Increases Spontaneously</div>
+    In any real (irreversible) process, the entropy of an <em>isolated system</em> increases. This is the Second Law. As entropy increases, more and more energy gets "locked up" as unavailable thermal energy. The Universe tends toward states of higher entropy because there are astronomically more disordered microstates than ordered ones — and random processes naturally sample the most probable configurations.
+  </div>
+
+  <!-- Q&A Section 1 -->
+  <div class="qa-section">
+    <div class="qa-header">📝 Important Questions &amp; Answers — Entropy</div>
+
+    <div class="qa-item">
+      <div class="qa-q">Why is entropy called a "state function" and what are the consequences?</div>
+      <div class="qa-a">
+        A <strong>state function</strong> is any thermodynamic quantity whose value depends only on the current state of the system — not on the path taken to reach that state. Entropy is a state function because <code>dS = dQ_rev/T</code> is an exact differential (its cyclic integral is zero for any reversible cycle). <br><br>
+        Consequences: (1) ΔS between two states is uniquely defined regardless of the process. (2) We can calculate ΔS along any convenient reversible path, even if the actual process is irreversible. (3) For a spontaneous irreversible process, ΔS<sub>total</sub> &gt; 0, but we can still compute ΔS of each subsystem separately and add them.
+        <div class="mnemonic">MNEMONIC: "STATE = SAME THING ALWAYS, TRAJECTORY ERASED" — only endpoint matters</div>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">What is the physical meaning of S = k ln W?</div>
+      <div class="qa-a">
+        W is the <strong>thermodynamic probability</strong> — the number of distinct microscopic arrangements (microstates) that correspond to the same macroscopic state. Taking the logarithm makes entropy additive: for two independent systems A and B, W<sub>total</sub> = W<sub>A</sub> × W<sub>B</sub>, so S<sub>total</sub> = k ln(W<sub>A</sub>W<sub>B</sub>) = k ln W<sub>A</sub> + k ln W<sub>B</sub> = S<sub>A</sub> + S<sub>B</sub>. <br><br>
+        This connects the macroscopic (thermodynamic) and microscopic (statistical) descriptions of matter: entropy is fundamentally about how many ways a system can be arranged at the molecular level consistent with what we observe macroscopically.
+        <div class="mnemonic">MNEMONIC: "BOLTZMANN'S GRAVE" — his tombstone literally has S = k log W inscribed on it</div>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">Why is entropy constant in an adiabatic reversible process?</div>
+      <div class="qa-a">
+        By definition, an adiabatic process has <em>dQ = 0</em> (no heat exchange with surroundings). For a <em>reversible</em> process, <code>dS = dQ_rev/T = 0/T = 0</code>. Therefore S is constant — the process is <em>isentropic</em>. This is why reversible adiabatics are the same as isentropes, and in an S-T diagram they appear as vertical lines. For an <em>irreversible</em> adiabatic, dS &gt; 0 (entropy increases even though no heat enters).
+        <div class="mnemonic">MNEMONIC: "REVERSIBLE ADIABATIC = ISENTROPIC = VERTICAL ON S-T GRAPH"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 2 — ENTROPY OF PERFECT GAS
+════════════════════════════════════════════════════════════ -->
+<section id="sec-perfect-gas">
+  <div class="sec-header">
+    <div class="lec-tag">Lecture 2</div>
+    <h1 class="sec-title">Entropy of a Perfect Gas</h1>
+  </div>
+
+  <p>We derive the entropy change of a perfect gas from first principles using the combined first and second laws. This gives a formula in terms of measurable quantities: temperature and volume (or temperature and pressure).</p>
+
+  <h2 class="sub-title">Derivation from First Principles</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Full Derivation — Entropy of a Perfect Gas</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">dQ = dU + P dV  (First Law)</span>
+        <span class="step-note">The heat absorbed equals the increase in internal energy plus work done by the gas. This is the First Law of Thermodynamics for a quasi-static process.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">dS = dQ_rev / T  (Second Law definition of entropy)</span>
+        <span class="step-note">For a reversible process, the entropy change is dQ/T. For irreversible, dS > dQ/T.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">dS = dU/T + P dV/T</span>
+        <span class="step-note">Substituting the First Law: dS = (dU + PdV)/T</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">For perfect gas: dU = Cᵥ dT  and  P = nRT/V</span>
+        <span class="step-note">For a perfect gas, internal energy depends only on T (Joule's law), so dU = CᵥdT. The equation of state is PV = nRT.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <span class="step-eq">dS = Cᵥ dT/T + (nR/V) dV</span>
+        <span class="step-note">Substituting dU and PdV = nRT·dV/V into step 3</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">6</div>
+      <div class="step-body">
+        <span class="step-eq">Integrating: S₂ − S₁ = Cᵥ ln(T₂/T₁) + nR ln(V₂/V₁)</span>
+        <span class="step-note">Direct integration from state 1 to state 2. This is the entropy change between two equilibrium states of a perfect gas.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">7</div>
+      <div class="step-body">
+        <span class="step-eq">Equivalently: ΔS = Cᵥ ln(T₂/T₁) + Cₚ ln(V₂/V₁)</span>
+        <span class="step-note">Using Mayer's relation: Cₚ − Cᵥ = nR (or R for one mole). This form shows entropy depends on two independent variables for a perfect gas.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-label">Entropy Change of a Perfect Gas</div>
+    <div class="eq">S₂ − S₁ = Cᵥ ln(T₂/T₁) + nR ln(V₂/V₁)
+             = Cᵥ ln(T₂/T₁) + Cₚ ln(V₂/V₁)</div>
+    <div class="eq-note">Valid for n moles of a perfect gas undergoing any process (reversible or not!) between equilibrium states. The path doesn't matter — S is a state function.</div>
+  </div>
+
+  <div class="box tip">
+    <div class="box-title">💡 Special Cases</div>
+    <strong>Isothermal (T = const, dT = 0):</strong> ΔS = nR ln(V₂/V₁) = −nR ln(P₂/P₁). Expansion (V₂ &gt; V₁) increases entropy.<br><br>
+    <strong>Isochoric (V = const, dV = 0):</strong> ΔS = Cᵥ ln(T₂/T₁). Heating increases entropy.<br><br>
+    <strong>Isobaric (P = const):</strong> Using PV = nRT, V∝T at const P, so dV/V = dT/T → ΔS = (Cᵥ+nR)ln(T₂/T₁) = Cₚ ln(T₂/T₁).<br><br>
+    <strong>Adiabatic reversible:</strong> ΔS = 0 (isentropic). From the formula: Cᵥ ln(T₂/T₁) = −nR ln(V₂/V₁), which recovers the adiabatic relation T Vᵞ⁻¹ = const.
+  </div>
+
+  <!-- Q&A -->
+  <div class="qa-section">
+    <div class="qa-header">📝 Important Questions &amp; Answers — Perfect Gas Entropy</div>
+    <div class="qa-item">
+      <div class="qa-q">Show that entropy is zero for a reversible adiabatic process using the formula.</div>
+      <div class="qa-a">
+        For a reversible adiabatic: PVᵞ = const, and TV^(γ-1) = const. From the latter: ln(T₂/T₁) = −(γ−1)ln(V₂/V₁) = −(nR/Cᵥ)ln(V₂/V₁). Substituting into ΔS = Cᵥ ln(T₂/T₁) + nR ln(V₂/V₁): ΔS = Cᵥ·(−nR/Cᵥ)ln(V₂/V₁) + nR ln(V₂/V₁) = −nR ln(V₂/V₁) + nR ln(V₂/V₁) = 0 ✓
+        <div class="mnemonic">MNEMONIC: "ADIABATIC REVERSIBLE = S DOESN'T CHANGE" — think of it as the 'zero path' in entropy</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Why can we use the entropy formula even for irreversible processes?</div>
+      <div class="qa-a">
+        Because entropy is a <strong>state function</strong>. The formula ΔS = Cᵥ ln(T₂/T₁) + nR ln(V₂/V₁) is derived for reversible processes, but since S depends only on the state (T, V) and not on the path, we can use any convenient reversible path connecting the same initial and final states to compute ΔS. The answer is the same regardless. For an irreversible process, we simply identify the initial and final equilibrium states and compute ΔS between them using the formula — even though the actual process was irreversible.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 3 — THERMODYNAMIC FUNCTIONS
+════════════════════════════════════════════════════════════ -->
+<section id="sec-thermodynamic-fns">
+  <div class="sec-header">
+    <div class="lec-tag">Lecture 1–2</div>
+    <h1 class="sec-title">Thermodynamic Functions: U, H, F, G</h1>
+  </div>
+
+  <p>The four thermodynamic potentials — Internal Energy <em>U</em>, Enthalpy <em>H</em>, Helmholtz Free Energy <em>F</em>, and Gibbs Free Energy <em>G</em> — are all state functions. Each is most naturally suited to a different set of constraints (variables held fixed).</p>
+
+  <div class="box key">
+    <div class="box-title">🔑 Combined First and Second Law</div>
+    The fundamental thermodynamic identity ties entropy, internal energy, pressure, and volume together:<br><br>
+    <code>TdS = dU + PdV</code> &nbsp;⟹&nbsp; <code>dU = TdS − PdV</code><br><br>
+    This single equation is the foundation from which all four potentials are derived using Legendre transforms.
+  </div>
+
+  <h2 class="sub-title">Definitions and Natural Variables</h2>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Potential</th><th>Definition</th><th>Differential</th><th>Natural Variables</th><th>Use Case</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>U</strong> — Internal Energy</td>
+        <td>Fundamental</td>
+        <td><code>dU = TdS − PdV</code></td>
+        <td>S, V</td>
+        <td>Isolated system (S, V = const)</td>
+      </tr>
+      <tr>
+        <td><strong>H</strong> — Enthalpy</td>
+        <td>H = U + PV</td>
+        <td><code>dH = TdS + VdP</code></td>
+        <td>S, P</td>
+        <td>Constant pressure (chemical reactions)</td>
+      </tr>
+      <tr>
+        <td><strong>F</strong> — Helmholtz Free Energy</td>
+        <td>F = U − TS</td>
+        <td><code>dF = −PdV − SdT</code></td>
+        <td>T, V</td>
+        <td>Constant T, V (statistical mechanics)</td>
+      </tr>
+      <tr>
+        <td><strong>G</strong> — Gibbs Free Energy</td>
+        <td>G = U − TS + PV</td>
+        <td><code>dG = −SdT + VdP</code></td>
+        <td>T, P</td>
+        <td>Const T, P (spontaneity, equilibrium)</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 class="sub-title">Deriving the Differentials</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Enthalpy H = U + PV</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">H = U + PV  (definition)</span>
+        <span class="step-note">Enthalpy is internal energy plus the "flow work" PV.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">dH = dU + PdV + VdP</span>
+        <span class="step-note">Product rule: d(PV) = PdV + VdP</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">dU = TdS − PdV  (substituting the fundamental relation)</span>
+        <span class="step-note">Use the combined first+second law</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">dH = TdS − PdV + PdV + VdP = TdS + VdP ✓</span>
+        <span class="step-note">The PdV terms cancel. Result: dH = TdS + VdP. Natural variables of H are (S, P).</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Helmholtz Free Energy F = U − TS</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">F = U − TS  (definition)</span>
+        <span class="step-note">F represents the maximum work extractable from a system at constant T,V. The "TS" term is the unavailable energy.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">dF = dU − TdS − SdT</span>
+        <span class="step-note">Product rule: d(TS) = TdS + SdT</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">dF = (TdS − PdV) − TdS − SdT = −PdV − SdT ✓</span>
+        <span class="step-note">Substituting dU = TdS − PdV; the TdS terms cancel. Natural variables: (T, V)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Gibbs Free Energy G = U − TS + PV = H − TS = F + PV</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">G = U − TS + PV  (definition)</span>
+        <span class="step-note">G is the Legendre transform of U with respect to both T and P. It is most useful for processes at constant T and P (e.g., chemical reactions in the lab).</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">dG = dU − TdS − SdT + PdV + VdP</span>
+        <span class="step-note">Full differential of G = U − TS + PV</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">dG = (TdS − PdV) − TdS − SdT + PdV + VdP</span>
+        <span class="step-note">Substituting dU = TdS − PdV</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">dG = −SdT + VdP ✓</span>
+        <span class="step-note">TdS and PdV terms both cancel. Natural variables of G are (T, P) — the most experimentally convenient!</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">Gibbs Free Energy and Spontaneity</h2>
+
+  <div class="box gold">
+    <div class="box-title">🌟 The Most Important Results of Thermodynamics</div>
+    At constant T and P (the conditions of almost every chemical and biological process):<br><br>
+    <strong>ΔG &lt; 0</strong>: Process is <em>spontaneous</em> (proceeds without external input)<br>
+    <strong>ΔG &gt; 0</strong>: Process is <em>non-spontaneous</em> (requires external work)<br>
+    <strong>ΔG = 0</strong>: System is at <em>equilibrium</em> (no net driving force)<br><br>
+    G also measures the <strong>maximum non-PV work</strong> extractable from a system at constant T, P (e.g., electrical work in a battery).
+  </div>
+
+  <!-- Q&A -->
+  <div class="qa-section">
+    <div class="qa-header">📝 Important Questions &amp; Answers — Thermodynamic Functions</div>
+    <div class="qa-item">
+      <div class="qa-q">What is the physical significance of each thermodynamic potential?</div>
+      <div class="qa-a">
+        <strong>U (Internal Energy):</strong> Total energy stored in the system. Decrease in U equals work done + heat lost at constant S, V. Natural for isolated systems.<br><br>
+        <strong>H (Enthalpy):</strong> U + PV. At constant pressure, ΔH = Q (heat absorbed). This is why enthalpy is used in calorimetry and chemistry. H also equals the heat absorbed in a reversible constant-pressure process.<br><br>
+        <strong>F (Helmholtz Free Energy):</strong> Maximum work obtainable from the system at constant T, V. The "free" energy that can actually be used for work. ΔF = W_max (isothermal).<br><br>
+        <strong>G (Gibbs Free Energy):</strong> Maximum non-PV work at constant T, P. Most useful for chemistry and biology since experiments are usually done at constant T (room temperature) and P (atmospheric pressure).
+        <div class="mnemonic">MNEMONIC: "UGLY HOUNDS FREQUENTLY GROWL" → U, H, F, G in order</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Derive dH = dU + PdV + VdP and state when ΔH = Q.</div>
+      <div class="qa-a">
+        H = U + PV → dH = dU + d(PV) = dU + PdV + VdP. From First Law: dQ = dU + PdV. Therefore dH = dQ + VdP. At <strong>constant pressure</strong> (dP = 0): dH = dQ → ΔH = Q. So the heat absorbed at constant pressure equals the enthalpy change — this is why ΔH is so fundamental to chemistry: most reactions happen open to the atmosphere (constant P).
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 4 — MAXWELL'S RELATIONS
+════════════════════════════════════════════════════════════ -->
+<section id="sec-maxwell">
+  <div class="sec-header">
+    <div class="lec-tag">Lecture 1–2</div>
+    <h1 class="sec-title">Maxwell's Relations</h1>
+  </div>
+
+  <p>Maxwell's relations are a set of four partial-derivative equalities derived from the exactness of the differentials of the four thermodynamic potentials. They are among the most powerful tools in thermodynamics, allowing us to relate quantities that are hard to measure (like entropy changes with volume) to easily measurable quantities (like pressure changes with temperature).</p>
+
+  <h2 class="sub-title">The Exactness Condition (Mathematical Basis)</h2>
+
+  <p>If <code>dx = M dy + N dz</code> is an exact differential (meaning x is a state function), then by Clairaut's theorem (equality of mixed partial derivatives):</p>
+
+  <div class="eq-block">
+    <div class="eq-label">Condition for Exactness (Euler Criterion)</div>
+    <div class="eq">dx = M dy + N dz  is exact  ⟺  (∂M/∂z)_y = (∂N/∂y)_z</div>
+    <div class="eq-note">This follows because if x = x(y,z), then M = (∂x/∂y)_z and N = (∂x/∂z)_y, and since mixed partials commute: ∂²x/∂z∂y = ∂²x/∂y∂z</div>
+  </div>
+
+  <h2 class="sub-title">Deriving All Four Maxwell Relations</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Maxwell's Relations from the Four Exact Differentials</div>
+    <div class="step">
+      <div class="step-n">I</div>
+      <div class="step-body">
+        <span class="step-eq">dU = TdS − PdV  ⟹  (∂T/∂V)_S = −(∂P/∂S)_V</span>
+        <span class="step-note">From dU: M=T (coefficient of dS), N=−P (coefficient of dV). Applying exactness: (∂T/∂V)_S = ∂(−P)/∂S)_V → Maxwell I</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">II</div>
+      <div class="step-body">
+        <span class="step-eq">dH = TdS + VdP  ⟹  (∂T/∂P)_S = (∂V/∂S)_P</span>
+        <span class="step-note">From dH: M=T (coeff of dS), N=V (coeff of dP). Exactness: (∂T/∂P)_S = (∂V/∂S)_P → Maxwell II</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">III</div>
+      <div class="step-body">
+        <span class="step-eq">dF = −PdV − SdT  ⟹  (∂P/∂T)_V = (∂S/∂V)_T</span>
+        <span class="step-note">From dF: M=−P (coeff of dV), N=−S (coeff of dT). Exactness: ∂(−P)/∂T)_V = ∂(−S)/∂V)_T → (∂P/∂T)_V = (∂S/∂V)_T → Maxwell III</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">IV</div>
+      <div class="step-body">
+        <span class="step-eq">dG = −SdT + VdP  ⟹  −(∂S/∂P)_T = (∂V/∂T)_P</span>
+        <span class="step-note">From dG: M=−S (coeff of dT), N=V (coeff of dP). Exactness: ∂(−S)/∂P)_T = (∂V/∂T)_P → Maxwell IV</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-label">The Four Maxwell Relations (Summary)</div>
+    <div class="eq">(∂T/∂V)_S = −(∂P/∂S)_V    ... (I)  from dU
+(∂T/∂P)_S =  (∂V/∂S)_P    ... (II) from dH
+(∂P/∂T)_V =  (∂S/∂V)_T    ... (III) from dF  ← most used
+−(∂S/∂P)_T = (∂V/∂T)_P    ... (IV) from dG  ← most used</div>
+    <div class="eq-note">Relations III and IV are the most practically useful — they relate entropy derivatives to P-V-T quantities that can be measured directly.</div>
+  </div>
+
+  <h2 class="sub-title">The Maxwell Relations "Wheel" — A Memory Aid</h2>
+
+  <p>SKS Sir's notes show the mnemonic diagram: a square (or wheel) with the variables S, P, T, V at the corners and the four potentials on the sides. Here is the canonical thermodynamic square:</p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+      <!-- Square -->
+      <rect x="100" y="60" width="200" height="200" fill="none" stroke="#2a2f45" stroke-width="1.5"/>
+
+      <!-- Corner variables (going clockwise from top-left: S, P, T, V) -->
+      <text x="85" y="58" fill="#6ab08c" font-size="20" font-family="JetBrains Mono" font-weight="bold">S</text>
+      <text x="300" y="58" fill="#6ab08c" font-size="20" font-family="JetBrains Mono" font-weight="bold">P</text>
+      <text x="300" y="280" fill="#6ab08c" font-size="20" font-family="JetBrains Mono" font-weight="bold">T</text>
+      <text x="85" y="280" fill="#6ab08c" font-size="20" font-family="JetBrains Mono" font-weight="bold">V</text>
+
+      <!-- Potentials on sides -->
+      <text x="155" y="47" fill="#7ba3e0" font-size="14" font-family="JetBrains Mono">H (S,P)</text>
+      <text x="305" y="168" fill="#c8a96e" font-size="14" font-family="JetBrains Mono">G (T,P)</text>
+      <text x="140" y="298" fill="#d07070" font-size="14" font-family="JetBrains Mono">F (T,V)</text>
+      <text x="50" y="168" fill="#9b89d4" font-size="14" font-family="JetBrains Mono">U (S,V)</text>
+
+      <!-- Diagonal arrows (Maxwell relations) -->
+      <line x1="110" y1="70" x2="290" y2="250" stroke="#35405c" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="290" y1="70" x2="110" y2="250" stroke="#35405c" stroke-width="1" stroke-dasharray="4,3"/>
+
+      <!-- Center labels -->
+      <text x="160" y="158" fill="#5ab8c0" font-size="12" font-family="JetBrains Mono">Read diagonals</text>
+      <text x="155" y="175" fill="#5ab8c0" font-size="12" font-family="JetBrains Mono">for Maxwell eqs</text>
+
+      <!-- Arrow indicators -->
+      <text x="85" y="320" fill="#a0a8c0" font-size="11" font-family="JetBrains Mono">Corners: Variables S,P,T,V</text>
+      <text x="85" y="338" fill="#a0a8c0" font-size="11" font-family="JetBrains Mono">Sides: Potentials U,H,F,G</text>
+      <text x="85" y="356" fill="#a0a8c0" font-size="11" font-family="JetBrains Mono">Arrows: direction of derivation</text>
+
+      <!-- Number labels for Maxwell relations -->
+      <text x="62" y="72" fill="#d07070" font-size="13" font-family="JetBrains Mono">①</text>
+      <text x="315" y="72" fill="#7ba3e0" font-size="13" font-family="JetBrains Mono">②</text>
+      <text x="315" y="268" fill="#c8a96e" font-size="13" font-family="JetBrains Mono">③</text>
+      <text x="62" y="268" fill="#9b89d4" font-size="13" font-family="JetBrains Mono">④</text>
+    </svg>
+    <div class="diagram-cap">Fig 4.1 — The Thermodynamic Square. Corners carry the variables (S, P, T, V); sides carry the potentials (U, H, F, G). The natural variables of each potential are the corners of its side. Maxwell relations come from applying the exactness condition to each potential's differential. SKS Sir's notes: reading anti-clockwise gives −ve sign.</div>
+  </div>
+
+  <h2 class="sub-title">Applying Maxwell III: Isothermal Expansion and Entropy</h2>
+
+  <p>Maxwell III — <code>(∂P/∂T)_V = (∂S/∂V)_T</code> — is one of the most useful relations. It allows us to compute how entropy changes with volume at constant temperature (impossible to measure directly) from the pressure-temperature dependence (easily measured).</p>
+
+  <div class="box tip">
+    <div class="box-title">💡 Physical Meaning of Maxwell III</div>
+    Multiplying both sides by T: <code>T(∂P/∂T)_V = T(∂S/∂V)_T = (∂Q/∂V)_T</code>. This says: <em>in isothermal expansion, the heat absorbed per unit volume increase equals T times the pressure coefficient (∂P/∂T)_V</em>. For an ideal gas, P = RT/V, so ∂P/∂T = R/V, and T(∂P/∂T)_V = RT/V = P → (∂U/∂V)_T = 0 (Joule's law!).
+  </div>
+
+  <!-- Q&A -->
+  <div class="qa-section">
+    <div class="qa-header">📝 Important Questions &amp; Answers — Maxwell's Relations</div>
+    <div class="qa-item">
+      <div class="qa-q">State all four Maxwell relations and specify which potential each comes from.</div>
+      <div class="qa-a">
+        <strong>(I) from U:</strong> (∂T/∂V)_S = −(∂P/∂S)_V<br>
+        <strong>(II) from H:</strong> (∂T/∂P)_S = (∂V/∂S)_P<br>
+        <strong>(III) from F:</strong> (∂P/∂T)_V = (∂S/∂V)_T  ← Most commonly used<br>
+        <strong>(IV) from G:</strong> −(∂S/∂P)_T = (∂V/∂T)_P  ← Most commonly used
+        <div class="mnemonic">MNEMONIC: "GOOD PHYSICISTS HAVE STUDIED UNDER VERY FINE TEACHERS" → G(dG), P(-S,V), H(dH), S(T,V), U(dU), V(-P), F(dF), T(-P,-S)</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">How do Maxwell's relations help measure entropy changes experimentally?</div>
+      <div class="qa-a">
+        Entropy cannot be measured directly — there is no "entropymeter." But Maxwell's relations equate entropy derivatives to P-V-T derivatives, which CAN be measured. For example: <code>(∂S/∂V)_T = (∂P/∂T)_V</code> (Maxwell III). The right side can be found from the equation of state: just measure pressure at two temperatures with volume held constant. Similarly, <code>(∂S/∂P)_T = −(∂V/∂T)_P</code> (Maxwell IV) gives the entropy change with pressure from the thermal expansion coefficient. This is how calorimetric and P-V-T data are combined to construct complete entropy tables for real substances.
+        <div class="mnemonic">MNEMONIC: "MAXWELL CONVERTS UNMEASURABLE TO MEASURABLE"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 5 — TdS EQUATIONS
+════════════════════════════════════════════════════════════ -->
+<section id="sec-tds">
+  <div class="sec-header">
+    <div class="lec-tag">Lecture 3</div>
+    <h1 class="sec-title">The Three TdS Equations</h1>
+  </div>
+
+  <p>The TdS equations (also called the "specific heat equations") express <em>TdS</em> in terms of the different pairs of independent variables: (T,V), (T,P), and (P,V). They are extremely useful for calculating heat exchanges in terms of measurable quantities.</p>
+
+  <p>The key idea: entropy S is a state function. We can write S as a function of any two independent variables and expand dS as a total differential, then multiply through by T.</p>
+
+  <h2 class="sub-title">First TdS Equation — S = S(T, V)</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Derivation of First TdS Equation</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">S = S(T, V)  →  dS = (∂S/∂T)_V dT + (∂S/∂V)_T dV</span>
+        <span class="step-note">Total differential of S treating T and V as independent variables.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">TdS = T(∂S/∂T)_V dT + T(∂S/∂V)_T dV</span>
+        <span class="step-note">Multiply through by T.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">Cᵥ = T(∂S/∂T)_V  (definition of heat capacity at constant V)</span>
+        <span class="step-note">At constant V (dV=0): TdS = dQ = CᵥdT → Cᵥ = T(∂S/∂T)_V</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">T(∂S/∂V)_T = T(∂P/∂T)_V  (by Maxwell III)</span>
+        <span class="step-note">Maxwell relation: (∂S/∂V)_T = (∂P/∂T)_V</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <span class="step-eq">TdS = Cᵥ dT + T(∂P/∂T)_V dV   ← FIRST TdS EQUATION ✓</span>
+        <span class="step-note">Final result. Physically: the heat absorbed = Cᵥ×temperature change + work done against intermolecular forces during expansion.</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">Second TdS Equation — S = S(T, P)</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Derivation of Second TdS Equation</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">S = S(T, P)  →  dS = (∂S/∂T)_P dT + (∂S/∂P)_T dP</span>
+        <span class="step-note">Total differential treating T and P as independent variables.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">Cₚ = T(∂S/∂T)_P  (heat capacity at constant P)</span>
+        <span class="step-note">At constant P: TdS = dQ = CₚdT → Cₚ = T(∂S/∂T)_P</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">T(∂S/∂P)_T = −T(∂V/∂T)_P  (by Maxwell IV)</span>
+        <span class="step-note">Maxwell IV: (∂S/∂P)_T = −(∂V/∂T)_P</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">TdS = Cₚ dT − T(∂V/∂T)_P dP   ← SECOND TdS EQUATION ✓</span>
+        <span class="step-note">Physically: heat absorbed = Cₚ×temp change − T×(thermal expansion coeff)×pressure change</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">Third TdS Equation — S = S(P, V)</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Derivation of Third TdS Equation</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">S = S(P, V)  →  dS = (∂S/∂P)_V dP + (∂S/∂V)_P dV</span>
+        <span class="step-note">Total differential treating P and V as independent variables.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">TdS = T(∂S/∂P)_V dP + T(∂S/∂V)_P dV</span>
+        <span class="step-note">Multiply by T</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">(∂S/∂P)_V = (∂S/∂T)_V (∂T/∂P)_V = (Cᵥ/T)(∂T/∂P)_V</span>
+        <span class="step-note">Chain rule: (∂S/∂P)_V = (∂S/∂T)_V × (∂T/∂P)_V. Using Cᵥ/T = (∂S/∂T)_V</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">(∂S/∂V)_P = (∂S/∂T)_P (∂T/∂V)_P = (Cₚ/T)(∂T/∂V)_P</span>
+        <span class="step-note">Similarly using Cₚ/T = (∂S/∂T)_P</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <span class="step-eq">TdS = Cᵥ(∂T/∂P)_V dP + Cₚ(∂T/∂V)_P dV   ← THIRD TdS EQUATION ✓</span>
+        <span class="step-note">This form is useful when P and V are the natural control variables.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-label">Summary — Three TdS Equations</div>
+    <div class="eq">TdS = Cᵥ dT + T(∂P/∂T)_V dV        ... (1st)  [S = S(T,V)]
+TdS = Cₚ dT − T(∂V/∂T)_P dP        ... (2nd)  [S = S(T,P)]
+TdS = Cᵥ(∂T/∂P)_V dP + Cₚ(∂T/∂V)_P dV  ... (3rd)  [S = S(P,V)]</div>
+    <div class="eq-note">All three are exact — they represent the same physical quantity (heat exchange) in different variable choices.</div>
+  </div>
+
+  <!-- Q&A -->
+  <div class="qa-section">
+    <div class="qa-header">📝 Important Questions &amp; Answers — TdS Equations</div>
+    <div class="qa-item">
+      <div class="qa-q">Derive the 1st TdS equation and explain the physical meaning of each term.</div>
+      <div class="qa-a">
+        <strong>Derivation:</strong> Write S = S(T,V) → dS = (∂S/∂T)_V dT + (∂S/∂V)_T dV. Multiply by T: TdS = Cᵥ dT + T(∂P/∂T)_V dV (using Cᵥ = T(∂S/∂T)_V and Maxwell III).<br><br>
+        <strong>Physical meanings:</strong><br>
+        • <em>Cᵥ dT</em>: Heat required to raise the temperature by dT at constant volume. This is the familiar "sensible heat."<br>
+        • <em>T(∂P/∂T)_V dV</em>: Heat absorbed when the gas expands by dV at constant temperature. For an ideal gas, this term equals P dV — the work done. For a real gas, it has an extra contribution from changing intermolecular forces.
+        <div class="mnemonic">MNEMONIC: "TdS ONE = Cv CHANGES T, MAXWELL CHANGES V"</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Using the 2nd TdS equation, find how the temperature of a gas changes during an adiabatic process.</div>
+      <div class="qa-a">
+        For an adiabatic process: TdS = dQ = 0 (no heat exchange). Applying the 2nd TdS equation: 0 = Cₚ dT − T(∂V/∂T)_P dP. Therefore: Cₚ dT = T(∂V/∂T)_P dP → (dT/dP)_S = T(∂V/∂T)_P / Cₚ. For an ideal gas: (∂V/∂T)_P = nR/P, so (dT/dP)_S = nRT/(PsCₚ) = V/Cₚ. This is the "adiabatic lapse rate" — how temperature drops as pressure decreases (e.g., rising air in the atmosphere). It shows that temperature and pressure always increase/decrease together in an adiabatic process.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 6 — Cv AND Cp VARIATIONS
+════════════════════════════════════════════════════════════ -->
+<section id="sec-cv-cp">
+  <div class="sec-header">
+    <div class="lec-tag">Lectures 2–3</div>
+    <h1 class="sec-title">Variation of Cᵥ and Cₚ, and Cₚ − Cᵥ</h1>
+  </div>
+
+  <h2 class="sub-title">Variation of Cᵥ with Volume</h2>
+
+  <p>From the 1st TdS equation, since dS is an exact differential, applying the Euler criterion:</p>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Variation of Cᵥ with Volume</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">1st TdS: dS = (Cᵥ/T)dT + (∂P/∂T)_V dV</span>
+        <span class="step-note">Dividing the 1st TdS equation by T</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">Since dS is exact: ∂/∂V(Cᵥ/T)_T = ∂/∂T(∂P/∂T)_V)_V</span>
+        <span class="step-note">Euler's condition for exact differentials: cross-partial derivatives must be equal</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">(1/T)(∂Cᵥ/∂V)_T = ∂²P/∂T²)_V</span>
+        <span class="step-note">T is constant in the left derivative, so it comes out</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">(∂Cᵥ/∂V)_T = T(∂²P/∂T²)_V   ← KEY RESULT</span>
+        <span class="step-note">Cᵥ changes with volume only if pressure has a non-zero second derivative with temperature.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <span class="step-eq">For perfect gas: P = nRT/V → ∂P/∂T = nR/V → ∂²P/∂T² = 0
+∴ (∂Cᵥ/∂V)_T = 0  ✓ (Cᵥ independent of volume for perfect gas)</span>
+        <span class="step-note">Perfect gas: all derivatives of nR/V with respect to T are zero, confirming Joule's law</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">6</div>
+      <div class="step-body">
+        <span class="step-eq">For van der Waals gas: P = RT/(v−b) − a/v²
+∂²P/∂T² = 0 also! → (∂Cᵥ/∂V)_T = 0</span>
+        <span class="step-note">Even for van der Waals gas, ∂P/∂T = R/(v−b) is independent of T, so ∂²P/∂T² = 0. Cᵥ is independent of volume for both perfect and van der Waals gases.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box gold">
+    <div class="box-title">🌟 Important Result: Cᵥ is Volume-Independent for Both Perfect and Van der Waals Gases</div>
+    This is a non-trivial result! It means <em>Cᵥ depends only on temperature</em> for these gases — not on how compressed or expanded they are. The physical reason: in the van der Waals equation, the intermolecular forces (represented by 'a') affect the internal energy but do so in a way that doesn't alter how Cᵥ changes with volume.
+  </div>
+
+  <h2 class="sub-title">Variation of Cₚ with Pressure</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Variation of Cₚ with Pressure</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">2nd TdS: dS = (Cₚ/T)dT − (∂V/∂T)_P dP</span>
+        <span class="step-note">Dividing the 2nd TdS equation by T</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">Exactness: ∂/∂P(Cₚ/T)_T = −∂/∂T(∂V/∂T)_P)_P</span>
+        <span class="step-note">Euler criterion applied to the exact differential dS</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">(∂Cₚ/∂P)_T = −T(∂²V/∂T²)_P   ← KEY RESULT</span>
+        <span class="step-note">Cₚ changes with pressure if the volume has a non-zero second derivative with temperature at constant pressure.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">For perfect gas: PV = RT → V = RT/P → ∂V/∂T = R/P → ∂²V/∂T² = 0
+∴ (∂Cₚ/∂P)_T = 0  (Cₚ independent of P for perfect gas)</span>
+        <span class="step-note">Confirms perfect gas result — Cₚ depends only on T, not P.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <span class="step-eq">For van der Waals gas: (∂Cₚ/∂P)_T = −T(∂²V/∂T²)_P = +2aT/RT² × something ≠ 0</span>
+        <span class="step-note">For a real gas, Cₚ does vary with pressure — this is measurable and important for high-pressure engineering.</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">Cₚ − Cᵥ: General Derivation</h2>
+
+  <p>The difference between the heat capacities at constant pressure and constant volume can be derived from the TdS equations. This is one of the most important results in thermodynamics.</p>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Derivation of Cₚ − Cᵥ</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">From 1st TdS (eq. I): TdS = Cᵥ dT + T(∂P/∂T)_V dV</span>
+        <span class="step-note">First TdS equation</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">From 2nd TdS (eq. II): TdS = Cₚ dT − T(∂V/∂T)_P dP</span>
+        <span class="step-note">Second TdS equation</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">Subtract I from II: 0 = (Cₚ−Cᵥ)dT − T{(∂V/∂T)_P dP + (∂P/∂T)_V dV}</span>
+        <span class="step-note">Equating the two expressions for TdS and rearranging. Note TdS cancels.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">At constant pressure (dP = 0):
+(Cₚ−Cᵥ)dT = T(∂V/∂T)_P dP + T(∂P/∂T)_V dV</span>
+        <span class="step-note">Setting dP = 0 in the equation above isolates the Cₚ−Cᵥ term</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <span class="step-eq">At constant P: set dP = 0, so:
+(Cₚ−Cᵥ)dT = T(∂P/∂T)_V dV|_P = T(∂P/∂T)_V (∂V/∂T)_P dT</span>
+        <span class="step-note">Since at constant P, dV = (∂V/∂T)_P dT</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">6</div>
+      <div class="step-body">
+        <span class="step-eq">Cₚ − Cᵥ = T(∂V/∂T)_P (∂P/∂T)_V   ← GENERAL RESULT ✓</span>
+        <span class="step-note">This is the exact general result for any substance. It relates Cₚ−Cᵥ to measurable P-V-T properties.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">7</div>
+      <div class="step-body">
+        <span class="step-eq">For perfect gas: (∂V/∂T)_P = R/P, (∂P/∂T)_V = R/V
+Cₚ − Cᵥ = T·(R/P)·(R/V) = R·T/(PV) = R·(RT)/(RT) = R</span>
+        <span class="step-note">Using PV = RT (per mole). Famous Mayer's relation: Cₚ − Cᵥ = R ≈ 8.314 J/mol·K</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">8</div>
+      <div class="step-body">
+        <span class="step-eq">For van der Waals gas: Cₚ − Cᵥ = R(1 + 2a/(vRT))</span>
+        <span class="step-note">Since v−b ≈ v for small b, the correction comes from the 'a' term (intermolecular attractions). The difference is always greater than R for a real gas below the Boyle temperature.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-label">Summary — Cₚ − Cᵥ</div>
+    <div class="eq">General:     Cₚ − Cᵥ = T(∂V/∂T)_P · (∂P/∂T)_V
+Perfect gas: Cₚ − Cᵥ = R  (Mayer's relation)
+VdW gas:    Cₚ − Cᵥ = R(1 + 2a/vRT)  ≥ R
+Note: Cₚ > Cᵥ always (since T, (∂V/∂T)_P², (−∂V/∂P)_T > 0)</div>
+  </div>
+
+  <h2 class="sub-title">Variation of Internal Energy U with Volume</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 (∂U/∂V)_T — Internal Pressure</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">From: dU = TdS − PdV → (∂U/∂V)_T = T(∂S/∂V)_T − P</span>
+        <span class="step-note">Differentiate dU with respect to V at constant T</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">By Maxwell III: (∂S/∂V)_T = (∂P/∂T)_V</span>
+        <span class="step-note">Maxwell relation from dF</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">(∂U/∂V)_T = T(∂P/∂T)_V − P   ← INTERNAL PRESSURE ✓</span>
+        <span class="step-note">This is called the "internal pressure" — it measures how the internal energy changes with volume at constant temperature, reflecting intermolecular forces.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">Perfect gas: P=RT/V → T(∂P/∂T)_V = T·R/V = P → (∂U/∂V)_T = P − P = 0 ✓</span>
+        <span class="step-note">Joule's law: internal energy of a perfect gas is independent of volume (no intermolecular forces)</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <span class="step-eq">VdW gas: P = RT/(v−b) − a/v² → T(∂P/∂T)_V = RT/(v−b)
+(∂U/∂V)_T = RT/(v−b) − [RT/(v−b) − a/v²] = a/v²</span>
+        <span class="step-note">The internal pressure for a van der Waals gas is a/v² — positive, representing the attractive interactions between molecules.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box gold">
+    <div class="box-title">🌟 Physical Meaning: (∂U/∂V)_T = a/v² for Van der Waals Gas</div>
+    As a van der Waals gas expands isothermally (at constant T), the molecules move apart against intermolecular attractions (represented by the constant 'a'). Work must be done against these attractions, so internal energy U increases. The rate of increase is a/v² per unit volume increase. This is positive (energy input required) confirming molecules attract each other. For a perfect gas, a = 0 and no energy is needed for isothermal expansion — U stays constant (Joule's law).
+  </div>
+
+  <!-- Q&A -->
+  <div class="qa-section">
+    <div class="qa-header">📝 Important Questions &amp; Answers — Heat Capacities</div>
+    <div class="qa-item">
+      <div class="qa-q">Why is Cₚ always greater than Cᵥ? Give a physical explanation.</div>
+      <div class="qa-a">
+        <strong>Mathematical:</strong> Cₚ − Cᵥ = T(∂V/∂T)_P(∂P/∂T)_V. All factors are positive for any stable system: T &gt; 0 (absolute temperature), (∂V/∂T)_P &gt; 0 (most substances expand when heated at constant P), and (∂P/∂T)_V &gt; 0 (pressure increases when heated at constant V). Hence Cₚ − Cᵥ &gt; 0 always.<br><br>
+        <strong>Physical:</strong> When you heat gas at constant pressure, you supply heat for two purposes: (1) raising the temperature (same as Cᵥ), and (2) doing work PdV to push back the atmosphere as the gas expands. At constant volume, you only supply heat for purpose (1). So Cₚ always needs more heat input per degree of temperature rise than Cᵥ.
+        <div class="mnemonic">MNEMONIC: "PRESSURE NEEDS EXTRA HEAT FOR EXPANSION WORK"</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Derive Mayer's relation Cₚ − Cᵥ = R from first principles for a perfect gas.</div>
+      <div class="qa-a">
+        Use the general result: Cₚ − Cᵥ = T(∂V/∂T)_P(∂P/∂T)_V. For a perfect gas PV = RT (per mole): <br>
+        (∂V/∂T)_P = R/P   and   (∂P/∂T)_V = R/V <br>
+        Therefore: Cₚ − Cᵥ = T × (R/P) × (R/V) = TR²/(PV) = TR²/(RT) = R ✓ <br>
+        R = 8.314 J/mol·K is the universal gas constant. This is Mayer's relation, derived in 1842, which historically provided one of the first determinations of the mechanical equivalent of heat.
+        <div class="mnemonic">MNEMONIC: "MAYER'S EQUATION: Cp MINUS Cv EQUALS R" — the R reminds you it's the gas constant and a perfect gas result</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 7 — CLAUSIUS–CLAPEYRON
+════════════════════════════════════════════════════════════ -->
+<section id="sec-clausius">
+  <div class="sec-header">
+    <div class="lec-tag">Lecture 3</div>
+    <h1 class="sec-title">First-Order Phase Transitions &amp; Clausius–Clapeyron Equation</h1>
+  </div>
+
+  <p>A <strong>first-order phase transition</strong> is a change of phase (solid↔liquid↔gas) occurring at constant temperature and pressure. Examples: melting, boiling, sublimation. The key feature: there is a <em>latent heat</em> — heat is absorbed or released at the transition without any temperature change.</p>
+
+  <h2 class="sub-title">Condition for Phase Equilibrium — Equal Gibbs Potentials</h2>
+
+  <p>Consider a system of mass m₁ of liquid in equilibrium with mass m₂ of vapour. The total Gibbs free energy is:</p>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Deriving the Phase Equilibrium Condition</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">G_total = m₁g₁ + m₂g₂  (where g₁, g₂ are specific Gibbs potentials per unit mass)</span>
+        <span class="step-note">Total Gibbs free energy is additive for the two phases</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">For 1st order transition at const T, P: G = const → dG = 0</span>
+        <span class="step-note">At constant T and P, G is minimised at equilibrium (dG = 0)</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">dG = dm₁g₁ + dm₂g₂ = 0
+In equilibrium: dm₁ = −dm₂ (conservation of mass)
+→ g₁ = g₂   ← Phase Equilibrium Condition</span>
+        <span class="step-note">If mass transfers from phase 1 to phase 2 (dm₂ = −dm₁), then G is stationary only when g₁ = g₂</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box key">
+    <div class="box-title">🔑 Condition for Phase Equilibrium</div>
+    At a first-order phase transition, the <strong>specific Gibbs free energy is equal in both phases</strong>: g₁ = g₂. Equivalently, the chemical potential μ₁ = μ₂. This is the thermodynamic condition for two phases to coexist in equilibrium.
+  </div>
+
+  <h2 class="sub-title">Clausius–Clapeyron Equation — Full Derivation</h2>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- Axes -->
+      <line x1="50" y1="270" x2="410" y2="270" stroke="#2a2f45" stroke-width="1.5"/>
+      <line x1="50" y1="20" x2="50" y2="270" stroke="#2a2f45" stroke-width="1.5"/>
+      <text x="415" y="275" fill="#6b7599" font-size="13" font-family="JetBrains Mono">T</text>
+      <text x="30" y="18" fill="#6b7599" font-size="13" font-family="JetBrains Mono">P</text>
+
+      <!-- Fusion curve (negative slope for water — special!) -->
+      <path d="M 120 190 Q 138 165 155 130 Q 170 100 180 60" fill="none" stroke="#7ba3e0" stroke-width="2.2"/>
+      <text x="115" y="52" fill="#7ba3e0" font-size="11" font-family="JetBrains Mono">Fusion</text>
+
+      <!-- Vaporization curve -->
+      <path d="M 155 130 Q 210 155 270 180 Q 330 205 390 240" fill="none" stroke="#c8a96e" stroke-width="2.2"/>
+      <text x="340" y="230" fill="#c8a96e" font-size="11" font-family="JetBrains Mono">Vaporisation</text>
+
+      <!-- Sublimation curve -->
+      <path d="M 80 255 Q 110 225 138 198 Q 148 185 155 130" fill="none" stroke="#6ab08c" stroke-width="2.2"/>
+      <text x="58" y="255" fill="#6ab08c" font-size="11" font-family="JetBrains Mono">Sublim.</text>
+
+      <!-- Triple point -->
+      <circle cx="155" cy="130" r="5" fill="#d07070"/>
+      <text x="158" y="125" fill="#d07070" font-size="11" font-family="JetBrains Mono">Triple Point</text>
+
+      <!-- Region labels -->
+      <text x="80" y="140" fill="#a0a8c0" font-size="13" font-family="JetBrains Mono">Solid</text>
+      <text x="190" y="90" fill="#a0a8c0" font-size="13" font-family="JetBrains Mono">Liquid</text>
+      <text x="260" y="240" fill="#a0a8c0" font-size="13" font-family="JetBrains Mono">Gas</text>
+
+      <!-- dP/dT slope indicator -->
+      <line x1="270" y1="180" x2="310" y2="170" stroke="#9b89d4" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="310" y="168" fill="#9b89d4" font-size="10" font-family="JetBrains Mono">dP/dT = L/T(Vg−Vl)</text>
+    </svg>
+    <div class="diagram-cap">Fig 7.1 — Phase diagram with triple point. The fusion, vaporisation, and sublimation curves meet at the triple point. The Clausius–Clapeyron equation gives the slope dP/dT of each curve. For water, the fusion curve has negative slope (dP/dT &lt; 0) because ice is less dense than water (V₂ &lt; V₁).</div>
+  </div>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Full Derivation — Clausius–Clapeyron Equation</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">At T: g_liquid = g_vapour  (phase equilibrium)</span>
+        <span class="step-note">The Gibbs potential per unit mass is equal in both phases at temperature T and pressure P</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">At T+dT: (g_l + dg_l) = (g_g + dg_g)  →  dg_l = dg_g</span>
+        <span class="step-note">At a slightly different temperature T+dT (with corresponding pressure P+dP), equilibrium must still hold</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">dg = dG/m = d(U−TS+PV)/m = −s dT + v dP</span>
+        <span class="step-note">For specific quantities (per unit mass): dg = −s dT + v dP. Here s = specific entropy, v = specific volume.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">−s_l dT + v_l dP = −s_g dT + v_g dP</span>
+        <span class="step-note">Equating dg_l = dg_g: writing out both differentials</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <span class="step-eq">(s_g − s_l) dT = (v_g − v_l) dP</span>
+        <span class="step-note">Rearranging: collecting entropy terms on left, volume terms on right</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">6</div>
+      <div class="step-body">
+        <span class="step-eq">dP/dT = (s_g − s_l)/(v_g − v_l)</span>
+        <span class="step-note">The slope of the coexistence curve in the P-T diagram</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">7</div>
+      <div class="step-body">
+        <span class="step-eq">Latent heat: L = T(s_g − s_l)  [since dQ = TdS = L at phase transition]</span>
+        <span class="step-note">The latent heat L is the heat absorbed per unit mass during the phase change at constant T. It equals T times the entropy difference.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">8</div>
+      <div class="step-body">
+        <span class="step-eq">dP/dT = L / [T(v_g − v_l)]   ← CLAUSIUS–CLAPEYRON EQUATION ✓</span>
+        <span class="step-note">The slope of the P-T coexistence curve equals the latent heat divided by T times the volume change at the transition.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-label">Clausius–Clapeyron Equation</div>
+    <div class="eq">dP/dT = L / [T(V_g − V_l)]
+
+  L = latent heat per unit mass
+  T = temperature of the transition
+  V_g = specific volume of vapour (gas)
+  V_l = specific volume of liquid</div>
+    <div class="eq-note">This equation gives the slope of the P-T coexistence curve (phase boundary). It determines how the boiling/melting point changes with pressure.</div>
+  </div>
+
+  <h2 class="sub-title">Application: Melting of Ice — Why Ice Has Negative Slope</h2>
+
+  <p>For the ice-water transition: V_ice &lt; V_water (water expands upon freezing — ice is less dense). Therefore:</p>
+  <div class="eq-block">
+    <div class="eq">V_g = V_ice  &lt;  V_l = V_water
+V_g − V_l &lt; 0
+dP/dT = L/[T(V_g−V_l)] &lt; 0  (negative slope)</div>
+    <div class="eq-note">The melting point of ice DECREASES when pressure increases. Ice under high pressure melts at a lower temperature. This is why ice skating is possible (though pressure melting is a small effect; friction is the main mechanism).</div>
+  </div>
+
+  <div class="box tip">
+    <div class="box-title">💡 Physical Meaning of Clausius–Clapeyron</div>
+    The equation tells us: <em>the slope of the P-T coexistence curve is determined by the ratio of latent heat to the volume change at the transition.</em><br><br>
+    • Large L (large latent heat) → steep curve → boiling point changes rapidly with pressure. Example: water has large L_vap = 2260 J/g, so boiling point changes quickly with altitude.<br>
+    • Small ΔV → steeper curve → harder to change the transition pressure with temperature.<br>
+    • For an ideal gas approximation (V_g ≫ V_l, V_g ≈ RT/P): d(ln P)/d(1/T) = −L/R — this is the Clausius-Clapeyron equation in integrated form.
+  </div>
+
+  <!-- Q&A -->
+  <div class="qa-section">
+    <div class="qa-header">📝 Important Questions &amp; Answers — Clausius–Clapeyron</div>
+    <div class="qa-item">
+      <div class="qa-q">Explain the triple point using the Clausius–Clapeyron equation.</div>
+      <div class="qa-a">
+        The triple point is the unique temperature and pressure at which all three phases (solid, liquid, gas) coexist in equilibrium. At this point, all three coexistence curves (fusion, vaporisation, sublimation) intersect. <br><br>
+        The existence of the triple point of water (273.16 K, 611.73 Pa) can be understood from the fact that as pressure decreases, the boiling point decreases (from Clausius-Clapeyron: dP/dT &gt; 0 for vaporisation curve) while the melting point increases (dP/dT &lt; 0 for fusion). At sufficiently low pressure, the boiling and melting points coincide — this is the triple point. At any lower pressure, liquid water cannot exist at all.
+        <div class="mnemonic">MNEMONIC: "TRIPLE POINT = THREE CURVES MEET, THREE PHASES GREET"</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Water boils at 100°C at 1 atm but at ~70°C at altitude. Explain using Clausius–Clapeyron.</div>
+      <div class="qa-a">
+        At high altitude, atmospheric pressure P is lower. For the liquid-vapour coexistence curve, dP/dT = L/[T(V_g−V_l)] &gt; 0 (positive slope). A lower P corresponds to a lower T on the coexistence curve — so the boiling point decreases. Using the integrated form: ln(P₂/P₁) = (L/R)(1/T₁ − 1/T₂). At ~5000m altitude, P ≈ 0.54 atm, giving T_boil ≈ 83°C. At Everest (P ≈ 0.33 atm), water boils at ~70°C — insufficient to cook many foods properly.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 8 — JOULE–THOMSON EFFECT
+════════════════════════════════════════════════════════════ -->
+<section id="sec-jt">
+  <div class="sec-header">
+    <div class="lec-tag">Lecture 3</div>
+    <h1 class="sec-title">Joule–Thomson Effect (Adiabatic Throttling)</h1>
+  </div>
+
+  <p>The Joule–Thomson effect describes what happens when a gas is forced through a porous plug (or throttle valve) from high pressure to low pressure, under thermally insulated (adiabatic) conditions. This is the physical basis of most industrial refrigeration and liquefaction of gases.</p>
+
+  <h2 class="sub-title">The Apparatus and Observations</h2>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Piston 1 (left, high pressure) -->
+      <rect x="30" y="70" width="18" height="60" fill="#2a2f45" stroke="#7ba3e0" stroke-width="1.5"/>
+      <text x="10" y="108" fill="#7ba3e0" font-size="11" font-family="JetBrains Mono">P₁</text>
+
+      <!-- Left chamber -->
+      <rect x="48" y="70" width="140" height="60" fill="rgba(123,163,224,0.06)" stroke="#35405c" stroke-width="1.5"/>
+      <text x="90" y="103" fill="#7ba3e0" font-size="13" font-family="JetBrains Mono">(P₁,V₁,T₁)</text>
+
+      <!-- Porous plug -->
+      <rect x="186" y="70" width="20" height="60" fill="#1a1e2b" stroke="#c8a96e" stroke-width="2"/>
+      <!-- plug texture -->
+      <line x1="189" y1="75" x2="203" y2="125" stroke="#c8a96e" stroke-width="0.8" opacity="0.5"/>
+      <line x1="195" y1="72" x2="188" y2="128" stroke="#c8a96e" stroke-width="0.8" opacity="0.5"/>
+      <line x1="200" y1="73" x2="192" y2="128" stroke="#c8a96e" stroke-width="0.8" opacity="0.5"/>
+      <text x="176" y="62" fill="#c8a96e" font-size="10" font-family="JetBrains Mono">Porous plug</text>
+
+      <!-- Right chamber -->
+      <rect x="206" y="70" width="140" height="60" fill="rgba(106,176,140,0.06)" stroke="#35405c" stroke-width="1.5"/>
+      <text x="230" y="103" fill="#6ab08c" font-size="13" font-family="JetBrains Mono">(P₂,V₂,T₂)</text>
+
+      <!-- Piston 2 (right, low pressure) -->
+      <rect x="346" y="70" width="18" height="60" fill="#2a2f45" stroke="#6ab08c" stroke-width="1.5"/>
+      <text x="366" y="108" fill="#6ab08c" font-size="11" font-family="JetBrains Mono">P₂</text>
+
+      <!-- P1 > P2 indicator -->
+      <text x="30" y="155" fill="#a0a8c0" font-size="12" font-family="JetBrains Mono">P₁ &gt; P₂  |  Adiabatic walls (dQ = 0)  |  H = const</text>
+
+      <!-- Arrows -->
+      <path d="M 66 100 L 186 100" stroke="#7ba3e0" stroke-width="1.5" marker-end="url(#arr)"/>
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#7ba3e0"/>
+        </marker>
+      </defs>
+    </svg>
+    <div class="diagram-cap">Fig 8.1 — Joule–Thomson apparatus. Gas is pushed through a porous plug from high pressure P₁ to low pressure P₂ by pistons. The system is thermally insulated. Key result: Enthalpy H is conserved (isenthalpic process).</div>
+  </div>
+
+  <h2 class="sub-title">J-T is an Isenthalpic Process — Proof</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Proof that H = const in J-T Process</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">Work done ON gas on left: W₁ = P₁V₁  (piston pushes volume V₁ at pressure P₁)</span>
+        <span class="step-note">The left piston does work P₁V₁ on the gas, pushing it through the plug.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">Work done BY gas on right: W₂ = P₂V₂  (gas pushes piston by volume V₂ at P₂)</span>
+        <span class="step-note">The gas does work P₂V₂ on the right piston as it expands.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">Net work done ON gas: W_net = P₁V₁ − P₂V₂</span>
+        <span class="step-note">Total work = work received − work done</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">Adiabatic: dQ = 0 → ΔU = W_net = P₁V₁ − P₂V₂</span>
+        <span class="step-note">By First Law: ΔU = Q + W. With Q=0: U₂ − U₁ = P₁V₁ − P₂V₂</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <span class="step-eq">U₂ + P₂V₂ = U₁ + P₁V₁  →  H₂ = H₁  →  H = const ✓</span>
+        <span class="step-note">Since H = U + PV, we have H₂ = H₁. The Joule-Thomson process is ISENTHALPIC.</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">The Joule–Thomson Coefficient — Full Derivation</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Deriving the J-T Coefficient μ_JT = (∂T/∂P)_H</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">Since H = const: dH = 0
+dH = TdS + VdP = Cₚ dT − T(∂V/∂T)_P dP + VdP</span>
+        <span class="step-note">Start from dH = TdS + VdP and substitute the 2nd TdS equation for TdS</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">dH = Cₚ dT − {T(∂V/∂T)_P − V} dP</span>
+        <span class="step-note">Collecting terms</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">Setting dH = 0:  Cₚ dT = {T(∂V/∂T)_P − V} dP</span>
+        <span class="step-note">For the isenthalpic process, dH = 0</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <span class="step-eq">μ_JT = (∂T/∂P)_H = (1/Cₚ){T(∂V/∂T)_P − V}   ← J-T COEFFICIENT ✓</span>
+        <span class="step-note">The J-T coefficient gives the temperature change per unit pressure drop. Positive μ → cooling; negative μ → heating.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-label">Joule–Thomson Coefficient</div>
+    <div class="eq">μ_JT = (∂T/∂P)_H = (1/Cₚ){T(∂V/∂T)_P − V}
+
+For perfect gas:  (∂V/∂T)_P = nR/P = V/T  →  T(∂V/∂T)_P = V
+∴ μ_JT = (1/Cₚ){V − V} = 0  (no J-T effect for perfect gas)
+
+For real gas (VdW): μ_JT = (1/Cₚ){2a/RT − b}  (approx.)</div>
+    <div class="eq-note">• μ_JT > 0: cooling upon expansion (T decreases as P decreases) — refrigeration!
+• μ_JT < 0: heating upon expansion — occurs at high T
+• μ_JT = 0: no temperature change — only for perfect gas, or at the inversion temperature</div>
+  </div>
+
+  <h2 class="sub-title">Inversion Temperature — Where J-T Changes Sign</h2>
+
+  <div class="deriv">
+    <div class="deriv-header">📐 Inversion Temperature for Van der Waals Gas</div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <span class="step-eq">At inversion: μ_JT = 0 → T(∂V/∂T)_P = V</span>
+        <span class="step-note">The J-T coefficient changes sign at the inversion temperature Tᵢ</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <span class="step-eq">For VdW gas: 0 = (1/Cₚ){2a/RT − b} → 2a/RT_i = b</span>
+        <span class="step-note">Setting μ_JT = 0 and solving for T</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <span class="step-eq">T_i = 2a/(bR)   ← INVERSION TEMPERATURE ✓</span>
+        <span class="step-note">Above T_i: J-T effect is heating. Below T_i: J-T effect is cooling. For N₂: T_i ≈ 621 K; for H₂: T_i ≈ 202 K; for He: T_i ≈ 40 K.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box warn">
+    <div class="box-title">⚠ The Anomaly of H₂ and He at Room Temperature</div>
+    At room temperature (≈300K): Hydrogen (T_i ≈ 202K) is already ABOVE its inversion temperature, so it HEATS UP when throttled — the opposite of most gases! Helium (T_i ≈ 40K) also heats up at room temperature. This is why H₂ and He must first be pre-cooled below their inversion temperatures before throttling can be used to liquefy them. Most other gases (N₂, O₂, air) have inversion temperatures well above room temperature and cool upon throttling.
+  </div>
+
+  <h2 class="sub-title">J-T Effect as Deviation from Boyle's and Joule's Laws</h2>
+
+  <p>From SKS Sir's notes (Lec-3): The J-T effect arises from the <em>combination</em> of deviations from both Boyle's law and Joule's law:</p>
+
+  <div class="eq-block">
+    <div class="eq-label">J-T Coefficient in terms of deviations</div>
+    <div class="eq">Cₚ(∂T/∂P)_H = T(∂V/∂T)_P − V
+                 = −T(∂S/∂P)_T − V      [by Maxwell IV]
+                 = −[T(∂S/∂P)_T + V]
+                 = −[(∂U/∂P)_T + P(∂V/∂P)_T + V] 
+                                  ← this involves deviations from BOTH laws:
+      • (∂U/∂P)_T ≠ 0 → deviation from Joule's law (real intermolecular forces)
+      • ∂(PV)/∂P ≠ 0 → deviation from Boyle's law (real gas equation of state)</div>
+    <div class="eq-note">The J-T effect is zero for a perfect gas precisely because a perfect gas obeys both Joule's law and Boyle's law exactly.</div>
+  </div>
+
+  <!-- Q&A -->
+  <div class="qa-section">
+    <div class="qa-header">📝 Important Questions &amp; Answers — Joule–Thomson Effect</div>
+    <div class="qa-item">
+      <div class="qa-q">Prove that the Joule-Thomson expansion is isenthalpic. What is the significance?</div>
+      <div class="qa-a">
+        <strong>Proof:</strong> The apparatus has adiabatic walls (dQ = 0). Work done ON gas by left piston = P₁V₁. Work done BY gas on right piston = P₂V₂. By the First Law: ΔU = U₂ − U₁ = P₁V₁ − P₂V₂. Rearranging: U₂ + P₂V₂ = U₁ + P₁V₁ → H₂ = H₁ → H = const.<br><br>
+        <strong>Significance:</strong> The isenthalpic nature means the process is NOT isentropic (entropy increases for a real gas — the process is irreversible). It also means the temperature change depends entirely on how H relates to T at constant H — this is measured by the J-T coefficient. For industrial liquefaction, this is exploited: throttle a gas below its inversion temperature, and it cools; repeat in a cycle and eventually it liquefies.
+        <div class="mnemonic">MNEMONIC: "JT = JUST THROTTLE, HOLDS H CONSTANT"</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Why is the J-T coefficient zero for a perfect gas?</div>
+      <div class="qa-a">
+        μ_JT = (1/Cₚ){T(∂V/∂T)_P − V}. For a perfect gas: PV = nRT → V = nRT/P → (∂V/∂T)_P = nR/P → T(∂V/∂T)_P = nRT/P = V. Therefore μ_JT = (1/Cₚ){V−V} = 0. <br><br>
+        Physical reason: A perfect gas has no intermolecular forces. When it expands, no work is done against attractive forces, so no energy is needed from the kinetic energy of the molecules — temperature doesn't change. The J-T effect is entirely due to the real gas deviations (the 'a' and 'b' constants in van der Waals equation).
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">What is the inversion temperature and why is it important for gas liquefaction?</div>
+      <div class="qa-a">
+        The inversion temperature T_i = 2a/(bR) is the temperature above which throttling causes heating (μ_JT &lt; 0) and below which it causes cooling (μ_JT &gt; 0). <br><br>
+        For liquefaction: gas must be cooled BELOW T_i before throttling can be used to liquefy it. Most industrial gases (N₂, O₂, air) have T_i well above room temperature, so they can be directly throttled to liquefy. H₂ (T_i ≈ 202K) and He (T_i ≈ 40K) must first be pre-cooled by other means — e.g., H₂ is pre-cooled using liquid N₂, and He is pre-cooled using liquid H₂ — before J-T throttling cools them further to liquefaction.
+        <div class="mnemonic">MNEMONIC: "ABOVE INVERSION = HEATING, BELOW = COOLING" — think of it as an 'inversion' of behavior</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 9 — PHASE TRANSITIONS
+════════════════════════════════════════════════════════════ -->
+<section id="sec-phase">
+  <div class="sec-header">
+    <div class="lec-tag">Lecture 3</div>
+    <h1 class="sec-title">Phase Transitions — Gibbs Free Energy and Spontaneity</h1>
+  </div>
+
+  <h2 class="sub-title">Gibbs Free Energy Criterion for Spontaneity</h2>
+
+  <p>Recall: <code>G = H − TS</code> or equivalently <code>G = U + PV − TS</code>. At constant T and P:</p>
+
+  <div class="box gold">
+    <div class="box-title">🌟 The Gibbs Criterion</div>
+    <strong>ΔG &lt; 0</strong>: Process is spontaneous (thermodynamically favorable)<br>
+    <strong>ΔG &gt; 0</strong>: Process is non-spontaneous (requires external work)<br>
+    <strong>ΔG = 0</strong>: System is at thermodynamic equilibrium<br><br>
+    <strong>Physical meaning:</strong> G = H − TS. A process is spontaneous if it decreases enthalpy (exothermic, ΔH &lt; 0) OR increases entropy (TΔS &gt; 0), or both. If one opposes the other, the sign of ΔG determines which effect wins. At high T, the TS term dominates → entropy-driven processes. At low T, the H term dominates → energy-driven processes.
+  </div>
+
+  <h2 class="sub-title">Total Differential of G and Its Meaning</h2>
+
+  <div class="eq-block">
+    <div class="eq-label">Gibbs Free Energy — Natural Variables (T, P)</div>
+    <div class="eq">G = H − TS = U + PV − TS
+dG = −SdT + VdP
+
+⟹ S = −(∂G/∂T)_P  ←  entropy from G
+⟹ V =  (∂G/∂P)_T  ←  volume from G</div>
+    <div class="eq-note">These relations show G is a "generating function" — all thermodynamic properties can be derived from it once G(T,P) is known.</div>
+  </div>
+
+  <h2 class="sub-title">G and Maximum Work</h2>
+
+  <div class="box key">
+    <div class="box-title">🔑 G as Maximum Non-PV Work</div>
+    At constant T and P: <code>dW_max = −dG</code>. This means: the maximum useful (non-expansion) work that a system can do in a process at constant T, P equals the decrease in Gibbs free energy. In electrochemistry: ΔG = −nFE, where n = moles of electrons, F = Faraday constant, E = cell EMF. The battery voltage is directly related to the Gibbs free energy change of the electrochemical reaction.
+  </div>
+
+  <h2 class="sub-title">Phase Stability and the Common-Tangent Rule</h2>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg">
+      <!-- G vs T at constant P -->
+      <line x1="40" y1="250" x2="440" y2="250" stroke="#2a2f45" stroke-width="1.5"/>
+      <line x1="40" y1="30" x2="40" y2="250" stroke="#2a2f45" stroke-width="1.5"/>
+      <text x="445" y="255" fill="#6b7599" font-size="12" font-family="JetBrains Mono">T</text>
+      <text x="20" y="28" fill="#6b7599" font-size="12" font-family="JetBrains Mono">G</text>
+
+      <!-- G_solid (least steep, highest at high T) -->
+      <path d="M 60 80 Q 200 110 380 190" fill="none" stroke="#7ba3e0" stroke-width="2.2"/>
+      <text x="385" y="188" fill="#7ba3e0" font-size="12" font-family="JetBrains Mono">Solid</text>
+
+      <!-- G_liquid (intermediate slope) -->
+      <path d="M 60 140 Q 200 155 380 225" fill="none" stroke="#c8a96e" stroke-width="2.2"/>
+      <text x="385" y="223" fill="#c8a96e" font-size="12" font-family="JetBrains Mono">Liquid</text>
+
+      <!-- G_gas (steepest slope, lowest at high T since S_gas is largest) -->
+      <path d="M 60 200 Q 180 215 300 238 Q 360 244 410 248" fill="none" stroke="#6ab08c" stroke-width="2.2"/>
+      <text x="415" y="247" fill="#6ab08c" font-size="12" font-family="JetBrains Mono">Gas</text>
+
+      <!-- Intersection points -->
+      <circle cx="195" cy="148" r="4" fill="#d07070"/>
+      <line x1="195" y1="148" x2="195" y2="250" stroke="#d07070" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="185" y="265" fill="#d07070" font-size="11" font-family="JetBrains Mono">T_melt</text>
+
+      <circle cx="318" cy="220" r="4" fill="#d07070"/>
+      <line x1="318" y1="220" x2="318" y2="250" stroke="#d07070" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="308" y="265" fill="#d07070" font-size="11" font-family="JetBrains Mono">T_boil</text>
+
+      <!-- Slope annotation: slope = −S -->
+      <text x="55" y="26" fill="#a0a8c0" font-size="11" font-family="JetBrains Mono">Slope = −S  (steeper slope = higher entropy)</text>
+      <text x="55" y="42" fill="#a0a8c0" font-size="11" font-family="JetBrains Mono">S_gas &gt; S_liquid &gt; S_solid → gas has steepest −slope</text>
+    </svg>
+    <div class="diagram-cap">Fig 9.1 — Gibbs free energy G vs temperature T at constant P for the three phases. Since dG = −SdT + VdP, the slope (∂G/∂T)_P = −S. The phase with lowest G at each T is the stable phase. Transitions occur where two G curves cross: at T_melt (solid-liquid) and T_boil (liquid-gas). The gas has the steepest negative slope because S_gas is largest.</div>
+  </div>
+
+  <div class="box tip">
+    <div class="box-title">💡 Reading the G-T Phase Diagram</div>
+    <strong>Slope:</strong> (∂G/∂T)_P = −S. Since entropy increases from solid → liquid → gas, the G curves become progressively steeper (more negative slope) in that order.<br><br>
+    <strong>Stable phase:</strong> At any temperature, the stable phase is the one with the <em>lowest</em> G. This is because systems at constant T, P minimize their Gibbs free energy.<br><br>
+    <strong>Phase transitions:</strong> Occur where two G curves intersect — at that T, both phases have equal G (phase coexistence). Below T_melt, solid is stable; between T_melt and T_boil, liquid is stable; above T_boil, gas is stable.
+  </div>
+
+  <h2 class="sub-title">Total Differential Relations — Complete Summary</h2>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Relation</th><th>Type</th><th>From</th><th>Physical Meaning</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>(∂T/∂V)_S = −(∂P/∂S)_V</code></td>
+        <td>Maxwell I</td>
+        <td>dU</td>
+        <td>Adiabatic volume–pressure coupling</td>
+      </tr>
+      <tr>
+        <td><code>(∂T/∂P)_S = (∂V/∂S)_P</code></td>
+        <td>Maxwell II</td>
+        <td>dH</td>
+        <td>Adiabatic pressure–entropy coupling</td>
+      </tr>
+      <tr>
+        <td><code>(∂P/∂T)_V = (∂S/∂V)_T</code></td>
+        <td>Maxwell III</td>
+        <td>dF</td>
+        <td>Relates entropy density to pressure coefficient</td>
+      </tr>
+      <tr>
+        <td><code>−(∂S/∂P)_T = (∂V/∂T)_P</code></td>
+        <td>Maxwell IV</td>
+        <td>dG</td>
+        <td>Relates entropy compression to thermal expansion</td>
+      </tr>
+      <tr>
+        <td><code>(∂U/∂V)_T = T(∂P/∂T)_V − P</code></td>
+        <td>Internal pressure</td>
+        <td>dU+Maxwell III</td>
+        <td>Internal energy change with volume (intermolecular forces)</td>
+      </tr>
+      <tr>
+        <td><code>Cₚ−Cᵥ = T(∂V/∂T)_P(∂P/∂T)_V</code></td>
+        <td>Cp−Cv formula</td>
+        <td>TdS I and II</td>
+        <td>Difference of heat capacities in terms of P-V-T</td>
+      </tr>
+      <tr>
+        <td><code>dP/dT = L/[T(Vg−Vl)]</code></td>
+        <td>Clausius–Clapeyron</td>
+        <td>dG, g₁=g₂</td>
+        <td>Slope of phase coexistence curve</td>
+      </tr>
+      <tr>
+        <td><code>μ_JT = (1/Cₚ){T(∂V/∂T)_P−V}</code></td>
+        <td>J-T coefficient</td>
+        <td>dH=0, TdS II</td>
+        <td>Cooling/heating in adiabatic throttling</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- Final Q&A -->
+  <div class="qa-section">
+    <div class="qa-header">📝 Important Questions &amp; Answers — Phase Transitions</div>
+    <div class="qa-item">
+      <div class="qa-q">Explain why the slope of the G-T curve is steepest for the gas phase.</div>
+      <div class="qa-a">
+        The slope (∂G/∂T)_P = −S. Since entropy increases in the order S_solid &lt; S_liquid &lt; S_gas, the magnitude of the slope is greatest for the gas phase. In a G vs T plot, this means the gas G curve has the steepest downward slope. At high temperatures, the gas G curve eventually falls below both liquid and solid G curves — the gas becomes the thermodynamically stable phase. This is the fundamental thermodynamic reason why all substances become gases at sufficiently high temperatures.
+        <div class="mnemonic">MNEMONIC: "GAS HAS GREATEST SLOPE = GREATEST SLOPE MEANS GREATEST ENTROPY"</div>
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">What is the significance of ΔG = 0 for a phase transition?</div>
+      <div class="qa-a">
+        ΔG = 0 (i.e., g₁ = g₂) is the condition for two phases to coexist in equilibrium. This occurs along the coexistence curves in the P-T diagram (the melting curve, boiling curve, sublimation curve). At these curves, neither phase is more stable than the other — they are in dynamic equilibrium, with molecules continuously exchanging between phases. This is also the condition from which the Clausius-Clapeyron equation is derived. Away from these curves, one phase has lower G and is the thermodynamically stable phase.
+      </div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Show that Cₚ − Cᵥ = R for a perfect gas using only the general formula and the ideal gas equation.</div>
+      <div class="qa-a">
+        General: Cₚ − Cᵥ = T(∂V/∂T)_P·(∂P/∂T)_V. For one mole of ideal gas: PV = RT. From PV = RT at constant P: V = RT/P → (∂V/∂T)_P = R/P. From PV = RT at constant V: P = RT/V → (∂P/∂T)_V = R/V. Substituting: Cₚ − Cᵥ = T·(R/P)·(R/V) = TR²/(PV) = TR²/(RT) = R ✓. This elegant result shows that Cₚ − Cᵥ = R exactly for any ideal gas, regardless of whether it is monatomic, diatomic, etc. The difference is always exactly the universal gas constant R = 8.314 J/(mol·K).
+        <div class="mnemonic">MNEMONIC: "PERFECT GAS ALWAYS GIVES R — no more, no less"</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>SKS Sir · Advanced Thermodynamics · Expanded Class Notes</p>
+  <p style="margin-top:8px; opacity:0.6">Entropy · Maxwell Relations · TdS Equations · Clausius–Clapeyron · Joule–Thomson</p>
+</footer>
+
+<script>
+// ===== PROGRESS BAR =====
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (scrolled / total * 100) + '%';
+});
+
+// ===== ACTIVE NAV HIGHLIGHTING =====
+const sections = document.querySelectorAll('section[id]');
+const navBtns = document.querySelectorAll('.nav-btn');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navBtns.forEach(b => b.classList.remove('active'));
+      const active = document.querySelector(`.nav-btn[href="#${e.target.id}"]`);
+      if (active) { active.classList.add('active'); active.scrollIntoView({block:'nearest', inline:'nearest'}); }
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solid State Physics — Complete NPTEL Notes (IIT Kanpur)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,500&display=swap');
+:root{
+  --bg:#0b0d12;--bg2:#10141c;--bg3:#141820;--card:#181d28;
+  --border:#232838;--border2:#2c3347;
+  --gold:#c8a84b;--gold2:#e6c76a;--gold3:#f0d98a;
+  --teal:#4fc3a1;--blue:#5ba3d9;--purple:#9b7fd4;--red:#d46b6b;--green:#6dbe8a;
+  --text:#cccfd8;--textdim:#7a7e8e;--textbright:#eef0f5;
+  --fmla-bg:#080b12;--scroll:#2a3050;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75}
+.topbar{background:linear-gradient(90deg,#0a0c14,#0f1320,#0a0c14);border-bottom:1px solid var(--gold);padding:1.1rem 2rem;text-align:center;position:sticky;top:0;z-index:300}
+.topbar h1{font-family:'Playfair Display',serif;color:var(--gold2);font-size:1.45rem;letter-spacing:.04em}
+.topbar p{color:var(--textdim);font-size:.76rem;margin-top:.2rem}
+.nav-ribbon{background:var(--bg2);border-bottom:1px solid var(--border);padding:.45rem 1.2rem;display:flex;gap:.35rem;flex-wrap:wrap;position:sticky;top:68px;z-index:200}
+.nav-ribbon a{font-size:.67rem;font-family:'JetBrains Mono',monospace;color:var(--textdim);text-decoration:none;padding:.28rem .7rem;border:1px solid var(--border);border-radius:3px;white-space:nowrap;transition:all .15s;letter-spacing:.04em}
+.nav-ribbon a:hover{color:var(--gold2);border-color:var(--gold);background:rgba(200,168,75,.08)}
+.layout{display:flex;max-width:1600px;margin:0 auto}
+aside{width:255px;flex-shrink:0;height:calc(100vh - 110px);overflow-y:auto;position:sticky;top:110px;background:var(--bg2);border-right:1px solid var(--border);padding:.8rem 0;scrollbar-width:thin;scrollbar-color:var(--scroll) var(--bg2)}
+aside::-webkit-scrollbar{width:3px}
+aside::-webkit-scrollbar-thumb{background:var(--scroll)}
+.sb-sec{padding:.45rem .8rem .2rem;font-size:.57rem;font-family:'JetBrains Mono',monospace;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;opacity:.6;margin-top:.7rem}
+aside a{display:block;padding:.25rem .95rem;font-size:.72rem;color:var(--textdim);text-decoration:none;border-left:2px solid transparent;transition:all .12s}
+aside a:hover{color:var(--gold2);border-left-color:var(--gold);background:rgba(200,168,75,.05);padding-left:1.15rem}
+main{flex:1;min-width:0;padding:1.8rem 2.2rem}
+.unit-banner{background:linear-gradient(135deg,var(--card),var(--bg3));border:1px solid var(--border2);border-left:4px solid var(--gold);border-radius:4px;padding:1.4rem 1.8rem;margin:2.2rem 0 1.2rem}
+.unit-banner .tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;opacity:.8}
+.unit-banner h2{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--textbright);margin-top:.35rem}
+.unit-banner .weeks{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--blue);margin-top:.35rem}
+.lcard{background:var(--card);border:1px solid var(--border);border-radius:5px;margin-bottom:.9rem;overflow:hidden}
+.lhdr{display:flex;align-items:center;gap:.9rem;padding:.82rem 1.3rem;cursor:pointer;transition:background .15s;user-select:none;border-bottom:1px solid transparent}
+.lhdr:hover{background:rgba(200,168,75,.05)}
+.lhdr.open{background:rgba(200,168,75,.07);border-bottom-color:var(--border)}
+.lnum{background:rgba(200,168,75,.14);border:1px solid rgba(200,168,75,.3);color:var(--gold2);font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.18rem .55rem;border-radius:3px;flex-shrink:0;letter-spacing:.04em}
+.ltitle{color:var(--textbright);font-size:.93rem;font-weight:500;flex:1}
+.larrow{color:var(--textdim);font-size:.85rem;transition:transform .2s;flex-shrink:0}
+.lhdr.open .larrow{transform:rotate(180deg)}
+.lweek{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--textdim);flex-shrink:0}
+.lbody{display:none;padding:1.4rem 1.7rem}
+.lbody.open{display:block}
+.lbody h4{font-size:.9rem;font-weight:600;color:var(--teal);margin:1.3rem 0 .55rem;border-left:3px solid var(--teal);padding-left:.65rem}
+.lbody h5{font-size:.86rem;font-weight:600;color:var(--gold);margin:1rem 0 .35rem;font-style:italic}
+.lbody p{margin-bottom:.8rem;color:var(--text);line-height:1.8;font-size:.9rem}
+.lbody ul,.lbody ol{padding-left:1.5rem;margin:.45rem 0 .8rem}
+.lbody li{margin-bottom:.28rem;font-size:.88rem;color:var(--text)}
+.lbody li::marker{color:var(--gold)}
+.pq{background:rgba(155,127,212,.07);border-left:3px solid var(--purple);padding:.85rem 1.1rem;margin:.9rem 0;border-radius:0 4px 4px 0;font-style:italic;color:#c5bde0;font-size:.87rem;line-height:1.72;position:relative}
+.pq::before{content:'\201C';font-size:2.2rem;color:var(--purple);opacity:.35;position:absolute;top:-.3rem;left:.7rem;line-height:1;font-family:Georgia,serif}
+.pq .who{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--purple);margin-top:.4rem;letter-spacing:.1em;opacity:.8;padding-left:1.4rem}
+.deriv{background:var(--fmla-bg);border:1px solid var(--border2);border-top:3px solid var(--teal);border-radius:4px;padding:1.2rem 1.5rem;margin:.9rem 0}
+.dtitle{font-family:'JetBrains Mono',monospace;font-size:.61rem;color:var(--teal);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem}
+.step{font-family:'JetBrains Mono',monospace;font-size:.81rem;color:#b0c4d8;line-height:1.68;margin:.38rem 0;padding-left:.75rem;border-left:2px solid rgba(79,195,161,.2)}
+.step b{color:var(--teal)}
+.rbox{background:rgba(79,195,161,.07);border:1px solid rgba(79,195,161,.3);border-radius:3px;padding:.55rem .9rem;margin-top:.75rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.88rem;color:var(--gold2)}
+.fbox{background:rgba(5,8,18,.9);border:1px solid var(--border2);border-left:3px solid var(--gold);padding:.85rem 1.3rem;margin:.8rem 0;border-radius:0 4px 4px 0}
+.flbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--textdim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.45rem}
+.feq{font-family:'JetBrains Mono',monospace;font-size:.89rem;color:var(--gold2);display:block;text-align:center;line-height:1.75}
+.feq+.feq{margin-top:.25rem}
+.key{background:linear-gradient(135deg,rgba(200,168,75,.07),rgba(200,168,75,.02));border:1px solid rgba(200,168,75,.3);border-radius:4px;padding:1rem 1.4rem;margin:.9rem 0;position:relative}
+.key::after{content:'★';position:absolute;top:.75rem;right:.9rem;color:var(--gold);opacity:.4;font-size:.85rem}
+.klbl{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.45rem}
+.keq{font-family:'JetBrains Mono',monospace;font-size:.92rem;color:var(--gold2);display:block;text-align:center;padding:.28rem}
+.key p{font-size:.83rem;color:var(--textdim);margin-top:.45rem}
+.note{background:rgba(91,163,217,.07);border-left:3px solid var(--blue);padding:.85rem 1.1rem;margin:.8rem 0;border-radius:0 4px 4px 0;font-size:.87rem}
+.warn{background:rgba(212,107,107,.07);border-left:3px solid var(--red);padding:.85rem 1.1rem;margin:.8rem 0;border-radius:0 4px 4px 0;font-size:.87rem}
+.succ{background:rgba(109,190,138,.07);border-left:3px solid var(--green);padding:.85rem 1.1rem;margin:.8rem 0;border-radius:0 4px 4px 0;font-size:.87rem}
+.note strong,.warn strong,.succ strong{color:var(--textbright);display:block;margin-bottom:.28rem;font-size:.72rem;font-family:'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+table{width:100%;border-collapse:collapse;margin:.9rem 0;font-size:.82rem}
+th{background:rgba(200,168,75,.1);color:var(--gold2);font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;padding:.55rem .85rem;border-bottom:1px solid var(--gold);text-align:left}
+td{padding:.48rem .85rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5}
+tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+tr:hover td{background:rgba(200,168,75,.03)}
+.diagram{background:var(--fmla-bg);border:1px solid var(--border2);border-radius:4px;padding:.9rem;margin:1.1rem 0;text-align:center;overflow-x:auto}
+.diagram svg{max-width:100%;display:block;margin:0 auto}
+.diagram figcaption{font-size:.74rem;color:var(--textdim);margin-top:.6rem;font-style:italic}
+.qa-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:1.6rem 1.8rem;margin:1.2rem 0}
+.qa-wrap h3{font-family:'Playfair Display',serif;color:var(--gold2);font-size:1.1rem;border-bottom:1px solid var(--border);padding-bottom:.65rem;margin-bottom:1.1rem}
+.qa{margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:1.3rem}
+.qa:last-child{border:none;margin:0;padding:0}
+.qa-q{font-weight:600;color:var(--teal);font-size:.89rem;margin-bottom:.55rem;padding-left:1.1rem;position:relative}
+.qa-q::before{content:'Q';position:absolute;left:0;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--teal);opacity:.7}
+.qa-a{font-size:.86rem;color:var(--text);line-height:1.8;padding-left:1.1rem;border-left:2px solid var(--border2)}
+code{font-family:'JetBrains Mono',monospace;font-size:.8em;background:rgba(200,168,75,.1);color:var(--gold2);padding:.1em .38em;border-radius:2px}
+footer{text-align:center;padding:2.2rem 2rem;color:var(--textdim);font-size:.77rem;border-top:1px solid var(--border);background:var(--bg2);font-style:italic;margin-top:1.5rem}
+@media(max-width:900px){.layout{flex-direction:column}aside{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid var(--border)}main{padding:1.1rem}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>Solid State &amp; Condensed Matter Physics — IIT Kanpur NPTEL</h1>
+  <p>Prof. Manoj K. Harbola &amp; Prof. Satyajit Banerjee · Lectures 1–26, 62–80, 82–87 · Enhanced with RR Ma'am &amp; PS Sir Notes</p>
+</div>
+<nav class="nav-ribbon">
+  <a href="#unit1">I: Drude &amp; Sommerfeld</a>
+  <a href="#unit2">II: Crystal Structure</a>
+  <a href="#unit3">III: Diffraction</a>
+  <a href="#unit4">IV: Phonons</a>
+  <a href="#unit5">V: Specific Heat</a>
+  <a href="#unit6">VI: Bloch &amp; Bands</a>
+  <a href="#unit7">VII: Semiconductors</a>
+  <a href="#unit8">VIII: Magnetism</a>
+  <a href="#qa">★ Q&amp;A Bank</a>
+  <a href="#formulas">Formulas</a>
+</nav>
+<div class="layout">
+<aside>
+  <div class="sb-sec">I — Free Electrons (L1–18)</div>
+  <a href="#L1">L1 · Drude Model Intro</a>
+  <a href="#L2">L2 · Drude EOM &amp; σ</a>
+  <a href="#L3">L3 · Hall Effect I</a>
+  <a href="#L4">L4 · Hall Effect II &amp; Sensors</a>
+  <a href="#L5">L5 · Hall Effect III &amp; Failures</a>
+  <a href="#L6">L6 · Need for Quantum</a>
+  <a href="#L7">L7 · Sommerfeld I: QM Setup</a>
+  <a href="#L8">L8 · Sommerfeld II: k-space</a>
+  <a href="#L9">L9 · Sommerfeld III: Counting States</a>
+  <a href="#L10">L10 · Sommerfeld IV: E_F Derivation</a>
+  <a href="#L11">L11 · Fermi Sphere &amp; DOS</a>
+  <a href="#L12">L12 · Finite T &amp; Sommerfeld Expansion</a>
+  <a href="#L13">L13 · Electronic Specific Heat</a>
+  <a href="#L14">L14 · Experimental γ &amp; m*</a>
+  <a href="#L15">L15 · Thermal Conductivity I</a>
+  <a href="#L16">L16 · Thermal Conductivity II</a>
+  <a href="#L17">L17 · Wiedemann-Franz</a>
+  <a href="#L18">L18 · Pauli Paramagnetism</a>
+  <div class="sb-sec">II — Crystal Structure (L19–26)</div>
+  <a href="#L19">L19 · Lattice, Basis, Unit Cell</a>
+  <a href="#L20">L20 · Cubic Structures &amp; Packing</a>
+  <a href="#L21">L21 · 14 Bravais Lattices</a>
+  <a href="#L22">L22 · Crystallographic Restriction</a>
+  <a href="#L23">L23 · Miller Indices I</a>
+  <a href="#L24">L24 · Miller Indices II &amp; d_hkl</a>
+  <a href="#L25">L25 · Crystal Directions &amp; Families</a>
+  <a href="#L26">L26 · Bonding &amp; Madelung</a>
+  <div class="sb-sec">III — Diffraction (L27–37)</div>
+  <a href="#L27">L27 · X-Ray Diffraction &amp; Bragg</a>
+  <a href="#L28">L28 · Laue Equations</a>
+  <a href="#L29">L29 · Structure Factor</a>
+  <a href="#L30">L30 · Reciprocal Lattice</a>
+  <a href="#L31">L31 · Brillouin Zones</a>
+  <a href="#L32">L32 · Ewald Sphere</a>
+  <div class="sb-sec">IV — Phonons (L38–46)</div>
+  <a href="#L38">L38 · Monatomic Chain I</a>
+  <a href="#L39">L39 · Monatomic Chain II: Dispersion</a>
+  <a href="#L40">L40 · Diatomic Chain I</a>
+  <a href="#L41">L41 · Diatomic Chain II: Branches</a>
+  <a href="#L42">L42 · 3D Phonons</a>
+  <a href="#L45">L45 · Normal Modes &amp; Quantization</a>
+  <a href="#L46">L46 · Phonon Momentum &amp; Scales</a>
+  <div class="sb-sec">V — Specific Heat (L47–54)</div>
+  <a href="#L47">L47 · Einstein Model</a>
+  <a href="#L48">L48 · Debye Model I: DOS</a>
+  <a href="#L49">L49 · Debye Model II: T³ Law</a>
+  <a href="#L50">L50 · Debye vs Einstein Comparison</a>
+  <div class="sb-sec">VI — Bloch &amp; Bands (L62–70)</div>
+  <a href="#L62">L62 · Bloch Theorem I: Proof</a>
+  <a href="#L63">L63 · Bloch Theorem II: Crystal Momentum</a>
+  <a href="#L64">L64 · Nearly Free Electron Model</a>
+  <a href="#L65">L65 · Energy Gaps &amp; Standing Waves</a>
+  <a href="#L66">L66 · Kronig-Penney I</a>
+  <a href="#L67">L67 · Kronig-Penney II: Analysis</a>
+  <a href="#L68">L68 · Wave Eq. in Periodic Potential</a>
+  <a href="#L69">L69 · Band Gaps &amp; Central Equation</a>
+  <a href="#L70">L70 · Metal vs Insulator vs SC</a>
+  <div class="sb-sec">VII — Semiconductors (L71–80)</div>
+  <a href="#L71">L71 · Equations of Motion</a>
+  <a href="#L72">L72 · Effective Mass</a>
+  <a href="#L73">L73 · Concept of Holes</a>
+  <a href="#L74">L74 · Intrinsic SC I: Carrier Conc.</a>
+  <a href="#L75">L75 · Intrinsic SC II: Fermi Level</a>
+  <a href="#L76">L76 · Extrinsic SC: n-type &amp; p-type</a>
+  <a href="#L77">L77 · Impurity Conductivity</a>
+  <a href="#L78">L78 · Transport in Semiconductors</a>
+  <a href="#L79">L79 · Superconductivity I</a>
+  <a href="#L80">L80 · Superconductivity II: BCS</a>
+  <div class="sb-sec">VIII — Magnetism (L82–87)</div>
+  <a href="#L82">L82 · Diamagnetism</a>
+  <a href="#L83">L83 · Langevin Paramagnetism</a>
+  <a href="#L84">L84 · Curie Law &amp; Saturation</a>
+  <a href="#L85">L85 · Hund's Rules &amp; Brillouin Fn</a>
+  <a href="#L86">L86 · Ferromagnetism: Weiss MFT</a>
+  <a href="#L87">L87 · Exchange Interaction</a>
+  <div class="sb-sec">Exam Prep</div>
+  <a href="#qa">★ Q&amp;A Bank</a>
+  <a href="#formulas">Formula Sheet</a>
+</aside>
+<main>
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- UNIT I: FREE ELECTRONS (L1–L18) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="unit1">
+  <div class="tag">Unit I · Lectures 1–18</div>
+  <h2>Free Electron Theory of Metals</h2>
+  <div class="weeks">NPTEL Weeks 1–3 · Drude → Sommerfeld → Specific Heat → Thermal Conductivity</div>
+</div>
+
+<!-- L1 -->
+<div class="lcard" id="L1">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L01</span>
+  <span class="ltitle">Introduction to Drude's Free Electron Theory — Historical Context &amp; Assumptions</span>
+  <span class="lweek">Week 1</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<p>Paul Drude (1900) proposed the first quantitative model for metallic conduction by treating conduction electrons as a classical ideal gas — the "free electron" model. Despite being pre-quantum, it achieves remarkable successes and its failures are equally instructive, pointing directly to the need for quantum mechanics.</p>
+<h4>Drude's Five Assumptions</h4>
+<ul>
+  <li><strong>Free electrons:</strong> Valence electrons detach from atoms and roam freely — the "electron gas". Positive ionic cores are fixed background charges.</li>
+  <li><strong>Independent electrons:</strong> Electrons interact with ionic cores at collision events only — no electron–electron interactions (independent electron approximation).</li>
+  <li><strong>Instantaneous randomising collisions:</strong> Each collision is instantaneous and completely randomises the electron's velocity direction. No memory of pre-collision state.</li>
+  <li><strong>Relaxation time τ:</strong> The mean time between successive collisions. Between collisions, electrons travel freely (no force except applied fields). τ ≈ 10⁻¹⁴ s at room temperature.</li>
+  <li><strong>Maxwell–Boltzmann statistics:</strong> Classical velocity distribution. <em>This is the fatal flaw Sommerfeld corrected</em>.</li>
+</ul>
+<h4>Electron Number Density</h4>
+<div class="fbox">
+  <div class="flbl">Electron number density (Z_v = valence)</div>
+  <span class="feq">n = Z_v · ρN_A / A</span>
+  <span class="feq">Cu: ρ=8.96 g/cm³, A=63.55, Z_v=1 → n = 8.49×10²² cm⁻³ = 8.49×10²⁸ m⁻³</span>
+</div>
+<h4>Physical Picture: Electron Scattering</h4>
+<div class="diagram">
+<svg viewBox="0 0 520 130" xmlns="http://www.w3.org/2000/svg" width="480">
+  <defs><marker id="a1" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L0,6L6,3Z" fill="#c8a84b"/></marker>
+  <marker id="a2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L0,6L6,3Z" fill="#d46b6b"/></marker></defs>
+  <!-- Ion cores grid -->
+  <g fill="#5ba3d9" opacity=".7">
+    <circle cx="60" cy="30" r="11"/><circle cx="160" cy="30" r="11"/><circle cx="260" cy="30" r="11"/><circle cx="360" cy="30" r="11"/><circle cx="460" cy="30" r="11"/>
+    <circle cx="60" cy="75" r="11"/><circle cx="160" cy="75" r="11"/><circle cx="260" cy="75" r="11"/><circle cx="360" cy="75" r="11"/><circle cx="460" cy="75" r="11"/>
+    <circle cx="60" cy="120" r="11"/><circle cx="160" cy="120" r="11"/><circle cx="260" cy="120" r="11"/><circle cx="360" cy="120" r="11"/><circle cx="460" cy="120" r="11"/>
+  </g>
+  <g fill="white" font-size="9" text-anchor="middle" font-family="Inter">
+    <text x="60" y="33">+</text><text x="160" y="33">+</text><text x="260" y="33">+</text><text x="360" y="33">+</text><text x="460" y="33">+</text>
+    <text x="60" y="78">+</text><text x="160" y="78">+</text><text x="260" y="78">+</text><text x="360" y="78">+</text><text x="460" y="78">+</text>
+    <text x="60" y="123">+</text><text x="160" y="123">+</text><text x="260" y="123">+</text><text x="360" y="123">+</text><text x="460" y="123">+</text>
+  </g>
+  <!-- Electron zigzag path -->
+  <polyline points="0,75 35,45 80,100 135,40 195,85 240,55 300,100 340,50 400,80 445,45 520,90"
+    stroke="#c8a84b" stroke-width="1.8" fill="none" stroke-dasharray="4,2" marker-end="url(#a1)"/>
+  <!-- E field arrow -->
+  <line x1="10" y1="17" x2="510" y2="17" stroke="#d46b6b" stroke-width="1.5" marker-end="url(#a2)"/>
+  <text x="260" y="12" fill="#d46b6b" font-size="10" font-family="Inter" text-anchor="middle">→ Applied Electric Field E</text>
+  <text x="0" y="90" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">e⁻ path</text>
+</svg>
+<figcaption>Fig 1.1 — Drude model: conduction electrons (gold dashed path) zigzag between fixed positive ion cores (blue). Net drift opposite to E gives current. Each collision point = scattering from an ionic core.</figcaption>
+</div>
+<div class="pq">
+"The idea was this: these electrons are scattering from ionic cores and going from one to the other — this is how the scattering is occurring and this is what leads to resistivity. It is like a billiard ball which is hitting different points and then moving around this metal."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 8</span>
+</div>
+</div>
+</div>
+
+<!-- L2 -->
+<div class="lcard" id="L2">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L02</span>
+  <span class="ltitle">Drude EOM &amp; Electrical Conductivity — Full Derivation</span>
+  <span class="lweek">Week 1</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Equation of Motion with Damping</h4>
+<p>An electron (charge −e, e>0) in electric field <strong>E</strong>: driving force eE. Collision "friction": −mv/τ (on average, momentum lost per unit time = mv/τ). Full EOM:</p>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: σ = ne²τ/m (Drude)</div>
+  <div class="step"><b>Full EOM:</b> m(dv/dt) = eE − (m/τ)v</div>
+  <div class="step"><b>Transient solution</b> (v(0)=0): v(t) = (eEτ/m)(1 − e^{−t/τ}) → v_d = eEτ/m as t→∞</div>
+  <div class="step"><b>Steady state (dv/dt=0):</b> eE = mv_d/τ → v_d = eEτ/m</div>
+  <div class="step"><b>Current density</b> (n electrons/vol, charge −e, moving at −v_d): j = nev_d = (ne²τ/m)E</div>
+  <div class="step"><b>Ohm's law</b> j = σE gives:</div>
+  <div class="rbox">σ = ne²τ/m &nbsp;&nbsp; ρ = 1/σ = m/(ne²τ) &nbsp;&nbsp; (Drude)</div>
+</div>
+<h4>Numerical Verification — Copper</h4>
+<div class="fbox">
+  <span class="feq">n=8.5×10²⁸ m⁻³, e=1.6×10⁻¹⁹ C, m=9.1×10⁻³¹ kg, τ≈2.5×10⁻¹⁴ s</span>
+  <span class="feq">σ = (8.5×10²⁸ × (1.6×10⁻¹⁹)² × 2.5×10⁻¹⁴) / 9.1×10⁻³¹ ≈ 5.9×10⁷ Ω⁻¹m⁻¹</span>
+  <span class="feq">Experiment: 6.0×10⁷ Ω⁻¹m⁻¹ ✓ — excellent agreement!</span>
+</div>
+<h4>Temperature Dependence of Resistivity</h4>
+<p>In Drude model, τ ∝ 1/T (more phonon scattering at higher T) → ρ = m/(ne²τ) ∝ T. This predicts linear ρ(T) at high T — correct! Metals do show ρ ∝ T above the Debye temperature. At low T, Bloch–Grüneisen theory (quantum) gives ρ ∝ T⁵.</p>
+</div>
+</div>
+
+<!-- L3 -->
+<div class="lcard" id="L3">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L03</span>
+  <span class="ltitle">Hall Effect — Part I: Setup, Geometry &amp; Derivation of R_H</span>
+  <span class="lweek">Week 1</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Hall Effect Geometry</h4>
+<div class="diagram">
+<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" width="460">
+  <defs><marker id="ga" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L0,6L6,3Z" fill="#4fc3a1"/></marker>
+  <marker id="gb" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L0,6L6,3Z" fill="#d46b6b"/></marker></defs>
+  <!-- Metal block -->
+  <rect x="100" y="50" width="300" height="110" fill="rgba(24,29,40,.9)" stroke="#2c3347" stroke-width="1.5"/>
+  <!-- Current arrows -->
+  <line x1="25" y1="105" x2="98" y2="105" stroke="#4fc3a1" stroke-width="2" marker-end="url(#ga)"/>
+  <line x1="402" y1="105" x2="475" y2="105" stroke="#4fc3a1" stroke-width="2" marker-end="url(#ga)"/>
+  <text x="15" y="102" fill="#4fc3a1" font-size="11" font-family="Inter">I →</text>
+  <!-- B field symbols -->
+  <text x="160" y="90" fill="#9b7fd4" font-size="15">⊗</text><text x="200" y="90" fill="#9b7fd4" font-size="15">⊗</text>
+  <text x="240" y="90" fill="#9b7fd4" font-size="15">⊗</text><text x="280" y="90" fill="#9b7fd4" font-size="15">⊗</text>
+  <text x="320" y="90" fill="#9b7fd4" font-size="15">⊗</text>
+  <text x="200" y="75" fill="#9b7fd4" font-size="10" font-family="Inter">B (into page, −ẑ)</text>
+  <!-- Hall voltage leads -->
+  <line x1="250" y1="50" x2="250" y2="5" stroke="#d46b6b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="250" y1="160" x2="250" y2="185" stroke="#d46b6b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="260" y="30" fill="#d46b6b" font-size="10" font-family="Inter">+ V_H −</text>
+  <!-- Dimension labels -->
+  <text x="100" y="180" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">W (width)</text>
+  <text x="105" y="178" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">↕</text>
+  <text x="250" y="180" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono" text-anchor="middle">L (length)</text>
+  <text x="78" y="105" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">t</text>
+</svg>
+<figcaption>Fig 3.1 — Hall measurement: current I in x̂, B field in −ẑ. Lorentz force pushes electrons in +x direction → accumulate on one face → transverse Hall field E_H builds up in ŷ until Lorentz force balanced.</figcaption>
+</div>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Hall Coefficient R_H from Drude Theory</div>
+  <div class="step"><b>Setup:</b> Current J in ŷ, B = B₀ẑ. Steady-state EOM: 0 = e(E + v×B) − mv/τ</div>
+  <div class="step"><b>x-component:</b> 0 = eE_x + ev_yB₀ − mv_x/τ</div>
+  <div class="step"><b>y-component:</b> 0 = eE_y − ev_xB₀ − mv_y/τ</div>
+  <div class="step"><b>Hall condition:</b> No current in x → J_x = 0 → v_x = 0 at steady state</div>
+  <div class="step"><b>From x-equation with v_x=0:</b> 0 = eE_x + ev_yB₀ → E_x = −v_yB₀</div>
+  <div class="step"><b>From y-equation with v_x=0:</b> v_y = eE_yτ/m = J_y/(ne), so E_x = −J_yB₀/(ne)</div>
+  <div class="rbox">R_H = E_x/(J_yB₀) = −1/(ne) &nbsp; (negative → electrons are carriers)</div>
+</div>
+<div class="fbox">
+  <div class="flbl">Hall measurement quantities</div>
+  <span class="feq">Hall resistivity: ρ_H = R_H·B₀ = −B₀/(ne)</span>
+  <span class="feq">Hall voltage: V_H = −IB₀/(net) &nbsp; (t = sample thickness)</span>
+  <span class="feq">Hall resistance: ℛ_H = V_H/I = R_H·B₀/t = −B₀/(net)</span>
+</div>
+</div>
+</div>
+
+<!-- L4 -->
+<div class="lcard" id="L4">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L04</span>
+  <span class="ltitle">Hall Effect — Part II: Applications as Sensors</span>
+  <span class="lweek">Week 1</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Hall Sensors — Real-World Applications</h4>
+<div class="pq">
+"When you are using a Hall sensor — you bias it by sending a current I through the sample and if you take the sample and place it in a magnetic field B₀, you will get a transverse voltage V_H. If you measure this ratio V_H/I you will immediately know how much is the magnetic field B₀ — and this is how you can use it as a sensor."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 8</span>
+</div>
+<div class="pq">
+"In automobiles it is used for measuring the level of the fuel. You suspend a magnet which floats on top of the fuel. As the level of the liquid goes down, the magnet also moves down, much further away from the sensor. B₀ becomes less, the Hall voltage becomes less, and therefore you can find out how much is the decrease in the fluid."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 8</span>
+</div>
+<h4>Summary of Hall Sensor Applications</h4>
+<ul>
+  <li>Automobile fuel level gauges (floating magnet on fuel)</li>
+  <li>Position sensing of rotating discs in industrial machinery</li>
+  <li>Aerospace orientation sensors</li>
+  <li>Mobile phone compasses and proximity sensors</li>
+  <li>Brushless DC motor position detection</li>
+</ul>
+</div>
+</div>
+
+<!-- L5 -->
+<div class="lcard" id="L5">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L05</span>
+  <span class="ltitle">Hall Effect — Part III: Sign Anomaly, Magnetoresistance &amp; Failures of Drude</span>
+  <span class="lweek">Week 1</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>The Sign Anomaly — Drude's Worst Failure</h4>
+<table>
+  <tr><th>Metal</th><th>Valence</th><th>R_H (Drude, ×10⁻²⁴ cm³/C)</th><th>R_H (Expt.)</th><th>Verdict</th></tr>
+  <tr><td>Li</td><td>1</td><td>−1.33</td><td>−1.70</td><td>✓ Good</td></tr>
+  <tr><td>Na</td><td>1</td><td>−2.36</td><td>−2.50</td><td>✓ Good</td></tr>
+  <tr><td>Cu</td><td>1</td><td>−0.74</td><td>−0.55</td><td>✓ Reasonable</td></tr>
+  <tr><td>Be</td><td>2</td><td>−0.26</td><td><b>+2.44</b></td><td>✗ WRONG SIGN</td></tr>
+  <tr><td>Zn</td><td>2</td><td>−0.46</td><td><b>+0.33</b></td><td>✗ WRONG SIGN</td></tr>
+  <tr><td>Al</td><td>3</td><td>−0.35</td><td><b>+1.04</b></td><td>✗ WRONG SIGN</td></tr>
+</table>
+<div class="pq">
+"RH is positive instead of being negative for aluminium and beryllium. RH being positive, 1/(ne), indicates that the charge carriers are positive. This is completely — it cannot understand any of this using the Drude model, how does the charge carrier become positive?"
+<span class="who">— Prof. Satyajit Banerjee, Lecture 8</span>
+</div>
+<h4>Magnetoresistance</h4>
+<div class="pq">
+"What Drude's theory says is that the longitudinal resistivity — the voltage drop along the direction of the flow of current — is independent of the magnetic field. But actual experiments show this is not true. There is a dependence: the longitudinal resistance also depends on the magnetic field. This is one of the failures of Drude's model that it is unable to explain the longitudinal magnetic field dependence of the longitudinal resistivity — it goes by the name of <b>magnetoresistance</b>."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 8</span>
+</div>
+<h4>The Insulator Problem — Drude's Biggest Failure</h4>
+<div class="pq">
+"The biggest failure which comes out from Drude's theory is the behaviour of insulators. In insulators, if you look at the behaviour of resistivity as a function of temperature, the resistivity actually diverges as you lower the temperature — as T tends to 0 the longitudinal resistivity actually tends to infinity. What does Drude's theory say? ρ = m/(ne²τ). If ρ tends to infinity it implies τ should be tending to 0. τ tending to 0 as T tends to 0 implies that the scattering rate tends to infinity. This is completely absurd — this conclusion which comes out from Drude's theory is completely absurd."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 8</span>
+</div>
+<h4>Complete Failure Summary</h4>
+<table>
+  <tr><th>Property</th><th>Drude Prediction</th><th>Experiment</th><th>Fix Needed</th></tr>
+  <tr><td>Electronic C_V</td><td>(3/2)Nk_B (large)</td><td>~100× smaller</td><td>Fermi-Dirac stats</td></tr>
+  <tr><td>Hall sign (Be,Al...)</td><td>Always negative</td><td>Positive!</td><td>Holes (band theory)</td></tr>
+  <tr><td>Insulators</td><td>All materials conduct</td><td>ρ→∞ as T→0</td><td>Band gaps</td></tr>
+  <tr><td>Magnetoresistance</td><td>ρ_xx independent of B</td><td>ρ_xx(B) increases</td><td>Fermi surface</td></tr>
+  <tr><td>Lorenz number</td><td>1.24×10⁻⁸ W·Ω/K²</td><td>2.45×10⁻⁸</td><td>Correct statistics</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L6 -->
+<div class="lcard" id="L6">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L06</span>
+  <span class="ltitle">Need for Quantum Mechanics — Introduction to Sommerfeld's Model</span>
+  <span class="lweek">Week 2</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Why Classical Statistics Fails for Electrons</h4>
+<p>Electrons are <em>fermions</em> — half-integer spin particles — obeying the Pauli exclusion principle: no two electrons can share the same quantum state (same n, ℓ, m_ℓ, m_s). This forces electrons to fill energy levels from the bottom up, not spread classically. The result is a completely different velocity and energy distribution from the Maxwell–Boltzmann gas Drude assumed.</p>
+<h4>Fermi–Dirac Distribution</h4>
+<div class="key">
+  <div class="klbl">Fermi–Dirac Distribution (Central result of quantum statistical mechanics)</div>
+  <span class="keq">f(ε) = 1 / {exp[(ε − μ)/k_BT] + 1}</span>
+  <p>μ = chemical potential (= Fermi energy E_F at T=0). f = probability a state of energy ε is occupied. The +1 in the denominator encodes Pauli exclusion (unlike Bose–Einstein which has −1, or Maxwell–Boltzmann which has no ±1).</p>
+</div>
+<h4>Boundary Conditions — Why Periodic BC?</h4>
+<div class="pq">
+"In your problem of just a single electron inside a box you consider that the wave function becomes zero at the two edges. But this has a problem because it gives rise to standing waves inside the solid — you want electrons to actually propagate through the solid. So what Sommerfeld considered was this very important periodic boundary condition: the wave function at x equals the wave function at x+L."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 13</span>
+</div>
+<div class="fbox">
+  <div class="flbl">Periodic (Born–von Kármán) BC → allowed k</div>
+  <span class="feq">ψ(x+L) = ψ(x) → e^{ikL} = 1 → k = 2πn/L (n = 0, ±1, ±2, ...)</span>
+  <span class="feq">3D: k_x = 2πn_x/L, k_y = 2πn_y/L, k_z = 2πn_z/L</span>
+  <span class="feq">Plane wave: ψ_k(r) = (1/√V)e^{ik·r},  Energy: ε_k = ℏ²k²/(2m)</span>
+</div>
+</div>
+</div>
+
+<!-- L7 -->
+<div class="lcard" id="L7">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L07</span>
+  <span class="ltitle">Sommerfeld I — Quantum States in a Metal, k-Space &amp; Fermi Sphere</span>
+  <span class="lweek">Week 2</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Discrete k-States in k-Space</h4>
+<div class="pq">
+"If I look at the momentum of my electron in the solid, it has momenta k_x, k_y, k_z. You will have a discrete set of states — each spaced by 2π/L in each direction. The smallest volume in the momentum space is equal to (2π/L)³ — below this volume there is no state which is available."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 13</span>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" width="360">
+  <line x1="50" y1="250" x2="370" y2="250" stroke="#2c3347" stroke-width="1.5" marker-end="url(#ax)"/>
+  <line x1="200" y1="280" x2="200" y2="20" stroke="#2c3347" stroke-width="1.5" marker-end="url(#ax)"/>
+  <!-- Fermi sphere (circle) -->
+  <circle cx="200" cy="250" r="130" fill="rgba(79,195,161,.1)" stroke="#4fc3a1" stroke-width="2"/>
+  <!-- k-dots -->
+  <g fill="#5ba3d9" opacity=".65">
+    <circle cx="200" cy="250" r="3"/>
+    <circle cx="228" cy="250" r="3"/><circle cx="256" cy="250" r="3"/><circle cx="284" cy="250" r="3"/><circle cx="312" cy="250" r="3"/>
+    <circle cx="172" cy="250" r="3"/><circle cx="144" cy="250" r="3"/><circle cx="116" cy="250" r="3"/>
+    <circle cx="200" cy="222" r="3"/><circle cx="228" cy="222" r="3"/><circle cx="256" cy="222" r="3"/><circle cx="172" cy="222" r="3"/><circle cx="144" cy="222" r="3"/>
+    <circle cx="200" cy="194" r="3"/><circle cx="228" cy="194" r="3"/><circle cx="172" cy="194" r="3"/>
+    <circle cx="200" cy="166" r="3"/>
+    <circle cx="200" cy="278" r="3"/><circle cx="228" cy="278" r="3"/><circle cx="172" cy="278" r="3"/>
+    <circle cx="340" cy="250" r="3"/><circle cx="60" cy="250" r="3"/>
+  </g>
+  <!-- k_F arrow -->
+  <line x1="200" cy="250" x1="200" y1="250" x2="330" y2="250" stroke="#4fc3a1" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="260" y="244" fill="#4fc3a1" font-size="10" font-family="JetBrains Mono">k_F</text>
+  <!-- spacing label -->
+  <line x1="200" y1="264" x2="228" y2="264" stroke="#c8a84b" stroke-width="1.2"/>
+  <text x="212" y="277" fill="#c8a84b" font-size="9" font-family="JetBrains Mono" text-anchor="middle">2π/L</text>
+  <!-- axis labels -->
+  <text x="374" y="253" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">k_x</text>
+  <text x="204" y="16" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">k_y</text>
+  <defs><marker id="ax" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L0,6L6,3Z" fill="#2c3347"/></marker></defs>
+</svg>
+<figcaption>Fig 7.1 — 2D slice of k-space. Blue dots = allowed k-states, spacing 2π/L. Teal circle = Fermi sphere of radius k_F. At T=0 all states inside (teal fill) are occupied; all outside are empty.</figcaption>
+</div>
+</div>
+</div>
+
+<!-- L8 -->
+<div class="lcard" id="L8">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L08</span>
+  <span class="ltitle">Sommerfeld II — Density of States D(ε) — Full Derivation</span>
+  <span class="lweek">Week 2</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: 3D Density of States D(ε) ∝ √ε</div>
+  <div class="step"><b>Volume per k-state:</b> (2π/L)³ = (2π)³/V. States in Fermi sphere of radius k (×2 for spin):</div>
+  <div class="step">N(k) = 2·(4πk³/3) / [(2π)³/V] = Vk³/(3π²)</div>
+  <div class="step"><b>Convert to energy:</b> ε = ℏ²k²/(2m) → k = √(2mε)/ℏ → k³ = (2mε/ℏ²)^{3/2}</div>
+  <div class="step">N(ε) = (V/3π²)(2mε/ℏ²)^{3/2}</div>
+  <div class="step"><b>DOS = dN/dε:</b></div>
+  <div class="rbox">D(ε) = (V/2π²)(2m/ℏ²)^{3/2} √ε = C·√ε &nbsp; where C = (V/2π²)(2m/ℏ²)^{3/2}</div>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 400 210" xmlns="http://www.w3.org/2000/svg" width="380">
+  <line x1="40" y1="175" x2="370" y2="175" stroke="#2c3347" stroke-width="1.5"/>
+  <line x1="40" y1="175" x2="40" y2="15" stroke="#2c3347" stroke-width="1.5"/>
+  <!-- D(ε)∝√ε curve -->
+  <path d="M40,175 C120,170 200,125 280,58 L340,25" stroke="#4fc3a1" stroke-width="2.5" fill="rgba(79,195,161,.1)"/>
+  <!-- E_F line -->
+  <line x1="40" y1="88" x2="250" y2="88" stroke="#c8a84b" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="250" y1="88" x2="250" y2="175" stroke="#c8a84b" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- Shaded filled states -->
+  <path d="M40,175 C120,170 200,125 250,88 L250,175 Z" fill="rgba(200,168,75,.12)"/>
+  <!-- Labels -->
+  <text x="375" y="178" fill="#7a7e8e" font-size="11" font-family="JetBrains Mono">ε</text>
+  <text x="22" y="12" fill="#7a7e8e" font-size="11" font-family="JetBrains Mono">D(ε)</text>
+  <text x="255" y="172" fill="#c8a84b" font-size="11" font-family="JetBrains Mono">E_F</text>
+  <text x="120" y="158" fill="#c8a84b" font-size="10" font-family="Inter">filled (T=0)</text>
+  <text x="290" y="90" fill="#4fc3a1" font-size="10" font-family="Inter">D(ε)∝√ε</text>
+</svg>
+<figcaption>Fig 8.1 — Parabolic DOS D(ε)∝√ε for 3D free electrons. Gold shading = filled states at T=0. Fermi energy E_F = energy of highest filled state at T=0.</figcaption>
+</div>
+</div>
+</div>
+
+<!-- L9 -->
+<div class="lcard" id="L9">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L09</span>
+  <span class="ltitle">Sommerfeld III — Counting States: Deriving the Fermi Energy E_F</span>
+  <span class="lweek">Week 2</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Fermi Energy E_F₀ from electron count</div>
+  <div class="step"><b>Total electrons at T=0:</b> N = ∫₀^{E_F₀} D(ε)dε = C∫₀^{E_F₀} ε^{1/2}dε = C·(2/3)·E_F₀^{3/2}</div>
+  <div class="step"><b>Solve for E_F₀:</b> E_F₀^{3/2} = 3N/(2C) = 3N(2π²)/(2V) · (ℏ²/2m)^{3/2} / ... → simplify</div>
+  <div class="rbox">E_F₀ = (ℏ²/2m)·(3π²n)^{2/3} &nbsp;&nbsp; k_F = (3π²n)^{1/3} &nbsp; (Fermi wavevector)</div>
+</div>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Average energy per electron at T=0</div>
+  <div class="step"><b>Total energy:</b> U₀ = ∫₀^{E_F₀} ε·D(ε)dε = C∫₀^{E_F₀} ε^{3/2}dε = C·(2/5)·E_F₀^{5/2}</div>
+  <div class="step"><b>Average = U₀/N:</b> [C·(2/5)·E_F₀^{5/2}] / [C·(2/3)·E_F₀^{3/2}] = (3/5)E_F₀</div>
+  <div class="rbox">⟨ε⟩₀ = (3/5)E_F₀ &nbsp; ← Quantum zero-point "Pauli pressure" kinetic energy</div>
+</div>
+<table>
+  <tr><th>Metal</th><th>n (10²² cm⁻³)</th><th>E_F (eV)</th><th>T_F = E_F/k_B (K)</th><th>v_F (10⁶ m/s)</th></tr>
+  <tr><td>Li</td><td>4.70</td><td>4.74</td><td>55,000</td><td>1.29</td></tr>
+  <tr><td>Na</td><td>2.65</td><td>3.24</td><td>37,700</td><td>1.07</td></tr>
+  <tr><td>K</td><td>1.40</td><td>2.12</td><td>24,600</td><td>0.86</td></tr>
+  <tr><td>Cu</td><td>8.49</td><td>7.04</td><td>81,700</td><td>1.57</td></tr>
+  <tr><td>Ag</td><td>5.86</td><td>5.51</td><td>63,900</td><td>1.39</td></tr>
+  <tr><td>Al</td><td>18.1</td><td>11.70</td><td>135,700</td><td>2.03</td></tr>
+</table>
+<div class="note">
+  <strong>T_F is Enormous!</strong>
+  For Cu: T_F ≈ 81,700 K. At room temperature T/T_F ≈ 300/81700 ≈ 0.004. The electron gas is always extremely "cold" compared to T_F — it is a highly degenerate quantum Fermi gas. Only electrons within ~k_BT ≈ 0.026 eV of E_F participate in thermal excitations. This is the key insight that fixes every Drude failure.
+</div>
+</div>
+</div>
+
+<!-- L10 -->
+<div class="lcard" id="L10">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L10</span>
+  <span class="ltitle">Sommerfeld IV — Temperature Dependence of E_F &amp; Sommerfeld Expansion</span>
+  <span class="lweek">Week 2</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Sommerfeld Expansion</h4>
+<p>For properties that depend on integrals of the form ∫f(ε)H(ε)dε, the correction from T=0 result can be systematically calculated. The key result:</p>
+<div class="fbox">
+  <div class="flbl">Sommerfeld expansion (leading correction in T²)</div>
+  <span class="feq">∫₋∞^∞ H(ε)f(ε)dε ≈ ∫₋∞^μ H(ε)dε + (π²/6)(k_BT)²H'(μ) + O(T⁴)</span>
+</div>
+<div class="fbox">
+  <div class="flbl">E_F at finite T</div>
+  <span class="feq">E_F(T) = E_F₀[1 − (π²/12)(k_BT/E_F₀)² + ...]</span>
+  <span class="feq">Cu at 300K: correction ≈ (π²/12)(0.026/7)² ≈ 4×10⁻⁴ → negligible!</span>
+</div>
+<div class="fbox">
+  <div class="flbl">Internal energy at finite T</div>
+  <span class="feq">U(T) = U₀[1 + (5π²/12)(k_BT/E_F₀)² + ...]</span>
+</div>
+</div>
+</div>
+
+<!-- L11 -->
+<div class="lcard" id="L11">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L11</span>
+  <span class="ltitle">Fermi Sphere, Fermi Surface &amp; DOS at E_F</span>
+  <span class="lweek">Week 2</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>The Fermi Surface</h4>
+<p>The Fermi surface is the surface in k-space separating occupied from empty states at T=0. For free electrons it is a perfect sphere of radius k_F. For real metals (in a periodic potential), the Fermi surface is distorted by the lattice and can have complex topology.</p>
+<div class="fbox">
+  <div class="flbl">Key Fermi surface quantities</div>
+  <span class="feq">k_F = (3π²n)^{1/3} &nbsp; (Fermi wavevector)</span>
+  <span class="feq">E_F = ℏ²k_F²/(2m) &nbsp; (Fermi energy)</span>
+  <span class="feq">v_F = ℏk_F/m = √(2E_F/m) &nbsp; (Fermi velocity)</span>
+  <span class="feq">D(E_F) = 3n/(2E_F) &nbsp; (DOS at Fermi energy)</span>
+</div>
+<p>All transport and thermodynamic properties of metals are governed by electrons near the Fermi surface — not by all N electrons. This is a fundamental principle of Fermi liquid theory.</p>
+</div>
+</div>
+
+<!-- L12 -->
+<div class="lcard" id="L12">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L12</span>
+  <span class="ltitle">The Smearing of Fermi Distribution at Finite T — Visual Understanding</span>
+  <span class="lweek">Week 2</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="diagram">
+<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" width="440">
+  <!-- Axes -->
+  <line x1="40" y1="150" x2="430" y2="150" stroke="#2c3347" stroke-width="1.5"/>
+  <line x1="40" y1="150" x2="40" y2="15" stroke="#2c3347" stroke-width="1.5"/>
+  <!-- T=0 step function -->
+  <polyline points="40,35 230,35 230,150" stroke="#4fc3a1" stroke-width="2.5" fill="rgba(79,195,161,.12)"/>
+  <!-- T>0 smooth -->
+  <path d="M40,33 C80,33 160,35 200,55 C220,70 230,100 260,135 C280,150 340,155 430,158"
+    stroke="#c8a84b" stroke-width="2" fill="none" stroke-dasharray="6,3"/>
+  <!-- E_F line -->
+  <line x1="230" y1="15" x2="230" y2="150" stroke="#7a7e8e" stroke-width="1" stroke-dasharray="3,2"/>
+  <!-- k_BT region bracket -->
+  <line x1="190" y1="170" x2="270" y2="170" stroke="#d46b6b" stroke-width="1.5"/>
+  <line x1="190" y1="165" x2="190" y2="175" stroke="#d46b6b" stroke-width="1"/>
+  <line x1="270" y1="165" x2="270" y2="175" stroke="#d46b6b" stroke-width="1"/>
+  <text x="230" y="185" fill="#d46b6b" font-size="9" font-family="JetBrains Mono" text-anchor="middle">~4k_BT smearing</text>
+  <!-- Labels -->
+  <text x="435" y="153" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">ε</text>
+  <text x="22" y="12" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">f(ε)</text>
+  <text x="25" y="38" fill="#4fc3a1" font-size="9" font-family="JetBrains Mono">1</text>
+  <text x="25" y="150" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">0</text>
+  <text x="234" y="18" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">E_F</text>
+  <text x="300" y="40" fill="#4fc3a1" font-size="10" font-family="Inter">T = 0</text>
+  <text x="340" y="80" fill="#c8a84b" font-size="10" font-family="Inter">T &gt; 0</text>
+  <text x="75" y="22" fill="#4fc3a1" font-size="9" font-family="Inter">f=1</text>
+  <text x="300" y="152" fill="#7a7e8e" font-size="9" font-family="Inter">f≈0</text>
+</svg>
+<figcaption>Fig 12.1 — Fermi-Dirac distribution f(ε). T=0 (teal): perfect step at E_F. T>0 (gold dashed): smoothed over ~4k_BT. Only electrons within this smeared region (~k_BT/E_F fraction of all) are thermally active.</figcaption>
+</div>
+</div>
+</div>
+
+<!-- L13 -->
+<div class="lcard" id="L13">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L13</span>
+  <span class="ltitle">Electronic Specific Heat — Derivation of C_ve = γT</span>
+  <span class="lweek">Week 3</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Qualitative Argument</h4>
+<p>In Drude: all N electrons absorb heat → C = (3/2)Nk_B. In Sommerfeld: only electrons within ~k_BT of E_F can be excited (need empty state above). Fraction active ≈ k_BT/E_F. Energy absorbed ≈ (fraction) × N × k_BT → U_thermal ∝ (k_BT/E_F)×Nk_BT = Nk_B²T²/E_F → C_ve ∝ T.</p>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: C_ve = γT (Sommerfeld)</div>
+  <div class="step"><b>From Sommerfeld expansion:</b> U(T) = U₀ + (π²/6)D(E_F)(k_BT)² + O(T⁴)</div>
+  <div class="step"><b>Using D(E_F) = 3n/(2E_F):</b> U(T) = U₀ + (π²/4)·n·k_B²T²/E_F</div>
+  <div class="step"><b>Differentiate:</b> C_ve = dU/dT = (π²/2)·n·k_B²T/E_F = (π²/2)·nk_B·(k_BT/E_F)</div>
+  <div class="rbox">C_ve = γT &nbsp;&nbsp; γ = π²nk_B²/(2E_F) = π²k_B²D(E_F)/3 &nbsp; (Sommerfeld constant)</div>
+</div>
+<div class="key">
+  <div class="klbl">Ratio of Sommerfeld to Drude specific heat</div>
+  <span class="keq">C_ve(Sommerfeld) / C_ve(Drude) = (π²/3)·(k_BT/E_F) ≈ 0.01 at 300K</span>
+  <p>~100× smaller than Drude — matches experiment perfectly! The factor k_BT/E_F is the fraction of active electrons.</p>
+</div>
+</div>
+</div>
+
+<!-- L14 -->
+<div class="lcard" id="L14">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L14</span>
+  <span class="ltitle">Experimental Measurement of γ — Heavy Fermions &amp; Effective Mass</span>
+  <span class="lweek">Week 3</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Low-T Total Specific Heat</h4>
+<div class="fbox">
+  <div class="flbl">Low-T total specific heat (electrons + phonons)</div>
+  <span class="feq">C_total = γT + AT³</span>
+  <span class="feq">Divide by T: C/T = γ + AT²</span>
+  <span class="feq">Plot C/T vs T² → straight line: intercept = γ (electronic), slope = A (Debye)</span>
+</div>
+<div class="pq">
+"From the slope you can measure γ which is proportional to the mass. You can also use the expression which is already derived for the specific heat and calculate γ, put in the mass of the electron, and you can theoretically also calculate the value of the Sommerfeld's constant. The ratio of γ_observed to γ_theory is nothing else but the actual mass of the electron in the solid to the mass of the free electron. For most simple metals it is of the order of 1. But there are materials — heavy fermion materials — in which the actual mass of the electron can be <b>1000 times</b> the mass of the electron."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 23</span>
+</div>
+<table>
+  <tr><th>Metal</th><th>γ_theory (mJ/mol·K²)</th><th>γ_exp (mJ/mol·K²)</th><th>m*/m_e</th></tr>
+  <tr><td>Li</td><td>0.749</td><td>1.63</td><td>2.18</td></tr>
+  <tr><td>Na</td><td>1.094</td><td>1.38</td><td>1.26</td></tr>
+  <tr><td>K</td><td>1.668</td><td>2.08</td><td>1.25</td></tr>
+  <tr><td>Cu</td><td>0.505</td><td>0.695</td><td>1.38</td></tr>
+  <tr><td>Al</td><td>0.912</td><td>1.35</td><td>1.48</td></tr>
+  <tr><td>UPt₃ (heavy fermion)</td><td>~0.5</td><td>~420</td><td>~800!</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L15–L17 -->
+<div class="lcard" id="L15">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L15–L17</span>
+  <span class="ltitle">Thermal Conductivity of Metals — Drude vs Sommerfeld</span>
+  <span class="lweek">Week 3</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="pq">
+"In Drude's theory the velocity was about 10⁵ m/s. But in Sommerfeld the velocity is the Fermi velocity — which is 10 times the Drude velocity. The specific heat from Sommerfeld is about 10⁻² times the Drude specific heat. These two factors cancel out — the kappa from Sommerfeld is approximately the same as from Drude! With a strange combination of higher velocity but lower specific heat, they completely cancel out at room temperature."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 23</span>
+</div>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Thermal Conductivity κ (Sommerfeld)</div>
+  <div class="step"><b>General kinetic theory:</b> κ = (1/3)·v_F²·τ·C_ve_vol</div>
+  <div class="step">v_F = Fermi velocity (T-independent), C_ve_vol = γT (volume-specific heat)</div>
+  <div class="step"><b>Also:</b> σ = ne²τ/m, v_F² = 2E_F/m, C_ve_vol = (π²/3)D(E_F)k_B²T</div>
+  <div class="step"><b>Ratio κ/σ:</b> (1/3)v_F²τ·C_ve_vol / (ne²τ/m) = mv_F²C_ve_vol/(3ne²) = 2E_F·C_ve_vol/(3ne²)</div>
+  <div class="step">Substitute C_ve_vol = (π²/3)·(3n/2E_F)·k_B²T = π²nk_B²T/(2E_F):</div>
+  <div class="rbox">κ/(σT) = π²k_B²/(3e²) = L₀ = 2.44×10⁻⁸ W·Ω·K⁻² ← Lorenz number ■</div>
+</div>
+<div class="key">
+  <div class="klbl">Wiedemann–Franz Law</div>
+  <span class="keq">κ = L₀·σ·T &nbsp;&nbsp; L₀ = π²k_B²/(3e²) = 2.44×10⁻⁸ W·Ω·K⁻²</span>
+  <p>n and τ cancel → universal constant. Sommerfeld gives correct L₀. Drude gives L₀ = (3/2)(k_B/e)² ≈ 1.24×10⁻⁸ — wrong by factor ~2.</p>
+</div>
+<div class="pq">
+"The Wiedemann-Franz law is valid even within Sommerfeld's theory. But at <b>intermediate temperatures</b> the Wiedemann-Franz law is not validated — because there the ionic contribution (AT³ phonon term) to specific heat contributes and changes the balance between κ and σ."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 23</span>
+</div>
+</div>
+</div>
+
+<!-- L18 -->
+<div class="lcard" id="L18">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L18</span>
+  <span class="ltitle">Pauli Spin Paramagnetism &amp; Limitations of Sommerfeld Model</span>
+  <span class="lweek">Week 3</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Pauli Paramagnetism</h4>
+<p>In a magnetic field B, spin-up and spin-down electron sub-bands shift by ±μ_BB. More spin-down states fill → net magnetisation. Only electrons near E_F participate.</p>
+<div class="fbox">
+  <div class="flbl">Pauli spin susceptibility</div>
+  <span class="feq">χ_P = μ₀μ_B²·D(E_F) = 3nμ₀μ_B²/(2E_F) = nμ₀μ_B²/(k_BT_F)</span>
+  <span class="feq">Temperature-INDEPENDENT! &nbsp; (contrast with Curie law χ ∝ 1/T)</span>
+</div>
+<div class="note">
+  <strong>Key Experimental Signature</strong>
+  Classical Curie paramagnetism gives χ ∝ 1/T. Pauli paramagnetism is T-independent. Observation of T-independent χ in alkali metals (Li, Na, K) was one of the first direct experimental confirmations of Fermi-Dirac statistics in metals.
+</div>
+<h4>Limitations of Sommerfeld Model</h4>
+<div class="pq">
+"We have not considered that the electron is moving in a lattice of ions — we have not considered the interaction of the electrons with the ions inside the solid. The electron is moving through a periodic potential which is created by these ions, but we have neglected all of that. If you include all of that then the effect of these interactions actually acts like a drag on the electrons and it increases its <b>effective mass</b>."
+<span class="who">— Prof. Satyajit Banerjee, Lecture 23</span>
+</div>
+<ul>
+  <li>Neglects periodic potential of ion cores → cannot explain band gaps, metals vs. insulators</li>
+  <li>Neglects electron-phonon interaction → explains m* enhancement (heavy fermions)</li>
+  <li>Neglects electron-electron interactions → important in correlated electron systems</li>
+  <li>Cannot explain positive Hall coefficients (needs holes concept)</li>
+</ul>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- UNIT II: CRYSTAL STRUCTURE (L19–L26) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="unit2">
+  <div class="tag">Unit II · Lectures 19–26</div>
+  <h2>Crystal Structure &amp; Symmetry</h2>
+  <div class="weeks">NPTEL Week 4 · Lattice + Basis → Bravais → Miller Indices → Bonding</div>
+</div>
+
+<!-- L19 -->
+<div class="lcard" id="L19">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L19</span>
+  <span class="ltitle">Crystal Structure I — Lattice, Basis, Unit Cell, Wigner-Seitz Cell</span>
+  <span class="lweek">Week 4</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="key">
+  <div class="klbl">Fundamental Identity</div>
+  <span class="keq">Crystal = Lattice + Basis</span>
+  <p>Lattice: mathematical set of points with perfect translational symmetry. Basis: identical atomic group at each point. Lattice captures geometry; basis captures the physical/chemical content.</p>
+</div>
+<h4>Definitions</h4>
+<ul>
+  <li><strong>Bravais lattice:</strong> Set of points R = n₁a + n₂b + n₃c (primitive vectors a,b,c; integers n₁,n₂,n₃). Every point has identical environment.</li>
+  <li><strong>Primitive unit cell:</strong> Minimum-volume cell containing exactly 1 lattice point. Volume = |a·(b×c)|.</li>
+  <li><strong>Conventional unit cell:</strong> Larger cell displaying crystal symmetry (may contain 2, 4, etc. lattice points). More intuitive but not primitive.</li>
+  <li><strong>Wigner–Seitz cell:</strong> Region of space closer to a given lattice point than to any other. Constructed by drawing perpendicular bisector planes between a point and all its neighbours. Has full point-group symmetry of the lattice.</li>
+</ul>
+<div class="diagram">
+<svg viewBox="0 0 530 160" xmlns="http://www.w3.org/2000/svg" width="500">
+  <!-- SC -->
+  <rect x="20" y="30" width="90" height="90" fill="none" stroke="#5ba3d9" stroke-width="1.8"/>
+  <g fill="#5ba3d9" opacity=".75">
+    <circle cx="20" cy="30" r="10"/><circle cx="110" cy="30" r="10"/>
+    <circle cx="20" cy="120" r="10"/><circle cx="110" cy="120" r="10"/>
+  </g>
+  <text x="65" y="155" fill="#7a7e8e" font-size="10" font-family="Inter" text-anchor="middle">SC: 1 atom/cell</text>
+  <text x="65" y="20" fill="#5ba3d9" font-size="10" font-family="Inter" text-anchor="middle">Simple Cubic</text>
+
+  <!-- BCC -->
+  <rect x="185" y="30" width="90" height="90" fill="none" stroke="#5ba3d9" stroke-width="1.8"/>
+  <g fill="#5ba3d9" opacity=".75">
+    <circle cx="185" cy="30" r="10"/><circle cx="275" cy="30" r="10"/>
+    <circle cx="185" cy="120" r="10"/><circle cx="275" cy="120" r="10"/>
+  </g>
+  <circle cx="230" cy="75" r="12" fill="#c8a84b"/>
+  <text x="230" y="155" fill="#7a7e8e" font-size="10" font-family="Inter" text-anchor="middle">BCC: 2 atoms/cell</text>
+  <text x="230" y="20" fill="#5ba3d9" font-size="10" font-family="Inter" text-anchor="middle">Body-Centred Cubic</text>
+
+  <!-- FCC -->
+  <rect x="355" y="30" width="90" height="90" fill="none" stroke="#5ba3d9" stroke-width="1.8"/>
+  <g fill="#5ba3d9" opacity=".75">
+    <circle cx="355" cy="30" r="10"/><circle cx="445" cy="30" r="10"/>
+    <circle cx="355" cy="120" r="10"/><circle cx="445" cy="120" r="10"/>
+  </g>
+  <g fill="#4fc3a1">
+    <circle cx="400" cy="30" r="9"/><circle cx="400" cy="120" r="9"/>
+    <circle cx="355" cy="75" r="9"/><circle cx="445" cy="75" r="9"/>
+  </g>
+  <text x="400" y="155" fill="#7a7e8e" font-size="10" font-family="Inter" text-anchor="middle">FCC: 4 atoms/cell</text>
+  <text x="400" y="20" fill="#5ba3d9" font-size="10" font-family="Inter" text-anchor="middle">Face-Centred Cubic</text>
+</svg>
+<figcaption>Fig 19.1 — Three cubic Bravais lattices. SC: corner atoms only. BCC: corners + body-centre (gold). FCC: corners + face-centres (teal). Fractional counts: SC = 8×(1/8)=1, BCC = 8×(1/8)+1=2, FCC = 8×(1/8)+6×(1/2)=4.</figcaption>
+</div>
+</div>
+</div>
+
+<!-- L20 -->
+<div class="lcard" id="L20">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L20</span>
+  <span class="ltitle">Crystal Structure II — Packing Fractions, Close-Packing, Common Structures</span>
+  <span class="lweek">Week 4</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Packing Fraction Calculations</div>
+  <div class="step"><b>SC:</b> Atoms touch along edge: 2r = a → r = a/2. PF = 1·(4π/3)(a/2)³/a³ = π/6 ≈ 52%</div>
+  <div class="step"><b>BCC:</b> Touch along body diagonal: 4r = a√3 → r = a√3/4. PF = 2·(4π/3)(a√3/4)³/a³ = π√3/8 ≈ 68%</div>
+  <div class="step"><b>FCC:</b> Touch along face diagonal: 4r = a√2 → r = a√2/4. PF = 4·(4π/3)(a√2/4)³/a³ = π/(3√2) ≈ 74%</div>
+  <div class="rbox">FCC and HCP both achieve 74.05% — the theoretical maximum for identical spheres (Kepler conjecture, proved by Hales 1998)</div>
+</div>
+<table>
+  <tr><th>Structure</th><th>n/cell</th><th>CN</th><th>Contact</th><th>r(a)</th><th>PF</th><th>Examples</th></tr>
+  <tr><td>SC</td><td>1</td><td>6</td><td>Edge: 2r=a</td><td>a/2</td><td>52%</td><td>Po (only!)</td></tr>
+  <tr><td>BCC</td><td>2</td><td>8</td><td>Body diag: 4r=a√3</td><td>a√3/4</td><td>68%</td><td>Na,K,W,Fe,Cr,Mo</td></tr>
+  <tr><td>FCC</td><td>4</td><td>12</td><td>Face diag: 4r=a√2</td><td>a√2/4</td><td>74%</td><td>Cu,Al,Ni,Au,Ag,Pb</td></tr>
+  <tr><td>HCP</td><td>6</td><td>12</td><td>Basal: 2r=a</td><td>a/2</td><td>74%</td><td>Mg,Zn,Ti,Co,Cd</td></tr>
+  <tr><td>Diamond</td><td>8</td><td>4</td><td>Tetrahedral: 4r=a√3/2</td><td>a√3/8</td><td>34%</td><td>C,Si,Ge</td></tr>
+  <tr><td>NaCl (B1)</td><td>8</td><td>6 each</td><td>FCC + shifted FCC</td><td>—</td><td>—</td><td>NaCl,KCl,MgO</td></tr>
+</table>
+<h4>FCC vs HCP — Same Packing, Different Stacking</h4>
+<p>Both FCC and HCP stack close-packed hexagonal layers. FCC: ABCABC… stacking (each 3rd layer directly above 1st). HCP: ABABAB… stacking (every other layer above each other). Same density but different symmetry: FCC cubic, HCP hexagonal.</p>
+</div>
+</div>
+
+<!-- L21 -->
+<div class="lcard" id="L21">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L21</span>
+  <span class="ltitle">14 Bravais Lattices &amp; 7 Crystal Systems</span>
+  <span class="lweek">Week 4</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<table>
+  <tr><th>#</th><th>System</th><th>a,b,c</th><th>Angles</th><th>Min. Symmetry</th><th>Bravais Types</th><th>Count</th></tr>
+  <tr><td>1</td><td>Triclinic</td><td>a≠b≠c</td><td>α≠β≠γ≠90°</td><td>1-fold only</td><td>P</td><td>1</td></tr>
+  <tr><td>2</td><td>Monoclinic</td><td>a≠b≠c</td><td>α=γ=90°, β≠90°</td><td>One 2-fold axis</td><td>P, C</td><td>2</td></tr>
+  <tr><td>3</td><td>Orthorhombic</td><td>a≠b≠c</td><td>α=β=γ=90°</td><td>Three 2-fold axes</td><td>P,C,I,F</td><td>4</td></tr>
+  <tr><td>4</td><td>Tetragonal</td><td>a=b≠c</td><td>α=β=γ=90°</td><td>One 4-fold axis</td><td>P, I</td><td>2</td></tr>
+  <tr><td>5</td><td>Rhombohedral</td><td>a=b=c</td><td>α=β=γ≠90°</td><td>One 3-fold axis</td><td>R</td><td>1</td></tr>
+  <tr><td>6</td><td>Hexagonal</td><td>a=b≠c</td><td>α=β=90°, γ=120°</td><td>One 6-fold axis</td><td>P</td><td>1</td></tr>
+  <tr><td>7</td><td>Cubic</td><td>a=b=c</td><td>α=β=γ=90°</td><td>Four 3-fold axes</td><td>P, I, F</td><td>3</td></tr>
+  <tr><td colspan="6" style="text-align:right"><b>Total:</b></td><td><b>14</b></td></tr>
+</table>
+<div class="note">
+  <strong>Why exactly 14, not more?</strong>
+  Some naive combinations reduce to already-listed types. Example: base-centred cubic (C centering on top/bottom faces of cube) → the primitive vectors form a tetragonal lattice (a'=b'=a/√2, c'=a, all 90°) → this IS the primitive tetragonal lattice. Adding face-centring or body-centring to a cubic cell sometimes increases symmetry to a different cubic type or reduces to a simpler type.
+</div>
+</div>
+</div>
+
+<!-- L22 -->
+<div class="lcard" id="L22">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L22</span>
+  <span class="ltitle">Crystallographic Restriction Theorem — Only n = 1,2,3,4,6 Allowed</span>
+  <span class="lweek">Week 4</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Proof: Crystallographic Restriction Theorem</div>
+  <div class="step"><b>Setup:</b> 2D lattice with spacing t. Points A and B are adjacent, distance t apart. Rotation by φ = 360°/n is a symmetry.</div>
+  <div class="step"><b>Rotate B about A</b> by φ → new point C. <b>Rotate A about B</b> by −φ → new point D. Both C,D must be lattice points.</div>
+  <div class="step"><b>Distance CD:</b> By geometry (both rotations are by φ from A,B separated by t):</div>
+  <div class="step">CD = t − 2t·cos(π−φ) = t + 2t·cosφ = t(1 + 2cosφ)</div>
+  <div class="step"><b>Lattice constraint:</b> CD must be an integer multiple of t: 1 + 2cosφ = m (integer)</div>
+  <div class="step"><b>Since |cosφ|≤1:</b> −1 ≤ (m−1)/2 ≤ 1 → −1 ≤ m ≤ 3, so m ∈ {−1,0,1,2,3}</div>
+  <div class="rbox">
+    m=−1 → cosφ=−1 → φ=180° → n=2 &nbsp;|&nbsp; m=0 → cosφ=−½ → φ=120° → n=3<br>
+    m=1 → cosφ=0 → φ=90° → n=4 &nbsp;|&nbsp; m=2 → cosφ=½ → φ=60° → n=6 &nbsp;|&nbsp; m=3 → φ=0°, n=1<br>
+    <b>Only n = 1, 2, 3, 4, 6 are compatible with translational periodicity ■</b>
+  </div>
+</div>
+<p><strong>n=5 forbidden:</strong> φ=72°, cos72°≈0.309 → m=1+2×0.309=1.618 — NOT an integer. Pentagons cannot tile a plane. <em>Quasicrystals</em> (Shechtman 1984, Nobel 2011) have 5-fold diffraction patterns because they are aperiodic (quasiperiodic) — they do not contradict this theorem.</p>
+</div>
+</div>
+
+<!-- L23 -->
+<div class="lcard" id="L23">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L23</span>
+  <span class="ltitle">Miller Indices I — Procedure &amp; Important Planes</span>
+  <span class="lweek">Week 4</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Miller Index Procedure</h4>
+<ol>
+  <li>Find where the plane intercepts the three crystallographic axes. Express intercepts in units of lattice parameters: (p·a, q·b, r·c).</li>
+  <li>Take reciprocals: (1/p, 1/q, 1/r).</li>
+  <li>Multiply by LCM to get smallest integers: (h, k, l).</li>
+  <li>Negative intercept → bar over index: (h̄kl). Parallel to axis → intercept ∞ → index 0.</li>
+</ol>
+<div class="note">
+  <strong>Why Reciprocals?</strong>
+  If a plane is parallel to an axis, it never intersects it (intercept = ∞). Taking 1/∞ = 0 is mathematically clean. Also: in orthogonal systems, (hkl) are proportional to components of the unit normal to the plane. The reciprocal lattice vector G_hkl = ha* + kb* + lc* is always normal to the (hkl) planes.
+</div>
+<h4>Examples in Cubic Crystal</h4>
+<table>
+  <tr><th>Intercepts</th><th>Reciprocals</th><th>Miller Index</th><th>Description</th></tr>
+  <tr><td>1,∞,∞</td><td>1,0,0</td><td>(100)</td><td>Cube face (perpendicular to x)</td></tr>
+  <tr><td>1,1,∞</td><td>1,1,0</td><td>(110)</td><td>Face diagonal plane</td></tr>
+  <tr><td>1,1,1</td><td>1,1,1</td><td>(111)</td><td>Body diagonal plane (close-packed in FCC)</td></tr>
+  <tr><td>½,1,∞</td><td>2,1,0</td><td>(210)</td><td>—</td></tr>
+  <tr><td>−1,1,∞</td><td>−1,1,0</td><td>(1̄10)</td><td>Negative intercept on x</td></tr>
+</table>
+<h4>Sets of Equivalent Planes: {hkl}</h4>
+<p>Curly braces denote all planes related by crystal symmetry. In cubic: {100} = {(100),(010),(001),(1̄00),(01̄0),(001̄)} — all 6 cube faces. {110} has 12 members. {111} has 8 members.</p>
+</div>
+</div>
+
+<!-- L24 -->
+<div class="lcard" id="L24">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L24</span>
+  <span class="ltitle">Miller Indices II — Interplanar Spacing d_hkl</span>
+  <span class="lweek">Week 4</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: d_hkl for Cubic Crystal</div>
+  <div class="step"><b>Plane (hkl) passes through</b> points (a/h, 0, 0), (0, a/k, 0), (0, 0, a/l). Plane equation: hx + ky + lz = a</div>
+  <div class="step"><b>Distance from origin (0,0,0) to plane hx+ky+lz=a:</b></div>
+  <div class="step">d = |a| / √(h²+k²+l²)</div>
+  <div class="step"><b>Adjacent parallel planes:</b> hx+ky+lz = 0, a, 2a, 3a, ... Spacing between adjacent planes:</div>
+  <div class="rbox">d_hkl = a/√(h²+k²+l²) &nbsp; (cubic)</div>
+</div>
+<div class="fbox">
+  <div class="flbl">d_hkl for other systems</div>
+  <span class="feq">Tetragonal: 1/d² = (h²+k²)/a² + l²/c²</span>
+  <span class="feq">Orthorhombic: 1/d² = h²/a² + k²/b² + l²/c²</span>
+  <span class="feq">Hexagonal: 1/d² = (4/3)(h²+hk+k²)/a² + l²/c²</span>
+</div>
+<table>
+  <tr><th>Plane (hkl)</th><th>d_hkl (cubic)</th><th>Note</th></tr>
+  <tr><td>(100)</td><td>a</td><td>Largest spacing (most widely spaced)</td></tr>
+  <tr><td>(110)</td><td>a/√2 = 0.707a</td><td>—</td></tr>
+  <tr><td>(111)</td><td>a/√3 = 0.577a</td><td>Close-packed in FCC</td></tr>
+  <tr><td>(200)</td><td>a/2</td><td>Absent in BCC (h+k+l=2=even: PRESENT)</td></tr>
+  <tr><td>(211)</td><td>a/√6 = 0.408a</td><td>—</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L25 -->
+<div class="lcard" id="L25">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L25</span>
+  <span class="ltitle">Crystal Directions [uvw], Angle Between Planes, Zone Axes</span>
+  <span class="lweek">Week 4</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Direction Indices [uvw]</h4>
+<p>Direction from origin to lattice point at u·a + v·b + w·c. Express (u,v,w) as smallest integers in square brackets: [uvw]. Negative → bar. Families of equivalent directions: ⟨uvw⟩.</p>
+<div class="fbox">
+  <div class="flbl">Angle between planes (hkl) and (h'k'l') in cubic</div>
+  <span class="feq">cosφ = (hh' + kk' + ll') / [√(h²+k²+l²)·√(h'²+k'²+l'²)]</span>
+  <span class="feq">Angle between directions [uvw] and [u'v'w']: same formula with u,v,w replacing h,k,l</span>
+</div>
+<h4>Important Directions in Cubic</h4>
+<table>
+  <tr><th>Direction</th><th>Equivalent set ⟨⟩</th><th>Physical Role</th></tr>
+  <tr><td>[100]</td><td>⟨100⟩: 6 members</td><td>Cube edges; easy magnetisation axis in Fe</td></tr>
+  <tr><td>[110]</td><td>⟨110⟩: 12 members</td><td>Face diagonals; BCC close-packed direction</td></tr>
+  <tr><td>[111]</td><td>⟨111⟩: 8 members</td><td>Body diagonals; easy axis in Ni; FCC close-pack</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L26 -->
+<div class="lcard" id="L26">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L26</span>
+  <span class="ltitle">Ionic Bonding &amp; Madelung Constant</span>
+  <span class="lweek">Week 4</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Born-Landé Lattice Energy</h4>
+<div class="fbox">
+  <div class="flbl">Madelung sum for NaCl structure</div>
+  <span class="feq">A_M = 6/1 − 12/√2 + 8/√3 − 6/2 + 24/√5 − ... = 1.7476</span>
+  <span class="feq">Born-Landé energy: U = −N·A_M·e²/(4πε₀r₀)·(1 − 1/n) &nbsp; (n≈8–12)</span>
+</div>
+<table>
+  <tr><th>Structure</th><th>Madelung Constant A_M</th></tr>
+  <tr><td>NaCl (rock salt)</td><td>1.7476</td></tr>
+  <tr><td>CsCl (B2)</td><td>1.7627</td></tr>
+  <tr><td>Zincblende (ZnS, B3)</td><td>1.6381</td></tr>
+  <tr><td>1D ionic chain (toy)</td><td>2 ln 2 ≈ 1.386</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- UNIT III: DIFFRACTION (L27–L32) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="unit3">
+  <div class="tag">Unit III · Lectures 27–37</div>
+  <h2>X-Ray Diffraction, Reciprocal Lattice &amp; Brillouin Zones</h2>
+  <div class="weeks">NPTEL Week 5</div>
+</div>
+
+<!-- L27 -->
+<div class="lcard" id="L27">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L27</span>
+  <span class="ltitle">X-Ray Diffraction &amp; Bragg's Law — Full Derivation</span>
+  <span class="lweek">Week 5</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Why X-Rays?</h4>
+<p>Interplanar spacings d ~ 1–3 Å. For Bragg diffraction: λ ≤ 2d → λ ≲ 3 Å. X-rays (0.5–2.5 Å, energies 5–25 keV) → ideal. Visible light (λ~5000 Å): λ ≫ 2d → no Bragg condition can be satisfied → crystal transparent to visible light.</p>
+<div class="diagram">
+<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg" width="460">
+  <defs>
+    <marker id="ya" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L0,6L6,3Z" fill="#c8a84b"/></marker>
+    <marker id="yb" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L0,6L6,3Z" fill="#d46b6b"/></marker>
+  </defs>
+  <!-- Crystal planes -->
+  <line x1="20" y1="90" x2="480" y2="90" stroke="#5ba3d9" stroke-width="2"/>
+  <line x1="20" y1="140" x2="480" y2="140" stroke="#5ba3d9" stroke-width="2"/>
+  <!-- d spacing -->
+  <line x1="485" y1="90" x2="485" y2="140" stroke="#5ba3d9" stroke-width="1.2"/>
+  <text x="490" y="118" fill="#5ba3d9" font-size="10" font-family="JetBrains Mono">d</text>
+  <!-- Atoms on planes -->
+  <g fill="#5ba3d9" opacity=".6">
+    <circle cx="80" cy="90" r="6"/><circle cx="180" cy="90" r="6"/><circle cx="280" cy="90" r="6"/><circle cx="380" cy="90" r="6"/>
+    <circle cx="80" cy="140" r="6"/><circle cx="180" cy="140" r="6"/><circle cx="280" cy="140" r="6"/><circle cx="380" cy="140" r="6"/>
+  </g>
+  <!-- Incoming rays -->
+  <line x1="60" y1="30" x2="180" y2="90" stroke="#c8a84b" stroke-width="2" marker-end="url(#ya)"/>
+  <line x1="110" y1="30" x2="238" y2="90" stroke="#c8a84b" stroke-width="1.5" marker-end="url(#ya)"/>
+  <!-- Reflected rays -->
+  <line x1="180" y1="90" x2="295" y2="30" stroke="#c8a84b" stroke-width="2" marker-end="url(#ya)"/>
+  <line x1="238" y1="90" x2="360" y2="30" stroke="#c8a84b" stroke-width="1.5" marker-end="url(#ya)"/>
+  <!-- Ray 2 penetrating to plane 2 -->
+  <line x1="140" y1="30" x2="230" y2="140" stroke="#d46b6b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#yb)"/>
+  <line x1="230" y1="140" x2="360" y2="30" stroke="#d46b6b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#yb)"/>
+  <!-- Path B, C, D labels -->
+  <text x="178" y="128" fill="#d46b6b" font-size="10" font-family="Inter">B</text>
+  <text x="228" y="157" fill="#d46b6b" font-size="10" font-family="Inter">C</text>
+  <text x="285" y="128" fill="#d46b6b" font-size="10" font-family="Inter">D</text>
+  <!-- Angle θ -->
+  <path d="M180,90 A22,22 0 0,1 163,75" stroke="#4fc3a1" stroke-width="1.3" fill="none"/>
+  <text x="150" y="76" fill="#4fc3a1" font-size="11" font-family="JetBrains Mono">θ</text>
+  <!-- Path diff label -->
+  <text x="230" y="180" fill="#d46b6b" font-size="10" font-family="Inter" text-anchor="middle">extra path = BC + CD = 2d sinθ</text>
+  <!-- Labels -->
+  <text x="48" y="25" fill="#c8a84b" font-size="10" font-family="Inter">Ray 1</text>
+  <text x="115" y="25" fill="#d46b6b" font-size="10" font-family="Inter">Ray 2</text>
+</svg>
+<figcaption>Fig 27.1 — Bragg reflection: Ray 1 reflects from plane 1 (gold). Ray 2 (red) penetrates to plane 2 and reflects, travelling extra path BC+CD = 2d sinθ. Constructive interference when this equals nλ.</figcaption>
+</div>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Bragg's Law</div>
+  <div class="step"><b>Path difference</b> (Ray 2 vs Ray 1): PD = BC + CD</div>
+  <div class="step"><b>Geometry:</b> BC = d sinθ (vertical drop from plane 1 to plane 2, projected along ray). CD = d sinθ (same by symmetry of specular reflection)</div>
+  <div class="step">PD = 2d sinθ</div>
+  <div class="step"><b>Constructive interference:</b> PD = nλ (n = 1,2,3,...)</div>
+  <div class="rbox">2d_hkl · sinθ = nλ &nbsp;&nbsp; ← Bragg's Law (1913, Nobel Prize 1915)</div>
+</div>
+<div class="warn">
+  <strong>What Bragg's Law Does NOT Tell You</strong>
+  Bragg's law gives only the ANGLES at which peaks occur — not whether a peak exists or how intense it is. For that, you need the structure factor: F_hkl = Σ_j f_j exp[2πi(hx_j+ky_j+lz_j)]. If F_hkl = 0 (systematic absence), no peak appears even if Bragg's angle is satisfied!
+</div>
+</div>
+</div>
+
+<!-- L28 -->
+<div class="lcard" id="L28">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L28</span>
+  <span class="ltitle">Laue Equations &amp; Structure Factor</span>
+  <span class="lweek">Week 5</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Laue Conditions</h4>
+<div class="fbox">
+  <div class="flbl">Laue conditions (three simultaneous equations)</div>
+  <span class="feq">a·(ŝ − ŝ₀) = hλ &nbsp; b·(ŝ − ŝ₀) = kλ &nbsp; c·(ŝ − ŝ₀) = lλ</span>
+  <span class="feq">ŝ₀ = incident direction, ŝ = scattered direction. All three must hold simultaneously.</span>
+  <span class="feq">Momentum form: Δk = k' − k = G_hkl (scattering vector = reciprocal lattice vector)</span>
+</div>
+<h4>Structure Factor &amp; Systematic Absences</h4>
+<div class="fbox">
+  <div class="flbl">Structure factor</div>
+  <span class="feq">F_hkl = Σ_j f_j · exp[2πi(hx_j + ky_j + lz_j)]</span>
+  <span class="feq">Intensity ∝ |F_hkl|²  (f_j = atomic scattering factor of atom j at fractional coord (x_j,y_j,z_j))</span>
+</div>
+<table>
+  <tr><th>Structure</th><th>Basis atoms</th><th>F_hkl</th><th>Absent when</th></tr>
+  <tr><td>SC</td><td>(0,0,0)</td><td>f (always)</td><td>Never absent</td></tr>
+  <tr><td>BCC</td><td>(0,0,0) + (½,½,½)</td><td>f[1 + e^{πi(h+k+l)}]</td><td>h+k+l = odd</td></tr>
+  <tr><td>FCC</td><td>(0,0,0)+(½,½,0)+(½,0,½)+(0,½,½)</td><td>f·4 or 0</td><td>h,k,l mixed odd+even</td></tr>
+  <tr><td>Diamond</td><td>FCC + (¼,¼,¼) shift</td><td>FCC × [1 + e^{iπ(h+k+l)/2}]</td><td>FCC rules + extra</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L29–L32 -->
+<div class="lcard" id="L30">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L29–L32</span>
+  <span class="ltitle">Reciprocal Lattice, Brillouin Zones &amp; Ewald Sphere</span>
+  <span class="lweek">Week 5</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="fbox">
+  <div class="flbl">Reciprocal lattice primitive vectors</div>
+  <span class="feq">a* = 2π(b×c)/(a·b×c) &nbsp; b* = 2π(c×a)/(a·b×c) &nbsp; c* = 2π(a×b)/(a·b×c)</span>
+  <span class="feq">Key: a·a* = 2π, a·b* = 0 (and cyclic permutations)</span>
+  <span class="feq">RL vector: G_hkl = ha*+kb*+lc*, |G_hkl| = 2π/d_hkl</span>
+  <span class="feq">Bragg in RL form: k' − k = G_hkl (elastic: |k'|=|k|=2π/λ)</span>
+</div>
+<div class="note">
+  <strong>FCC–BCC Duality</strong>
+  Real FCC ↔ Reciprocal BCC. Real BCC ↔ Reciprocal FCC. Real SC ↔ Reciprocal SC (same). The first Brillouin zone (Wigner-Seitz cell of RL) of FCC is a truncated octahedron; of BCC is a rhombic dodecahedron.
+</div>
+<div class="diagram">
+<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" width="360">
+  <defs><marker id="za" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L0,6L6,3Z" fill="#4fc3a1"/></marker>
+  <marker id="zb" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0L0,6L6,3Z" fill="#c8a84b"/></marker></defs>
+  <!-- Ewald sphere -->
+  <circle cx="200" cy="145" r="115" fill="rgba(91,163,217,.05)" stroke="#5ba3d9" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <!-- RL origin O -->
+  <circle cx="200" cy="260" r="5" fill="#c8a84b"/>
+  <text x="208" y="275" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">O (RL origin)</text>
+  <!-- Incident beam k -->
+  <line x1="200" y1="30" x2="200" y2="260" stroke="#4fc3a1" stroke-width="2" marker-end="url(#za)"/>
+  <text x="205" y="50" fill="#4fc3a1" font-size="9" font-family="Inter">incident k</text>
+  <!-- Crystal C at sphere centre -->
+  <circle cx="200" cy="145" r="7" fill="#d46b6b"/>
+  <text x="210" y="148" fill="#d46b6b" font-size="9" font-family="Inter">C (crystal)</text>
+  <!-- RL point P on sphere -->
+  <circle cx="295" cy="78" r="6" fill="#c8a84b"/>
+  <text x="302" y="75" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">P (hkl)</text>
+  <!-- Diffracted k' -->
+  <line x1="200" y1="145" x2="295" y2="78" stroke="#c8a84b" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#zb)"/>
+  <text x="245" y="100" fill="#c8a84b" font-size="9" font-family="Inter">diffracted k'</text>
+  <!-- G from O to P -->
+  <line x1="200" y1="260" x2="295" y2="78" stroke="#9b7fd4" stroke-width="1.5"/>
+  <text x="258" y="188" fill="#9b7fd4" font-size="9" font-family="JetBrains Mono">G_hkl</text>
+  <!-- Radius 1/λ label -->
+  <line x1="200" y1="145" x2="200" y2="260" stroke="#7a7e8e" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="160" y="210" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">radius = 1/λ</text>
+</svg>
+<figcaption>Fig 30.1 — Ewald sphere. Sphere of radius 1/λ centred at crystal C. RL origin O on sphere surface. Diffraction from (hkl) when RL point P lies on sphere surface → |OP|=|G_hkl|=1/d_hkl, satisfying Bragg's law.</figcaption>
+</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- UNIT IV: PHONONS (L38–L46) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="unit4">
+  <div class="tag">Unit IV · Lectures 38–46</div>
+  <h2>Lattice Vibrations &amp; Phonons</h2>
+  <div class="weeks">NPTEL Weeks 6–7 · 1D Chains → 3D → Quantization → Crystal Momentum</div>
+</div>
+
+<!-- L38 -->
+<div class="lcard" id="L38">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L38–L39</span>
+  <span class="ltitle">1D Monatomic Chain — EOM, Trial Wave &amp; Full Dispersion Derivation</span>
+  <span class="lweek">Week 6</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="diagram">
+<svg viewBox="0 0 520 100" xmlns="http://www.w3.org/2000/svg" width="480">
+  <defs><marker id="ma" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0L0,5L5,2.5Z" fill="#c8a84b"/></marker></defs>
+  <g fill="#5ba3d9"><circle cx="60" cy="50" r="14"/><circle cx="170" cy="50" r="14"/><circle cx="280" cy="50" r="14"/><circle cx="390" cy="50" r="14"/><circle cx="500" cy="50" r="14"/></g>
+  <g fill="white" font-size="9" text-anchor="middle" font-family="JetBrains Mono">
+    <text x="60" y="54">n-1</text><text x="170" y="54">n</text><text x="280" y="54">n+1</text><text x="390" y="54">n+2</text>
+  </g>
+  <!-- Springs -->
+  <polyline points="74,50 90,35 106,65 122,35 138,65 154,50" stroke="#c8a84b" stroke-width="1.8" fill="none"/>
+  <polyline points="184,50 200,35 216,65 232,35 248,65 264,50" stroke="#c8a84b" stroke-width="1.8" fill="none"/>
+  <polyline points="294,50 310,35 326,65 342,35 358,65 374,50" stroke="#c8a84b" stroke-width="1.8" fill="none"/>
+  <polyline points="404,50 420,35 436,65 452,35 468,65 484,50" stroke="#c8a84b" stroke-width="1.8" fill="none"/>
+  <text x="115" y="20" fill="#c8a84b" font-size="9" font-family="JetBrains Mono" text-anchor="middle">K</text>
+  <text x="0" y="53" fill="#5ba3d9" font-size="9" font-family="JetBrains Mono">M</text>
+  <line x1="60" y1="82" x2="170" y2="82" stroke="#7a7e8e" stroke-width="1"/>
+  <text x="115" y="95" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono" text-anchor="middle">← a →</text>
+</svg>
+<figcaption>Fig 38.1 — 1D monatomic chain: identical atoms mass M, spring constant K, lattice spacing a. u_n = displacement of nth atom from equilibrium.</figcaption>
+</div>
+<div class="deriv">
+  <div class="dtitle">▸ Full Derivation: ω(k) for 1D Monatomic Chain</div>
+  <div class="step"><b>Step 1 — EOM for atom n</b> (nearest-neighbour springs only):</div>
+  <div class="step">M·ü_n = K(u_{n+1} − u_n) + K(u_{n-1} − u_n) = K(u_{n+1} + u_{n-1} − 2u_n)</div>
+  <div class="step"><b>Step 2 — Trial travelling wave:</b> u_n(t) = A·exp[i(nka − ωt)]</div>
+  <div class="step"><b>Step 3 — Substitute:</b> LHS = −Mω²·A·e^{i(nka−ωt)}</div>
+  <div class="step">RHS = K·A·e^{i(nka−ωt)}·[e^{ika} + e^{-ika} − 2] = KA·e^{i(nka−ωt)}·2(cos ka − 1)</div>
+  <div class="step"><b>Step 4 — Cancel A·e^{i(nka−ωt)}:</b> −Mω² = 2K(cos ka − 1) = −4K sin²(ka/2)</div>
+  <div class="step"><b>Step 5 — Identity:</b> 1 − cos(x) = 2sin²(x/2): Mω² = 4K sin²(ka/2)</div>
+  <div class="rbox">ω(k) = 2√(K/M) · |sin(ka/2)|  ← Monatomic chain dispersion relation</div>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" width="420">
+  <line x1="40" y1="180" x2="400" y2="180" stroke="#2c3347" stroke-width="1.5"/>
+  <line x1="220" y1="195" x2="220" y2="15" stroke="#2c3347" stroke-width="1.5"/>
+  <path d="M40,180 Q130,20 220,180 Q310,20 400,180" stroke="#4fc3a1" stroke-width="2.5" fill="rgba(79,195,161,.08)"/>
+  <!-- zone boundary markers -->
+  <line x1="40" y1="180" x2="40" y2="18" stroke="#c8a84b" stroke-width="1" stroke-dasharray="4,3" opacity=".7"/>
+  <line x1="400" y1="180" x2="400" y2="18" stroke="#c8a84b" stroke-width="1" stroke-dasharray="4,3" opacity=".7"/>
+  <line x1="40" y1="18" x2="400" y2="18" stroke="#d46b6b" stroke-width="1" stroke-dasharray="3,3" opacity=".5"/>
+  <!-- linear region tangent -->
+  <line x1="220" y1="180" x2="290" y2="70" stroke="#c8a84b" stroke-width="1.5" stroke-dasharray="5,3" opacity=".7"/>
+  <text x="403" y="183" fill="#7a7e8e" font-size="11" font-family="JetBrains Mono">k</text>
+  <text x="224" y="12" fill="#7a7e8e" font-size="11" font-family="JetBrains Mono">ω</text>
+  <text x="28" y="196" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">−π/a</text>
+  <text x="380" y="196" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">π/a</text>
+  <text x="210" y="196" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">0</text>
+  <text x="405" y="22" fill="#d46b6b" font-size="9" font-family="JetBrains Mono">ω_max=2√(K/M)</text>
+  <text x="265" y="128" fill="#c8a84b" font-size="9" font-family="Inter">ω≈v_s·k (linear)</text>
+  <text x="70" y="172" fill="#4fc3a1" font-size="9" font-family="JetBrains Mono">v_g=0 (BZ boundary)</text>
+  <text x="160" y="210" fill="#c8a84b" font-size="9" font-family="Inter" text-anchor="middle">←── First Brillouin Zone ──→</text>
+</svg>
+<figcaption>Fig 38.2 — Monatomic chain dispersion. Linear at k→0 (sound), flattens at BZ boundary k=±π/a (group velocity=0, standing wave). Maximum ω = 2√(K/M). All distinct modes in first BZ only.</figcaption>
+</div>
+<h4>Key Properties</h4>
+<table>
+  <tr><th>Feature</th><th>Result</th><th>Physical Meaning</th></tr>
+  <tr><td>k→0 (long wave)</td><td>ω ≈ v_s·k, v_s = a√(K/M)</td><td>Linear = acoustic sound wave</td></tr>
+  <tr><td>k = π/a (BZ boundary)</td><td>ω_max = 2√(K/M), v_g = 0</td><td>Standing wave, Bragg reflection</td></tr>
+  <tr><td>Above ω_max</td><td>No real k solution</td><td>Low-pass filter; evanescent waves only</td></tr>
+  <tr><td>Phase velocity</td><td>v_ph = ω/k = v_s·sinc(ka/2)</td><td>Frequency-dependent (dispersive)</td></tr>
+  <tr><td>Group velocity</td><td>v_g = dω/dk = v_s cos(ka/2)</td><td>Energy transport speed; 0 at zone boundary</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L40 -->
+<div class="lcard" id="L40">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L40–L41</span>
+  <span class="ltitle">1D Diatomic Chain — Acoustic &amp; Optical Branches Full Derivation</span>
+  <span class="lweek">Week 6</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<p>Two different atoms (masses M &gt; m) alternating in the chain; spring constant K; lattice constant a (distance between like atoms). Two atoms per primitive cell → two branches.</p>
+<div class="deriv">
+  <div class="dtitle">▸ Full Derivation: Diatomic Chain Dispersion</div>
+  <div class="step"><b>EOM for even-indexed (M) atoms:</b> M·ü_{2n} = K(u_{2n+1} + u_{2n-1} − 2u_{2n})</div>
+  <div class="step"><b>EOM for odd-indexed (m) atoms:</b> m·ü_{2n-1} = K(u_{2n} + u_{2n-2} − 2u_{2n-1})</div>
+  <div class="step"><b>Trial waves</b> (different amplitudes A,B for the two species):</div>
+  <div class="step">u_{2n} = A·exp[i(2nka − ωt)],  u_{2n-1} = B·exp[i((2n-1)ka − ωt)]</div>
+  <div class="step"><b>Substitute into EOMs and simplify:</b></div>
+  <div class="step">(2K − ω²M)A = 2K cos(ka)·B  ...(1)</div>
+  <div class="step">2K cos(ka)·A = (2K − ω²m)B  ...(2)</div>
+  <div class="step"><b>Non-trivial solution:</b> det of coefficient matrix = 0:</div>
+  <div class="step">(2K − ω²M)(2K − ω²m) − 4K²cos²(ka) = 0</div>
+  <div class="step">ω⁴(Mm) − 2Kω²(M+m) + 4K²sin²(ka) = 0 &nbsp; (quadratic in ω²)</div>
+  <div class="rbox">ω² = K(1/M + 1/m) ± K√[(1/M + 1/m)² − 4sin²(ka)/(Mm)]  (± → optical/acoustic)</div>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 440 230" xmlns="http://www.w3.org/2000/svg" width="420">
+  <line x1="40" y1="195" x2="400" y2="195" stroke="#2c3347" stroke-width="1.5"/>
+  <line x1="220" y1="210" x2="220" y2="15" stroke="#2c3347" stroke-width="1.5"/>
+  <!-- Optical branch (upper) -->
+  <path d="M40,50 Q130,58 220,62 Q310,58 400,50" stroke="#c8a84b" stroke-width="2.5" fill="none"/>
+  <!-- Acoustic branch (lower) -->
+  <path d="M40,195 Q130,175 220,170 Q310,175 400,195" stroke="#4fc3a1" stroke-width="2.5" fill="none"/>
+  <!-- Gap region -->
+  <rect x="40" y="105" width="360" height="52" fill="rgba(212,107,107,.07)"/>
+  <line x1="40" y1="105" x2="400" y2="105" stroke="#d46b6b" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="40" y1="157" x2="400" y2="157" stroke="#d46b6b" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="405" y="53" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">Optical (+)</text>
+  <text x="405" y="172" fill="#4fc3a1" font-size="9" font-family="JetBrains Mono">Acoustic (−)</text>
+  <text x="403" y="108" fill="#d46b6b" font-size="9" font-family="JetBrains Mono">√(2K/m)</text>
+  <text x="403" y="160" fill="#d46b6b" font-size="9" font-family="JetBrains Mono">√(2K/M)</text>
+  <text x="175" y="135" fill="#d46b6b" font-size="10" font-family="Inter">Forbidden gap</text>
+  <text x="403" y="198" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">k</text>
+  <text x="224" y="12" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">ω</text>
+  <text x="30" y="210" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">−π/2a</text>
+  <text x="380" y="210" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">+π/2a</text>
+  <text x="216" y="210" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">0</text>
+</svg>
+<figcaption>Fig 40.1 — Diatomic chain dispersion. Gold: optical branch. Teal: acoustic branch. Red band: forbidden gap √(2K/M) to √(2K/m). BZ now half the size of monatomic (period = 2a).</figcaption>
+</div>
+<h4>Critical Frequencies &amp; Physical Motions</h4>
+<table>
+  <tr><th></th><th>Acoustic (−)</th><th>Optical (+)</th></tr>
+  <tr><td>ω at k=0</td><td>0</td><td>√[2K(1/M+1/m)]</td></tr>
+  <tr><td>ω at BZ edge (k=π/2a)</td><td>√(2K/M)</td><td>√(2K/m)</td></tr>
+  <tr><td>A/B ratio (k→0)</td><td>A/B → 1 (same direction)</td><td>A/B → −m/M (opposite)</td></tr>
+  <tr><td>Physical motion</td><td>Both atoms same dir; CM moves → sound</td><td>Atoms opposite; CM fixed → dipole oscillation</td></tr>
+  <tr><td>Couples to</td><td>Sound, neutrons, ultrasound</td><td>Infrared light (IR absorption in ionic crystals)</td></tr>
+</table>
+<div class="pq">
+"The optical branch — this is called optical because when you have an ionic crystal the two atoms move in opposite directions and since they carry opposite charges you get an oscillating dipole moment which can then interact with light. So this branch is referred to as the optical branch."
+<span class="who">— Prof. Manoj K. Harbola, Lecture 46</span>
+</div>
+<h4>The Phononic Band Gap</h4>
+<p>Between ω = √(2K/M) and √(2K/m) there are NO propagating solutions — this is the <strong>phonon band gap</strong>. Waves in this frequency range decay exponentially. Gap width: Δω = √(2K)(1/√m − 1/√M). As M/m → 1 (monatomic limit), the gap vanishes and the two branches merge into the monatomic result.</p>
+</div>
+</div>
+
+<!-- L42 -->
+<div class="lcard" id="L42">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L42</span>
+  <span class="ltitle">3D Phonons — Polarizations, Acoustic &amp; Optical Branches</span>
+  <span class="lweek">Week 6</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>From 1D to 3D</h4>
+<p>In 3D, for each wavevector <strong>k</strong> there are 3 polarisations: 1 longitudinal (displacement || k) and 2 transverse (displacement ⊥ k). For a crystal with p atoms per unit cell and N unit cells:</p>
+<div class="fbox">
+  <div class="flbl">Total phonon modes in 3D</div>
+  <span class="feq">Total modes = 3pN</span>
+  <span class="feq">Acoustic branches: 3  (1 LA + 2 TA, all have ω→0 as k→0)</span>
+  <span class="feq">Optical branches: 3(p−1)  (only if p&gt;1)</span>
+  <span class="feq">Example: NaCl (p=2): 3 acoustic + 3 optical = 6 branches total</span>
+</div>
+<table>
+  <tr><th>Crystal</th><th>Atoms/cell p</th><th>Acoustic</th><th>Optical</th><th>Total</th></tr>
+  <tr><td>Na (BCC monatomic)</td><td>1</td><td>3 (1LA+2TA)</td><td>0</td><td>3</td></tr>
+  <tr><td>NaCl</td><td>2</td><td>3</td><td>3</td><td>6</td></tr>
+  <tr><td>SiC (zincblende)</td><td>2</td><td>3</td><td>3</td><td>6</td></tr>
+  <tr><td>Perovskite BaTiO₃</td><td>5</td><td>3</td><td>12</td><td>15</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L45 -->
+<div class="lcard" id="L45">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L45</span>
+  <span class="ltitle">Normal Modes &amp; Quantization into Phonons</span>
+  <span class="lweek">Week 7</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="pq">
+"When these atoms are vibrating, it is not an individual atom that is vibrating — the whole lattice, all atoms are vibrating together in a pattern. Pattern is that the motion of different atoms is related by a wave-like relation: u_{n+1}/u_n = e^{ika}. So this whole thing is vibrating with one frequency — something like what you are familiar with from class 12 — a string vibrating in its fundamental mode, or next harmonic. Each part of this string is related by a wave-like relationship. So this is a pattern, and this pattern is known as a <b>normal mode</b>."
+<span class="who">— Prof. Manoj K. Harbola, Lecture 46</span>
+</div>
+<div class="pq">
+"It so happens that the energy is that of a harmonic oscillator — it takes energy in quanta of ℏω. So we will write the energy of a normal mode of frequency ω to be equal to (n + 1/2)ℏω_k. And each of these quanta of energy is known as a <b>phonon</b>. In correspondence with the photon which is the quanta of energy of light, quanta of these vibrations or these waves that are travelling in a crystal is now going to be known as phonon."
+<span class="who">— Prof. Manoj K. Harbola, Lecture 46</span>
+</div>
+<div class="key">
+  <div class="klbl">Phonon Properties</div>
+  <span class="keq">Energy of mode (k,s): E_{k,s} = (n_{k,s} + ½)·ℏω_s(k)</span>
+  <span class="keq">Mean occupation: ⟨n⟩ = 1/(exp(ℏω/k_BT) − 1)  ← Bose-Einstein distribution</span>
+  <span class="keq">Crystal momentum: p = ℏk (quasi-momentum, not true momentum)</span>
+  <p>Phonons are bosons. Their number is NOT conserved — created/absorbed by thermal fluctuations. A thermally vibrating crystal = a gas of phonons.</p>
+</div>
+</div>
+</div>
+
+<!-- L46 -->
+<div class="lcard" id="L46">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L46</span>
+  <span class="ltitle">Phonon Crystal Momentum, N-Processes &amp; Umklapp Processes</span>
+  <span class="lweek">Week 7</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="pq">
+"If I have a lattice and I scatter some particle from it — suppose incoming momentum was p_in, outgoing momentum was p_out — then p_out = p_in + ℏk_phonon. So this k of phonon behaves like it is representing the momentum. However, there is no real momentum in phonon — it is just that it comes out when you really take the interaction of the incoming particle and the lattice into account properly. So all the time this ℏk is given a name and it is known as <b>crystal momentum</b>."
+<span class="who">— Prof. Manoj K. Harbola, Lecture 46</span>
+</div>
+<div class="fbox">
+  <div class="flbl">Phonon scattering conservation laws</div>
+  <span class="feq">Normal (N-process): k₁ + k₂ = k₃  (crystal momenta add directly)</span>
+  <span class="feq">Umklapp (U-process): k₁ + k₂ = k₃ + G  (G = reciprocal lattice vector)</span>
+  <span class="feq">U-processes transfer momentum to lattice → thermal resistance at high T</span>
+</div>
+<div class="note">
+  <strong>Physical Scales</strong>
+  k ~ π/a ~ 10¹⁰ m⁻¹ → ℏk ~ 10⁻²⁴ kg·m/s (crystal momentum). ω ~ v_s·π/a ~ 10³×10¹⁰ ~ 10¹³ rad/s → ℏω ~ 10⁻²¹ J ~ 0–60 meV (phonon energy). Compare: k_BT at 300K = 26 meV → many acoustic phonons thermally populated.
+</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- UNIT V: SPECIFIC HEAT (L47–L50) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="unit5">
+  <div class="tag">Unit V · Lectures 47–54</div>
+  <h2>Specific Heat of Solids — Einstein &amp; Debye Models</h2>
+  <div class="weeks">NPTEL Week 8 · Classical → Einstein → Debye T³ Law</div>
+</div>
+
+<!-- L47 -->
+<div class="lcard" id="L47">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L47</span>
+  <span class="ltitle">Classical Dulong-Petit &amp; Einstein Model of Specific Heat</span>
+  <span class="lweek">Week 8</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Classical Dulong-Petit Law (1819)</h4>
+<p>Each atom has 3 KE + 3 PE degrees of freedom. Equipartition → ⟨E⟩ = 3k_BT per atom. Total: U = 3Nk_BT → C_V = 3Nk_B = 3R per mole ≈ 24.9 J/mol·K. Works at high T (above ~θ_D) but fails completely at low T: diamond at room T has C_V ~ 0.7 J/mol·K, not 24.9!</p>
+<h4>Einstein's Quantum Solution (1907)</h4>
+<p>Einstein quantised each oscillator using Planck's hypothesis. All N atoms treated as independent harmonic oscillators at the SAME frequency ω_E.</p>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Einstein Specific Heat C_E</div>
+  <div class="step"><b>Average energy of one quantum oscillator:</b> ⟨E⟩ = ℏω_E/(exp(ℏω_E/k_BT)−1) + ℏω_E/2</div>
+  <div class="step"><b>Total energy:</b> U = 3N·ℏω_E/(exp(θ_E/T)−1) + 3Nℏω_E/2  where θ_E = ℏω_E/k_B</div>
+  <div class="step"><b>C_E = dU/dT:</b> Let x = θ_E/T = ℏω_E/k_BT:</div>
+  <div class="rbox">C_E = 3Nk_B · x² · e^x / (e^x − 1)²  where x = θ_E/T</div>
+</div>
+<table>
+  <tr><th>Limit</th><th>x = θ_E/T</th><th>C_E → ?</th><th>Match experiment?</th></tr>
+  <tr><td>High-T (T≫θ_E)</td><td>x→0: e^x≈1+x, e^x/(e^x−1)²≈1/x²</td><td>C_E → 3Nk_B = 3R</td><td>✓ Dulong-Petit</td></tr>
+  <tr><td>Low-T (T≪θ_E)</td><td>x→∞: e^x/(e^x−1)²≈e^{-x}</td><td>C_E ∝ x²e^{-x} → 0 exponentially</td><td>✗ Too fast! Expt: T³</td></tr>
+</table>
+<div class="warn">
+  <strong>Einstein's Low-T Failure</strong>
+  Einstein gives C_E ∝ e^{−θ_E/T} at low T — exponential suppression. Experiment shows C_V ∝ T³. Reason: Einstein has NO low-frequency modes. At low T, there are no modes with ℏω ≲ k_BT to excite → zero contribution. Debye fixes this by including acoustic modes with ω→0.
+</div>
+</div>
+</div>
+
+<!-- L48 -->
+<div class="lcard" id="L48">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L48</span>
+  <span class="ltitle">Debye Model — Phonon DOS &amp; Internal Energy</span>
+  <span class="lweek">Week 8</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Debye's Key Idea</h4>
+<p>Treat the crystal as an elastic continuum up to a cutoff frequency ν_D chosen to preserve total mode count = 3N. This correctly captures the low-ω acoustic modes.</p>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Debye Phonon DOS g(ν)</div>
+  <div class="step"><b>Standing waves in cube L³</b> (using (π/L)³ per mode, 1/8 sphere, ×3 polarisations):</div>
+  <div class="step">N(K) = (1/8)·(4πK³/3)/(π/L)³ = VK³/(6π²) (per polarisation)</div>
+  <div class="step"><b>3 polarisations</b> (1 longitudinal v_L, 2 transverse v_T, using K = ω/v):</div>
+  <div class="step">g(ω)dω = [V/(2π²)]·(1/v_L³ + 2/v_T³)·ω²dω</div>
+  <div class="step"><b>Debye approximation:</b> single average speed v_s, defined by 3/v_s³ = 1/v_L³ + 2/v_T³</div>
+  <div class="step">g(ω) = 3Vω²/(2π²v_s³) for ω ≤ ω_D, zero above</div>
+  <div class="step"><b>Cutoff ω_D from ∫g dω = 3N:</b> ω_D = v_s(6π²N/V)^{1/3} = v_s(6π²n)^{1/3}</div>
+  <div class="rbox">g(ν) = 9N·ν²/ν_D³  (parabolic DOS, ν ≤ ν_D) &nbsp;&nbsp; θ_D = hν_D/k_B</div>
+</div>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Debye Internal Energy &amp; T³ Law</div>
+  <div class="step"><b>Total energy:</b> E = ∫₀^{ν_D} [hν/(e^{hν/k_BT}−1)]·g(ν)dν = (9N/ν_D³)∫₀^{ν_D} hν³/(e^{hν/k_BT}−1)dν</div>
+  <div class="step"><b>Substitute x = hν/k_BT, x_D = hν_D/k_BT = θ_D/T:</b></div>
+  <div class="step">E = 9Nk_BT·(T/θ_D)³ ∫₀^{x_D} x³/(e^x−1) dx</div>
+  <div class="step"><b>High-T (T≫θ_D, x_D→0):</b> ∫₀^{x_D}x³/(e^x−1)dx ≈ ∫₀^{x_D}x²dx = x_D³/3 = (θ_D/T)³/3</div>
+  <div class="step">E = 9Nk_BT·(T/θ_D)³·(θ_D/T)³/3 = 3Nk_BT → C_V = 3Nk_B = 3R ✓</div>
+  <div class="step"><b>Low-T (T≪θ_D, x_D→∞):</b> ∫₀^∞ x³/(e^x−1)dx = π⁴/15 (standard Riemann zeta result: Γ(4)ζ(4))</div>
+  <div class="step">E = 9Nk_BT·(T/θ_D)³·π⁴/15 = (3π⁴Nk_B/5)·T⁴/θ_D³</div>
+  <div class="rbox">C_V = dE/dT = (12π⁴Nk_B/5)·(T/θ_D)³ ∝ T³  ← Debye T³ Law ✓</div>
+</div>
+</div>
+</div>
+
+<!-- L49 -->
+<div class="lcard" id="L49">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L49</span>
+  <span class="ltitle">Debye T³ Law — Physical Explanation &amp; Debye Temperatures</span>
+  <span class="lweek">Week 8</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="key">
+  <div class="klbl">Debye T³ Law</div>
+  <span class="keq">C_V = (12π⁴Nk_B/5)·(T/θ_D)³ ∝ T³  (low T, T ≪ θ_D)</span>
+  <span class="keq">Debye temperature: θ_D = ℏv_s(6π²n)^{1/3}/k_B</span>
+  <p>Total specific heat at low T: C = γT + (12π⁴Nk_B/5)(T/θ_D)³ = γT + AT³ (electrons + phonons)</p>
+</div>
+<h4>Physical Reason for T³</h4>
+<p>At low T: only phonons with ℏω ≲ k_BT can be thermally excited. These have small k (long wavelength, acoustic). Number of such modes = volume of sphere of radius k_max = k_BT/(ℏv_s) in k-space: N_active ∝ k_max³ ∝ T³. Each contributes energy ~k_BT. Total E ∝ T⁴ → C_V ∝ T³.</p>
+<div class="diagram">
+<svg viewBox="0 0 430 215" xmlns="http://www.w3.org/2000/svg" width="400">
+  <line x1="40" y1="180" x2="390" y2="180" stroke="#2c3347" stroke-width="1.5"/>
+  <line x1="40" y1="180" x2="40" y2="15" stroke="#2c3347" stroke-width="1.5"/>
+  <!-- Debye curve -->
+  <path d="M40,180 Q100,155 155,100 Q210,50 270,25 Q320,15 390,13" stroke="#4fc3a1" stroke-width="2.5" fill="none"/>
+  <!-- Einstein curve -->
+  <path d="M40,180 Q90,179 140,177 Q180,168 220,120 Q260,60 310,20 Q340,12 390,11" stroke="#c8a84b" stroke-width="1.8" fill="none" stroke-dasharray="5,3"/>
+  <!-- 3R line -->
+  <line x1="40" y1="13" x2="390" y2="13" stroke="#7a7e8e" stroke-width="1" stroke-dasharray="3,3" opacity=".6"/>
+  <!-- θ_D marker -->
+  <line x1="195" y1="180" x2="195" y2="15" stroke="#5ba3d9" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
+  <text x="197" y="195" fill="#5ba3d9" font-size="9" font-family="JetBrains Mono">θ_D</text>
+  <!-- T³ region marker -->
+  <text x="55" y="165" fill="#4fc3a1" font-size="10" font-family="Inter">∝T³</text>
+  <text x="395" y="182" fill="#7a7e8e" font-size="11" font-family="JetBrains Mono">T</text>
+  <text x="42" y="12" fill="#7a7e8e" font-size="11" font-family="JetBrains Mono">C_V</text>
+  <text x="25" y="16" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">3R</text>
+  <text x="310" y="45" fill="#4fc3a1" font-size="10" font-family="Inter">Debye</text>
+  <text x="310" y="68" fill="#c8a84b" font-size="10" font-family="Inter">Einstein</text>
+</svg>
+<figcaption>Fig 49.1 — Debye (teal) matches experiment: T³ at low T, approaches 3R. Einstein (gold dashed): exponential at low T — too fast. Both agree at high T (Dulong-Petit).</figcaption>
+</div>
+<table>
+  <tr><th>Material</th><th>θ_D (K)</th><th>Softness</th></tr>
+  <tr><td>Pb</td><td>88</td><td>Very soft</td></tr>
+  <tr><td>Na</td><td>158</td><td>Soft metal</td></tr>
+  <tr><td>Ag</td><td>215</td><td>—</td></tr>
+  <tr><td>Cu</td><td>315</td><td>—</td></tr>
+  <tr><td>Al</td><td>394</td><td>—</td></tr>
+  <tr><td>Fe</td><td>470</td><td>—</td></tr>
+  <tr><td>Diamond</td><td>1860</td><td>Extremely stiff (covalent)</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L50 -->
+<div class="lcard" id="L50">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L50</span>
+  <span class="ltitle">Comparison: Dulong-Petit vs Einstein vs Debye — Summary</span>
+  <span class="lweek">Week 8</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<table>
+  <tr><th>Model</th><th>DOS assumption</th><th>High-T C_V</th><th>Low-T C_V</th><th>Correct?</th></tr>
+  <tr><td>Dulong-Petit (classical)</td><td>Equipartition, continuous</td><td>3Nk_B = 3R</td><td>3Nk_B (constant) ✗</td><td>High-T only</td></tr>
+  <tr><td>Einstein (1907)</td><td>Delta function at ω_E</td><td>3Nk_B ✓</td><td>∝(θ_E/T)²e^{−θ_E/T} ✗</td><td>High-T only</td></tr>
+  <tr><td>Debye (1912)</td><td>g(ω)∝ω² up to ω_D</td><td>3Nk_B ✓</td><td>(12π⁴Nk_B/5)(T/θ_D)³ ✓</td><td>Both limits!</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- UNIT VI: BLOCH & BANDS (L62–L70) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="unit6">
+  <div class="tag">Unit VI · Lectures 62–70</div>
+  <h2>Bloch's Theorem &amp; Band Theory</h2>
+  <div class="weeks">NPTEL Week 9 · Bloch → NFE → Kronig-Penney → Gaps → Metal/Insulator</div>
+</div>
+
+<!-- L62 -->
+<div class="lcard" id="L62">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L62</span>
+  <span class="ltitle">Bloch's Theorem — Proof via Translation Operators</span>
+  <span class="lweek">Week 9</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>The Problem Sommerfeld Left</h4>
+<p>Sommerfeld set V=0 everywhere. Real crystals have a periodic Coulomb potential V(r) = V(r+R) for every lattice vector R. What form must the eigenstates take? Bloch's theorem (1928) gives the complete answer.</p>
+<div class="deriv">
+  <div class="dtitle">▸ Full Proof of Bloch's Theorem</div>
+  <div class="step"><b>Define translation operator T_R:</b> T_R·f(r) = f(r+R). Key: V(r+R)=V(r) → [H, T_R]=0</div>
+  <div class="step"><b>Simultaneous eigenstates:</b> Since [H,T_R]=0, ∃ states that are eigenstates of both: H|ψ⟩=E|ψ⟩ and T_R|ψ⟩=c_R|ψ⟩</div>
+  <div class="step"><b>Constraint on c_R:</b> T_{R₁+R₂} = T_{R₁}T_{R₂} → c_{R₁+R₂} = c_{R₁}c_{R₂}. Also: ∫|ψ(r+R)|²d³r = ∫|ψ(r)|²d³r → |c_R|²=1 → |c_R|=1</div>
+  <div class="step"><b>Only solution:</b> c_R = e^{ik·R} for some vector k (exponential is the only function satisfying f(R₁+R₂)=f(R₁)f(R₂) with |f|=1)</div>
+  <div class="step"><b>Write ψ(r) = e^{ik·r}u(r):</b> Then ψ(r+R) = e^{ik·(r+R)}u(r+R) = e^{ik·R}·e^{ik·r}·u(r+R)</div>
+  <div class="step">For this to equal c_R·ψ(r) = e^{ik·R}·e^{ik·r}·u(r): need u(r+R) = u(r) ✓</div>
+  <div class="rbox">ψ_{nk}(r) = e^{ik·r}·u_{nk}(r) where u_{nk}(r+R) = u_{nk}(r) ← Bloch's Theorem ■</div>
+</div>
+<div class="pq">
+"In free electrons, ℏk gives the momentum of the electron. What about when the wave function is of Bloch form? The answer is: ℏk behaves exactly like the momentum of an electron in a periodic lattice. If I take d/dt of ℏk for an electron moving in a periodic system, this will be equal to the external force — the force applied from outside, for example an electric field. So it is in this way that it behaves like momentum."
+<span class="who">— Prof. Manoj K. Harbola, Lecture 60</span>
+</div>
+<div class="fbox">
+  <div class="flbl">Key consequences of Bloch's theorem</div>
+  <span class="feq">Crystal momentum: ℏk (k defined modulo reciprocal lattice → reduce to 1st BZ)</span>
+  <span class="feq">No scattering from perfect lattice: ψ_{nk} is exact eigenstate → propagates freely</span>
+  <span class="feq">Band structure: For each k ∈ 1st BZ, multiple eigenvalues E_n(k) labelled by band index n</span>
+  <span class="feq">k and k+G are equivalent: all distinct states in 1st BZ only</span>
+</div>
+</div>
+</div>
+
+<!-- L63 -->
+<div class="lcard" id="L63">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L63</span>
+  <span class="ltitle">Bloch II — Why No Scattering from Perfect Lattice &amp; Physical Picture</span>
+  <span class="lweek">Week 9</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="pq">
+"We have shown that k within the First Brillouin Zone is enough to specify the wave function. The wave functions ψ_{k+G} and ψ_k are identical. k and k+G are equivalent. And this implies that k can be specified within the First Brillouin Zone."
+<span class="who">— Prof. Manoj K. Harbola, Lecture 60</span>
+</div>
+<h4>Why Metals Have Long Mean Free Paths</h4>
+<p>A Bloch state is a stationary solution — it neither accelerates nor decelerates spontaneously. An electron in |ψ_{nk}⟩ will remain there forever if the Hamiltonian stays periodic. Only deviations from perfect periodicity scatter electrons:</p>
+<ul>
+  <li><strong>Phonons (thermal vibrations):</strong> dominant at high T → ρ ∝ T</li>
+  <li><strong>Impurities and defects:</strong> dominant at low T → residual resistivity (T-independent)</li>
+  <li><strong>Electron-electron scattering:</strong> sub-dominant → ρ ∝ T² (Fermi liquid)</li>
+</ul>
+<p>At 4K, pure Cu has λ ~ mm (not Å!). The Drude model thought λ ~ 25 Å because it didn't know about Bloch's theorem.</p>
+</div>
+</div>
+
+<!-- L64 -->
+<div class="lcard" id="L64">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L64–L65</span>
+  <span class="ltitle">Nearly Free Electron Model — Energy Gaps at Zone Boundaries</span>
+  <span class="lweek">Week 9</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Perturbation Approach</h4>
+<p>Start from Sommerfeld free electrons (V=0). Add weak periodic potential V(r) = Σ_G V_G·e^{iG·r} as perturbation. Most k-values: small energy shifts. Near zone boundary k = G/2: two states become degenerate → avoided crossing → energy gap.</p>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Band Gap 2|V_G| at Zone Boundary (1D)</div>
+  <div class="step"><b>At k=π/a:</b> Free states |k⟩=e^{iπx/a} and |k−G⟩=e^{-iπx/a} (G=2π/a) are degenerate: ε₀ = ℏ²π²/(2ma²)</div>
+  <div class="step"><b>Degenerate perturbation theory → 2×2 secular matrix:</b></div>
+  <div class="step">|ε₀−E   V_G |  = 0 → (ε₀−E)² = |V_G|²</div>
+  <div class="step">|V_G*   ε₀−E|</div>
+  <div class="step"><b>Eigenvalues:</b> E± = ε₀ ± |V_G|</div>
+  <div class="rbox">Band gap: E_g = E₊ − E₋ = 2|V_G| = twice the Fourier component of V at G=2π/a</div>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg" width="420">
+  <!-- Periodic potential V(x) schematic -->
+  <path d="M20,80 Q58,20 96,80 Q134,20 172,80 Q210,20 248,80 Q286,20 324,80 Q362,20 400,80 Q438,20 476,80"
+        stroke="#5ba3d9" stroke-width="1.5" fill="none" stroke-dasharray="4,2"/>
+  <!-- ψ+ = cos: peaks at ions (lower E) -->
+  <path d="M20,150 Q58,80 96,150 Q134,80 172,150 Q210,80 248,150 Q286,80 324,150 Q362,80 400,150"
+        stroke="#4fc3a1" stroke-width="2.2" fill="rgba(79,195,161,.1)"/>
+  <!-- ψ- = sin: peaks between ions (higher E) -->
+  <path d="M20,120 Q58,50 96,120 Q134,50 172,120 Q210,50 248,120 Q286,50 324,120 Q362,50 400,120"
+        stroke="#d46b6b" stroke-width="2.2" fill="rgba(212,107,107,.08)"/>
+  <!-- Ion positions (minima of V) -->
+  <g fill="#5ba3d9" opacity=".8"><circle cx="58" cy="158" r="5"/><circle cx="154" cy="158" r="5"/><circle cx="250" cy="158" r="5"/><circle cx="346" cy="158" r="5"/></g>
+  <!-- E_g double-arrow -->
+  <line x1="425" y1="105" x2="425" y2="135" stroke="#c8a84b" stroke-width="2"/>
+  <line x1="418" y1="105" x2="432" y2="105" stroke="#c8a84b" stroke-width="1.5"/>
+  <line x1="418" y1="135" x2="432" y2="135" stroke="#c8a84b" stroke-width="1.5"/>
+  <text x="435" y="123" fill="#c8a84b" font-size="10" font-family="JetBrains Mono">E_g=2|V_G|</text>
+  <!-- Labels -->
+  <text x="400" y="155" fill="#4fc3a1" font-size="9" font-family="Inter">ψ₊∝cos(πx/a)</text>
+  <text x="400" y="123" fill="#d46b6b" font-size="9" font-family="Inter">ψ₋∝sin(πx/a)</text>
+  <text x="20" y="78" fill="#5ba3d9" font-size="9" font-family="Inter">V(x)</text>
+  <text x="140" y="175" fill="#5ba3d9" font-size="9" font-family="Inter" text-anchor="middle">Ion core positions</text>
+</svg>
+<figcaption>Fig 64.1 — At k=π/a, two standing waves form. ψ₊∝cos(πx/a): charge density peaks at ion sites (lower PE → lower E band). ψ₋∝sin(πx/a): density peaks between ions (higher PE → upper band). Energy gap = 2|V_G|.</figcaption>
+</div>
+</div>
+</div>
+
+<!-- L66 -->
+<div class="lcard" id="L66">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L66–L67</span>
+  <span class="ltitle">Kronig-Penney Model — Exact Solution &amp; Three Limiting Cases</span>
+  <span class="lweek">Week 9</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Full Derivation: KP Dispersion Relation (Dirac Comb Limit)</div>
+  <div class="step"><b>Potential:</b> Wells of depth 0, width a; barriers V₀, width b. Period d = a+b. E &lt; V₀.</div>
+  <div class="step"><b>In well</b> (0 &lt; x &lt; a): ψ''+ α²ψ=0, α=√(2mE)/ℏ → ψ=Ae^{iαx}+Be^{-iαx}</div>
+  <div class="step"><b>In barrier</b> (−b &lt; x &lt; 0): ψ''−β²ψ=0, β=√(2m(V₀−E))/ℏ → ψ=Ce^{βx}+De^{-βx}</div>
+  <div class="step"><b>Apply</b> Bloch BC ψ(x+d)=e^{ikd}ψ(x) + 4 continuity conditions (ψ and ψ' continuous at x=0 and x=a). Set det of 4×4 matrix = 0:</div>
+  <div class="step">General: [(β²−α²)/2αβ]sinh(βb)sin(αa) + cosh(βb)cos(αa) = cos[k(a+b)]</div>
+  <div class="step"><b>Dirac comb limit:</b> V₀→∞, b→0, keeping P = mV₀ab/ℏ² finite:</div>
+  <div class="step">sinh(βb)→βb, cosh(βb)→1, (β²−α²)/2αβ·βb ≈ β²b/2α ≈ mV₀b/(ℏ²α) = P/(αa)</div>
+  <div class="rbox">(P/αa)·sin(αa) + cos(αa) = cos(ka) &nbsp;&nbsp; P = mV₀ab/ℏ² (barrier strength)</div>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 490 220" xmlns="http://www.w3.org/2000/svg" width="460">
+  <line x1="40" y1="110" x2="460" y2="110" stroke="#2c3347" stroke-width="1.5"/>
+  <line x1="40" y1="205" x2="460" y2="205" stroke="#2c3347" stroke-width="1"/>
+  <line x1="40" y1="15" x2="460" y2="15" stroke="#2c3347" stroke-width="1"/>
+  <!-- f(αa) curve (schematic sinc-like oscillation with P/αa·sin+cos) -->
+  <path d="M50,110 Q80,10 115,200 Q140,75 158,110 Q180,148 208,8 Q238,205 265,110 Q283,38 312,210 Q335,60 362,110 Q380,165 400,60" stroke="#4fc3a1" stroke-width="2.2" fill="none"/>
+  <!-- ±1 lines -->
+  <line x1="40" y1="35" x2="460" y2="35" stroke="#d46b6b" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="40" y1="185" x2="460" y2="185" stroke="#d46b6b" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- Allowed band shadings -->
+  <rect x="50" y="35" width="50" height="150" fill="rgba(79,195,161,.12)"/>
+  <rect x="155" y="35" width="46" height="150" fill="rgba(79,195,161,.12)"/>
+  <rect x="260" y="35" width="55" height="150" fill="rgba(79,195,161,.12)"/>
+  <!-- Labels -->
+  <text x="465" y="113" fill="#7a7e8e" font-size="11" font-family="JetBrains Mono">αa</text>
+  <text x="44" y="30" fill="#d46b6b" font-size="9" font-family="JetBrains Mono">+1</text>
+  <text x="44" y="193" fill="#d46b6b" font-size="9" font-family="JetBrains Mono">−1</text>
+  <text x="75" y="185" fill="#4fc3a1" font-size="9" font-family="Inter" text-anchor="middle">Band 1</text>
+  <text x="178" y="55" fill="#4fc3a1" font-size="9" font-family="Inter" text-anchor="middle">Band 2</text>
+  <text x="288" y="185" fill="#4fc3a1" font-size="9" font-family="Inter" text-anchor="middle">Band 3</text>
+  <text x="118" y="115" fill="#d46b6b" font-size="9" font-family="Inter" text-anchor="middle">gap</text>
+  <text x="220" y="115" fill="#d46b6b" font-size="9" font-family="Inter" text-anchor="middle">gap</text>
+  <text x="108" y="220" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">π</text>
+  <text x="205" y="220" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">2π</text>
+  <text x="305" y="220" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">3π</text>
+  <text x="100" y="8" fill="#4fc3a1" font-size="9" font-family="Inter">f(αa) = (P/αa)sin(αa)+cos(αa)</text>
+</svg>
+<figcaption>Fig 66.1 — KP plot of f(αa) vs αa (energy increases along x). Teal shaded = allowed bands (|f|≤1, real k exists). White gaps = |f|>1, no real k → forbidden energies. Gaps at αa = nπ (BZ boundaries).</figcaption>
+</div>
+<table>
+  <tr><th>Limit</th><th>P</th><th>Result</th><th>Physical Picture</th></tr>
+  <tr><td>P=0</td><td>No barriers</td><td>cos(αa)=cos(ka) → α=k → E=ℏ²k²/2m</td><td>Free electron gas, no gaps</td></tr>
+  <tr><td>P→∞</td><td>Impenetrable</td><td>αa=nπ → E_n=n²π²ℏ²/(2ma²)</td><td>Isolated quantum wells (atomic limit)</td></tr>
+  <tr><td>General P</td><td>Moderate</td><td>Bands at αa≠nπ, gaps at αa=nπ</td><td>Interplay of tunnelling and confinement</td></tr>
+</table>
+<div class="key">
+  <div class="klbl">States Per Band</div>
+  <span class="keq">N unit cells → N distinct k-values per band → 2N states (with spin)</span>
+  <p>This is the basis for the metal/insulator criterion. A band is "full" at 2N electrons. If the valence electrons exactly fill an integer number of bands → insulator. If any band is partially filled → metal.</p>
+</div>
+</div>
+</div>
+
+<!-- L68 -->
+<div class="lcard" id="L68">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L68–L69</span>
+  <span class="ltitle">Wave Equation in Periodic Potential — Central Equation &amp; Band Structure</span>
+  <span class="lweek">Week 10</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="fbox">
+  <div class="flbl">Central Equation (Fourier-expanded Schrödinger equation for Bloch states)</div>
+  <span class="feq">ψ_k(r) = Σ_G C_G · e^{i(k−G)·r}  (plane wave expansion of Bloch function)</span>
+  <span class="feq">[ℏ²(k−G)²/(2m) − E]C_G + Σ_{G'} V_{G−G'}·C_{G'} = 0  (one equation per G)</span>
+  <span class="feq">Near BZ boundary: truncate to 2 most-degenerate G → 2×2 problem → gap = 2|V_G| as before</span>
+</div>
+<h4>Extended, Reduced, and Periodic Zone Schemes</h4>
+<ul>
+  <li><strong>Extended zone scheme:</strong> Each band in a different zone (n=1 in 1st BZ, n=2 in 2nd BZ, etc.). Shows the connection to free electron parabola.</li>
+  <li><strong>Reduced zone scheme:</strong> All bands folded back into 1st BZ using G translations. Most useful for analysing transport and optical properties.</li>
+  <li><strong>Periodic zone scheme:</strong> Each band repeated periodically. Useful for plotting Fermi surfaces.</li>
+</ul>
+</div>
+</div>
+
+<!-- L70 -->
+<div class="lcard" id="L70">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L70</span>
+  <span class="ltitle">Metal vs Insulator vs Semiconductor — Band Filling Criterion</span>
+  <span class="lweek">Week 10</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="key">
+  <div class="klbl">Fundamental Classification by Band Filling</div>
+  <span class="keq">Metal: partially filled band OR overlapping bands → states at E_F → conductance</span>
+  <span class="keq">Insulator: all bands full/empty, E_g ≫ k_BT → no carriers → σ≈0</span>
+  <span class="keq">Semiconductor: like insulator but E_g ~ 1 eV → thermal excitation at 300K creates carriers</span>
+</div>
+<table>
+  <tr><th>Material</th><th>Config</th><th>Band filling</th><th>E_g (eV)</th><th>Type</th></tr>
+  <tr><td>Na</td><td>3s¹</td><td>3s half-filled</td><td>—</td><td>Metal</td></tr>
+  <tr><td>Mg</td><td>3s²</td><td>3s full but overlaps 3p</td><td>—</td><td>Metal (band overlap)</td></tr>
+  <tr><td>Be</td><td>2s²</td><td>2s full → overlaps 2p → holes!</td><td>—</td><td>Metal (+ve Hall)</td></tr>
+  <tr><td>Diamond C</td><td>sp³</td><td>VB completely full</td><td>5.5</td><td>Insulator</td></tr>
+  <tr><td>Si</td><td>sp³</td><td>Same structure as diamond</td><td>1.1</td><td>Semiconductor</td></tr>
+  <tr><td>Ge</td><td>sp³</td><td>Same</td><td>0.67</td><td>Semiconductor</td></tr>
+  <tr><td>GaAs</td><td>III-V</td><td>Zincblende sp³</td><td>1.42 (direct)</td><td>SC (LEDs, lasers)</td></tr>
+</table>
+<div class="note">
+  <strong>Why Does Carbon (Diamond) Insulate but Graphite Conduct?</strong>
+  Diamond: sp³ hybridisation → 4 bonds per atom → all valence electrons in filled bonding orbitals → E_g = 5.5 eV → insulator. Graphite: sp² hybridisation → 3 bonds per atom, one pz electron left over per C → half-filled π band → metal. The crystal structure determines band filling and therefore electrical behaviour!
+</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- UNIT VII: SEMICONDUCTORS (L71–L80) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="unit7">
+  <div class="tag">Unit VII · Lectures 71–80</div>
+  <h2>Effective Mass, Holes &amp; Semiconductors</h2>
+  <div class="weeks">NPTEL Weeks 10–12 · Effective Mass → Holes → Intrinsic SC → Doping → Superconductivity</div>
+</div>
+
+<!-- L71 -->
+<div class="lcard" id="L71">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L71</span>
+  <span class="ltitle">Equations of Motion for Bloch Electrons — Group Velocity</span>
+  <span class="lweek">Week 11</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="fbox">
+  <div class="flbl">Semi-classical equations of motion for Bloch electron</div>
+  <span class="feq">Group velocity: v = (1/ℏ)·∇_k E_n(k)  (velocity of wave packet)</span>
+  <span class="feq">Crystal momentum equation: ℏ(dk/dt) = F_external = e(E + v×B)</span>
+  <span class="feq">These replace Newton's 2nd law for Bloch electrons. The lattice potential is ABSORBED into E_n(k).</span>
+</div>
+<h4>Interesting Consequences</h4>
+<ul>
+  <li><strong>v=0 at zone boundary:</strong> E(k) has zero slope at k=±π/a → standing wave → no current even if k-state is occupied.</li>
+  <li><strong>A full band carries no current:</strong> Σ_k v(k) = (1/ℏ)Σ_k ∇_k E_n(k) = 0 (by periodicity of E_n(k) in k). This is why filled bands in insulators don't conduct.</li>
+</ul>
+</div>
+</div>
+
+<!-- L72 -->
+<div class="lcard" id="L72">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L72</span>
+  <span class="ltitle">Effective Mass — Derivation &amp; Anisotropy</span>
+  <span class="lweek">Week 11</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Effective Mass Tensor</div>
+  <div class="step"><b>Rate of change of group velocity:</b> dv_i/dt = Σ_j (1/ℏ)·(d²E/dk_i dk_j)·(dk_j/dt)</div>
+  <div class="step"><b>Using ℏ(dk_j/dt) = F_j:</b> dv_i/dt = Σ_j (1/ℏ²)·(d²E/dk_i dk_j)·F_j</div>
+  <div class="step"><b>Compare with Newton:</b> dv_i/dt = Σ_j (1/m*)_{ij}·F_j</div>
+  <div class="rbox">(1/m*)_{ij} = (1/ℏ²)·∂²E/∂k_i∂k_j  ← Effective mass tensor (inverse!)</div>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 440 210" xmlns="http://www.w3.org/2000/svg" width="420">
+  <line x1="40" y1="175" x2="400" y2="175" stroke="#2c3347" stroke-width="1.5"/>
+  <line x1="220" y1="192" x2="220" y2="15" stroke="#2c3347" stroke-width="1.5"/>
+  <path d="M40,65 Q130,148 220,168 Q310,148 400,65" stroke="#4fc3a1" stroke-width="2.5" fill="rgba(79,195,161,.08)"/>
+  <!-- m*>0 at bottom -->
+  <text x="175" y="190" fill="#4fc3a1" font-size="9" font-family="Inter">m*&gt;0 (∂²E/∂k²&gt;0)</text>
+  <!-- m*<0 at top (near BZ boundary) -->
+  <text x="44" y="60" fill="#d46b6b" font-size="9" font-family="Inter">m*&lt;0 (∂²E/∂k²&lt;0)</text>
+  <text x="372" y="60" fill="#d46b6b" font-size="9" font-family="Inter">m*&lt;0</text>
+  <!-- v_g = 0 at top -->
+  <text x="38" y="50" fill="#c8a84b" font-size="8" font-family="Inter">v_g=0</text>
+  <text x="370" y="50" fill="#c8a84b" font-size="8" font-family="Inter">v_g=0</text>
+  <text x="403" y="178" fill="#7a7e8e" font-size="11" font-family="JetBrains Mono">k</text>
+  <text x="224" y="12" fill="#7a7e8e" font-size="11" font-family="JetBrains Mono">E</text>
+  <text x="28" y="192" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">−π/a</text>
+  <text x="378" y="192" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">+π/a</text>
+</svg>
+<figcaption>Fig 72.1 — E(k) band: near bottom (k≈0), d²E/dk²&gt;0 → m*&gt;0. Near zone boundary, d²E/dk²&lt;0 → m*&lt;0. At zone boundary, dE/dk=0 (group velocity zero, standing wave).</figcaption>
+</div>
+<table>
+  <tr><th>Material/Band</th><th>m*/m_e</th><th>Note</th></tr>
+  <tr><td>Si conduction band</td><td>m_l*=0.92, m_t*=0.19</td><td>Anisotropic (ellipsoidal)</td></tr>
+  <tr><td>Si valence band (heavy hole)</td><td>0.54</td><td>—</td></tr>
+  <tr><td>GaAs conduction band</td><td>0.067</td><td>Very light → high mobility</td></tr>
+  <tr><td>InSb conduction band</td><td>0.013</td><td>Extremely light</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L73 -->
+<div class="lcard" id="L73">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L73</span>
+  <span class="ltitle">Concept of Holes — Resolving the Hall Sign Anomaly</span>
+  <span class="lweek">Week 11</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Why Holes Are Necessary</h4>
+<p>Near the top of a band, m*&lt;0 — electrons there accelerate OPPOSITE to an applied force. It's more natural to describe the collective behaviour of N−1 electrons in a nearly-full band by tracking the single missing state (hole).</p>
+<table>
+  <tr><th>Property</th><th>Missing electron (at k_e)</th><th>Hole description</th></tr>
+  <tr><td>Charge</td><td>−e</td><td><b>q_h = +e</b></td></tr>
+  <tr><td>Effective mass</td><td>m_e* &lt; 0</td><td><b>m_h* = −m_e* &gt; 0</b></td></tr>
+  <tr><td>Wavevector</td><td>k_e</td><td><b>k_h = −k_e</b></td></tr>
+  <tr><td>Group velocity</td><td>v_e = (1/ℏ)dE/dk_e</td><td>v_h = v_e (same)</td></tr>
+  <tr><td>Drift in E field</td><td>Opposite to E (electron-like?)</td><td>Same direction as E</td></tr>
+  <tr><td>Hall coefficient R_H</td><td>Would give negative R_H</td><td><b>R_H = +1/(n_h e) &gt; 0 ✓</b></td></tr>
+</table>
+<div class="key">
+  <div class="klbl">Resolution of Hall Sign Anomaly!</div>
+  <span class="keq">Be, Zn (divalent): filled 2s/4s bands overlap next band → holes dominate → R_H &gt; 0 ✓</span>
+  <span class="keq">Al (trivalent): valence band complex topology → holes in upper sub-band → R_H &gt; 0 ✓</span>
+  <p>This completely and quantitatively explains the anomaly that defeated the Drude model. The quantum band theory is essential.</p>
+</div>
+</div>
+</div>
+
+<!-- L74 -->
+<div class="lcard" id="L74">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L74–L75</span>
+  <span class="ltitle">Intrinsic Semiconductors — Carrier Concentration &amp; Fermi Level</span>
+  <span class="lweek">Week 11</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Intrinsic Carrier Concentration n_i</div>
+  <div class="step"><b>Electron density in CB</b> (Boltzmann approx: E−E_F ≫ k_BT in CB):</div>
+  <div class="step">n = ∫_{E_C}^∞ D_C(E)·f(E)dE ≈ N_C·exp[−(E_C−E_F)/k_BT]</div>
+  <div class="step">N_C = 2(2πm_e*k_BT/h²)^{3/2}  (effective DOS in CB)</div>
+  <div class="step"><b>Hole density in VB:</b> p = N_V·exp[−(E_F−E_V)/k_BT],  N_V = 2(2πm_h*k_BT/h²)^{3/2}</div>
+  <div class="step"><b>Mass action law:</b> np = N_C·N_V·exp(−E_g/k_BT) = n_i² (independent of E_F)</div>
+  <div class="step"><b>Intrinsic condition n=p:</b> N_C·exp[−(E_C−E_F)/k_BT] = N_V·exp[−(E_F−E_V)/k_BT]</div>
+  <div class="step">→ E_F = (E_C+E_V)/2 + (3k_BT/4)ln(m_h*/m_e*) ≈ midgap (correction tiny)</div>
+  <div class="rbox">n_i = √(N_C·N_V)·exp(−E_g/2k_BT) &nbsp;&nbsp; E_F_i ≈ (E_C+E_V)/2</div>
+</div>
+<div class="fbox">
+  <div class="flbl">Numerical values</div>
+  <span class="feq">Si (E_g=1.1 eV, 300K): n_i ≈ 1.5×10¹⁰ cm⁻³  vs metals: ~10²² cm⁻³</span>
+  <span class="feq">Ge (E_g=0.67 eV, 300K): n_i ≈ 2.4×10¹³ cm⁻³</span>
+  <span class="feq">GaAs (E_g=1.42 eV, 300K): n_i ≈ 1.8×10⁶ cm⁻³  (very pure!)</span>
+</div>
+</div>
+</div>
+
+<!-- L76 -->
+<div class="lcard" id="L76">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L76</span>
+  <span class="ltitle">Extrinsic (Doped) Semiconductors — n-type &amp; p-type</span>
+  <span class="lweek">Week 11</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Donor and Acceptor Levels</h4>
+<ul>
+  <li><strong>n-type (donor):</strong> Add Group V (P, As, Sb) to Si. Extra electron in shallow state below CB (~45 meV). At 300K all ionised → n ≈ N_D. E_F shifts toward CB.</li>
+  <li><strong>p-type (acceptor):</strong> Add Group III (B, Al, Ga) to Si. Missing electron → shallow state above VB (~45 meV). At 300K all ionised → p ≈ N_A. E_F shifts toward VB.</li>
+</ul>
+<div class="fbox">
+  <div class="flbl">Doped semiconductor (complete ionisation at 300K)</div>
+  <span class="feq">n-type: n ≈ N_D,  p = n_i²/N_D  (mass action law)</span>
+  <span class="feq">p-type: p ≈ N_A,  n = n_i²/N_A</span>
+  <span class="feq">Always: np = n_i² at thermal equilibrium</span>
+</div>
+<h4>Conductivity of Doped SC</h4>
+<div class="fbox">
+  <span class="feq">σ = n·e·μ_e + p·e·μ_h</span>
+  <span class="feq">Si: μ_e ≈ 1500 cm²/Vs, μ_h ≈ 450 cm²/Vs (at 300K, lightly doped)</span>
+</div>
+</div>
+</div>
+
+<!-- L77 -->
+<div class="lcard" id="L77">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L77</span>
+  <span class="ltitle">Impurity Conduction &amp; Freeze-Out at Low Temperature</span>
+  <span class="lweek">Week 11</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Temperature Regimes of Doped SC Conductivity</h4>
+<table>
+  <tr><th>T range</th><th>Regime</th><th>Dominant carriers</th><th>σ behaviour</th></tr>
+  <tr><td>Very low T</td><td>Freeze-out</td><td>Carriers return to impurity levels</td><td>σ → 0 (exponential)</td></tr>
+  <tr><td>Low-moderate T</td><td>Extrinsic (saturation)</td><td>n ≈ N_D (all donors ionised)</td><td>σ nearly constant (τ ∝ 1/T → σ ∝ T^{-3/2})</td></tr>
+  <tr><td>High T</td><td>Intrinsic</td><td>Thermally generated e-h pairs dominate</td><td>σ ∝ exp(−E_g/2k_BT) increases rapidly</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L78 -->
+<div class="lcard" id="L78">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L78</span>
+  <span class="ltitle">Transport in Semiconductors — Drift, Diffusion &amp; Einstein Relation</span>
+  <span class="lweek">Week 11</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="fbox">
+  <div class="flbl">Semiconductor transport equations</div>
+  <span class="feq">Drift current density: J_drift = (nμ_e + pμ_h)eE = σE</span>
+  <span class="feq">Diffusion current: J_diff = eD_e∇n − eD_h∇p  (Fick's law)</span>
+  <span class="feq">Einstein relation: D_e/μ_e = D_h/μ_h = k_BT/e  (valid at equilibrium)</span>
+  <span class="feq">Total continuity: ∂n/∂t = (1/e)∇·J_n + G − R  (generation-recombination)</span>
+</div>
+</div>
+</div>
+
+<!-- L79 -->
+<div class="lcard" id="L79">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L79</span>
+  <span class="ltitle">Superconductivity I — Phenomenology: Zero Resistance &amp; Meissner Effect</span>
+  <span class="lweek">Week 12</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Key Experimental Facts</h4>
+<ul>
+  <li><strong>Zero resistance (Onnes 1911):</strong> Below T_C, ρ = 0 exactly. Currents in a SC ring persist for years with no decay (measured τ &gt; 10⁵ years!).</li>
+  <li><strong>Meissner effect (1933):</strong> A SC expels all magnetic flux from its interior when cooled through T_C — B = 0 inside (perfect diamagnetism). NOT just a consequence of ρ=0; a perfect conductor would freeze flux in. Meissner effect is the defining property of the superconducting state.</li>
+  <li><strong>Energy gap 2Δ:</strong> A gap opens at E_F below T_C. Quasiparticle excitations require energy &gt; Δ.</li>
+  <li><strong>Isotope effect:</strong> T_C ∝ M^{−1/2} (M = ionic mass) → phonons mediate pairing.</li>
+  <li><strong>London equation:</strong> J = −(n_se²/m)A → London penetration depth λ_L = √(m/μ₀n_se²) ~ 50 nm</li>
+</ul>
+<table>
+  <tr><th>Material</th><th>T_C (K)</th><th>Type</th><th>H_C (or H_C2) at 0K</th></tr>
+  <tr><td>Hg (Onnes 1911)</td><td>4.15</td><td>I</td><td>411 Oe</td></tr>
+  <tr><td>Pb</td><td>7.19</td><td>I</td><td>803 Oe</td></tr>
+  <tr><td>Nb</td><td>9.25</td><td>II</td><td>H_C2 = 0.24 T</td></tr>
+  <tr><td>Nb₃Ge</td><td>23.2</td><td>II</td><td>H_C2 = 38 T</td></tr>
+  <tr><td>YBCO</td><td>93</td><td>II (cuprate)</td><td>H_C2 &gt; 100 T</td></tr>
+</table>
+</div>
+</div>
+
+<!-- L80 -->
+<div class="lcard" id="L80">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L80</span>
+  <span class="ltitle">Superconductivity II — BCS Theory &amp; Cooper Pairs</span>
+  <span class="lweek">Week 12</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Cooper Pairs — Physical Picture</h4>
+<p>An electron moving through the lattice polarises nearby ions, creating a slight local positive charge density that persists for ~10⁻¹³ s (phonon timescale). A second electron arriving later sees this polarisation and is attracted. This phonon-mediated attractive interaction overcomes the Coulomb repulsion for electrons near E_F, binding them into Cooper pairs: (k↑, −k↓).</p>
+<div class="key">
+  <div class="klbl">BCS Universal Results (1957)</div>
+  <span class="keq">Energy gap: 2Δ(0) = 3.528 k_BT_C  (universal ratio)</span>
+  <span class="keq">Coherence length: ξ₀ = ℏv_F/(πΔ) ~ 100–1000 nm (Cooper pair size)</span>
+  <span class="keq">Penetration depth: λ_L = √(m*/μ₀n_se²) ~ 50–200 nm</span>
+  <span class="keq">T_C ~ 1.13·ω_D·exp(−1/N(0)V) &nbsp; (N(0) = DOS at E_F, V = pairing potential)</span>
+</div>
+<h4>Type I vs Type II</h4>
+<p><strong>Type I:</strong> Single critical field H_C. Above H_C, superconductivity destroyed abruptly. κ = λ_L/ξ₀ &lt; 1/√2. Examples: Hg, Pb, Sn. <strong>Type II:</strong> Two critical fields H_C1 and H_C2. For H_C1 &lt; H &lt; H_C2, flux penetrates in quantised vortices (Abrikosov lattice) while bulk SC survives. κ &gt; 1/√2. Examples: Nb, all high-T_C materials. Practical applications (MRI magnets, maglev) use Type II.</p>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- UNIT VIII: MAGNETISM (L82–L87) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="unit8">
+  <div class="tag">Unit VIII · Lectures 82–87</div>
+  <h2>Magnetism in Solids</h2>
+  <div class="weeks">NPTEL Week 12+ · Diamagnetism → Langevin Paramagnetism → Hund's Rules → Ferromagnetism → Exchange</div>
+</div>
+
+<!-- L82 -->
+<div class="lcard" id="L82">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L82</span>
+  <span class="ltitle">Diamagnetism — Larmor Precession &amp; Langevin Derivation</span>
+  <span class="lweek">Week 12</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Magnetic Field Quantities Review</h4>
+<div class="fbox">
+  <div class="flbl">Key relations</div>
+  <span class="feq">B = μ₀(H + M) = μ₀(1+χ)H = μ_r μ₀ H</span>
+  <span class="feq">Magnetisation: M = χ·H  (χ = magnetic susceptibility)</span>
+  <span class="feq">χ &lt; 0: diamagnetic | χ &gt; 0 small: paramagnetic | χ ≫ 0: ferromagnetic</span>
+</div>
+<table>
+  <tr><th>Type</th><th>χ</th><th>T-dep</th><th>Origin</th><th>Examples</th></tr>
+  <tr><td>Diamagnetic</td><td>−10⁻⁶ to −10⁻⁵</td><td>None</td><td>Lenz's law: induced orbital moments oppose B</td><td>Cu, Bi, He, H₂O</td></tr>
+  <tr><td>Paramagnetic</td><td>+10⁻⁶ to +10⁻³</td><td>χ∝1/T</td><td>Permanent moments align with B vs thermal</td><td>Al, O₂, Mn²⁺</td></tr>
+  <tr><td>Ferromagnetic</td><td>≫1</td><td>χ∝1/(T−T_C)</td><td>Spontaneous alignment via exchange</td><td>Fe, Co, Ni, Gd</td></tr>
+  <tr><td>Antiferromagnetic</td><td>Small+</td><td>Peak at T_N</td><td>Antiparallel alignment; net M=0</td><td>MnO, FeO, Cr</td></tr>
+  <tr><td>Ferrimagnetic</td><td>Large+</td><td>Like ferro</td><td>Antiparallel but unequal; net M≠0</td><td>Fe₃O₄, ferrites</td></tr>
+</table>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Langevin Diamagnetic Susceptibility</div>
+  <div class="step"><b>Larmor precession:</b> In field B, orbiting electron's precession frequency: ω_L = eB/(2m_ec)</div>
+  <div class="step"><b>Change in orbital frequency →  change in current →  change in magnetic moment:</b></div>
+  <div class="step">δμ per electron = −(e²B/6m_ec²)·⟨r²⟩  &nbsp; (⟨ρ²⟩ = ⟨x²+y²⟩ = (2/3)⟨r²⟩, minus sign = Lenz)</div>
+  <div class="step"><b>N atoms, Z electrons each:</b> δM = N·Z·δμ = −(NZe²B/6m_ec²)⟨r²⟩</div>
+  <div class="rbox">χ_dia = δM/(B/μ₀) = −μ₀NZe²⟨r²⟩/(6m_ec²) &nbsp; [SI] &nbsp;&nbsp; ≈ −10⁻⁶ (small, negative)</div>
+</div>
+<div class="note">
+  <strong>Diamagnetism is Universal</strong>
+  Every material has diamagnetic contribution (all electrons respond to B via Lenz's law). But it is small and temperature-independent. In most materials it is overwhelmed by paramagnetism or ferromagnetism from unpaired electrons. Bi and graphite are unusual in having very large diamagnetic susceptibility (anomalous Landau diamagnetism from band structure).
+</div>
+</div>
+</div>
+
+<!-- L83 -->
+<div class="lcard" id="L83">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L83</span>
+  <span class="ltitle">Langevin Paramagnetism &amp; the Curie Law</span>
+  <span class="lweek">Week 12</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Full Derivation: Langevin Theory → M = nμ·L(a) → Curie Law</div>
+  <div class="step"><b>Setup:</b> n permanent dipoles/vol, each of magnitude μ, free to orient. In field H, PE = −μ_0μH cosθ. Let a = μ_0μH/k_BT.</div>
+  <div class="step"><b>Boltzmann distribution:</b> Fraction of dipoles in dΩ = 2π sinθ dθ: dn ∝ e^{a cosθ} sinθ dθ</div>
+  <div class="step"><b>Mean component along H:</b> ⟨cosθ⟩ = ∫₀^π cosθ e^{a cosθ} sinθ dθ / ∫₀^π e^{a cosθ} sinθ dθ</div>
+  <div class="step"><b>Substitute x = cosθ:</b> ⟨cosθ⟩ = ∫₋₁^{+1} x·e^{ax}dx / ∫₋₁^{+1} e^{ax}dx</div>
+  <div class="step">Numerator: ∂/∂a [∫e^{ax}dx] = ∂/∂a [(e^a−e^{-a})/a] = [(ae^a+ae^{-a}−e^a+e^{-a})/a²] / ... simplify</div>
+  <div class="step">Final: ⟨cosθ⟩ = coth(a) − 1/a = L(a)  ← Langevin function</div>
+  <div class="rbox">M = n·μ·L(a) &nbsp; where L(a) = coth(a) − 1/a, &nbsp; a = μH/k_BT</div>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 430 200" xmlns="http://www.w3.org/2000/svg" width="410">
+  <line x1="40" y1="155" x2="390" y2="155" stroke="#2c3347" stroke-width="1.5"/>
+  <line x1="40" y1="155" x2="40" y2="18" stroke="#2c3347" stroke-width="1.5"/>
+  <!-- Langevin L(a) -->
+  <path d="M40,155 Q75,142 110,115 Q145,88 180,72 Q230,52 290,40 L390,35" stroke="#4fc3a1" stroke-width="2.5" fill="none"/>
+  <!-- Linear approximation (small a) -->
+  <path d="M40,155 Q75,138 120,118" stroke="#c8a84b" stroke-width="1.8" stroke-dasharray="5,3"/>
+  <!-- Saturation line -->
+  <line x1="40" y1="35" x2="390" y2="35" stroke="#d46b6b" stroke-width="1" stroke-dasharray="3,3" opacity=".6"/>
+  <!-- Labels -->
+  <text x="394" y="158" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">a=μH/k_BT</text>
+  <text x="22" y="15" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">M/nμ</text>
+  <text x="25" y="38" fill="#d46b6b" font-size="9" font-family="JetBrains Mono">1</text>
+  <text x="25" y="155" fill="#7a7e8e" font-size="9" font-family="JetBrains Mono">0</text>
+  <text x="270" y="55" fill="#4fc3a1" font-size="10" font-family="Inter">L(a)=coth(a)−1/a</text>
+  <text x="80" y="124" fill="#c8a84b" font-size="10" font-family="Inter">Curie law ≈a/3</text>
+  <text x="330" y="38" fill="#d46b6b" font-size="10" font-family="Inter">saturation</text>
+</svg>
+<figcaption>Fig 83.1 — Langevin function L(a). Small a (ordinary fields, room T): linear → Curie law. Large a (low T or huge field): L→1 → saturation M = nμ. Classical result.</figcaption>
+</div>
+<div class="key">
+  <div class="klbl">Curie Law (small a ≪ 1 limit)</div>
+  <span class="keq">L(a) ≈ a/3 for a ≪ 1 → M = nμ²H/(3k_BT)</span>
+  <span class="keq">χ = M/H = C/T &nbsp; where C = nμ²/(3k_B)  (Curie constant)</span>
+  <p>Curie law: χ ∝ 1/T. At higher T, thermal disorder fights alignment → smaller χ. Observed experimentally in many paramagnetic salts and gases.</p>
+</div>
+</div>
+</div>
+
+<!-- L84 -->
+<div class="lcard" id="L84">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L84</span>
+  <span class="ltitle">Atomic Magnetic Moments — Orbital, Spin &amp; Total; Landé g-factor</span>
+  <span class="lweek">Week 12</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="fbox">
+  <div class="flbl">Sources of atomic magnetic moment</div>
+  <span class="feq">Orbital: μ_L = −(e/2m_ec)·L,  |μ_L| = μ_B√[ℓ(ℓ+1)]</span>
+  <span class="feq">Spin: μ_S = −g_s(e/2m_ec)·S,  g_s ≈ 2.0023 (Dirac + QED)</span>
+  <span class="feq">Bohr magneton: μ_B = eℏ/(2m_ec) = 9.274×10⁻²⁴ J/T</span>
+</div>
+<h4>Total Angular Momentum &amp; Landé g-factor</h4>
+<p>In free atoms, L and S precess about total J = L + S. The total magnetic moment μ_J = g_J·μ_B·J where g_J is the Landé g-factor:</p>
+<div class="fbox">
+  <div class="flbl">Landé g-factor (projection of μ onto J)</div>
+  <span class="feq">g_J = 1 + [J(J+1) + S(S+1) − L(L+1)] / [2J(J+1)]</span>
+  <span class="feq">Effective moment: μ_eff = g_J√[J(J+1)]·μ_B = P_eff·μ_B</span>
+  <span class="feq">Checks: L=0 → g_J=2 (pure spin) ✓.  S=0 → g_J=1 (pure orbital) ✓</span>
+</div>
+</div>
+</div>
+
+<!-- L85 -->
+<div class="lcard" id="L85">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L85</span>
+  <span class="ltitle">Hund's Rules, Brillouin Function &amp; Orbital Quenching</span>
+  <span class="lweek">Week 12</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="succ">
+  <strong>Hund's Three Rules — Ground State Configuration of Free Ions</strong>
+  <br><b>Rule 1 — Maximum S:</b> Fill each m_ℓ sublevel with spin-up before doubling up (Pauli + parallel spins minimise Coulomb repulsion by keeping electrons apart). S = ½ × (unpaired electrons).
+  <br><br><b>Rule 2 — Maximum L:</b> Given S, arrange electrons to maximise total orbital angular momentum L = |Σm_ℓ|. (Higher L → electrons orbit same way → lower repulsion.)
+  <br><br><b>Rule 3 — J from spin-orbit coupling (ζ·L·S):</b>
+  Shell &lt; half-filled → J = |L−S|.  Shell &gt; half-filled → J = L+S.  Exactly half-filled → L=0 → J = S.
+</div>
+<h4>Worked Examples</h4>
+<table>
+  <tr><th>Ion</th><th>Config</th><th>Filling</th><th>S</th><th>L</th><th>J</th><th>Term</th><th>g_J</th><th>P_eff(theory)</th><th>Expt</th></tr>
+  <tr><td>Fe²⁺</td><td>3d⁶</td><td>↑↑↑↑↑↓ (m_ℓ:+2,+1,0,−1,−2,+2)</td><td>2</td><td>2</td><td>4</td><td>⁵D₄</td><td>3/2</td><td>6.71</td><td>5.1–5.5</td></tr>
+  <tr><td>Mn²⁺</td><td>3d⁵</td><td>↑↑↑↑↑ (half-filled)</td><td>5/2</td><td>0</td><td>5/2</td><td>⁶S_{5/2}</td><td>2</td><td>5.92</td><td>5.9 ✓</td></tr>
+  <tr><td>Cr³⁺</td><td>3d³</td><td>↑↑↑__ (&lt;half)</td><td>3/2</td><td>3</td><td>3/2</td><td>⁴F_{3/2}</td><td>2/5</td><td>0.77</td><td>3.8 (orbital quenched)</td></tr>
+  <tr><td>Gd³⁺</td><td>4f⁷</td><td>Half-filled f</td><td>7/2</td><td>0</td><td>7/2</td><td>⁸S_{7/2}</td><td>2</td><td>7.94</td><td>7.98 ✓</td></tr>
+</table>
+<h4>Quantum Paramagnetism: Brillouin Function</h4>
+<p>Quantum mechanics allows only 2J+1 discrete values of m_J = −J,...,+J. The partition function is a finite sum:</p>
+<div class="key">
+  <div class="klbl">Brillouin Function B_J(x)</div>
+  <span class="keq">B_J(x) = [(2J+1)/(2J)]·coth[(2J+1)x/(2J)] − [1/(2J)]·coth[x/(2J)]</span>
+  <span class="keq">M = n·g_J·μ_B·J·B_J(x), &nbsp; x = g_J μ_B J H/(k_BT)</span>
+  <span class="keq">Small x limit: B_J(x) ≈ (J+1)x/(3J) → χ = ng_J²J(J+1)μ_B²/(3k_BT) = C/T</span>
+</div>
+<h4>Orbital Quenching in 3d Ions</h4>
+<div class="pq">
+"For transition metal ions the 3d shell is the outermost shell — directly exposed to the crystal electric field of surrounding ligands. This field is far stronger than the spin-orbit coupling. The crystal field makes the ground state a superposition of complex spherical harmonics with equal and opposite m_ℓ values — the result is that ⟨L_z⟩ = 0. The orbital angular momentum is said to be <b>quenched</b> — it no longer contributes to the magnetic moment. Only spin survives."
+<span class="who">— Prof. Manoj K. Harbola, Lecture 85</span>
+</div>
+<p>Consequence: 3d ions obey spin-only formula μ_eff ≈ 2√[S(S+1)]·μ_B, NOT g_J√[J(J+1)]·μ_B. Rare earth (4f) ions are shielded by 5s²5p⁶ → crystal field weak → full J coupling → g_J formula works.</p>
+</div>
+</div>
+
+<!-- L86 -->
+<div class="lcard" id="L86">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L86</span>
+  <span class="ltitle">Ferromagnetism — Weiss Molecular Field Theory &amp; Curie-Weiss Law</span>
+  <span class="lweek">Week 12</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<h4>Spontaneous Magnetisation</h4>
+<p>Below T_C, Fe/Co/Ni align spontaneously without any external field. This requires an internal effective field ~10⁷ Gauss — far beyond any magnetic dipole. Weiss (1907) postulated a "molecular field" proportional to M.</p>
+<table>
+  <tr><th>Material</th><th>T_C (K)</th><th>M_sat (μ_B/atom)</th><th>Weiss λ ≈</th></tr>
+  <tr><td>Fe</td><td>1043</td><td>2.22</td><td>~6700</td></tr>
+  <tr><td>Co</td><td>1388</td><td>1.72</td><td>~5600</td></tr>
+  <tr><td>Ni</td><td>631</td><td>0.606</td><td>~6600</td></tr>
+  <tr><td>Gd</td><td>292</td><td>7.63</td><td>~620</td></tr>
+</table>
+<div class="deriv">
+  <div class="dtitle">▸ Derivation: Curie-Weiss Law &amp; Curie Temperature T_C</div>
+  <div class="step"><b>Weiss hypothesis:</b> H_eff = H + λM  (λ = Weiss molecular field constant)</div>
+  <div class="step"><b>Self-consistency</b> (use Curie law for T &gt; T_C, small M): M = C·H_eff/T = C(H + λM)/T</div>
+  <div class="step">M·T = C·H + C·λ·M → M(T − Cλ) = C·H</div>
+  <div class="step"><b>Susceptibility:</b> χ = M/H = C/(T − Cλ) = C/(T − θ_f)</div>
+  <div class="rbox">Curie-Weiss Law: χ = C/(T − θ_f) &nbsp; where θ_f = T_C = C·λ &nbsp; (χ diverges at T_C!)</div>
+  <div class="step"><b>Finding T_C for H=0:</b> Self-consistency M = M_s·B_J(λg_Jμ_BM/k_BT) linearised near T_C:</div>
+  <div class="rbox">T_C = C·λ = nλg_J²J(J+1)μ_B²/(3k_B)</div>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg" width="420">
+  <line x1="40" y1="175" x2="400" y2="175" stroke="#2c3347" stroke-width="1.5"/>
+  <line x1="40" y1="175" x2="40" y2="18" stroke="#2c3347" stroke-width="1.5"/>
+  <!-- Curie-Weiss: 1/χ = (T−θ)/C — straight line with x-intercept at θ_f -->
+  <line x1="115" y1="175" x2="395" y2="30" stroke="#4fc3a1" stroke-width="2.5"/>
+  <!-- Pure Curie line (passes through origin) -->
+  <line x1="40" y1="175" x2="395" y2="30" stroke="#7a7e8e" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- T_C marker -->
+  <line x1="115" y1="175" x2="115" y2="162" stroke="#c8a84b" stroke-width="2"/>
+  <line x1="109" y1="175" x2="121" y2="175" stroke="#c8a84b" stroke-width="1.5"/>
+  <text x="100" y="192" fill="#c8a84b" font-size="9" font-family="JetBrains Mono">T_C=θ_f</text>
+  <!-- Slope label -->
+  <text x="310" y="72" fill="#4fc3a1" font-size="10" font-family="Inter">slope = 1/C</text>
+  <text x="290" y="90" fill="#7a7e8e" font-size="10" font-family="Inter">Curie (θ=0)</text>
+  <!-- Labels -->
+  <text x="403" y="178" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">T</text>
+  <text x="42" y="15" fill="#7a7e8e" font-size="10" font-family="JetBrains Mono">1/χ</text>
+  <text x="40" y="173" fill="#d46b6b" font-size="10" font-family="JetBrains Mono">0</text>
+</svg>
+<figcaption>Fig 86.1 — Curie-Weiss: plot 1/χ vs T → straight line. X-intercept = T_C = θ_f. Slope = 1/C gives Curie constant. Dashed grey = pure Curie law (passes through origin, θ_f=0).</figcaption>
+</div>
+</div>
+</div>
+
+<!-- L87 -->
+<div class="lcard" id="L87">
+<div class="lhdr" onclick="toggle(this)">
+  <span class="lnum">L87</span>
+  <span class="ltitle">Exchange Interaction — Origin of Weiss Field &amp; Heisenberg Hamiltonian</span>
+  <span class="lweek">Week 12</span><span class="larrow">▾</span>
+</div>
+<div class="lbody">
+<div class="deriv">
+  <div class="dtitle">▸ Why dipole-dipole is 10⁶× too small</div>
+  <div class="step"><b>Dipolar energy</b> (two magnetic dipoles separated by a ~ 2Å = 2×10⁻¹⁰ m):</div>
+  <div class="step">E_dip ~ μ₀μ_B²/a³ ~ (4π×10⁻⁷)(9.27×10⁻²⁴)²/(2×10⁻¹⁰)³ ~ 10⁻²⁵ J ~ 10⁻⁶ eV</div>
+  <div class="step">Equivalent temperature: T_dip ~ 10⁻⁶ eV / k_B ~ 0.01 K.  But T_C(Fe) = 1043 K!</div>
+  <div class="step"><b>Required Weiss field:</b> k_BT_C/μ_B ~ (1.38×10⁻²³×1043)/(9.27×10⁻²⁴) ~ 1.55×10³ T = 1.55×10⁷ Gauss</div>
+  <div class="rbox">Dipole-dipole is ~10⁶× too small. The Weiss field CANNOT be magnetic. It is ELECTROSTATIC!</div>
+</div>
+<h4>Heitler-London: Exchange Integral</h4>
+<div class="deriv">
+  <div class="dtitle">▸ Heitler-London: Origin of Exchange from Pauli + Coulomb</div>
+  <div class="step"><b>Two electrons on atoms A and B.</b> Two-electron state must be antisymmetric (fermions).</div>
+  <div class="step"><b>Singlet (S_total=0):</b> symmetric spatial × antisymmetric spin (↑↓−↓↑)/√2. Energy = C + |J_ex|</div>
+  <div class="step"><b>Triplet (S_total=1):</b> antisymmetric spatial × symmetric spin. Energy = C − |J_ex|</div>
+  <div class="step"><b>Exchange integral:</b> J_ex = ∫∫ψ_A*(1)ψ_B*(2)·(e²/4πε₀r₁₂)·ψ_A(2)ψ_B(1) dV₁dV₂</div>
+  <div class="step"><b>Energy splitting:</b> E_singlet − E_triplet = 2|J_ex|  (exchange splitting)</div>
+  <div class="rbox">J_ex &gt; 0 → triplet (parallel spins) is LOWER energy → FERROMAGNETISM<br>J_ex &lt; 0 → singlet (antiparallel) lower → ANTIFERROMAGNETISM<br>J_ex is ELECTROSTATIC ~ 0.1 eV → T_C ~ J_ex/k_B ~ 1000 K ✓</div>
+</div>
+<div class="key">
+  <div class="klbl">Heisenberg Exchange Hamiltonian</div>
+  <span class="keq">H_ex = −2J_ex Σ_{⟨ij⟩} S_i · S_j</span>
+  <p>J_ex &gt; 0 → ferromagnetism (Fe, Co, Ni, Gd). J_ex &lt; 0 → antiferromagnetism (MnO, FeO, Cr). The Weiss constant λ = 2ZJ_ex/(ng_J²μ_B²) where Z = coordination number.</p>
+</div>
+<h4>Stoner Criterion for Itinerant Ferromagnetism</h4>
+<p>For 3d metals (electrons not localised): the exchange interaction splits the spin-up and spin-down 3d sub-bands.</p>
+<div class="fbox">
+  <div class="flbl">Stoner criterion</div>
+  <span class="feq">I · D(E_F) &gt; 1  → spontaneous spin splitting → ferromagnetism</span>
+  <span class="feq">I = Stoner parameter (exchange energy), D(E_F) = total DOS at Fermi level</span>
+  <span class="feq">Ni: 3d⁸4s² → 3d band nearly full (9.4 e) → moment = 10 − 9.4 = 0.6 μ_B/atom (expt: 0.606 ✓)</span>
+  <span class="feq">Fe: moment ≈ 5−2.78 = 2.22 μ_B/atom (expt: 2.22 ✓)</span>
+</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- MASTER Q&A BANK -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="qa">
+  <div class="tag">★ Exam Preparation</div>
+  <h2>Master Q&amp;A Bank</h2>
+  <div class="weeks">All high-weightage derivations, conceptual questions &amp; numerical problems</div>
+</div>
+
+<div class="qa-wrap">
+<h3>I — Drude &amp; Sommerfeld</h3>
+<div class="qa">
+  <div class="qa-q">Derive σ = ne²τ/m from Drude theory. Verify numerically for copper.</div>
+  <div class="qa-a">EOM: m(dv/dt) = eE − mv/τ. Steady state: v_d = eEτ/m. j = nev_d → σ = ne²τ/m. For Cu: n=8.5×10²⁸ m⁻³, τ≈2.5×10⁻¹⁴ s → σ ≈ 5.9×10⁷ Ω⁻¹m⁻¹ (expt: 6.0×10⁷ ✓).</div>
+</div>
+<div class="qa">
+  <div class="qa-q">What is the Hall effect? Derive R_H from Drude theory. Explain the sign anomaly in Be and Al.</div>
+  <div class="qa-a">Hall effect: transverse voltage V_H develops when current-carrying conductor is in a perpendicular magnetic field. <br>Derivation: Current J in ŷ, B=B₀ẑ. Steady state with J_x=0: 0 = eE_x + ev_yB₀ → E_x = −v_yB₀ = −J_yB₀/(ne) → R_H = −1/(ne).<br>Sign anomaly: Be, Zn (divalent) and Al (trivalent) show R_H &gt; 0, implying positive carriers. Band theory explanation: these materials have nearly-full valence bands. Electrons near the top have m*&lt;0; described as holes with charge +e → R_H = +1/(n_he) &gt; 0. Drude model, knowing only negative electrons, cannot explain this.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Derive E_F at T=0. Show ⟨ε⟩ = (3/5)E_F. What is the Fermi temperature for Cu?</div>
+  <div class="qa-a">D(ε) = C√ε (C = (V/2π²)(2m/ℏ²)^{3/2}). N = ∫₀^{E_F}Dε dε = (2C/3)E_F^{3/2} → E_F = (ℏ²/2m)(3π²n)^{2/3}.<br>⟨ε⟩ = U₀/N = [C(2/5)E_F^{5/2}]/[C(2/3)E_F^{3/2}] = (3/5)E_F.<br>Cu: n=8.5×10²⁸ m⁻³ → E_F ≈ 7.04 eV → T_F = E_F/k_B ≈ 81,700 K. At 300K: T/T_F ≈ 0.004 → highly degenerate.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Derive the Sommerfeld electronic specific heat C_ve = γT. Why is it ~100× smaller than Drude's prediction?</div>
+  <div class="qa-a">From Sommerfeld expansion: U(T) = U₀ + (π²/6)D(E_F)(k_BT)² → C_ve = dU/dT = (π²/3)D(E_F)k_B²T = (π²nk_B²/2E_F)T = γT.<br>100× smaller because only fraction ~k_BT/E_F ≈ 0.004 of electrons can be thermally excited (need empty state above). Drude assumed all N electrons absorb heat → factor of order k_BT/E_F too large.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">State and derive the Wiedemann-Franz law. What is the correct Lorenz number?</div>
+  <div class="qa-a">κ = (1/3)v_F²τC_ve_vol; σ = ne²τ/m. Ratio: κ/(σT) = v_F²C_ve_vol/(3ne²/m) = 2E_F·(π²nk_B²/(2E_F))/(3ne²) = π²k_B²/(3e²) = L₀.<br>L₀ = π²k_B²/(3e²) = 2.44×10⁻⁸ W·Ω·K⁻². Universal (n, τ cancel). Drude gives (3/2)(k_B/e)² = 1.24×10⁻⁸ — factor 2 wrong.</div>
+</div>
+</div>
+
+<div class="qa-wrap">
+<h3>II — Crystal Structure &amp; Diffraction</h3>
+<div class="qa">
+  <div class="qa-q">Prove that only n=1,2,3,4,6-fold rotation axes are possible in a crystal lattice.</div>
+  <div class="qa-a">Rotate adjacent lattice point B (distance t from A) by φ=360°/n about A, and A about B. New points C,D must be lattice points → CD must be integer multiple of t: CD = t+2t cosφ = mt. So 2cosφ = m−1. Since |cosφ|≤1: m ∈{−1,0,1,2,3} → φ = 180°(n=2), 120°(n=3), 90°(n=4), 60°(n=6), 0°(n=1). n=5: cos72°≈0.309 → m≈1.618 not integer → forbidden.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Derive Bragg's law. What are systematic absences and what causes them?</div>
+  <div class="qa-a">Path difference between rays from adjacent planes = 2d sinθ. Constructive interference: 2d sinθ = nλ.<br>Systematic absences: structure factor F_hkl = Σf_j exp[2πi(hx_j+ky_j+lz_j)] = 0 for certain (hkl). BCC: F = f[1+e^{πi(h+k+l)}] = 0 when h+k+l = odd → (100),(111),(210)... absent. FCC: absent when h,k,l mixed (some odd, some even) → (100),(110),(210)... absent, but (111),(200),(220)... present.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Calculate the packing fraction of FCC. Why is 74% the theoretical maximum for spheres?</div>
+  <div class="qa-a">FCC: atoms touch along face diagonal → 4r = a√2 → r = a√2/4. n=4. PF = 4×(4π/3)(a√2/4)³/a³ = π/(3√2) ≈ 74.05%.<br>74% is maximum because FCC/HCP achieve coordination number 12 — no sphere can be simultaneously tangent to more than 12 identical spheres of the same radius. Kepler conjectured this in 1611; proved by T. Hales (1998). Both FCC (ABCABC) and HCP (ABABAB) close-packed stackings achieve this.</div>
+</div>
+</div>
+
+<div class="qa-wrap">
+<h3>III — Phonons &amp; Specific Heat</h3>
+<div class="qa">
+  <div class="qa-q">Derive ω(k) for the 1D monatomic chain. Draw the dispersion and explain acoustic limit, zone boundary, and BZ.</div>
+  <div class="qa-a">EOM: Mü_n = K(u_{n+1}+u_{n-1}−2u_n). Trial u_n = Ae^{i(nka−ωt)}: Mω² = 4K sin²(ka/2) → ω = 2√(K/M)|sin(ka/2)|.<br>k→0: ω≈a√(K/M)·k (linear, acoustic, v_s = a√(K/M)). k=π/a: ω_max=2√(K/M), v_g=0 (standing wave, Bragg reflection). BZ: ω periodic with period 2π/a → all distinct modes in k∈[−π/a,+π/a]. N unit cells → N k-values.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Derive the diatomic chain dispersion. Explain acoustic vs optical and the forbidden gap.</div>
+  <div class="qa-a">EOM for M,m atoms → trial waves → (2K−ω²M)A = 2Kcos(ka)B and 2Kcos(ka)A = (2K−ω²m)B. Det=0 → ω² = K(1/M+1/m) ± K√[(1/M+1/m)²−4sin²(ka)/Mm].<br>Acoustic (−): ω→0 as k→0, atoms move same direction (sound). Optical (+): ω=√[2K(1/M+1/m)] at k=0, atoms move opposite (IR coupling). Gap: √(2K/M) to √(2K/m) — no propagating modes; vanishes when M=m.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Derive the Debye T³ law. Why does it succeed where Einstein fails?</div>
+  <div class="qa-a">Debye DOS: g(ν)=9Nν²/ν_D³. E = 9Nk_BT(T/θ_D)³∫₀^{x_D} x³/(e^x−1)dx.<br>Low T (x_D→∞): ∫→π⁴/15. E = (3π⁴Nk_B/5)T⁴/θ_D³ → C_V = (12π⁴Nk_B/5)(T/θ_D)³ ∝ T³. ✓<br>Einstein fails because it has a single frequency ω_E: at T≪θ_E, no modes with energy ≲k_BT → exponential C_E∝e^{-θ_E/T}. Debye has g(ω)∝ω² → acoustic modes at all ω→0 always excitable at any T&gt;0 → power-law C_V∝T³.</div>
+</div>
+</div>
+
+<div class="qa-wrap">
+<h3>IV — Band Theory &amp; Semiconductors</h3>
+<div class="qa">
+  <div class="qa-q">State and prove Bloch's theorem. What are its physical consequences?</div>
+  <div class="qa-a">Statement: ψ_{nk}(r) = e^{ik·r}u_{nk}(r) where u is lattice-periodic.<br>Proof: [H,T_R]=0 → simultaneous eigenstates. |c_R|=1 → c_R=e^{ik·R}. Writing ψ=e^{ik·r}u(r): ψ(r+R)=e^{ik·R}ψ(r) requires u(r+R)=u(r). ■<br>Consequences: (1) No scattering from perfect lattice (Bloch state is exact eigenstate). (2) Mean free path λ≫a at low T. (3) Crystal momentum ℏk defined (mod ℏG). (4) Energy bands E_n(k) labelled by n,k.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Derive the KP dispersion relation. Explain the three limiting cases and how energy gaps form.</div>
+  <div class="qa-a">Square-well potential → Schrödinger in each region + Bloch BC + 4 continuity conditions → determinant=0. Dirac comb limit (V₀→∞, b→0, P=mV₀ab/ℏ² finite): (P/αa)sin(αa)+cos(αa)=cos(ka).<br>Gaps form where |LHS|&gt;1 (no real k). At αa=nπ: sin(nπ)=0 so LHS=cos(nπ)=±1 — right at boundary of gap. The ±1 band edges in reduced zone scheme correspond to Bragg reflection at BZ boundaries.<br>P=0: free electron; P→∞: atomic levels; general P: bands + gaps.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Define effective mass. Derive it and explain why m*&lt;0 leads to the concept of holes. How does this explain the positive Hall coefficient?</div>
+  <div class="qa-a">v_g = (1/ℏ)dE/dk. F = ℏ(dk/dt). a = dv_g/dt = (1/ℏ²)(d²E/dk²)F. Comparing F=m*a: m* = ℏ²/(d²E/dk²).<br>Near band top: d²E/dk²&lt;0 → m*&lt;0 → electron decelerates under force. Reinterpret: hole (missing electron) has charge +e, mass m_h*=−m*&gt;0, wavevector k_h=−k_e. Holes drift in direction of E field.<br>Positive Hall: In Be (2s²), 2s band nearly full → holes dominate → R_H = +1/(n_he) &gt; 0. ✓</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Derive the intrinsic carrier concentration n_i for a semiconductor.</div>
+  <div class="qa-a">n = N_C exp[−(E_C−E_F)/k_BT], p = N_V exp[−(E_F−E_V)/k_BT] (Boltzmann approx).<br>Mass action: np = N_CN_V exp(−E_g/k_BT) = n_i² (independent of E_F!).<br>Intrinsic (n=p): E_F ≈ (E_C+E_V)/2. n_i = √(N_CN_V)·exp(−E_g/2k_BT).<br>Si (E_g=1.1 eV, 300K): n_i ≈ 1.5×10¹⁰ cm⁻³.</div>
+</div>
+</div>
+
+<div class="qa-wrap">
+<h3>V — Magnetism</h3>
+<div class="qa">
+  <div class="qa-q">Derive Langevin's classical theory of paramagnetism and obtain the Curie law.</div>
+  <div class="qa-a">PE = −μH cosθ. Boltzmann: dn ∝ e^{a cosθ}sinθ dθ, a=μH/k_BT. ⟨cosθ⟩ = coth(a)−1/a = L(a) (Langevin function). M = nμL(a). For a≪1: L(a)≈a/3 → M = nμ²H/(3k_BT). χ = C/T, C = nμ²/(3k_B). ✓</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Apply Hund's rules to Fe²⁺ (3d⁶). Find L, S, J. Calculate g_J and μ_eff.</div>
+  <div class="qa-a">3d⁶ filling (m_ℓ = +2,+1,0,−1,−2): ↑↑↑↑↑↓ (last electron pairs with m_ℓ=+2).<br>Rule 1: S = 5×½ − 1×½ = 2. Rule 2: L = |2+1+0+(−1)+(−2)+2| = 2. Rule 3: &gt;half-filled → J = L+S = 4. Term: ⁵D₄.<br>g_J = 1 + [J(J+1)+S(S+1)−L(L+1)]/(2J(J+1)) = 1+(20+6−6)/40 = 3/2.<br>μ_eff = (3/2)√[4×5]·μ_B = (3/2)√20·μ_B ≈ 6.71 μ_B. Experiment: ~5.1–5.5 μ_B (orbital quenching in crystal → spin-only ≈ 4.90 μ_B fits better).</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Derive the Curie-Weiss law using Weiss molecular field theory. Find T_C.</div>
+  <div class="qa-a">H_eff = H + λM. Curie law: M = C(H+λM)/T → χ = M/H = C/(T−Cλ) = C/(T−T_C). ← Curie-Weiss. T_C = Cλ = nλg_J²J(J+1)μ_B²/(3k_B). Experimentally: plot 1/χ vs T → straight line; x-intercept = T_C; slope = 1/C.</div>
+</div>
+<div class="qa">
+  <div class="qa-q">Why can't magnetic dipole-dipole interactions explain ferromagnetism? What is the exchange interaction?</div>
+  <div class="qa-a">Dipolar energy E_dip ~ μ₀μ_B²/a³ ~ 10⁻²⁵ J ~ 10⁻⁶ eV → T_dip ~ 0.01 K. Observed T_C(Fe) = 1043 K → factor 10⁶ discrepancy. Required Weiss field ~10⁷ Gauss — impossible magnetically.<br>Exchange: from Coulomb repulsion + Pauli exclusion. Heitler-London: singlet energy = C+|J_ex|; triplet = C−|J_ex|. Exchange integral J_ex = ∫∫ψ_A*(1)ψ_B*(2)(e²/r₁₂)ψ_A(2)ψ_B(1)dV₁dV₂. Electrostatic origin, scale ~0.1 eV → T_C ~ 1000 K ✓. J_ex&gt;0 → ferro; J_ex&lt;0 → antiferro. H_ex = −2J_ex Σ_{⟨ij⟩}S_i·S_j.</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- FORMULA SHEET -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="unit-banner" id="formulas">
+  <div class="tag">Quick Reference</div>
+  <h2>Complete Formula Sheet</h2>
+</div>
+
+<div class="qa-wrap">
+<h3>Free Electron Theory</h3>
+<table>
+  <tr><th>Quantity</th><th>Formula</th><th>Notes</th></tr>
+  <tr><td>Drude σ</td><td>ne²τ/m</td><td>τ ~ 10⁻¹⁴ s at 300K</td></tr>
+  <tr><td>Hall coefficient</td><td>R_H = −1/(ne)</td><td>Negative for electrons, +1/ne for holes</td></tr>
+  <tr><td>3D DOS</td><td>D(ε) = (V/2π²)(2m/ℏ²)^{3/2}√ε</td><td>∝√ε (parabolic)</td></tr>
+  <tr><td>Fermi energy T=0</td><td>E_F = (ℏ²/2m)(3π²n)^{2/3}</td><td>Cu: ~7 eV</td></tr>
+  <tr><td>Fermi wavevector</td><td>k_F = (3π²n)^{1/3}</td><td>—</td></tr>
+  <tr><td>Average energy T=0</td><td>⟨ε⟩ = (3/5)E_F</td><td>Pauli pressure</td></tr>
+  <tr><td>E_F(T)</td><td>E_F₀[1−(π²/12)(k_BT/E_F₀)²]</td><td>Tiny correction at 300K</td></tr>
+  <tr><td>Electronic C_V</td><td>γT, γ = π²nk_B²/(2E_F)</td><td>Linear in T</td></tr>
+  <tr><td>Lorenz number</td><td>L₀ = π²k_B²/(3e²) = 2.44×10⁻⁸ W·Ω·K⁻²</td><td>Universal (n,τ cancel)</td></tr>
+  <tr><td>Pauli χ</td><td>χ_P = 3nμ₀μ_B²/(2E_F)</td><td>T-independent</td></tr>
+</table>
+
+<h3>Crystal Structure &amp; Diffraction</h3>
+<table>
+  <tr><th>Quantity</th><th>Formula</th><th>Notes</th></tr>
+  <tr><td>Packing fraction SC</td><td>π/6 ≈ 52%</td><td>2r=a</td></tr>
+  <tr><td>Packing fraction BCC</td><td>π√3/8 ≈ 68%</td><td>4r=a√3</td></tr>
+  <tr><td>Packing fraction FCC</td><td>π/(3√2) ≈ 74%</td><td>4r=a√2</td></tr>
+  <tr><td>d_hkl (cubic)</td><td>a/√(h²+k²+l²)</td><td>—</td></tr>
+  <tr><td>Bragg's law</td><td>2d sinθ = nλ</td><td>Positions only; intensities need F_hkl</td></tr>
+  <tr><td>Structure factor</td><td>Σf_j exp[2πi(hx_j+ky_j+lz_j)]</td><td>BCC absent: h+k+l odd; FCC: mixed hkl</td></tr>
+  <tr><td>RL vectors</td><td>a*=2π(b×c)/(a·b×c), etc.</td><td>a·a*=2π, a·b*=0</td></tr>
+</table>
+
+<h3>Phonons &amp; Specific Heat</h3>
+<table>
+  <tr><th>Quantity</th><th>Formula</th><th>Notes</th></tr>
+  <tr><td>Monatomic chain ω</td><td>2√(K/M)|sin(ka/2)|</td><td>ω_max=2√(K/M)</td></tr>
+  <tr><td>Sound speed</td><td>v_s = a√(K/M)</td><td>Long-wave limit</td></tr>
+  <tr><td>Diatomic acoustic max</td><td>√(2K/M)</td><td>M = heavier mass</td></tr>
+  <tr><td>Diatomic optical min (k=0)</td><td>√[2K(1/M+1/m)]</td><td>—</td></tr>
+  <tr><td>Phonon ⟨n⟩</td><td>1/(exp(ℏω/k_BT)−1)</td><td>Bose-Einstein (bosons)</td></tr>
+  <tr><td>Einstein C_E</td><td>3Nk_B·x²e^x/(e^x−1)², x=θ_E/T</td><td>Low-T: ∝x²e^{-x}</td></tr>
+  <tr><td>Debye DOS</td><td>g(ν) = 9Nν²/ν_D³</td><td>∝ν² up to ν_D</td></tr>
+  <tr><td>Debye C_V (low T)</td><td>(12π⁴Nk_B/5)(T/θ_D)³</td><td>T³ law</td></tr>
+  <tr><td>Debye cutoff</td><td>θ_D = ℏv_s(6π²n)^{1/3}/k_B</td><td>Cu: 315K; diamond: 1860K</td></tr>
+</table>
+
+<h3>Band Theory &amp; Semiconductors</h3>
+<table>
+  <tr><th>Quantity</th><th>Formula</th><th>Notes</th></tr>
+  <tr><td>Bloch wavefunction</td><td>ψ_{nk} = e^{ik·r}u_{nk}(r)</td><td>u lattice-periodic</td></tr>
+  <tr><td>KP (Dirac comb)</td><td>(P/αa)sin(αa)+cos(αa)=cos(ka)</td><td>P=mV₀ab/ℏ²</td></tr>
+  <tr><td>NFE band gap</td><td>E_g = 2|V_G|</td><td>At k=G/2 (BZ boundary)</td></tr>
+  <tr><td>Group velocity</td><td>v = (1/ℏ)dE/dk</td><td>Zero at zone boundary</td></tr>
+  <tr><td>Effective mass</td><td>m* = ℏ²/(d²E/dk²)</td><td>Can be negative (band top)</td></tr>
+  <tr><td>Intrinsic n_i</td><td>√(N_CN_V)·exp(−E_g/2k_BT)</td><td>Si 300K: 1.5×10¹⁰ cm⁻³</td></tr>
+  <tr><td>Mass action</td><td>np = n_i²</td><td>Always at equilibrium</td></tr>
+  <tr><td>BCS gap</td><td>2Δ(0) = 3.528 k_BT_C</td><td>Universal ratio</td></tr>
+</table>
+
+<h3>Magnetism</h3>
+<table>
+  <tr><th>Quantity</th><th>Formula</th><th>Notes</th></tr>
+  <tr><td>Diamagnetic χ</td><td>−μ₀NZe²⟨r²⟩/(6m_ec²)</td><td>T-independent, small</td></tr>
+  <tr><td>Langevin function</td><td>L(a) = coth(a) − 1/a</td><td>a = μH/k_BT</td></tr>
+  <tr><td>Curie law</td><td>χ = C/T, C = nμ²/(3k_B)</td><td>a≪1 limit</td></tr>
+  <tr><td>Brillouin function</td><td>B_J(x) = [(2J+1)/2J]coth[...] − [1/2J]coth[x/2J]</td><td>Quantum paramagnetism</td></tr>
+  <tr><td>Landé g-factor</td><td>1 + [J(J+1)+S(S+1)−L(L+1)]/(2J(J+1))</td><td>—</td></tr>
+  <tr><td>μ_eff (free ion)</td><td>g_J√[J(J+1)]·μ_B</td><td>4f ions; 3d: spin-only 2√[S(S+1)]μ_B</td></tr>
+  <tr><td>Curie-Weiss</td><td>χ = C/(T−T_C)</td><td>T&gt;T_C; T_C = Cλ</td></tr>
+  <tr><td>Weiss T_C</td><td>nλg_J²J(J+1)μ_B²/(3k_B)</td><td>= Cλ</td></tr>
+  <tr><td>Exchange Hamiltonian</td><td>H_ex = −2J_ex Σ_{⟨ij⟩}S_i·S_j</td><td>J_ex&gt;0: ferro; &lt;0: antiferro</td></tr>
+  <tr><td>Bohr magneton μ_B</td><td>eℏ/(2m_ec) = 9.274×10⁻²⁴ J/T</td><td>—</td></tr>
+</table>
+</div>
+
+<footer>
+  Compiled from NPTEL IIT Kanpur: <em>Introduction to Solid State Physics</em> · Prof. Manoj K. Harbola &amp; Prof. Satyajit Banerjee · Lectures 1–26, 62–80, 82–87<br>
+  Enhanced with RR Ma'am and PS Sir lecture notes (arrycd.github.io/Notes-Hub) · References: Kittel · Ashcroft &amp; Mermin · Dekker · 2026
+</footer>
+</main>
+</div>
+
+<script>
+function toggle(hdr){
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('open');
+}
+// Open first lecture in each unit by default on load
+document.addEventListener('DOMContentLoaded', function(){
+  const firstHeaders = document.querySelectorAll('.lcard:first-of-type .lhdr');
+  // just leave all closed so user can explore
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistical Mechanics — SR Sir Class Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #080810;
+  --bg-card:   #0f0f1c;
+  --bg-lift:   #14142a;
+  --bg-deep:   #1a1a32;
+  --border:    #2a2a4a;
+  --border-hi: #3d3d6a;
+  --text:      #dcdcf0;
+  --text-dim:  #8888b0;
+  --text-mute: #55557a;
+  --gold:      #f0b347;
+  --gold-dim:  #7a5c20;
+  --teal:      #3dd6c4;
+  --teal-dim:  #1a5c56;
+  --rose:      #f05c7a;
+  --rose-dim:  #6a1a28;
+  --indigo:    #7a8cff;
+  --indigo-dim:#2a2e6a;
+  --sage:      #7adf90;
+  --sage-dim:  #1a4a26;
+  --radius:    8px;
+  --font-body: 'Outfit', sans-serif;
+  --font-serif:'EB Garamond', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;min-height:100vh;}
+
+/* HERO */
+#hero{background:linear-gradient(135deg,#060612 0%,#0c0c24 50%,#0a0a1e 100%);border-bottom:1px solid var(--border);padding:2.5rem 2rem 2rem;text-align:center;position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 30% 50%,rgba(122,140,255,.07) 0%,transparent 70%),radial-gradient(ellipse 50% 35% at 70% 40%,rgba(61,214,196,.05) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);background:rgba(61,214,196,.08);border:1px solid rgba(61,214,196,.2);padding:.25rem .75rem;border-radius:2rem;margin-bottom:1rem;}
+#hero h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;color:#fff;letter-spacing:-.01em;line-height:1.2;}
+#hero h1 span{color:var(--gold);}
+.hero-sub{font-size:.95rem;color:var(--text-dim);margin-top:.5rem;font-style:italic;font-family:var(--font-serif);}
+.hero-meta{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;}
+.hero-meta span{font-family:var(--font-mono);font-size:.72rem;color:var(--text-mute);letter-spacing:.08em;text-transform:uppercase;}
+.hero-meta span b{color:var(--text-dim);}
+
+/* STICKY NAV */
+#sticky-nav{position:sticky;top:0;z-index:100;background:rgba(8,8,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.6rem 1.2rem;display:flex;gap:.25rem;flex-wrap:wrap;justify-content:center;}
+#sticky-nav a{font-family:var(--font-mono);font-size:.7rem;color:var(--text-mute);text-decoration:none;padding:.3rem .6rem;border-radius:4px;letter-spacing:.04em;white-space:nowrap;transition:background .15s,color .15s;}
+#sticky-nav a:hover{background:var(--bg-deep);color:var(--teal);}
+
+/* LAYOUT */
+main{max-width:860px;margin:0 auto;padding:1.5rem 1.5rem 4rem;}
+
+/* LECTURE BLOCK */
+.lec{margin:2.5rem 0;position:relative;}
+.lec-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;}
+.lec-num{flex-shrink:0;width:2.8rem;height:2.8rem;background:var(--bg-deep);border:1px solid var(--border-hi);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.8rem;font-weight:500;color:var(--indigo);line-height:1;text-align:center;}
+.lec-title-block{flex:1;}
+.lec-title-block h2{font-family:var(--font-serif);font-size:1.55rem;font-weight:500;color:#fff;line-height:1.2;}
+.lec-date{font-family:var(--font-mono);font-size:.68rem;color:var(--text-mute);letter-spacing:.1em;margin-top:.2rem;}
+.lec-body{padding-left:3.8rem;}
+hr.sec-div{border:none;border-top:1px solid var(--border);margin:2rem 0;}
+
+/* HEADINGS */
+h3{font-family:var(--font-serif);font-size:1.2rem;color:var(--gold);margin:1.8rem 0 .7rem;font-weight:400;}
+h4{font-size:.95rem;font-weight:600;color:var(--text);margin:1.2rem 0 .4rem;letter-spacing:.02em;}
+p{margin:.5rem 0;}
+
+/* BOXES */
+.box{border-radius:var(--radius);padding:1rem 1.1rem;margin:1rem 0;border-left:3px solid transparent;font-size:.93rem;}
+.box-key{background:rgba(240,179,71,.06);border-color:var(--gold);}
+.box-key .box-title{color:var(--gold);}
+.box-concept{background:rgba(122,140,255,.06);border-color:var(--indigo);}
+.box-concept .box-title{color:var(--indigo);}
+.box-warn{background:rgba(240,92,122,.06);border-color:var(--rose);}
+.box-warn .box-title{color:var(--rose);}
+.box-sage{background:rgba(122,223,144,.05);border-color:var(--sage);}
+.box-sage .box-title{color:var(--sage);}
+.box-teal{background:rgba(61,214,196,.05);border-color:var(--teal);}
+.box-teal .box-title{color:var(--teal);}
+.box-title{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:.5rem;}
+
+/* EQUATIONS */
+.eq-block{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1.2rem;margin:.8rem 0;font-family:var(--font-serif);font-size:1.05rem;text-align:center;line-height:1.9;overflow-x:auto;}
+.eq-block .eq-label{font-family:var(--font-mono);font-size:.65rem;color:var(--text-mute);display:block;text-align:right;margin-top:.3rem;letter-spacing:.06em;}
+.eq-inline{font-family:var(--font-serif);font-size:1.05em;background:rgba(255,255,255,.04);border:1px solid var(--border);padding:.05em .3em;border-radius:4px;}
+
+/* STEPS */
+.steps{counter-reset:step;margin:.8rem 0;}
+.step{display:flex;gap:.9rem;margin:.5rem 0;align-items:flex-start;}
+.step::before{counter-increment:step;content:counter(step);flex-shrink:0;width:1.5rem;height:1.5rem;background:var(--bg-deep);border:1px solid var(--border-hi);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.65rem;color:var(--indigo);margin-top:.15rem;}
+
+/* DERIVATION */
+details.deriv{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);margin:1rem 0;overflow:hidden;}
+details.deriv > summary{cursor:pointer;padding:.8rem 1rem;display:flex;align-items:center;gap:.7rem;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.05em;color:var(--teal);user-select:none;list-style:none;background:var(--bg-lift);border-bottom:1px solid transparent;transition:background .15s;}
+details.deriv > summary:hover{background:var(--bg-deep);}
+details.deriv[open] > summary{border-bottom-color:var(--border);color:var(--text);}
+details.deriv > summary::before{content:'▶';font-size:.6rem;color:var(--teal);transition:transform .2s;}
+details.deriv[open] > summary::before{transform:rotate(90deg);}
+details.deriv .deriv-body{padding:1rem 1.2rem;}
+
+/* Q&A */
+.qa-block{margin:1.5rem 0;}
+.qa-block h4{color:var(--text-dim);font-size:.82rem;font-family:var(--font-mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem;}
+details.qa{border:1px solid var(--border);border-radius:var(--radius);margin:.5rem 0;overflow:hidden;}
+details.qa > summary{cursor:pointer;padding:.75rem 1rem;background:var(--bg-card);font-size:.9rem;color:var(--text);list-style:none;display:flex;align-items:flex-start;gap:.7rem;transition:background .15s;}
+details.qa > summary:hover{background:var(--bg-lift);}
+details.qa > summary::before{content:'▶';font-size:.6rem;color:var(--gold);flex-shrink:0;margin-top:.3rem;transition:transform .2s;}
+details.qa[open] > summary::before{transform:rotate(90deg);}
+details.qa .qa-ans{padding:.9rem 1.1rem;border-top:1px solid var(--border);font-size:.9rem;color:var(--text-dim);line-height:1.75;}
+
+/* DIAGRAM */
+.diagram{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin:1rem 0;text-align:center;}
+.diagram svg text{font-family:var(--font-serif);}
+.diagram figcaption{font-size:.78rem;color:var(--text-mute);font-style:italic;margin-top:.5rem;font-family:var(--font-serif);line-height:1.4;}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;}
+table{width:100%;border-collapse:collapse;font-size:.85rem;}
+th{background:var(--bg-deep);color:var(--text);font-weight:600;padding:.5rem .8rem;text-align:left;border-bottom:2px solid var(--border-hi);font-family:var(--font-mono);font-size:.75rem;letter-spacing:.05em;}
+td{padding:.45rem .8rem;border-bottom:1px solid var(--border);color:var(--text-dim);}
+tr:hover td{background:rgba(255,255,255,.02);}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:.68rem;color:var(--text-mute);letter-spacing:.08em;}
+footer span{color:var(--text-dim);}
+.footer-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.2rem;}
+.footer-row span,.footer-row a{white-space:nowrap;}
+
+/* UTIL */
+.tag{display:inline-block;font-family:var(--font-mono);font-size:.65rem;padding:.1rem .45rem;border-radius:3px;letter-spacing:.05em;}
+.tag-ref{background:rgba(122,140,255,.12);color:var(--indigo);}
+.tag-assign{background:rgba(240,179,71,.1);color:var(--gold);}
+.tag-exam{background:rgba(240,92,122,.1);color:var(--rose);}
+sub,sup{font-size:.7em;}
+em{font-style:italic;color:var(--text);}
+strong{font-weight:600;color:var(--text);}
+
+/* HAMBURGER NAV */
+.nav-burger{display:none;position:sticky;top:0;z-index:101;background:rgba(8,8,16,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.55rem 1.2rem;justify-content:space-between;align-items:center;}
+.nav-burger-label{font-family:var(--font-mono);font-size:.72rem;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;}
+.burger-btn{background:none;border:none;cursor:pointer;padding:.3rem;display:flex;flex-direction:column;gap:4px;}
+.burger-btn span{display:block;width:20px;height:1.5px;background:var(--text-dim);transition:transform .2s,opacity .2s;}
+.burger-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+.burger-btn.open span:nth-child(2){opacity:0;}
+.burger-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+.nav-dropdown{position:sticky;top:2.45rem;z-index:100;display:none;background:rgba(8,8,16,.99);border-bottom:1px solid var(--border);padding:.3rem 0;max-height:70vh;overflow-y:auto;}
+.nav-dropdown.open{display:block;}
+.nav-dropdown a{display:block;font-family:var(--font-mono);font-size:.8rem;color:var(--text-mute);text-decoration:none;padding:.7rem 1.4rem;letter-spacing:.04em;border-left:2px solid transparent;transition:color .15s,border-color .15s,background .15s;}
+.nav-dropdown a:hover,.nav-dropdown a:active{color:var(--teal);border-left-color:var(--teal);background:rgba(61,214,196,.05);}
+
+@media(max-width:680px){
+  #sticky-nav{display:none !important;}
+  .nav-burger{display:flex;}
+}
+@media(max-width:600px){
+  .lec-body{padding-left:0;}
+  .lec-header{flex-direction:column;gap:.5rem;}
+  .step{display:block;}
+  .step::before{display:inline-flex;margin-right:.5rem;margin-bottom:.25rem;vertical-align:middle;}
+  .eq-block{font-size:.88rem;text-align:left;padding:.75rem .9rem;word-break:break-word;}
+  .hero-meta{gap:.6rem;}
+  .hero-meta span{font-size:.68rem;}
+  .tbl-wrap{-webkit-overflow-scrolling:touch;}
+  .box{word-break:break-word;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<header id="hero">
+  <div class="hero-tag">SR Sir · Statistical Mechanics · 2026</div>
+  <h1>Statistical Mechanics<br><span>— Ensembles, Partition Functions &amp; Thermodynamics</span></h1>
+  <p class="hero-sub">From Classical Oscillators to Relativistic Gases — Complete Notes with Derivations, Diagrams &amp; Expanded Explanations</p>
+  <div class="hero-meta">
+    <span><b>Ref:</b> Reif · Pathria · Kittel &amp; Kroemer</span>
+    <span><b>Level:</b> Advanced Undergraduate</span>
+    <span><b>Topics:</b> Canonical · Grand Canonical · Micro-canonical</span>
+    <span><b>Notes by:</b> Anuska Dey · Web by Arya Naiya</span>
+  </div>
+</header>
+
+<!-- ═══ STICKY NAV (desktop) ═══ -->
+<nav id="sticky-nav">
+  <a href="#stats-primer">Stats Primer</a>
+  <a href="#lec1">L1 · 2D Harmonic Osc.</a>
+  <a href="#lec2">L2 · 3D Harmonic Osc. (Canonical)</a>
+  <a href="#lec3">L3 · Grand Canonical Ideal Gas</a>
+  <a href="#lec4">L4 · Ideal Gas (Canonical)</a>
+  <a href="#lec5">L5 · Ultra-relativistic Gas</a>
+  <a href="#lec6">L6 · Relativistic Gas (Canonical)</a>
+  <a href="#lec7">L7 · Law of Atmospheres</a>
+  <a href="#lec8">L8 · Micro-canonical</a>
+  <a href="#iq">★ Imp Questions</a>
+</nav>
+
+<!-- ═══ HAMBURGER NAV (mobile) ═══ -->
+<div class="nav-burger" id="navBurger">
+  <span class="nav-burger-label">SR Sir · Stat Mech</span>
+  <button class="burger-btn" id="burgerBtn" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+<nav class="nav-dropdown" id="navDropdown">
+  <a href="#stats-primer" onclick="closeMenu()">📐 Statistical Toolkit</a>
+  <a href="#lec1"  onclick="closeMenu()">L-1 · 2D Classical Harmonic Oscillators</a>
+  <a href="#lec2"  onclick="closeMenu()">L-2 · 3D Harmonic Osc. (Canonical)</a>
+  <a href="#lec3"  onclick="closeMenu()">L-3 · Grand Canonical Ideal Gas</a>
+  <a href="#lec4"  onclick="closeMenu()">L-4 · Ideal Gas (Canonical)</a>
+  <a href="#lec5"  onclick="closeMenu()">L-5 · Ultra-relativistic Gas (Canonical)</a>
+  <a href="#lec6"  onclick="closeMenu()">L-6 · Relativistic Gas (Canonical)</a>
+  <a href="#lec7"  onclick="closeMenu()">L-7 · Law of Atmospheres</a>
+  <a href="#lec8"  onclick="closeMenu()">L-8 · Micro-canonical Ensemble</a>
+  <a href="#iq"    onclick="closeMenu()">★ Important Questions</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════ STATS PRIMER ═══════════════════════ -->
+<section class="lec" id="stats-primer">
+  <div class="lec-header">
+    <div class="lec-num" style="color:var(--teal);">📐</div>
+    <div class="lec-title-block">
+      <h2>Statistical Toolkit — Essential Framework</h2>
+      <div class="lec-date">Prerequisite Mathematics &nbsp;·&nbsp; <span class="tag tag-ref">Reif Ch. 1–2</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <div class="box box-concept">
+      <div class="box-title">Why Statistics?</div>
+      A macroscopic system has ~10<sup>23</sup> degrees of freedom. We cannot solve 10<sup>23</sup> equations of motion. Instead, we make probabilistic statements: rather than asking <em>what is</em> the state, we ask <em>how probable</em> is each state? The entire edifice of statistical mechanics rests on one postulate: <strong>in equilibrium, all accessible microstates of an isolated system are equally probable</strong> (the postulate of equal a priori probabilities).
+    </div>
+
+    <h3>Gaussian Integrals — The Workhorse</h3>
+    <p>Almost every partition function calculation reduces to Gaussian integrals. The master formula is:</p>
+    <div class="eq-block">
+      ∫<sub>−∞</sub><sup>∞</sup> e<sup>−αx²</sup> dx = √(π/α) &nbsp;&nbsp; (α &gt; 0)
+      <span class="eq-label">Gaussian integral — fundamental result</span>
+    </div>
+    <p>From this, by differentiation with respect to α, we get moments:</p>
+    <div class="eq-block">
+      ∫<sub>−∞</sub><sup>∞</sup> x² e<sup>−αx²</sup> dx = (1/2)√(π/α³) = √π / (2α<sup>3/2</sup>)
+    </div>
+    <div class="box box-teal">
+      <div class="box-title">Trick: Differentiating under the integral sign</div>
+      To evaluate ∫x<sup>2n</sup> e<sup>−αx²</sup>dx, differentiate the master Gaussian n times with respect to α and multiply by (−1)<sup>n</sup>. This is a powerful technique used repeatedly in calculating ⟨E⟩, ⟨E²⟩, etc.
+    </div>
+
+    <h3>The Gamma Function</h3>
+    <p>For momentum integrals in spherical coordinates (e.g., relativistic gas), the Gamma function appears:</p>
+    <div class="eq-block">
+      Γ(n) = ∫<sub>0</sub><sup>∞</sup> u<sup>n−1</sup> e<sup>−u</sup> du &nbsp;&nbsp;,&nbsp;&nbsp; Γ(n+1) = n! &nbsp;&nbsp;,&nbsp;&nbsp; Γ(1/2) = √π
+    </div>
+    <p>Key values: Γ(1)=1, Γ(2)=1, Γ(3)=2, Γ(4)=6. For the ultra-relativistic gas, Γ(3) = 2! = 2 is used directly.</p>
+
+    <h3>Stirling's Approximation</h3>
+    <p>When computing the partition function for N indistinguishable particles, ln(N!) appears. For large N:</p>
+    <div class="eq-block">
+      ln N! ≈ N ln N − N &nbsp;&nbsp; (Stirling's approximation, N ≫ 1)
+    </div>
+    <div class="box box-warn">
+      <div class="box-title">When to use it</div>
+      Stirling's approximation is only valid for N ≫ 1 (thermodynamic limit). It is used to simplify ln Z<sub>N</sub> when the partition function involves N! from indistinguishability. Without it, expressions like ln(V/Nλ³) + 1 (the Sackur-Tetrode equation) cannot be derived cleanly.
+    </div>
+
+    <h3>Three Ensembles at a Glance</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Ensemble</th><th>Fixed variables</th><th>Fluctuating</th><th>Partition function</th><th>Key potential</th></tr>
+      <tr><td><strong>Micro-canonical</strong></td><td>E, V, N</td><td>—</td><td>Ω(E,V,N) = # microstates</td><td>S = k<sub>B</sub> ln Ω</td></tr>
+      <tr><td><strong>Canonical</strong></td><td>T, V, N</td><td>E</td><td>Z = Σ e<sup>−βE<sub>i</sub></sup></td><td>F = −k<sub>B</sub>T ln Z</td></tr>
+      <tr><td><strong>Grand Canonical</strong></td><td>T, V, μ</td><td>E, N</td><td>Ξ = Σ<sub>N</sub> e<sup>βμN</sup>Z<sub>N</sub></td><td>Ω = −k<sub>B</sub>T ln Ξ</td></tr>
+    </table>
+    </div>
+
+    <h3>β and the Boltzmann Factor</h3>
+    <div class="eq-block">
+      β = 1/(k<sub>B</sub>T) &nbsp;&nbsp;&nbsp; [units: J<sup>−1</sup> or eV<sup>−1</sup>]
+    </div>
+    <p>The Boltzmann factor e<sup>−βE</sup> is the relative probability of a microstate with energy E when the system is in contact with a heat bath at temperature T. At high T (small β), all states are nearly equally probable. At low T (large β), only low-energy states are occupied.</p>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ═══════════════════════ L1: 2D HARMONIC OSCILLATORS ═══════════════════════ -->
+<section class="lec" id="lec1">
+  <div class="lec-header">
+    <div class="lec-num">L<br>1</div>
+    <div class="lec-title-block">
+      <h2>Thermodynamic Properties of N Distinguishable Classical Harmonic Oscillators in 2D</h2>
+      <div class="lec-date">Canonical Ensemble &nbsp;·&nbsp; <span class="tag tag-ref">Reif Ch. 7 · Pathria Ch. 3</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>The System</h3>
+    <p>Consider N classical, distinguishable harmonic oscillators in 2 dimensions. Each oscillator can move in the x and y directions, giving 2 position and 2 momentum coordinates. The Hamiltonian for a single oscillator is:</p>
+    <div class="eq-block">
+      H = p<sub>x</sub>²/(2m) + p<sub>y</sub>²/(2m) + ½mω²(x² + y²)
+      <span class="eq-label">Eq. (i) — Single oscillator Hamiltonian (2D)</span>
+    </div>
+
+    <div class="box box-concept">
+      <div class="box-title">Why "Distinguishable"?</div>
+      In the canonical ensemble, if the particles are <em>distinguishable</em> (e.g., they are localized at lattice sites and we can label them), the total partition function is simply Z<sub>N</sub> = (Z<sub>1</sub>)<sup>N</sup> — no factor of 1/N! is needed. For indistinguishable particles (like an ideal gas), we must divide by N! to avoid Gibbs paradox.
+    </div>
+
+    <h3>Roadmap to Thermodynamic Properties</h3>
+    <p>To get thermodynamic properties, SR Sir's notes outline four steps:</p>
+    <div class="steps">
+      <div class="step">Compute the single-particle partition function Z<sub>1</sub>(T,V,N) from the phase-space integral.</div>
+      <div class="step">Get the total partition function Z<sub>N</sub> = (Z<sub>1</sub>)<sup>N</sup> (since particles are distinguishable).</div>
+      <div class="step">Compute the Helmholtz free energy: F = −k<sub>B</sub>T ln Z<sub>N</sub>.</div>
+      <div class="step">Derive entropy S = −(∂F/∂T)<sub>V</sub>, internal energy U, pressure P, heat capacity C<sub>V</sub>, and chemical potential μ.</div>
+    </div>
+
+    <h3>i) Single-Particle Partition Function</h3>
+    <p>In classical statistical mechanics, the single-particle partition function integrates over phase space, weighted by the Boltzmann factor:</p>
+    <div class="eq-block">
+      Z<sub>1</sub> = (1/h²) ∫∫∫∫ e<sup>−βH</sup> dx dy dp<sub>x</sub> dp<sub>y</sub>
+    </div>
+    <p>Here h² is the phase-space cell volume for 2D (one factor of h per degree of freedom). Substituting the Hamiltonian:</p>
+    <div class="eq-block">
+      Z<sub>1</sub> = (1/h²) [∫ e<sup>−β p<sub>x</sub>²/2m</sup> dp<sub>x</sub>] [∫ e<sup>−β p<sub>y</sub>²/2m</sup> dp<sub>y</sub>] [∫ e<sup>−βmω²x²/2</sup> dx] [∫ e<sup>−βmω²y²/2</sup> dy]
+    </div>
+
+    <details class="deriv">
+      <summary>▶ Full derivation: Evaluating the Gaussian integrals</summary>
+      <div class="deriv-body">
+        <p>Each integral is Gaussian. For the momentum integral in x:</p>
+        <div class="eq-block">∫<sub>−∞</sub><sup>∞</sup> e<sup>−β p<sub>x</sub>²/2m</sup> dp<sub>x</sub> = √(π / (β/2m)) = √(2πm/β)</div>
+        <p>Similarly for p<sub>y</sub>. For the position integral in x (with α = βmω²/2):</p>
+        <div class="eq-block">∫<sub>−∞</sub><sup>∞</sup> e<sup>−βmω²x²/2</sup> dx = √(π / (βmω²/2)) = √(2π/βmω²)</div>
+        <p>Similarly for y. Therefore:</p>
+        <div class="eq-block">Z<sub>1</sub> = (1/h²) × (2πm/β) × (2π/βmω²) = (1/h²) × (4π²/β²ω²) = 4π²/(h²β²ω²)</div>
+        <p>Recognising β = 1/k<sub>B</sub>T and ħ = h/2π:</p>
+        <div class="eq-block">Z<sub>1</sub> = (k<sub>B</sub>T/ħω)² = (k<sub>B</sub>T)²/(ħω)²</div>
+        <p>This can also be written as Z<sub>1</sub> = (k<sub>B</sub>T/ħω)² since 4π²/h² = 1/ħ².</p>
+      </div>
+    </details>
+
+    <div class="eq-block">
+      Z<sub>1</sub><sup>(T,V,N)</sup> = (k<sub>B</sub>T / ħω)²
+      <span class="eq-label">Single-particle partition function — 2D harmonic oscillator</span>
+    </div>
+
+    <h3>ii) Total Partition Function</h3>
+    <p>Since the oscillators are distinguishable, the total partition function is just the product of N single-particle functions:</p>
+    <div class="eq-block">
+      Z<sub>N</sub> = (Z<sub>1</sub>)<sup>N</sup> = (k<sub>B</sub>T / ħω)<sup>2N</sup>
+      <span class="eq-label">Total partition function — N distinguishable 2D oscillators</span>
+    </div>
+
+    <h3>iii) Helmholtz Free Energy</h3>
+    <div class="eq-block">
+      F = −k<sub>B</sub>T ln Z<sub>N</sub> = −k<sub>B</sub>T · 2N · ln(k<sub>B</sub>T/ħω)
+      <br>
+      ∴ F = −2N k<sub>B</sub>T ln(k<sub>B</sub>T / ħω)
+      <span class="eq-label">Helmholtz free energy</span>
+    </div>
+
+    <h3>iv) Entropy</h3>
+    <div class="eq-block">
+      S = −(∂F/∂T)<sub>V</sub> = −∂/∂T [−2Nk<sub>B</sub>T ln(k<sub>B</sub>T/ħω)]
+      <br>
+      = 2Nk<sub>B</sub> ln(k<sub>B</sub>T/ħω) + 2Nk<sub>B</sub>T · (1/T)
+      <br>
+      ∴ <strong>S(E,V,N) = 2Nk<sub>B</sub> [1 + ln(k<sub>B</sub>T/ħω)]</strong>
+      <span class="eq-label">Entropy — 2D classical harmonic oscillators</span>
+    </div>
+
+    <h3>v) Internal Energy, C<sub>V</sub>, and Chemical Potential</h3>
+    <p>From U = F + TS, or equivalently U = −∂(ln Z<sub>N</sub>)/∂β:</p>
+    <div class="eq-block">
+      ln Z<sub>N</sub> = 2N ln(k<sub>B</sub>T/ħω) = −2N ln(βħω)
+      <br>
+      U = −∂(ln Z<sub>N</sub>)/∂β = −∂/∂β [−2N ln(βħω)] = 2N/β
+      <br>
+      ∴ <strong>U = 2Nk<sub>B</sub>T</strong>
+      <span class="eq-label">Internal energy — 2N quadratic degrees of freedom, each ½k<sub>B</sub>T</span>
+    </div>
+    <div class="box box-key">
+      <div class="box-title">Equipartition Theorem</div>
+      Each quadratic term in the Hamiltonian contributes ½k<sub>B</sub>T to the average energy. For N 2D oscillators: 4N quadratic terms (p<sub>x</sub>², p<sub>y</sub>², x², y² for each oscillator) × ½k<sub>B</sub>T = 2Nk<sub>B</sub>T. This is the <em>classical equipartition theorem</em>, which holds exactly in the classical regime (high T).
+    </div>
+    <div class="eq-block">
+      C<sub>V</sub> = (∂U/∂T)<sub>N,V</sub> = 2Nk<sub>B</sub>
+      <br>
+      P = −(∂F/∂V)<sub>T</sub> = 0 &nbsp;&nbsp; [H is volume-independent for oscillators]
+      <br>
+      ⟨E⟩ per oscillator = U/N = 2k<sub>B</sub>T
+    </div>
+
+    <div class="box box-sage">
+      <div class="box-title">Chemical Potential</div>
+      μ = (∂F/∂N)<sub>T,V</sub> = ∂/∂N [−2Nk<sub>B</sub>T ln(k<sub>B</sub>T/ħω)]
+      = −2k<sub>B</sub>T ln(k<sub>B</sub>T/ħω) = −2k<sub>B</sub>T ln(k<sub>B</sub>T/ħω)
+      <br><br>
+      This is negative (assuming k<sub>B</sub>T > ħω, i.e., classical regime), which makes sense: adding one more oscillator to the system lowers the free energy in the high-T classical limit.
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why does the partition function for a 2D oscillator depend on T² and not T?</summary>
+        <div class="qa-ans">The 2D oscillator has <em>four</em> quadratic degrees of freedom (two kinetic, two potential). Each Gaussian integral over a quadratic variable contributes a factor of √(π/α) ∝ β<sup>−1/2</sup> ∝ T<sup>1/2</sup>. Four such integrals give a total T<sup>4/2</sup> = T² dependence, with the 1/h² prefactor providing the correct dimensionless combination. In d dimensions, Z<sub>1</sub> ∝ (k<sub>B</sub>T/ħω)<sup>d</sup>.</div>
+      </details>
+      <details class="qa">
+        <summary>Why is pressure zero for a harmonic oscillator system?</summary>
+        <div class="qa-ans">The Hamiltonian H = p²/2m + ½mω²r² contains no explicit dependence on the volume V. The oscillator is "trapped" at a fixed centre — the restoring force is from the potential, not from container walls. Therefore ∂H/∂V = 0, and consequently P = −(∂F/∂V)<sub>T</sub> = 0. This contrasts with an ideal gas where the kinetic energy term gives rise to pressure.</div>
+      </details>
+      <details class="qa">
+        <summary>What does "classical limit" mean here, and when does it break down?</summary>
+        <div class="qa-ans">The classical treatment is valid when the thermal energy k<sub>B</sub>T ≫ ħω — the level spacing of the quantum harmonic oscillator. In this limit, the discrete sum over quantum states Σ e<sup>−βnħω</sup> can be approximated by the continuous phase-space integral. At low temperatures (k<sub>B</sub>T ≪ ħω), only the ground state is occupied, and the classical result fails catastrophically. The quantum heat capacity approaches zero as T→0 (third law), while the classical C<sub>V</sub> = 2Nk<sub>B</sub> is temperature-independent — the Einstein model captures this correction.</div>
+      </details>
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ═══════════════════════ L2: 3D HARMONIC OSC CANONICAL ═══════════════════════ -->
+<section class="lec" id="lec2">
+  <div class="lec-header">
+    <div class="lec-num">L<br>2</div>
+    <div class="lec-title-block">
+      <h2>N Distinguishable Classical Harmonic Oscillators in 3D (Canonical Ensemble)</h2>
+      <div class="lec-date">Canonical Ensemble · Einstein Solid framework &nbsp;·&nbsp; <span class="tag tag-ref">Kittel &amp; Kroemer Ch. 3</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Hamiltonian</h3>
+    <div class="eq-block">
+      H = Σ<sub>i=1</sub><sup>N</sup> [p<sub>i</sub>²/(2m) + ½mω²x<sub>i</sub>²]
+      <span class="eq-label">1D oscillators; each particle has one spatial degree of freedom</span>
+    </div>
+    <p>Note: in SR Sir's notes, this is written as a 1D oscillator Hamiltonian summed over N particles. For a 3D isotropic oscillator, just replace each 1D integral with a 3D one. The derivation is completely analogous.</p>
+
+    <h3>Partition Function for One Oscillator</h3>
+    <p>The single-particle partition function separates into a momentum integral (M.I.) and position integral (P.I.):</p>
+    <div class="eq-block">
+      Z<sub>1</sub> = (1/h) ∫<sub>−∞</sub><sup>∞</sup> e<sup>−βp²/2m</sup> dp · ∫<sub>−∞</sub><sup>∞</sup> e<sup>−βmω²x²/2</sup> dx
+    </div>
+
+    <details class="deriv">
+      <summary>▶ Derivation: Momentum and position integrals for 1D oscillator</summary>
+      <div class="deriv-body">
+        <p><strong>Momentum integral (M.I.):</strong> Let α = β/(2m):</p>
+        <div class="eq-block">∫<sub>−∞</sub><sup>∞</sup> e<sup>−βp²/2m</sup> dp = √(π/α) = √(2πm/β) = √(2πmk<sub>B</sub>T)</div>
+        <p><strong>Position integral (P.I.):</strong> Let α = βmω²/2:</p>
+        <div class="eq-block">∫<sub>−∞</sub><sup>∞</sup> e<sup>−βmω²x²/2</sup> dx = √(2π/(βmω²)) = √(2πk<sub>B</sub>T/(mω²))</div>
+        <p><strong>Combining:</strong></p>
+        <div class="eq-block">Z<sub>1</sub> = (1/h) · √(2πmk<sub>B</sub>T) · √(2πk<sub>B</sub>T/(mω²)) = (1/h) · 2πk<sub>B</sub>T/ω = k<sub>B</sub>T/(ħω)</div>
+        <p>For the 3D oscillator, each dimension contributes independently:</p>
+        <div class="eq-block">Z<sub>1</sub><sup>3D</sup> = (k<sub>B</sub>T/ħω)<sup>3</sup></div>
+      </div>
+    </details>
+
+    <div class="eq-block">
+      Z<sub>1</sub><sup>(1D)</sup> = k<sub>B</sub>T/(ħω) &nbsp;&nbsp;&nbsp; Z<sub>1</sub><sup>(3D)</sup> = (k<sub>B</sub>T/ħω)<sup>3</sup>
+    </div>
+
+    <h3>Total Partition Function</h3>
+    <div class="eq-block">
+      Z<sub>N</sub> = (Z<sub>1</sub>)<sup>N</sup> = (k<sub>B</sub>T/ħω)<sup>N</sup> &nbsp; [1D] &nbsp;&nbsp;or&nbsp;&nbsp; (k<sub>B</sub>T/ħω)<sup>3N</sup> &nbsp; [3D]
+      <span class="eq-label">Distinguishable particles: no 1/N! factor</span>
+    </div>
+
+    <h3>Helmholtz Free Energy</h3>
+    <div class="eq-block">
+      F = −k<sub>B</sub>T ln Z<sub>N</sub> = −Nk<sub>B</sub>T ln(k<sub>B</sub>T/ħω) &nbsp; [1D]
+    </div>
+
+    <h3>Entropy</h3>
+    <div class="eq-block">
+      S = −(∂F/∂T)<sub>V</sub> = Nk<sub>B</sub>[1 + ln(k<sub>B</sub>T/ħω)] &nbsp; [1D]
+      <br>
+      S = 3Nk<sub>B</sub>[1 + ln(k<sub>B</sub>T/ħω)] &nbsp; [3D]
+    </div>
+
+    <h3>Average Energy and Heat Capacity</h3>
+    <div class="eq-block">
+      ⟨E⟩ = U = Nk<sub>B</sub>T &nbsp; [1D, from equipartition: 2 quadratic DoF × ½k<sub>B</sub>T]
+      <br>
+      U = 3Nk<sub>B</sub>T &nbsp; [3D]
+      <br>
+      C<sub>V</sub> = Nk<sub>B</sub> &nbsp; [1D] &nbsp;&nbsp; C<sub>V</sub> = 3Nk<sub>B</sub> &nbsp; [3D — Dulong–Petit law]
+      <span class="eq-label">Classical Dulong–Petit: C<sub>V</sub> = 3Nk<sub>B</sub> per mole = 3R</span>
+    </div>
+
+    <div class="box box-key">
+      <div class="box-title">The Dulong–Petit Law</div>
+      For a 3D solid of N atoms treated as distinguishable harmonic oscillators, C<sub>V</sub> = 3Nk<sub>B</sub> = 3R per mole. This was observed experimentally long before statistical mechanics existed. It breaks down at low temperatures — the quantum Einstein and Debye models fix this, giving C<sub>V</sub> → 0 as T → 0 in agreement with the third law of thermodynamics.
+    </div>
+
+    <h3>Pressure</h3>
+    <div class="eq-block">
+      P = −(∂F/∂V)<sub>T</sub> = 0
+    </div>
+    <p>Again zero, for the same reason as the 2D case: the harmonic oscillator Hamiltonian is volume-independent.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:500px">
+        <!-- Axes -->
+        <line x1="60" y1="150" x2="440" y2="150" stroke="#3d3d6a" stroke-width="1.5"/>
+        <line x1="60" y1="20" x2="60" y2="150" stroke="#3d3d6a" stroke-width="1.5"/>
+        <!-- Classical Cv = 3NkB (horizontal line) -->
+        <line x1="60" y1="60" x2="440" y2="60" stroke="#f0b347" stroke-width="2" stroke-dasharray="6,3"/>
+        <!-- Einstein curve -->
+        <path d="M70,148 Q120,148 160,130 Q220,90 280,70 Q340,62 440,60" stroke="#3dd6c4" stroke-width="2" fill="none"/>
+        <!-- Labels -->
+        <text x="445" y="64" font-size="10" fill="#f0b347">3Nk_B (classical)</text>
+        <text x="285" y="65" font-size="10" fill="#3dd6c4">Einstein model</text>
+        <text x="420" y="165" font-size="11" fill="#8888b0">T</text>
+        <text x="30" y="55" font-size="10" fill="#8888b0" text-anchor="middle">C_V</text>
+        <text x="62" y="63" font-size="9" fill="#55557a">3Nk</text>
+        <!-- T_E marker -->
+        <line x1="160" y1="150" x2="160" y2="148" stroke="#55557a" stroke-width="1"/>
+        <text x="158" y="163" font-size="9" fill="#55557a">T_E</text>
+      </svg>
+      <figcaption>Heat capacity vs temperature: the classical (Dulong–Petit) result is a horizontal line at 3Nk<sub>B</sub>. The quantum Einstein model approaches this at high T but falls to zero as T→0. T<sub>E</sub> = ħω/k<sub>B</sub> is the Einstein temperature.</figcaption>
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why does the Dulong–Petit law fail at low temperatures?</summary>
+        <div class="qa-ans">The classical partition function treats energy as continuous, which is valid when k<sub>B</sub>T ≫ ħω. At low T, quantum mechanics forces the oscillator into discrete energy levels nħω. When k<sub>B</sub>T ≪ ħω, thermal fluctuations cannot excite the oscillator from its ground state, so it contributes nothing to the heat capacity. The quantum correction (Einstein model) gives C<sub>V</sub> ∝ (ħω/k<sub>B</sub>T)² e<sup>−ħω/k<sub>B</sub>T</sup> → 0 as T→0.</div>
+      </details>
+      <details class="qa">
+        <summary>Derive the average energy using U = −∂(ln Z)/∂β directly.</summary>
+        <div class="qa-ans">For 1D: ln Z<sub>N</sub> = N ln(k<sub>B</sub>T/ħω) = N ln(1/(βħω)) = −N ln(βħω).
+        Therefore U = −∂(ln Z<sub>N</sub>)/∂β = −∂/∂β(−N ln βħω) = N · ∂(ln β)/∂β = N/β = Nk<sub>B</sub>T. ✓</div>
+      </details>
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ═══════════════════════ L3: GRAND CANONICAL IDEAL GAS ═══════════════════════ -->
+<section class="lec" id="lec3">
+  <div class="lec-header">
+    <div class="lec-num">L<br>3</div>
+    <div class="lec-title-block">
+      <h2>Classical Ideal Gas in the Grand Canonical (Macro-canonical) Ensemble</h2>
+      <div class="lec-date">Grand Canonical Ensemble &nbsp;·&nbsp; <span class="tag tag-ref">Pathria Ch. 4 · Reif Ch. 9</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>The Grand Canonical Partition Function</h3>
+    <p>In the grand canonical ensemble, both energy and particle number fluctuate. The system is in contact with a heat bath (temperature T) and a particle reservoir (chemical potential μ). The grand partition function is:</p>
+    <div class="eq-block">
+      Ξ = Σ<sub>N=0</sub><sup>∞</sup> Σ<sub>states</sub> e<sup>−β(E<sub>i</sub> − μN)</sup> = Σ<sub>N=0</sub><sup>∞</sup> e<sup>βμN</sup> Z<sub>N</sub>
+      <span class="eq-label">Grand partition function (grand canonical sum)</span>
+    </div>
+    <p>Here Z<sub>N</sub> is the canonical partition function for exactly N particles.</p>
+
+    <h3>Hamiltonian</h3>
+    <div class="eq-block">
+      H = p²/(2m) &nbsp; (single particle, 3D ideal gas)
+    </div>
+
+    <h3>Canonical Partition Function for N Indistinguishable Particles</h3>
+    <div class="eq-block">
+      Z<sub>N</sub> = (1/N!) (Z<sub>1</sub>)<sup>N</sup>
+    </div>
+    <p>The 1/N! accounts for indistinguishability. The single-particle partition function is:</p>
+    <div class="eq-block">
+      Z<sub>1</sub> = (1/h³) ∫ d³q d³p e<sup>−βp²/2m</sup>
+    </div>
+    <p>The position integral gives the total volume: ∫d³q = V. The momentum integral:</p>
+    <div class="eq-block">
+      ∫ d³p e<sup>−βp²/2m</sup> = (∫<sub>−∞</sub><sup>∞</sup> dp<sub>x</sub> e<sup>−βp<sub>x</sub>²/2m</sup>)<sup>3</sup> = (2πmk<sub>B</sub>T)<sup>3/2</sup>
+    </div>
+
+    <details class="deriv">
+      <summary>▶ Derivation: Single-particle partition function and thermal de Broglie wavelength</summary>
+      <div class="deriv-body">
+        <div class="eq-block">Z<sub>1</sub> = V/h³ · (2πmk<sub>B</sub>T)<sup>3/2</sup></div>
+        <p>Define the <strong>thermal de Broglie wavelength</strong>:</p>
+        <div class="eq-block">λ = h/√(2πmk<sub>B</sub>T)</div>
+        <p>Then: λ³ = h³/(2πmk<sub>B</sub>T)<sup>3/2</sup>, so:</p>
+        <div class="eq-block">Z<sub>1</sub> = V/λ³</div>
+        <p>Physical interpretation: λ is the quantum length scale below which quantum effects become important. When the inter-particle spacing (V/N)<sup>1/3</sup> ≫ λ, classical statistics is valid. When (V/N)<sup>1/3</sup> ~ λ, quantum degeneracy effects (Fermi-Dirac or Bose-Einstein) become crucial.</p>
+      </div>
+    </details>
+
+    <div class="eq-block">
+      Z<sub>1</sub> = V/λ³ &nbsp;&nbsp;where&nbsp;&nbsp; λ = h/√(2πmk<sub>B</sub>T)
+      <span class="eq-label">Thermal de Broglie wavelength</span>
+    </div>
+    <div class="eq-block">
+      Z<sub>N</sub> = (1/N!)(V/λ³)<sup>N</sup>
+    </div>
+
+    <h3>Grand Partition Function</h3>
+    <div class="eq-block">
+      Ξ = Σ<sub>N=0</sub><sup>∞</sup> e<sup>βμN</sup> · (1/N!)(V/λ³)<sup>N</sup> = Σ<sub>N=0</sub><sup>∞</sup> (1/N!)(Ve<sup>βμ</sup>/λ³)<sup>N</sup>
+    </div>
+    <p>This is exactly the Taylor series for the exponential function:</p>
+    <div class="eq-block">
+      Ξ = exp(V e<sup>βμ</sup>/λ³)
+      <span class="eq-label">Grand partition function for the classical ideal gas</span>
+    </div>
+
+    <h3>Grand Potential</h3>
+    <div class="eq-block">
+      Ω(T,V,μ) = −k<sub>B</sub>T ln Ξ = −k<sub>B</sub>T · (V/λ³) e<sup>μ/k<sub>B</sub>T</sup>
+    </div>
+
+    <h3>Thermodynamic Properties from Grand Potential</h3>
+
+    <h4>1. Average number of particles ⟨N⟩</h4>
+    <div class="eq-block">
+      ⟨N⟩ = (1/β)(∂ ln Ξ/∂μ)<sub>T,V</sub> = k<sub>B</sub>T · (∂ ln Ξ/∂μ) = (V/λ³) e<sup>βμ</sup>
+      <span class="eq-label">Average particle number in the grand canonical ensemble</span>
+    </div>
+    <p>Rearranging: e<sup>βμ</sup> = ⟨N⟩λ³/V, so μ = k<sub>B</sub>T ln(⟨N⟩λ³/V).</p>
+
+    <h4>2. Internal energy ⟨E⟩</h4>
+    <details class="deriv">
+      <summary>▶ Derivation of internal energy</summary>
+      <div class="deriv-body">
+        <p>ln Ξ = (V/λ³)e<sup>βμ</sup>. We need ∂(ln Ξ)/∂β at fixed V, μ.</p>
+        <p>Write λ = h/√(2πmk<sub>B</sub>T) = h · (β/2πm)<sup>1/2</sup>, so λ³ = h³(β/2πm)<sup>3/2</sup>.</p>
+        <p>Therefore V/λ³ = V(2πm)<sup>3/2</sup>/(h³β<sup>3/2</sup>).</p>
+        <div class="eq-block">ln Ξ = V(2πm/h²)<sup>3/2</sup> β<sup>−3/2</sup> e<sup>βμ</sup></div>
+        <div class="eq-block">∂(ln Ξ)/∂β = V(2πm/h²)<sup>3/2</sup> e<sup>βμ</sup>[−(3/2)β<sup>−5/2</sup> + μβ<sup>−3/2</sup>]</div>
+        <div class="eq-block">= (V/λ³) e<sup>βμ</sup>[μ − (3/2)/β] = ⟨N⟩[μ − (3/2)k<sub>B</sub>T]</div>
+        <div class="eq-block">⟨E⟩ = −∂(ln Ξ)/∂β + μ⟨N⟩ = ⟨N⟩[(3/2)k<sub>B</sub>T] = (3/2)⟨N⟩k<sub>B</sub>T</div>
+      </div>
+    </details>
+    <div class="eq-block">
+      ⟨E⟩ = (3/2)⟨N⟩k<sub>B</sub>T
+      <span class="eq-label">Internal energy — classical ideal gas (3 translational DoF × ½k<sub>B</sub>T each)</span>
+    </div>
+
+    <h4>3. Entropy — the Sackur-Tetrode equation</h4>
+    <div class="eq-block">
+      S = ⟨N⟩k<sub>B</sub>[5/2 − ln(⟨N⟩λ³/V)]
+      <span class="eq-label">Sackur–Tetrode equation for the ideal gas</span>
+    </div>
+    <div class="box box-key">
+      <div class="box-title">Sackur–Tetrode: Physical Meaning</div>
+      The entropy depends on V/⟨N⟩ (volume per particle) and λ³ (quantum volume per particle). The ratio ⟨N⟩λ³/V = nλ³ is the "quantum concentration" — a measure of how much phase space each particle needs. When nλ³ ≪ 1 (dilute gas, high T), S is large and positive. When nλ³ → 1, quantum effects take over. This equation automatically satisfies extensivity (S ∝ N when V ∝ N) because of the 1/N! factor.
+    </div>
+
+    <h4>4. Helmholtz free energy</h4>
+    <div class="eq-block">
+      F = ⟨E⟩ − TS = ⟨N⟩k<sub>B</sub>T[ln(⟨N⟩λ³/V) − 1]
+    </div>
+
+    <h4>5. Gibbs free energy and chemical potential</h4>
+    <div class="eq-block">
+      G = F + PV = ⟨N⟩k<sub>B</sub>T ln(⟨N⟩λ³/V) = ⟨N⟩μ
+    </div>
+    <p>So G = Nμ as expected from the Euler relation. This confirms our expression for μ.</p>
+
+    <h4>6. Pressure — Ideal Gas Law</h4>
+    <div class="eq-block">
+      P = −(∂Ω/∂V)<sub>T,μ</sub> = k<sub>B</sub>T e<sup>βμ</sup>/λ³ = ⟨N⟩k<sub>B</sub>T/V
+      <br>
+      ∴ PV = ⟨N⟩k<sub>B</sub>T &nbsp;&nbsp;&nbsp; (Ideal Gas Law — derived from first principles!)
+      <span class="eq-label">The ideal gas law emerges naturally from the grand canonical treatment</span>
+    </div>
+
+    <h4>7. Heat capacities</h4>
+    <div class="eq-block">
+      C<sub>V</sub> = (∂⟨E⟩/∂T)<sub>N,V</sub> = (3/2)⟨N⟩k<sub>B</sub>
+      <br>
+      C<sub>P</sub> = C<sub>V</sub> + Nk<sub>B</sub> = (5/2)⟨N⟩k<sub>B</sub>
+      <br>
+      γ = C<sub>P</sub>/C<sub>V</sub> = 5/3 &nbsp;&nbsp; (monatomic ideal gas)
+    </div>
+
+    <h4>8. Enthalpy</h4>
+    <div class="eq-block">
+      H = ⟨E⟩ + PV = (3/2)⟨N⟩k<sub>B</sub>T + ⟨N⟩k<sub>B</sub>T = (5/2)⟨N⟩k<sub>B</sub>T
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>What is the physical significance of the thermal de Broglie wavelength?</summary>
+        <div class="qa-ans">λ = h/√(2πmk<sub>B</sub>T) represents the quantum mechanical "fuzziness" of a particle at temperature T — roughly the spread of its wavepacket due to thermal motion. When particles are separated by distances ≫ λ, their wavefunctions don't overlap and classical (Maxwell-Boltzmann) statistics applies. When the mean inter-particle distance ~ λ, wave-functions overlap significantly and quantum statistics (Fermi-Dirac or Bose-Einstein) must be used. At room temperature, λ ~ 0.1 Å for electrons in metals, meaning electrons are <em>always</em> in the quantum degenerate regime.</div>
+      </details>
+      <details class="qa">
+        <summary>Why is the 1/N! factor necessary for indistinguishable particles?</summary>
+        <div class="qa-ans">Without the 1/N!, swapping two particles in the same energy state would count as a <em>new</em> microstate, which is incorrect for identical particles. The overcounting by N! (the number of permutations of N particles) leads to the Gibbs paradox: without 1/N!, the entropy of mixing two ideal gases of the same species would be non-zero, violating the fact that mixing identical gases is not a thermodynamically irreversible process. The 1/N! makes entropy extensive (S ∝ N at fixed T and n = N/V).</div>
+      </details>
+      <details class="qa">
+        <summary>Why does G = Nμ for the ideal gas?</summary>
+        <div class="qa-ans">This is actually a fundamental thermodynamic identity (Euler's relation) for any system with one component: G = Nμ by definition. The chemical potential μ is the Gibbs free energy per particle. This can be derived from the extensivity of thermodynamic functions: if we scale the system by a factor λ (scaling N, V, E all by λ), then G scales as λG = G(λN, P, T), and differentiating with respect to λ at λ=1 gives the Euler relation.</div>
+      </details>
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ═══════════════════════ L4: IDEAL GAS CANONICAL ═══════════════════════ -->
+<section class="lec" id="lec4">
+  <div class="lec-header">
+    <div class="lec-num">L<br>4</div>
+    <div class="lec-title-block">
+      <h2>Classical Ideal Gas in the Canonical Ensemble</h2>
+      <div class="lec-date">Canonical Ensemble · Sackur–Tetrode via Stirling &nbsp;·&nbsp; <span class="tag tag-ref">Reif Ch. 7 · Pathria Ch. 3</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Setup</h3>
+    <p>Same system — N identical, non-interacting point particles in volume V, with Hamiltonian H = Σ<sub>i</sub> p<sub>i</sub>²/2m — but now in the canonical ensemble (fixed T, V, N).</p>
+
+    <div class="eq-block">
+      Z(T,V,N) = (1/N!) (1/h<sup>3N</sup>) ∫∏<sub>i=1</sub><sup>N</sup> d³r<sub>i</sub> d³p<sub>i</sub> e<sup>−βΣp<sub>i</sub>²/2m</sup>
+    </div>
+
+    <details class="deriv">
+      <summary>▶ Full derivation of the canonical partition function and Helmholtz free energy</summary>
+      <div class="deriv-body">
+        <p><strong>Step 1:</strong> Position integral for each particle gives V (phase space volume), and for N particles: ∫∏d³r<sub>i</sub> = V<sup>N</sup>.</p>
+        <p><strong>Step 2:</strong> Momentum integral for each particle in 3D:</p>
+        <div class="eq-block">∫d³p e<sup>−βp²/2m</sup> = (2πmk<sub>B</sub>T)<sup>3/2</sup></div>
+        <p>For N particles: ∏<sub>i=1</sub><sup>N</sup>(2πmk<sub>B</sub>T)<sup>3/2</sup> = (2πmk<sub>B</sub>T)<sup>3N/2</sup>.</p>
+        <p><strong>Step 3:</strong> Total partition function:</p>
+        <div class="eq-block">Z = (1/N!) (V/h³)^N (2πmk<sub>B</sub>T)<sup>3N/2</sup> / h<sup>0</sup></div>
+        <div class="eq-block">Z = (1/N!) (V(2πmk<sub>B</sub>T)<sup>3/2</sup>/h³)<sup>N</sup> = (1/N!)(V/λ³)<sup>N</sup></div>
+        <p><strong>Step 4:</strong> ln Z using Stirling's approximation (ln N! ≈ N ln N − N):</p>
+        <div class="eq-block">ln Z = −ln N! + N ln(V/λ³) ≈ −(N ln N − N) + N ln(V/λ³) = N ln(V/Nλ³) + N</div>
+        <p><strong>Step 5:</strong> Helmholtz free energy:</p>
+        <div class="eq-block">F = −k<sub>B</sub>T ln Z = −Nk<sub>B</sub>T[ln(V/Nλ³) + 1]</div>
+      </div>
+    </details>
+
+    <div class="eq-block">
+      F = −Nk<sub>B</sub>T [ln(V/(Nλ³)) + 1]
+      <span class="eq-label">Helmholtz free energy — classical ideal gas (canonical)</span>
+    </div>
+
+    <h3>Internal Energy</h3>
+    <div class="eq-block">
+      U = −∂(ln Z)/∂β = (3/2)Nk<sub>B</sub>T
+      <span class="eq-label">Derived from ln Z = N ln(V/λ³) − ln N!, noting λ ∝ β<sup>1/2</sup></span>
+    </div>
+
+    <h3>Entropy — Sackur-Tetrode Equation</h3>
+    <div class="eq-block">
+      S = −(∂F/∂T)<sub>N,V</sub> = Nk<sub>B</sub>[ln(V/Nλ³) + 5/2]
+      <span class="eq-label">Sackur–Tetrode equation (same as grand canonical result — ensembles agree!)</span>
+    </div>
+
+    <h3>Pressure and Ideal Gas Law</h3>
+    <div class="eq-block">
+      P = −(∂F/∂V)<sub>T,N</sub> = Nk<sub>B</sub>T/V &nbsp;&nbsp; ⟹ &nbsp;&nbsp; PV = Nk<sub>B</sub>T
+    </div>
+
+    <h3>Chemical Potential</h3>
+    <div class="eq-block">
+      μ = (∂F/∂N)<sub>T,V</sub> = −k<sub>B</sub>T[ln(V/Nλ³) + 1] + Nk<sub>B</sub>T · 1/N
+      = k<sub>B</sub>T ln(Nλ³/V)
+    </div>
+
+    <div class="box box-concept">
+      <div class="box-title">Ensemble Equivalence</div>
+      The canonical and grand canonical ensembles give exactly the same thermodynamic properties in the thermodynamic limit (N → ∞). This is ensemble equivalence: relative fluctuations in N (grand canonical) vanish as 1/√N, so for N ~ 10<sup>23</sup> the ensembles are indistinguishable. The two routes always agree for the ideal gas.
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Show that the entropy from the canonical ensemble is extensive.</summary>
+        <div class="qa-ans">S = Nk<sub>B</sub>[ln(V/Nλ³) + 5/2]. If we scale N → 2N and V → 2V (keeping density n = N/V fixed):
+        S → 2Nk<sub>B</sub>[ln(2V/2Nλ³) + 5/2] = 2Nk<sub>B</sub>[ln(V/Nλ³) + 5/2] = 2S. ✓
+        The entropy is extensive. Without the 1/N! factor, we would get ln(V/λ³) instead of ln(V/Nλ³), which would change by ln 2 per particle upon doubling — this is the Gibbs paradox.</div>
+      </details>
+      <details class="qa">
+        <summary>What happens to the classical ideal gas entropy as T → 0?</summary>
+        <div class="qa-ans">As T → 0, λ = h/√(2πmk<sub>B</sub>T) → ∞, so Nλ³/V → ∞ and ln(V/Nλ³) → −∞. The entropy S → −∞, which violates the third law of thermodynamics (S ≥ 0). This is a failure of classical statistics: at low T, quantum mechanics must be used. Quantum statistics (Fermi-Dirac for fermions, Bose-Einstein for bosons) correctly gives S → 0 as T → 0.</div>
+      </details>
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ═══════════════════════ L5: ULTRARELATIVISTIC GAS CANONICAL ═══════════════════════ -->
+<section class="lec" id="lec5">
+  <div class="lec-header">
+    <div class="lec-num">L<br>5</div>
+    <div class="lec-title-block">
+      <h2>Ultrarelativistic Gas in the Canonical Ensemble</h2>
+      <div class="lec-date">Massless or high-T limit: E = pc &nbsp;·&nbsp; <span class="tag tag-ref">Pathria Ch. 3</span> <span class="tag tag-exam">High Weightage</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>What is an Ultrarelativistic Gas?</h3>
+    <div class="box box-concept">
+      <div class="box-title">Physical Regime</div>
+      In the ultrarelativistic limit, either the particles are massless (photons, neutrinos) or the kinetic energy pc ≫ mc². The full relativistic energy-momentum relation E = √(p²c² + m²c⁴) simplifies to:
+      <br><br>
+      <strong>E = pc = |p|c &nbsp;&nbsp; (ultrarelativistic dispersion)</strong>
+      <br><br>
+      Examples: photon gas (blackbody radiation in the classical limit), ultra-hot plasma, and as an interesting pedagogical limit of the relativistic canonical ensemble.
+    </div>
+
+    <h3>Partition Function for N Indistinguishable Particles</h3>
+    <div class="eq-block">
+      H = Σ<sub>i=1</sub><sup>N</sup> |p<sub>i</sub>|c &nbsp;&nbsp; (total Hamiltonian)
+    </div>
+    <div class="eq-block">
+      Z(T,V,N) = (1/N!h<sup>3N</sup>) ∫∏<sub>i=1</sub><sup>N</sup> d³q<sub>i</sub> d³p<sub>i</sub> e<sup>−βΣ|p<sub>i</sub>|c</sup>
+    </div>
+    <p>The position integral gives V per particle; the partition function factorizes:</p>
+    <div class="eq-block">
+      Z = (1/N!)(V/h³)<sup>N</sup> (∫ d³p e<sup>−β|p|c</sup>)<sup>N</sup> = (1/N!) Z<sub>1</sub><sup>N</sup>
+    </div>
+
+    <details class="deriv">
+      <summary>▶ Derivation: Single-particle momentum integral using spherical coordinates</summary>
+      <div class="deriv-body">
+        <p>In spherical coordinates in momentum space: d³p = p² dp sin θ dθ dφ. The angular integral gives 4π:</p>
+        <div class="eq-block">∫ d³p e<sup>−βpc</sup> = 4π ∫<sub>0</sub><sup>∞</sup> p² e<sup>−βpc</sup> dp</div>
+        <p>Let u = βpc, so p = u/(βc), dp = du/(βc), p² = u²/(βc)²:</p>
+        <div class="eq-block">= 4π · (1/(βc)²) · (1/(βc)) ∫<sub>0</sub><sup>∞</sup> u² e<sup>−u</sup> du = 4π · (1/(βc)³) · Γ(3)</div>
+        <p>Now Γ(3) = 2! = 2, therefore:</p>
+        <div class="eq-block">∫ d³p e<sup>−βpc</sup> = 8π/(βc)³ = 8πk<sub>B</sub>³T³/c³</div>
+        <p>Single-particle partition function:</p>
+        <div class="eq-block">Z<sub>1</sub> = (V/h³) · 8π/(βc)³ = 8πV(k<sub>B</sub>T)³/(h³c³) = 8πV(k<sub>B</sub>T/hc)³</div>
+      </div>
+    </details>
+
+    <div class="eq-block">
+      Z<sub>1</sub> = 8πV(k<sub>B</sub>T)³/(h³c³)
+      <br>
+      Z<sub>N</sub> = (1/N!) [8πV(k<sub>B</sub>T)³/(h³c³)]<sup>N</sup> = (V<sup>N</sup>/N!) [8π(k<sub>B</sub>T/hc)³]<sup>N</sup>
+      <span class="eq-label">Partition function — ultrarelativistic gas</span>
+    </div>
+
+    <h3>Helmholtz Free Energy</h3>
+    <p>Using Stirling: ln N! ≈ N ln N − N:</p>
+    <div class="eq-block">
+      ln Z<sub>N</sub> = N ln V − (N ln N − N) + N ln[8π(k<sub>B</sub>T/hc)³]
+      <br>
+      F = −k<sub>B</sub>T ln Z<sub>N</sub> = −Nk<sub>B</sub>T [1 + ln(8πV(k<sub>B</sub>T)³/(Nh³c³))]
+      <span class="eq-label">Helmholtz free energy — ultrarelativistic gas</span>
+    </div>
+
+    <h3>Entropy</h3>
+    <div class="eq-block">
+      S = −(∂F/∂T)<sub>N,V</sub> = Nk<sub>B</sub>[4 + ln(8πV(k<sub>B</sub>T)³/(Nh³c³))]
+    </div>
+
+    <h3>Internal Energy</h3>
+    <div class="eq-block">
+      U = F + TS = 3Nk<sub>B</sub>T
+      <span class="eq-label">Each ultrarelativistic particle contributes 3k<sub>B</sub>T — compare to 3/2 k<sub>B</sub>T for non-relativistic!</span>
+    </div>
+
+    <div class="box box-key">
+      <div class="box-title">Non-relativistic vs. Ultrarelativistic Comparison</div>
+      <table>
+        <tr><th>Quantity</th><th>Non-relativistic (E = p²/2m)</th><th>Ultrarelativistic (E = pc)</th></tr>
+        <tr><td>⟨E⟩ per particle</td><td>(3/2)k<sub>B</sub>T</td><td>3k<sub>B</sub>T</td></tr>
+        <tr><td>C<sub>V</sub></td><td>(3/2)Nk<sub>B</sub></td><td>3Nk<sub>B</sub></td></tr>
+        <tr><td>Equation of state</td><td>PV = Nk<sub>B</sub>T</td><td>PV = Nk<sub>B</sub>T</td></tr>
+        <tr><td>P vs U relation</td><td>PV = (2/3)U</td><td>PV = (1/3)U</td></tr>
+      </table>
+      <br>The ultrarelativistic energy is exactly double — this follows from dimensional analysis: with only one energy scale (k<sub>B</sub>T) and E ∝ p (not p²), the equipartition theorem must give a different numerical prefactor.
+    </div>
+
+    <h3>Pressure and Equation of State</h3>
+    <div class="eq-block">
+      P = −(∂F/∂V)<sub>T,N</sub> = Nk<sub>B</sub>T/V &nbsp;&nbsp; ⟹ &nbsp;&nbsp; PV = Nk<sub>B</sub>T
+    </div>
+    <p>The ideal gas law is the same as the non-relativistic case — but note that U = 3Nk<sub>B</sub>T = 3PV, not (3/2)PV. This is the relativistic equation of state for radiation: P = U/(3V).</p>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why does the ultrarelativistic gas have U = 3Nk<sub>B</sub>T instead of (3/2)Nk<sub>B</sub>T?</summary>
+        <div class="qa-ans">The factor comes from the different dispersion relation E ∝ p vs E ∝ p². In the non-relativistic case, the Gaussian integral over e<sup>−βp²/2m</sup> in d dimensions gives ⟨E⟩ = (d/2)k<sub>B</sub>T per particle. For the ultrarelativistic case with E = pc, we integrate e<sup>−βpc</sup> in 3D using spherical coordinates. The average energy is ⟨E⟩ = ⟨pc⟩ = c⟨p⟩. Since ∫p³ e<sup>−βpc</sup>dp/∫p² e<sup>−βpc</sup>dp = 3/(βc), we get ⟨E⟩ = 3/β = 3k<sub>B</sub>T. The rule is: for E ∝ p<sup>s</sup> in d dimensions, ⟨E⟩ = (d/s)k<sub>B</sub>T.</div>
+      </details>
+      <details class="qa">
+        <summary>How does this relate to photons and the Stefan-Boltzmann law?</summary>
+        <div class="qa-ans">Photons are massless bosons with E = pc. The classical limit of the photon gas (Rayleigh-Jeans) treats them classically. However, the full quantum treatment (Planck distribution) gives the Stefan-Boltzmann law for radiation energy density u ∝ T⁴. The T³ factor in the ultrarelativistic partition function Z<sub>1</sub> ∝ T³V is the classical counterpart — quantum mechanically, ⟨E⟩ ∝ T⁴V for the photon gas. The classical ultrarelativistic result correctly predicts the PV = U/3 equation of state for radiation.</div>
+      </details>
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ═══════════════════════ L6: RELATIVISTIC GAS CANONICAL ═══════════════════════ -->
+<section class="lec" id="lec6">
+  <div class="lec-header">
+    <div class="lec-num">L<br>6</div>
+    <div class="lec-title-block">
+      <h2>Relativistic Gas in the Canonical Ensemble</h2>
+      <div class="lec-date">Full relativistic dispersion · Modified Bessel functions &nbsp;·&nbsp; <span class="tag tag-ref">Pathria Ch. 3</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Energy-Momentum Relation</h3>
+    <div class="eq-block">
+      E = √(p²c² + m²c⁴) = mc² √(1 + (pc/mc²)²)
+      <span class="eq-label">Full relativistic dispersion relation</span>
+    </div>
+
+    <h3>Partition Function</h3>
+    <div class="eq-block">
+      Z(T,V,N) = (1/N!h<sup>3N</sup>) ∫∏d³q d³p e<sup>−β Σ √(p<sub>i</sub>²c² + m²c⁴)</sup> = (1/N!) (Z<sub>1</sub>)<sup>N</sup>
+    </div>
+    <p>The single-particle partition function Z<sub>1</sub> = (V/h³) ∫d³p e<sup>−β√(p²c²+m²c⁴)</sup>. In spherical coordinates:</p>
+    <div class="eq-block">
+      Z<sub>1</sub> = (V/h³) · 4π ∫<sub>0</sub><sup>∞</sup> p² e<sup>−β√(p²c²+m²c⁴)</sup> dp
+    </div>
+
+    <details class="deriv">
+      <summary>▶ Derivation: Z<sub>1</sub> in terms of the modified Bessel function K<sub>2</sub></summary>
+      <div class="deriv-body">
+        <p>Let x = βpc, so p = x/(βc), dp = dx/(βc), p² = x²/(βc)²:</p>
+        <div class="eq-block">Z<sub>1</sub> = (4πV/h³)(k<sub>B</sub>T/c)³ ∫<sub>0</sub><sup>∞</sup> x² e<sup>−β mc²√(1+x²/(βmc²)²)</sup> dx</div>
+        <p>Let α = βmc². Then:</p>
+        <div class="eq-block">Z<sub>1</sub> = (4πV/h³)(k<sub>B</sub>T/c)³ ∫<sub>0</sub><sup>∞</sup> x² e<sup>−√(x²+α²)</sup> dx</div>
+        <p>This integral is a standard form related to the modified Bessel function of the second kind:</p>
+        <div class="eq-block">∫<sub>0</sub><sup>∞</sup> e<sup>−√(x²+α²)</sup> x² dx = α² K<sub>2</sub>(α)</div>
+        <p>where K<sub>n</sub>(α) = (α<sup>n</sup>/(2<sup>n−1</sup>Γ(n+1))) ∫<sub>0</sub><sup>∞</sup> e<sup>−α cosh t</sup> sinh<sup>2n</sup>t dt.</p>
+        <p>Therefore:</p>
+        <div class="eq-block">Z<sub>1</sub> = (4πV/h³)(k<sub>B</sub>T/c)³ α² K<sub>2</sub>(α) = (4πVm²c/(h³β)) K<sub>2</sub>(βmc²) = (4πVm²c k<sub>B</sub>T/h³) K<sub>2</sub>(mc²/k<sub>B</sub>T)</div>
+        <p>More compactly, Z<sub>1</sub> = (4πVm²c²/(h³β)) K<sub>2</sub>(βmc²).</p>
+      </div>
+    </details>
+
+    <div class="eq-block">
+      Z<sub>1</sub> = (4πVm²c²/h³β) K<sub>2</sub>(βmc²) &nbsp;&nbsp; where α = βmc²
+      <br>
+      Z<sub>N</sub> = (1/N!)(4πVm²c²/h³β)<sup>N</sup> K<sub>2</sub><sup>N</sup>(βmc²)
+      <span class="eq-label">Partition function — relativistic gas (Jüttner distribution)</span>
+    </div>
+
+    <h3>Limiting Cases</h3>
+    <h4>a) Non-relativistic limit (mc² ≫ k<sub>B</sub>T, i.e., α ≫ 1):</h4>
+    <p>For large α, the asymptotic form of the Bessel function is K<sub>2</sub>(α) ≈ √(π/2α) e<sup>−α</sup>.</p>
+    <div class="eq-block">
+      Z<sub>1</sub> ≈ (4πV/h³)(m/β)<sup>3/2</sup>/2 × e<sup>−βmc²</sup> · √(2π) = (V/λ³) e<sup>−βmc²</sup>
+    </div>
+    <p>The e<sup>−βmc²</sup> factor is the rest mass contribution to the energy. If we measure energies relative to mc², this recovers the non-relativistic ideal gas result. ✓</p>
+
+    <h4>b) Ultrarelativistic limit (mc² ≪ k<sub>B</sub>T, i.e., α → 0):</h4>
+    <p>For small α, K<sub>2</sub>(α) ≈ 2/α².</p>
+    <div class="eq-block">
+      Z<sub>1</sub> ≈ (4πV/h³)(k<sub>B</sub>T/c)³ · 2 = 8πV(k<sub>B</sub>T)³/(h³c³)
+    </div>
+    <p>This recovers the ultrarelativistic result from the previous lecture. ✓</p>
+
+    <div class="box box-sage">
+      <div class="box-title">Modified Bessel Function K<sub>n</sub></div>
+      K<sub>n</sub>(α) = (α<sup>n</sup>/(2<sup>n−1</sup>Γ(n+1))) ∫<sub>0</sub><sup>∞</sup> e<sup>−α cosh t</sup> sinh<sup>2n</sup>t dt. These functions appear naturally in relativistic statistical mechanics whenever the energy-momentum relation mixes linear (relativistic) and quadratic (non-relativistic) terms. Key limits: K<sub>n</sub>(α) → Γ(n)·2<sup>n−1</sup>/α<sup>n</sup> as α → 0, and K<sub>n</sub>(α) → √(π/2α) e<sup>−α</sup> as α → ∞.
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why does the Bessel function K<sub>2</sub> appear in the relativistic partition function?</summary>
+        <div class="qa-ans">The Bessel function arises from the structure of the relativistic integral ∫p² e<sup>−β√(p²c²+m²c⁴)</sup>dp. Unlike the Gaussian integral (non-relativistic) or the simple exponential integral (ultrarelativistic), the mixed form √(p²c²+m²c⁴) cannot be evaluated in closed form using elementary functions. The substitution p = mc sinh t transforms it into an integral representation of K<sub>2</sub>. This is why relativistic statistical mechanics necessarily involves special functions.</div>
+      </details>
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ═══════════════════════ L7: LAW OF ATMOSPHERES ═══════════════════════ -->
+<section class="lec" id="lec7">
+  <div class="lec-header">
+    <div class="lec-num">L<br>7</div>
+    <div class="lec-title-block">
+      <h2>Law of Atmospheres in the Canonical Ensemble</h2>
+      <div class="lec-date">Barometric formula · Canonical ensemble in external field &nbsp;·&nbsp; <span class="tag tag-ref">Reif Ch. 7</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Physical Setup</h3>
+    <p>Consider an ideal gas of N particles, each with mass m, in a uniform gravitational field <strong>g</strong> = −gẑ. The gravitational potential energy per particle at height z is U(z) = mgz. The total Hamiltonian is:</p>
+    <div class="eq-block">
+      H = p²/(2m) + mgz
+      <span class="eq-label">Hamiltonian with gravitational potential energy</span>
+    </div>
+
+    <h3>Single-Particle Canonical Partition Function</h3>
+    <div class="eq-block">
+      Z<sub>1</sub> = (1/h³) ∫ e<sup>−βH</sup> d³r d³p = (1/h³) [∫ e<sup>−βp²/2m</sup> d³p] [∫ e<sup>−βmgz</sup> d³r]
+    </div>
+    <p>The momentum integral (M.I.) is the standard Gaussian:</p>
+    <div class="eq-block">
+      ∫ e<sup>−βp²/2m</sup> d³p = (2πmk<sub>B</sub>T)<sup>3/2</sup>
+    </div>
+    <p>The position integral (P.I.) separates. The x and y integrals give the cross-sectional area A (since the gas fills a column of cross-section A from z = 0 to ∞):</p>
+    <div class="eq-block">
+      P.I. = A ∫<sub>0</sub><sup>∞</sup> e<sup>−βmgz</sup> dz = A · (1/(βmg)) = Ak<sub>B</sub>T/(mg)
+    </div>
+
+    <div class="eq-block">
+      Z<sub>1</sub> = (2πmk<sub>B</sub>T)<sup>3/2</sup> / h³ · Ak<sub>B</sub>T/(mg)
+      <span class="eq-label">Single-particle partition function — gas in gravitational field</span>
+    </div>
+
+    <h3>Density Distribution n(z)</h3>
+    <p>The probability density for a single particle to be at height z is proportional to the Boltzmann factor:</p>
+    <div class="eq-block">
+      P(z) ∝ e<sup>−βmgz</sup>
+    </div>
+    <p>The number density (particles per unit volume) at height z is:</p>
+    <div class="eq-block">
+      n(z) = n₀ e<sup>−mgz/k<sub>B</sub>T</sup> = n₀ e<sup>−βmgz</sup>
+      <span class="eq-label">Barometric density distribution</span>
+    </div>
+    <p>where n₀ is the density at z = 0. Normalising: N = ∫<sub>0</sub><sup>∞</sup> n(z) A dz = n₀ A/(βmg), giving n₀ = Nβmg/A = Nmg/(Ak<sub>B</sub>T).</p>
+
+    <h3>Pressure Distribution — Barometric Formula</h3>
+    <p>For an ideal gas, pressure P = nk<sub>B</sub>T, so:</p>
+    <div class="eq-block">
+      P(z) = n(z) k<sub>B</sub>T = n₀ k<sub>B</sub>T e<sup>−mgz/k<sub>B</sub>T</sup> = P₀ e<sup>−mgz/k<sub>B</sub>T</sup>
+      <span class="eq-label">Barometric formula — pressure decreases exponentially with altitude</span>
+    </div>
+    <p>The characteristic height (scale height) over which P drops by a factor e is:</p>
+    <div class="eq-block">
+      H = k<sub>B</sub>T/(mg) &nbsp;&nbsp; [scale height]
+    </div>
+    <p>For Earth's atmosphere with m ≈ 4.8×10<sup>−26</sup> kg (average air molecule), T = 288 K: H ≈ 8.5 km.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:420px">
+        <!-- Axes -->
+        <line x1="60" y1="170" x2="380" y2="170" stroke="#3d3d6a" stroke-width="1.5"/>
+        <line x1="60" y1="20" x2="60" y2="170" stroke="#3d3d6a" stroke-width="1.5"/>
+        <!-- Exponential decay curve -->
+        <path d="M60,40 Q100,50 140,80 Q190,115 250,145 Q310,160 380,167" stroke="#f0b347" stroke-width="2.5" fill="none"/>
+        <!-- Scale height marker -->
+        <line x1="60" y1="40" x2="60" y2="40" />
+        <line x1="145" y1="80" x2="145" y2="170" stroke="#55557a" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="60" y1="80" x2="145" y2="80" stroke="#55557a" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="148" y="165" font-size="9" fill="#7adf90">z = H</text>
+        <text x="20" y="43" font-size="9" fill="#8888b0">P₀</text>
+        <text x="15" y="83" font-size="9" fill="#8888b0">P₀/e</text>
+        <!-- Axis labels -->
+        <text x="385" y="174" font-size="11" fill="#8888b0">z</text>
+        <text x="35" y="18" font-size="11" fill="#8888b0">P(z)</text>
+        <text x="200" y="125" font-size="10" fill="#f0b347">P = P₀ e^(−mgz/k_BT)</text>
+      </svg>
+      <figcaption>Pressure decreases exponentially with altitude. The scale height H = k<sub>B</sub>T/mg is where pressure falls to P₀/e ≈ 37% of its surface value.</figcaption>
+    </div>
+
+    <h3>Alternative Derivation: Hydrostatic Equilibrium</h3>
+    <p>We can also derive the barometric formula from hydrostatic equilibrium (force balance on a slab of gas at height z with thickness dz):</p>
+    <div class="eq-block">
+      dP/dz = −n(z)mg = −ρg
+      <span class="eq-label">Hydrostatic equilibrium condition</span>
+    </div>
+    <p>Since P(z) = n(z)k<sub>B</sub>T, substituting:</p>
+    <div class="eq-block">
+      dP/dz = −P(z) mg/(k<sub>B</sub>T) &nbsp;&nbsp; ⟹ &nbsp;&nbsp; P(z) = P₀ e<sup>−mgz/k<sub>B</sub>T</sup> ✓
+    </div>
+    <p>This elementary approach agrees with the canonical ensemble result, confirming ensemble correctness.</p>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why does the density decrease exponentially with height (rather than, say, linearly)?</summary>
+        <div class="qa-ans">The exponential profile is a direct consequence of the Boltzmann distribution. The probability of a particle being at height z is proportional to e<sup>−βmgz</sup> — the probability decreases exponentially with potential energy mgz. More intuitively: at every height, the fraction of molecules with enough kinetic energy to climb an additional dz is e<sup>−mgdz/k<sub>B</sub>T</sup>, so the density has this multiplicative structure at every step, leading to exponential decay. This is the same as the Maxwell-Boltzmann factor applied to gravitational potential energy.</div>
+      </details>
+      <details class="qa">
+        <summary>The barometric formula assumes constant temperature. How does the real atmosphere differ?</summary>
+        <div class="qa-ans">The real atmosphere is not isothermal: temperature decreases with altitude in the troposphere (lapse rate ~ 6.5 K/km) due to adiabatic cooling of rising air parcels. In the stratosphere, temperature actually increases with altitude due to ozone absorption. For the isothermal approximation to be valid, we need the temperature to be uniform — this is better in the upper stratosphere and above. The real pressure profile is a modified barometric formula using the temperature profile T(z), often approximated as P(z) = P₀(1 − Lz/T₀)<sup>gM/RL</sup> where L is the lapse rate.</div>
+      </details>
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ═══════════════════════ L8: MICRO-CANONICAL ═══════════════════════ -->
+<section class="lec" id="lec8">
+  <div class="lec-header">
+    <div class="lec-num">L<br>8</div>
+    <div class="lec-title-block">
+      <h2>Micro-canonical Ensemble — Phase Space and Entropy</h2>
+      <div class="lec-date">Relating micro and macro: Ω, S, and the equation of state &nbsp;·&nbsp; <span class="tag tag-ref">Reif Ch. 2–3 · Pathria Ch. 1–2</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>The Micro-canonical Ensemble</h3>
+    <div class="box box-concept">
+      <div class="box-title">Fundamental Postulate</div>
+      In the micro-canonical ensemble, the system is isolated: E, V, and N are all fixed (to within a small width δE). Every microstate with energy in [E, E+δE] is equally probable. The density of states (number of accessible microstates) is:
+      <br><br>
+      Ω(E, V, N) = (number of microstates with energy in [E, E+δE])
+      <br><br>
+      Boltzmann's entropy: <strong>S = k<sub>B</sub> ln Ω(E, V, N)</strong>
+    </div>
+
+    <h3>Micro-canonical Ensemble for 1D Classical Harmonic Oscillators</h3>
+    <p>For N distinguishable 1D classical harmonic oscillators (lattice, e.g., Einstein model), with H = Σ[p<sub>i</sub>²/2m + ½mω²x<sub>i</sub>²], the phase space volume for energy up to E is the volume of a 2N-dimensional ellipsoid:</p>
+    <div class="eq-block">
+      Σ(E) = (1/h<sup>N</sup>) × Volume of 2N-dim ellipsoid defined by Σ[p<sub>i</sub>²/2m + ½mω²x<sub>i</sub>²] ≤ E
+    </div>
+
+    <h4>Shape of the energy surface</h4>
+    <p>Each oscillator contributes a term of the form p²/(2m) + ½mω²x² ≤ E. The phase-space "ball" has semi-axes a = √(2mE) in momentum directions and b = √(2E/mω²) in position directions.</p>
+    <p>Volume of a 2N-dimensional ellipsoid with semi-axes a in N momentum directions and b in N position directions:</p>
+    <div class="eq-block">
+      V<sub>2N</sub> = π<sup>N</sup>/(N!) × a<sup>N</sup> × b<sup>N</sup> = π<sup>N</sup>/(N!) × (2mE)<sup>N/2</sup> × (2E/mω²)<sup>N/2</sup>
+    </div>
+    <div class="eq-block">
+      Σ(E) = V<sub>2N</sub>/h<sup>N</sup> = (π<sup>N</sup>/N!h<sup>N</sup>) × 2<sup>N</sup>E<sup>N</sup>/ω<sup>N</sup> = (1/N!)(E/ħω)<sup>N</sup>
+    </div>
+
+    <details class="deriv">
+      <summary>▶ Derivation: Density of states Ω(E) and entropy S(E,V,N)</summary>
+      <div class="deriv-body">
+        <p>The density of states (number of microstates per unit energy) is:</p>
+        <div class="eq-block">g(E) = ∂Σ/∂E = (1/N!) · N(E/ħω)<sup>N−1</sup> · 1/(ħω) = (1/(N-1)!)(E/ħω)<sup>N−1</sup>/(ħω)</div>
+        <p>For large N: Ω(E) ≈ g(E)·δE. Using Stirling:</p>
+        <div class="eq-block">ln Ω = ln[(1/N!)(E/ħω)<sup>N</sup>] = N ln(E/ħω) − ln N! ≈ N ln(E/ħω) − N ln N + N</div>
+        <div class="eq-block">S = k<sub>B</sub> ln Ω = Nk<sub>B</sub>[1 + ln(E/Nħω)]</div>
+        <p>Temperature from entropy:</p>
+        <div class="eq-block">1/T = (∂S/∂E)<sub>N,V</sub> = Nk<sub>B</sub>/E &nbsp;&nbsp; ⟹ &nbsp;&nbsp; E = Nk<sub>B</sub>T ✓</div>
+        <p>This is consistent with the canonical result U = Nk<sub>B</sub>T for 1D oscillators. Ensembles agree!</p>
+      </div>
+    </details>
+
+    <div class="eq-block">
+      S(E,V,N) = Nk<sub>B</sub>[1 + ln(E/Nħω)]
+      <span class="eq-label">Entropy of N distinguishable 1D classical harmonic oscillators (micro-canonical)</span>
+    </div>
+
+    <h3>Relation Between Ensembles</h3>
+    <div class="box box-teal">
+      <div class="box-title">Micro ↔ Canonical ↔ Grand Canonical</div>
+      <p style="margin:.4rem 0">Micro-canonical: Ω(E,V,N) &nbsp;→&nbsp; S = k<sub>B</sub>ln Ω &nbsp;→&nbsp; T = 1/(∂S/∂E)</p>
+      <p style="margin:.4rem 0">Canonical: Z(T,V,N) = ∫Ω(E)e<sup>−βE</sup>dE &nbsp;→&nbsp; F = −k<sub>B</sub>T ln Z</p>
+      <p style="margin:.4rem 0">Grand Canonical: Ξ(T,V,μ) = Σ<sub>N</sub>e<sup>βμN</sup>Z<sub>N</sub> &nbsp;→&nbsp; Ω<sub>GC</sub> = −k<sub>B</sub>T ln Ξ</p>
+      <p style="margin:.5rem 0 0">All three are equivalent in the thermodynamic limit (N→∞). The differences only matter for small systems.</p>
+    </div>
+
+    <h3>Micro-canonical for the Ultrarelativistic Gas</h3>
+    <p>For N ultrarelativistic particles in 3D with E = Σ|p<sub>i</sub>|c, the number of microstates involves the volume of a 3N-dimensional sphere in momentum space subject to Σ|p<sub>i</sub>| = E/c.</p>
+    <div class="eq-block">
+      Ω(E) ∝ V<sup>N</sup> E<sup>3N</sup>
+      <span class="eq-label">Density of states scales as E<sup>3N</sup> for the ultrarelativistic gas</span>
+    </div>
+    <div class="eq-block">
+      S = k<sub>B</sub>ln Ω = Nk<sub>B</sub>ln V + 3Nk<sub>B</sub>ln E + const.
+    </div>
+    <div class="eq-block">
+      1/T = ∂S/∂E = 3Nk<sub>B</sub>/E &nbsp;&nbsp; ⟹ &nbsp;&nbsp; E = 3Nk<sub>B</sub>T ✓
+    </div>
+    <p>Consistent with the canonical result. The micro-canonical and canonical ensembles agree.</p>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why do all three ensembles give the same thermodynamic results for large N?</summary>
+        <div class="qa-ans">For a macroscopic system (N ~ 10<sup>23</sup>), the probability distribution of energy E (in the canonical ensemble) is sharply peaked around ⟨E⟩ with a width of order √N. The relative width σ<sub>E</sub>/⟨E⟩ ~ 1/√N → 0 as N→∞. This means the canonical ensemble effectively enforces E = ⟨E⟩ exactly in the thermodynamic limit, making it equivalent to the micro-canonical ensemble where E is truly fixed. The same argument applies to fluctuations in N in the grand canonical ensemble. Ensemble equivalence is a statement about the dominance of the mean over fluctuations for large systems.</div>
+      </details>
+      <details class="qa">
+        <summary>What is Boltzmann's tombstone equation S = k ln W and what does W mean?</summary>
+        <div class="qa-ans">The equation S = k<sub>B</sub> ln W (where W = Ω is the number of accessible microstates) is inscribed on Boltzmann's tombstone. It is the fundamental bridge between the microscopic and macroscopic descriptions of matter. W counts the number of distinct microscopic arrangements of all the atoms/molecules that give the same macroscopic state (same E, V, N). For a gas with N ~ 10<sup>23</sup>, W is an astronomically large number (order 10<sup>10²³</sup>), and the log brings it back to a manageable O(N) quantity.</div>
+      </details>
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ═══════════════════════ IMPORTANT QUESTIONS ═══════════════════════ -->
+<section class="lec" id="iq">
+  <div class="lec-header">
+    <div class="lec-num" style="color:var(--gold);">★</div>
+    <div class="lec-title-block">
+      <h2>Important Questions — High Weightage Topics</h2>
+      <div class="lec-date">Exam preparation · Detailed model answers &nbsp;·&nbsp; <span class="tag tag-exam">Exam Focus</span></div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <div class="box box-warn">
+      <div class="box-title">Strategy Note</div>
+      The highest-weightage topics in this course are: (1) Partition function derivations for classical oscillators and ideal gases, (2) Deriving thermodynamic potentials from Z, (3) The grand canonical partition function and grand potential, (4) Equation of state derivations, and (5) Comparing classical, non-relativistic, and ultrarelativistic cases.
+    </div>
+
+    <div class="qa-block">
+
+      <details class="qa">
+        <summary>Q1. Derive all thermodynamic properties of N distinguishable 2D classical harmonic oscillators from first principles. [Long Answer]</summary>
+        <div class="qa-ans">
+          <strong>System:</strong> H = p<sub>x</sub>²/2m + p<sub>y</sub>²/2m + ½mω²(x² + y²).<br><br>
+          <strong>Single-particle partition function:</strong><br>
+          Z<sub>1</sub> = (1/h²)∫e<sup>−βH</sup>dx dy dp<sub>x</sub>dp<sub>y</sub>. Each of the 4 Gaussian integrals contributes: ∫e<sup>−βp²/2m</sup>dp = √(2πm/β) and ∫e<sup>−βmω²x²/2</sup>dx = √(2π/βmω²). Therefore:<br>
+          Z<sub>1</sub> = (1/h²) · (2πm/β) · (2π/βmω²) = 4π²/(h²β²ω²) = (k<sub>B</sub>T/ħω)².<br><br>
+          <strong>Total partition function (distinguishable):</strong><br>
+          Z<sub>N</sub> = Z<sub>1</sub><sup>N</sup> = (k<sub>B</sub>T/ħω)<sup>2N</sup>.<br><br>
+          <strong>Helmholtz free energy:</strong><br>
+          F = −k<sub>B</sub>T ln Z<sub>N</sub> = −2Nk<sub>B</sub>T ln(k<sub>B</sub>T/ħω).<br><br>
+          <strong>Internal energy (equipartition):</strong><br>
+          U = −∂(ln Z<sub>N</sub>)/∂β = 2N/β = 2Nk<sub>B</sub>T. (4 quadratic DoF × ½k<sub>B</sub>T each).<br><br>
+          <strong>Entropy:</strong><br>
+          S = −(∂F/∂T) = 2Nk<sub>B</sub>[1 + ln(k<sub>B</sub>T/ħω)].<br><br>
+          <strong>Heat capacity:</strong> C<sub>V</sub> = 2Nk<sub>B</sub>.<br><br>
+          <strong>Pressure:</strong> P = −(∂F/∂V) = 0 (H is volume-independent).<br><br>
+          <strong>Chemical potential:</strong> μ = (∂F/∂N) = −2k<sub>B</sub>T ln(k<sub>B</sub>T/ħω).<br><br>
+          <strong>Average energy per oscillator:</strong> ⟨E⟩ = U/N = 2k<sub>B</sub>T. By equipartition, with 4 quadratic terms each contributing ½k<sub>B</sub>T.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Q2. Starting from the grand partition function, derive the ideal gas law PV = Nk<sub>B</sub>T and the Sackur-Tetrode entropy formula. [Long Answer]</summary>
+        <div class="qa-ans">
+          <strong>Grand partition function:</strong><br>
+          For the classical monatomic ideal gas with Z<sub>N</sub> = (1/N!)(V/λ³)<sup>N</sup> where λ = h/√(2πmk<sub>B</sub>T):<br>
+          Ξ = Σ<sub>N</sub> e<sup>βμN</sup>(V/λ³)<sup>N</sup>/N! = exp(Ve<sup>βμ</sup>/λ³).<br><br>
+          <strong>Grand potential:</strong><br>
+          Ω = −k<sub>B</sub>T ln Ξ = −k<sub>B</sub>T · (V/λ³)e<sup>βμ</sup>.<br><br>
+          <strong>Average particle number:</strong><br>
+          ⟨N⟩ = −(∂Ω/∂μ)<sub>T,V</sub> = (V/λ³)e<sup>βμ</sup> → e<sup>βμ</sup> = ⟨N⟩λ³/V.<br><br>
+          <strong>Pressure:</strong><br>
+          P = −(∂Ω/∂V)<sub>T,μ</sub> = k<sub>B</sub>T·e<sup>βμ</sup>/λ³ = ⟨N⟩k<sub>B</sub>T/V → <strong>PV = Nk<sub>B</sub>T ✓</strong><br><br>
+          <strong>Sackur-Tetrode entropy:</strong><br>
+          Ω = −k<sub>B</sub>T · Ve<sup>βμ</sup>/λ³ = −⟨N⟩k<sub>B</sub>T (grand potential).<br>
+          From thermodynamics, Ω = F − μN = F − ⟨N⟩μ. Using F = −⟨N⟩k<sub>B</sub>T[ln(V/⟨N⟩λ³)+1]:<br>
+          S = −(∂F/∂T)<sub>N,V</sub> = ⟨N⟩k<sub>B</sub>[ln(V/⟨N⟩λ³) + 5/2].<br><br>
+          The 5/2 comes from: ln(V/⟨N⟩λ³) from the particle number term, +1 from −N·∂(−k<sub>B</sub>T)/∂T = Nk<sub>B</sub>, and +3/2 from −N·∂(−k<sub>B</sub>T·ln λ⁻³)/∂T = 3Nk<sub>B</sub>/2 (since λ ∝ T<sup>−1/2</sup>).
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Q3. Compare the thermodynamics of the non-relativistic and ultrarelativistic ideal gases. Derive the equation of state for both and explain the difference in U. [Medium Answer]</summary>
+        <div class="qa-ans">
+          <strong>Non-relativistic (E = p²/2m):</strong><br>
+          Z<sub>1</sub> = V(2πmk<sub>B</sub>T)<sup>3/2</sup>/h³ = V/λ³.<br>
+          U = (3/2)Nk<sub>B</sub>T, PV = Nk<sub>B</sub>T, so PV = (2/3)U.<br><br>
+          <strong>Ultrarelativistic (E = pc):</strong><br>
+          Z<sub>1</sub> = 8πV(k<sub>B</sub>T)³/h³c³.<br>
+          U = 3Nk<sub>B</sub>T, PV = Nk<sub>B</sub>T, so PV = (1/3)U.<br><br>
+          <strong>Key difference in U:</strong> Non-relativistic: 3 translational quadratic degrees of freedom → (3/2)k<sub>B</sub>T per particle. Ultrarelativistic: the dispersion E = pc is linear in p, not quadratic. The average E = c⟨|p|⟩ = 3k<sub>B</sub>T (from computing ⟨p⟩ over the distribution ∝ p² e<sup>−βpc</sup>). The general rule: E ∝ p<sup>s</sup> in d dimensions → ⟨E⟩ = (d/s)k<sub>B</sub>T. NR: s=2, d=3 → (3/2)k<sub>B</sub>T. UR: s=1, d=3 → 3k<sub>B</sub>T.<br><br>
+          <strong>The P–U relation:</strong> This is fundamental — PV = (2/3)U for NR and PV = (1/3)U for UR. For stars: the radiation pressure (UR photons) PV = U/3 limits stellar mass (Eddington limit), while gas pressure (NR) PV = 2U/3 dominates in cooler stars.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Q4. What is the significance of the barometric formula? Derive it using (a) canonical ensemble and (b) hydrostatic equilibrium. [Medium Answer]</summary>
+        <div class="qa-ans">
+          <strong>Significance:</strong> The barometric formula P(z) = P₀ e<sup>−mgz/k<sub>B</sub>T</sup> describes how atmospheric pressure decreases with altitude. It is a direct manifestation of the Boltzmann distribution in an external field and shows how statistical mechanics predicts macroscopic observables from first principles.<br><br>
+          <strong>(a) Canonical ensemble:</strong><br>
+          Single-particle H = p²/2m + mgz. Z<sub>1</sub> separates into momentum and position integrals. Position integral: P.I. = A∫<sub>0</sub><sup>∞</sup>e<sup>−βmgz</sup>dz = A/(βmg). The probability density at height z is proportional to e<sup>−βmgz</sup>, so n(z) = n₀ e<sup>−βmgz</sup> and P(z) = n(z)k<sub>B</sub>T = P₀ e<sup>−mgz/k<sub>B</sub>T</sup>.<br><br>
+          <strong>(b) Hydrostatic equilibrium:</strong><br>
+          Force balance on a slab at height z: dP = −ρg dz = −nmg dz. With P = nk<sub>B</sub>T: dP/dz = −Pmg/(k<sub>B</sub>T). This ODE has solution P = P₀ exp(−mgz/k<sub>B</sub>T). Both approaches agree ✓.<br><br>
+          <strong>Scale height:</strong> H = k<sub>B</sub>T/(mg). For Earth's atmosphere, H ≈ 8.5 km. This explains why most of the atmosphere is confined to a thin shell.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Q5. State and prove the equipartition theorem for a classical system. What are its limitations? [Short-Medium Answer]</summary>
+        <div class="qa-ans">
+          <strong>Statement:</strong> For a classical system in thermal equilibrium at temperature T, each quadratic term in the Hamiltonian contributes ½k<sub>B</sub>T to the average energy.<br><br>
+          <strong>Proof:</strong> Consider a term H₀ = aq² (where q is any coordinate, a is a constant). In the canonical ensemble:
+          ⟨aq²⟩ = ∫aq² e<sup>−βaq²</sup> dq / ∫e<sup>−βaq²</sup> dq = −∂/∂β [ln∫e<sup>−βaq²</sup>dq] = −∂/∂β [½ln(π/aβ)] = 1/(2β) = k<sub>B</sub>T/2. ✓<br><br>
+          <strong>Limitations:</strong>
+          (1) <em>Quantum mechanics:</em> When k<sub>B</sub>T ≪ ħω, discrete energy levels matter and the classical result fails (Einstein model correction).
+          (2) <em>Anharmonic potentials:</em> Non-quadratic terms don't obey equipartition.
+          (3) <em>Relativistic systems:</em> The ultrarelativistic E = pc is not quadratic; the "relativistic equipartition" gives ⟨E⟩ = 3k<sub>B</sub>T per particle, not (3/2)k<sub>B</sub>T.
+          (4) <em>Quantum fields:</em> Each mode of a quantum field cannot be treated classically at low T (ultraviolet catastrophe in classical radiation theory, resolved by Planck).
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Q6. Explain what the chemical potential μ represents physically. Why is μ negative for an ideal gas in the classical limit? [Conceptual]</summary>
+        <div class="qa-ans">
+          <strong>Physical meaning of μ:</strong> The chemical potential μ = (∂F/∂N)<sub>T,V</sub> = (∂G/∂N)<sub>T,P</sub> is the change in Helmholtz (or Gibbs) free energy when one particle is added to the system at constant T and V (or T and P). It governs particle flow: particles flow from high μ to low μ, just as heat flows from high T to low T and pressure drives flow from high P to low P. In equilibrium, μ is uniform throughout the system.<br><br>
+          <strong>Why μ < 0 for classical ideal gas:</strong><br>
+          μ = k<sub>B</sub>T ln(Nλ³/V). In the classical regime, nλ³ = Nλ³/V ≪ 1 (dilute gas, high T), so ln(nλ³) < 0, making μ negative. Physically: adding one more particle to a dilute, high-T gas <em>increases</em> entropy (it has many phase-space states available) and this entropy gain lowers the free energy F = U − TS. As T → 0 or n → ∞, μ → 0 from below, and then quantum statistics (Fermi-Dirac or Bose-Einstein) takes over.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Q7. For N distinguishable classical harmonic oscillators in 3D (canonical ensemble), write a mini-derivation roadmap and state the key results. [Short Answer]</summary>
+        <div class="qa-ans">
+          <strong>Hamiltonian:</strong> H<sub>total</sub> = Σ<sub>i=1</sub><sup>N</sup>[p<sub>i</sub>²/2m + ½mω²x<sub>i</sub>²] (each oscillator has 1 spatial dimension; for 3D oscillator, replace N → 3N).<br><br>
+          <strong>Z<sub>1</sub>:</strong> (1/h)∫e<sup>−βp²/2m</sup>dp · ∫e<sup>−βmω²x²/2</sup>dx = (1/h)·√(2πm/β)·√(2π/βmω²) = k<sub>B</sub>T/(ħω).<br><br>
+          <strong>Z<sub>N</sub>:</strong> (k<sub>B</sub>T/ħω)<sup>N</sup> [or (k<sub>B</sub>T/ħω)<sup>3N</sup> for 3D oscillators].<br><br>
+          <strong>Key results:</strong><br>
+          F = −Nk<sub>B</sub>T ln(k<sub>B</sub>T/ħω)<br>
+          U = Nk<sub>B</sub>T → C<sub>V</sub> = Nk<sub>B</sub> [1D] or U = 3Nk<sub>B</sub>T → C<sub>V</sub> = 3Nk<sub>B</sub> = 3R/mol [3D, Dulong-Petit]<br>
+          S = Nk<sub>B</sub>[1 + ln(k<sub>B</sub>T/ħω)]<br>
+          P = 0 (volume-independent Hamiltonian)
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Q8. Using the micro-canonical ensemble, derive the entropy of N distinguishable 1D harmonic oscillators and show it is consistent with the canonical result. [Long Answer]</summary>
+        <div class="qa-ans">
+          <strong>Phase space volume Σ(E):</strong><br>
+          The energy surface {Σ p<sub>i</sub>²/2m + ½mω²x<sub>i</sub>² ≤ E} is a 2N-dimensional ellipsoid with semi-axes a<sub>i</sub> = √(2mE) (momentum) and b<sub>i</sub> = √(2E/mω²) (position). Volume of the 2N-dimensional ellipsoid = π<sup>N</sup>/N! · a<sup>N</sup>b<sup>N</sup>.<br><br>
+          Dividing by h<sup>N</sup> (phase-space cell):<br>
+          Σ(E) = π<sup>N</sup>/(N!h<sup>N</sup>) · (2mE)<sup>N/2</sup> · (2E/mω²)<sup>N/2</sup> = π<sup>N</sup>/(N!h<sup>N</sup>) · (2E)^N/ω<sup>N</sup> · (m·1/m)<sup>N/2</sup><br>
+          = (1/N!)(2πE/hω)<sup>N</sup>/... [simplifying] = (1/N!)(E/ħω)<sup>N</sup>.<br><br>
+          <strong>Density of states:</strong><br>
+          g(E) = dΣ/dE = (1/(N-1)!)(E/ħω)<sup>N-1</sup>/(ħω) ≈ (1/N!)(E/ħω)<sup>N</sup>/E for large N.<br><br>
+          <strong>Entropy using Stirling:</strong><br>
+          S = k<sub>B</sub> ln Ω = k<sub>B</sub> ln[(1/N!)(E/ħω)<sup>N</sup>]<br>
+          ≈ k<sub>B</sub>[N ln(E/ħω) − N ln N + N] = Nk<sub>B</sub>[1 + ln(E/Nħω)].<br><br>
+          <strong>Consistency check:</strong><br>
+          1/T = (∂S/∂E)<sub>N</sub> = Nk<sub>B</sub>/E → E = Nk<sub>B</sub>T.<br>
+          This matches the canonical result U = Nk<sub>B</sub>T ✓. Ensembles are equivalent.
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-row">
+    <span>📝 Original notes by <span>Anuska Dey</span></span>
+    <span>💻 Web by <span>Arya Naiya</span></span>
+    <span>👨‍🏫 Lectures by <span>SR Sir</span></span>
+    <span>📚 Stat Mech · 2026</span>
+  </div>
+  <div style="margin-top:.6rem;font-size:.62rem;color:var(--text-mute);">
+    Ref: Reif · Pathria &amp; Beale · Kittel &amp; Kroemer · Notes expanded with additional explanations.
+  </div>
+</footer>
+
+<script>
+// Hamburger menu
+const btn = document.getElementById('burgerBtn');
+const drop = document.getElementById('navDropdown');
+btn.addEventListener('click', () => {
+  const open = btn.classList.toggle('open');
+  drop.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+});
+function closeMenu() {
+  btn.classList.remove('open');
+  drop.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+}
+// Close on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('#navBurger') && !e.target.closest('#navDropdown')) closeMenu();
+});
+</script>
+</body>
+</html>

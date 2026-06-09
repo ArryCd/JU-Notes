@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thermodynamics & Statistical Mechanics — Exam Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+:root {
+  --bg: #0d0d0d; --surface: #141414; --card: #1a1a1a; --border: #2a2a2a;
+  --accent: #e8c547; --accent2: #4ecdc4; --accent3: #ff6b6b; --accent4: #a78bfa;
+  --text: #e8e8e0; --muted: #888;
+  --mono: 'DM Mono', monospace; --display: 'Bebas Neue', sans-serif; --body: 'DM Sans', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--body); font-weight: 300; line-height: 1.7; font-size: 15px; }
+
+header { background: var(--bg); border-bottom: 1px solid var(--border); padding: 3rem 2rem 2rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+.header-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+.header-title { font-family: var(--display); font-size: clamp(1.8rem, 5vw, 3.2rem); letter-spacing: 0.04em; line-height: 1; color: var(--accent); }
+.header-sub { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.3rem; }
+.exam-badge { font-family: var(--mono); font-size: 0.7rem; background: var(--accent3); color: #000; padding: 0.3rem 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+nav { background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; position: sticky; top: 88px; z-index: 99; }
+nav::-webkit-scrollbar { height: 2px; }
+nav::-webkit-scrollbar-thumb { background: var(--accent); }
+.nav-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 0; }
+nav a { font-family: var(--mono); font-size: 0.62rem; text-decoration: none; color: var(--muted); padding: 0.7rem 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.2s; }
+nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+main { max-width: 960px; margin: 0 auto; padding: 2rem; }
+
+.section { margin-bottom: 4rem; border-top: 1px solid var(--border); padding-top: 2.5rem; }
+.section-num { font-family: var(--display); font-size: 5rem; color: var(--border); line-height: 1; margin-bottom: -1.5rem; }
+.section-title { font-family: var(--display); font-size: clamp(1.6rem, 4vw, 2.4rem); letter-spacing: 0.05em; color: var(--text); margin-bottom: 1.5rem; }
+.section-title span { color: var(--accent); }
+
+.card { background: var(--card); border: 1px solid var(--border); padding: 1.4rem; margin-bottom: 1rem; }
+.card-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.5rem; }
+.card h4 { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; color: var(--accent); }
+.card p, .card li { font-size: 0.9rem; color: var(--text); }
+
+.formula { background: #080808; border-left: 3px solid var(--accent); padding: 0.9rem 1.2rem; font-family: var(--mono); font-size: 0.88rem; color: var(--accent); margin: 0.8rem 0; overflow-x: auto; }
+.formula .label { color: var(--muted); font-size: 0.72rem; display: block; margin-bottom: 0.3rem; }
+.formula .sub { color: var(--accent2); font-size: 0.82rem; display: block; margin-top: 0.3rem; }
+
+.formula-green { background: #080808; border-left: 3px solid var(--accent2); padding: 0.9rem 1.2rem; font-family: var(--mono); font-size: 0.88rem; color: var(--accent2); margin: 0.8rem 0; overflow-x: auto; }
+.formula-purple { background: #080808; border-left: 3px solid var(--accent4); padding: 0.9rem 1.2rem; font-family: var(--mono); font-size: 0.88rem; color: var(--accent4); margin: 0.8rem 0; overflow-x: auto; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; margin: 1rem 0; }
+@media(max-width:640px) { .grid-2,.grid-3 { grid-template-columns: 1fr; } }
+
+.tbl-wrap { overflow-x: auto; margin: 1rem 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+th { background: var(--surface); color: var(--accent); font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.65rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+td { padding: 0.55rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(232,197,71,0.04); }
+
+.qa-section { background: var(--surface); border: 1px solid var(--border); margin-top: 1.5rem; }
+.qa-header { background: var(--accent); color: #000; font-family: var(--display); font-size: 1.1rem; letter-spacing: 0.1em; padding: 0.6rem 1.2rem; }
+.qa-header.green { background: var(--accent2); }
+.qa-header.purple { background: var(--accent4); }
+.qa-item { border-bottom: 1px solid var(--border); }
+.qa-item:last-child { border-bottom: none; }
+.qa-q { padding: 1rem 1.2rem 0.5rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; user-select: none; }
+.qa-q:hover { color: var(--accent); }
+.qa-q::after { content: '▸'; color: var(--muted); flex-shrink: 0; transition: transform 0.2s; margin-top: 0.1rem; }
+.qa-item.open .qa-q::after { transform: rotate(90deg); color: var(--accent); }
+.qa-a { display: none; padding: 0 1.2rem 1rem 1.2rem; font-size: 0.87rem; color: #bbb; line-height: 1.8; }
+.qa-item.open .qa-a { display: block; }
+.qa-a .hl { color: var(--accent2); font-family: var(--mono); }
+.qa-a .hlr { color: var(--accent); font-family: var(--mono); }
+.qa-a .hlp { color: var(--accent4); font-family: var(--mono); }
+
+.alert { border-left: 3px solid var(--accent3); background: rgba(255,107,107,0.07); padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.88rem; }
+.alert-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent3); margin-bottom: 0.3rem; }
+.tip { border-left: 3px solid var(--accent); background: rgba(232,197,71,0.05); padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.88rem; }
+.tip-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; }
+
+.pyq-badge { display: inline-block; font-family: var(--mono); font-size: 0.6rem; padding: 0.1rem 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(255,107,107,0.15); color: var(--accent3); border: 1px solid var(--accent3); margin-left: 0.5rem; vertical-align: middle; }
+.topics-bar { display: flex; gap: 0.4rem; margin: 1.5rem 0; flex-wrap: wrap; }
+.topic-pill { font-family: var(--mono); font-size: 0.63rem; padding: 0.28rem 0.65rem; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); }
+.topic-pill.active { border-color: var(--accent); color: var(--accent); background: rgba(232,197,71,0.08); }
+.topic-pill.green { border-color: var(--accent2); color: var(--accent2); background: rgba(78,205,196,0.08); }
+.topic-pill.red { border-color: var(--accent3); color: var(--accent3); background: rgba(255,107,107,0.08); }
+
+.step { counter-increment: step; display: flex; gap: 1rem; margin-bottom: 0.8rem; align-items: flex-start; }
+.step::before { content: counter(step); font-family: var(--display); font-size: 1.8rem; color: var(--accent); line-height: 1; flex-shrink: 0; min-width: 1.8rem; }
+.steps { counter-reset: step; }
+
+.box-green { background: rgba(78,205,196,0.07); border: 1px solid rgba(78,205,196,0.25); padding: 1rem 1.2rem; margin: 0.8rem 0; }
+.box-yellow { background: rgba(232,197,71,0.07); border: 1px solid rgba(232,197,71,0.25); padding: 1rem 1.2rem; margin: 0.8rem 0; }
+.box-purple { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.25); padding: 1rem 1.2rem; margin: 0.8rem 0; }
+.box-red { background: rgba(255,107,107,0.07); border: 1px solid rgba(255,107,107,0.25); padding: 1rem 1.2rem; margin: 0.8rem 0; }
+
+footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: center; font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+ul { padding-left: 1.2rem; } li { margin-bottom: 0.3rem; }
+p + p { margin-top: 0.6rem; }
+strong { font-weight: 600; color: var(--text); }
+h3 { font-size: 1rem; font-weight: 600; color: var(--accent2); margin: 1.2rem 0 0.5rem; }
+h5 { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin: 0.8rem 0 0.3rem; letter-spacing: 0.05em; text-transform: uppercase; font-family: var(--mono); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="header-title">Thermo, Stat Mech & KTG</div>
+      <div class="header-sub">PHY-1536 · BSc 2nd Year, 2nd Semester · SKS Sir + SSA Sir + SR Sir · Greiner</div>
+    </div>
+    <div class="exam-badge">🔴 Exam in 2 Days</div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#s0">00 · PYQ</a>
+    <a href="#s1">01 · Thermo Laws</a>
+    <a href="#s2">02 · Entropy</a>
+    <a href="#s3">03 · Potentials</a>
+    <a href="#s4">04 · Maxwell</a>
+    <a href="#s5">05 · TdS + Cp-Cv</a>
+    <a href="#s6">06 · J-T + C-C</a>
+    <a href="#s7">07 · Ensembles</a>
+    <a href="#s8">08 · Canonical</a>
+    <a href="#s9">09 · Ideal Gas</a>
+    <a href="#s10">10 · HO Systems</a>
+    <a href="#s11">11 · Grand Can.</a>
+    <a href="#s12">12 · Rel. Gas</a>
+    <a href="#s13">13 · Planck</a>
+    <a href="#s14">14 · Statistics</a>
+    <a href="#s15">15 · Formula Sheet</a>
+  </div>
+</nav>
+
+<main>
+
+<div class="topics-bar">
+  <div class="topic-pill active">Carnot / Entropy</div>
+  <div class="topic-pill active">TdS Equations</div>
+  <div class="topic-pill active">J-T Effect</div>
+  <div class="topic-pill green">Canonical Z</div>
+  <div class="topic-pill green">Ideal Gas</div>
+  <div class="topic-pill green">HO Systems</div>
+  <div class="topic-pill green">Grand Canonical</div>
+  <div class="topic-pill red">Relativistic Gas</div>
+  <div class="topic-pill red">Planck's Law</div>
+  <div class="topic-pill red">Gaussian Stats</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 0: PYQ ANALYSIS
+══════════════════════════════════════════ -->
+<div class="section" id="s0">
+<div class="section-num">00</div>
+<div class="section-title">PYQ <span>Analysis</span> — PHY-1536 (2025)</div>
+
+<div class="alert">
+  <div class="alert-label">⚠ Exam Structure</div>
+  2 hrs · 40 marks · 3 groups · Answer 2 from A, 2 from B, 2 from C(1-3) + 1 from C(4-5). Use <strong>separate answer scripts for each group</strong>.
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-label">Group A — CO1 (Thermo Laws)</div>
+    <h4>What appeared:</h4>
+    <ul>
+      <li>Prove Carnot efficiency $\eta = 1 - T_2/T_1$</li>
+      <li>Two reversible engines in series — find source temp $T_1$ (numerical)</li>
+      <li>EOS: $PV = \frac{1}{3}U$ → P-V relation for adiabatic process</li>
+      <li>Show W is path function, U is state function</li>
+      <li>Kelvin-Planck ↔ Clausius equivalence</li>
+      <li>Carnot refrigerator numerical (calories + COP)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-label">Group B — CO2 (Thermo Applications)</div>
+    <h4>What appeared:</h4>
+    <ul>
+      <li>Entropy: meaning + $\Delta S$ for perfect gas</li>
+      <li>TdS equations → derive $C_p - C_v$ for perfect and real gas</li>
+      <li>J-T cooling expression for vdW gas + conditions for cooling/heating</li>
+    </ul>
+    <h4 style="margin-top:0.8rem">Group C — CO3/CO4 (Stat Mech)</h4>
+    <ul>
+      <li>Gaussian distribution: mean, most probable, SD</li>
+      <li>N distinguishable classical HO — microstates</li>
+      <li>Relativistic ideal gas: $Z$, free energy</li>
+      <li>Grand canonical: probability $P_{i,N_S}$, grand partition function $\Xi$</li>
+      <li>Planck's hypothesis → Planck distribution → Wien's displacement law</li>
+    </ul>
+  </div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Topic</th><th>Group</th><th>Marks</th><th>How often?</th><th>Your priority</th></tr>
+  <tr><td>Carnot efficiency derivation</td><td>A</td><td>3½</td><td>Every year</td><td style="color:var(--accent3)">🔴 Must do</td></tr>
+  <tr><td>Kelvin-Planck ↔ Clausius</td><td>A</td><td>½</td><td>Very frequent</td><td style="color:var(--accent3)">🔴 Must do</td></tr>
+  <tr><td>Carnot refrigerator numerical</td><td>A</td><td>5</td><td>Frequent</td><td style="color:var(--accent)">🟡 High</td></tr>
+  <tr><td>Entropy of perfect gas</td><td>B</td><td>5</td><td>Every year</td><td style="color:var(--accent3)">🔴 Must do</td></tr>
+  <tr><td>$C_p - C_v$ via TdS equations</td><td>B</td><td>5</td><td>Every year</td><td style="color:var(--accent3)">🔴 Must do</td></tr>
+  <tr><td>J-T effect + vdW gas</td><td>B</td><td>5</td><td>Every year</td><td style="color:var(--accent3)">🔴 Must do</td></tr>
+  <tr><td>Grand canonical probability + $\Xi$</td><td>C (CO4)</td><td>6</td><td>Frequent</td><td style="color:var(--accent3)">🔴 Must do</td></tr>
+  <tr><td>Planck distribution + Wien's law</td><td>C (CO4)</td><td>6</td><td>Frequent</td><td style="color:var(--accent3)">🔴 Must do</td></tr>
+  <tr><td>N classical HO — microstates</td><td>C (CO3)</td><td>7</td><td>Appears</td><td style="color:var(--accent)">🟡 High</td></tr>
+  <tr><td>Relativistic gas partition function</td><td>C (CO3)</td><td>7</td><td>Appears</td><td style="color:var(--accent)">🟡 High</td></tr>
+  <tr><td>Gaussian: mean / SD</td><td>C (CO3)</td><td>7</td><td>Appears</td><td style="color:var(--accent2)">🟢 Medium</td></tr>
+</table>
+</div>
+
+</div><!-- /s0 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 1: THERMODYNAMICS LAWS
+══════════════════════════════════════════ -->
+<div class="section" id="s1">
+<div class="section-num">01</div>
+<div class="section-title">Thermo <span>Laws & Carnot</span></div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-label">Laws at a glance</div>
+    <p><strong>0th Law:</strong> If A=B and B=C in thermal equil., then A=C. Defines temperature.</p>
+    <p><strong>1st Law:</strong> $dU = \delta Q - \delta W$ (conservation of energy). $U$ is a state function, $Q$ and $W$ are path functions.</p>
+    <p><strong>2nd Law (Kelvin-Planck):</strong> No engine operating in a cycle can convert all heat from a single reservoir into work.</p>
+    <p><strong>2nd Law (Clausius):</strong> Heat cannot spontaneously flow from cold to hot without external work.</p>
+    <p><strong>3rd Law:</strong> As $T\to 0$, $S\to 0$ for a perfect crystal.</p>
+  </div>
+  <div class="card">
+    <div class="card-label">Carnot Engine — key results</div>
+    <p>Carnot cycle: two isothermals + two adiabatics.</p>
+    <div class="formula">
+      $\eta_\text{Carnot} = 1 - \dfrac{T_2}{T_1} = \dfrac{W}{Q_1} = \dfrac{Q_1 - Q_2}{Q_1}$
+      <span class="sub">$T_1$ = source, $T_2$ = sink. Max efficiency for any engine operating between these temps.</span>
+    </div>
+    <div class="formula-green">
+      $\text{COP (refrigerator)} = \dfrac{Q_2}{W} = \dfrac{T_2}{T_1 - T_2}$
+      <span class="sub" style="color:var(--muted); font-size:0.75rem; display:block">For Carnot refrigerator: $W = Q_1 - Q_2 = Q_2(T_1-T_2)/T_2$</span>
+    </div>
+    <p style="font-size:0.85rem; margin-top:0.5rem">From $Q_1/T_1 = Q_2/T_2$ (reversible cycle): $\sum_i Q_i/T_i = 0$ and $\oint dS = 0$.</p>
+  </div>
+</div>
+
+<div class="qa-section">
+  <div class="qa-header">PYQ Worked: Two reversible engines in series</div>
+  <div class="qa-item">
+    <div class="qa-q">Engine 1 takes heat from source $T_1$, rejects to sink at 770 K. Engine 2 uses 770 K as source, rejects to 250 K. Both do same work. Find $T_1$.</div>
+    <div class="qa-a">
+      <span class="hl">Strategy:</span> Equal work output means equal efficiency for both engines.<br><br>
+      Engine 1: $\eta_1 = 1 - 770/T_1 = W/Q_1$<br>
+      Engine 2: $\eta_2 = 1 - 250/770 = 520/770$<br><br>
+      Equal work means: heat absorbed by engine 2 = heat rejected by engine 1 = $Q_{12}$<br>
+      So: $Q_{12}/Q_1 = 770/T_1$ and work of engine 1: $W_1 = Q_1 - Q_{12} = Q_1(1 - 770/T_1)$<br>
+      Work of engine 2: $W_2 = Q_{12}(1 - 250/770) = Q_{12}(520/770)$<br><br>
+      Setting $W_1 = W_2$: $Q_1(1 - 770/T_1) = (Q_1 \cdot 770/T_1)(520/770)$<br>
+      $\Rightarrow T_1 - 770 = 520 \Rightarrow$ <span class="hlr">$T_1 = 1290\text{ K}$</span>
+    </div>
+  </div>
+  <div class="qa-item">
+    <div class="qa-q">Carnot refrigerator: water at 0°C → ice at 0°C, room at 27°C. Find heat thrown to room, work done, COP.</div>
+    <div class="qa-a">
+      <span class="hl">Given:</span> 1 kg water at 0°C → ice at 0°C. Latent heat of ice $L = 80$ cal/g $= 80000$ cal.<br>
+      $T_2 = 273$ K (cold), $T_1 = 300$ K (room).<br><br>
+      Heat absorbed from cold reservoir: $Q_2 = 80000$ cal<br>
+      COP $ = T_2/(T_1-T_2) = 273/27 = 10.11$<br>
+      Work done: $W = Q_2/\text{COP} = 80000/10.11 = 7912$ cal<br>
+      Heat thrown to room: <span class="hlr">$Q_1 = Q_2 + W = 80000 + 7912 \approx 87912$ cal</span><br><br>
+      Alternatively: $Q_1 = Q_2 \cdot T_1/T_2 = 80000 \times 300/273 \approx 87912$ cal
+    </div>
+  </div>
+</div>
+
+<div class="qa-section">
+  <div class="qa-header">PYQ: Equivalence of Kelvin-Planck and Clausius</div>
+  <div class="qa-item">
+    <div class="qa-q">Show KP ↔ Clausius by contradiction</div>
+    <div class="qa-a">
+      <strong>KP violated → Clausius violated:</strong><br>
+      Suppose a device D violates KP: absorbs $Q$ from hot reservoir and converts all to work $W=Q$, no heat rejected.<br>
+      Use this work to run a refrigerator R that takes $Q'$ from cold and delivers $Q'+W$ to hot.<br>
+      Net effect: $(Q'+W) - Q = Q'$ flows from cold to hot with no other change → Clausius violated. ✓<br><br>
+      <strong>Clausius violated → KP violated:</strong><br>
+      Suppose device D violates Clausius: $Q$ flows from cold to hot with no work.<br>
+      Run a Carnot engine between hot ($T_1$) and cold ($T_2$): takes $Q_1$ from hot, does work $W$, rejects $Q_2 = Q_1 - W$ to cold.<br>
+      Set $Q_2 = Q$ (the spontaneous flow). Net: hot loses $Q_1 - Q = W$, cold loses and gains $Q_2=Q$ → net result: work $W$ extracted from single reservoir → KP violated. ✓
+    </div>
+  </div>
+</div>
+
+</div><!-- /s1 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: ENTROPY
+══════════════════════════════════════════ -->
+<div class="section" id="s2">
+<div class="section-num">02</div>
+<div class="section-title"><span>Entropy</span> — SKS Sir</div>
+
+<div class="grid-2">
+<div class="card">
+  <div class="card-label">Properties of Entropy</div>
+  <ul>
+    <li>Real physical quantity like $P, V, T$ — but cannot be felt</li>
+    <li>Remains constant in an <strong>adiabatic process</strong></li>
+    <li>Differentiates one adiabatic from another — gives rank of adiabatic</li>
+    <li>Single-valued function — depends on <strong>state only</strong>, not history</li>
+    <li>When entropy increases: system moves from ordered → disordered state (less probable → more probable)</li>
+    <li>Denoted by $S$</li>
+  </ul>
+</div>
+<div class="card">
+  <div class="card-label">Mathematical Definitions</div>
+  <div class="formula">$S = k_B \ln \Omega$ <span class="label">Boltzmann (Statistical)</span></div>
+  <div class="formula">$dS = \dfrac{\delta Q_\text{rev}}{T}$ <span class="label">Clausius (Thermodynamic)</span></div>
+  <div class="formula-green">$\oint \dfrac{dQ}{T} = 0$ (reversible) &nbsp;&nbsp;&nbsp; $\oint \dfrac{dQ}{T} \leq 0$ (irreversible)</div>
+  <p style="font-size:0.85rem">From Carnot: $Q_1/T_1 = Q_2/T_2$ for any reversible cycle → $\sum_i Q_i/T_i = 0$</p>
+</div>
+</div>
+
+<h3>Entropy of a Perfect Gas <span class="pyq-badge">PYQ B1</span></h3>
+<p>Start from $dQ = dU + PdV = C_v dT + PdV$, divide by $T$, use $P = nRT/V$:</p>
+
+<div class="grid-2">
+<div class="formula">
+  <span class="label">In terms of T and V:</span>
+  $\Delta S = S_2 - S_1 = C_v \ln\dfrac{T_2}{T_1} + nR\ln\dfrac{V_2}{V_1}$
+</div>
+<div class="formula">
+  <span class="label">In terms of T and P:</span>
+  $\Delta S = C_p \ln\dfrac{T_2}{T_1} + nR\ln\dfrac{P_1}{P_2}$
+  <span class="sub">$= C_p \ln\dfrac{T_2}{T_1} - nR\ln\dfrac{P_2}{P_1}$</span>
+</div>
+</div>
+
+<div class="tip">
+  <div class="tip-label">💡 Exam trick</div>
+  The two expressions are equivalent. For isothermal: $\Delta S = nR\ln(V_2/V_1) = -nR\ln(P_2/P_1)$. For isochoric: $\Delta S = C_v\ln(T_2/T_1)$. For isobaric: $\Delta S = C_p\ln(T_2/T_1)$.
+</div>
+
+<h3>Entropy and Unavailable Energy</h3>
+<div class="formula">
+  $W_\text{available} = Q_1\left(1 - \dfrac{T_R}{T_1}\right)$ &nbsp;&nbsp; where $T_R$ is the lowest available temperature
+  <span class="sub">Unavailable energy $= Q_2 = (Q_1/T_1)\cdot T_R \propto$ Entropy change</span>
+</div>
+<p>So: <strong>Unavailable energy $\propto$ entropy</strong>. As entropy increases, more energy becomes unavailable for doing work.</p>
+
+</div><!-- /s2 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: THERMODYNAMIC POTENTIALS
+══════════════════════════════════════════ -->
+<div class="section" id="s3">
+<div class="section-num">03</div>
+<div class="section-title">Thermodynamic <span>Potentials</span></div>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Potential</th><th>Definition</th><th>Natural Variables</th><th>Differential</th><th>Physical Meaning</th></tr>
+  <tr><td><strong style="color:var(--accent)">U</strong> (Internal Energy)</td><td>—</td><td>$S, V$</td><td>$dU = TdS - PdV$</td><td>Total microscopic energy</td></tr>
+  <tr><td><strong style="color:var(--accent)">H</strong> (Enthalpy)</td><td>$U + PV$</td><td>$S, P$</td><td>$dH = TdS + VdP$</td><td>Heat at const. pressure</td></tr>
+  <tr><td><strong style="color:var(--accent)">F</strong> (Helmholtz)</td><td>$U - TS$</td><td>$T, V$</td><td>$dF = -SdT - PdV$</td><td>Max work at const. $T, V$</td></tr>
+  <tr><td><strong style="color:var(--accent)">G</strong> (Gibbs)</td><td>$U - TS + PV$</td><td>$T, P$</td><td>$dG = -SdT + VdP$</td><td>Spontaneity at const. $T, P$</td></tr>
+</table>
+</div>
+
+<div class="grid-2">
+<div>
+  <div class="formula"><span class="label">From dF = -PdV - SdT:</span>
+    $P = -\left(\dfrac{\partial F}{\partial V}\right)_T$ &nbsp;&nbsp;&nbsp; $S = -\left(\dfrac{\partial F}{\partial T}\right)_V$
+  </div>
+  <div class="formula"><span class="label">From dG = -SdT + VdP:</span>
+    $V = \left(\dfrac{\partial G}{\partial P}\right)_T$ &nbsp;&nbsp;&nbsp; $S = -\left(\dfrac{\partial G}{\partial T}\right)_P$
+  </div>
+  <div class="formula"><span class="label">Gibbs free energy — spontaneity:</span>
+    $\Delta G < 0$ → spontaneous at const. $T, P$<br>
+    $\Delta G > 0$ → non-spontaneous<br>
+    $\Delta G = 0$ → equilibrium
+  </div>
+</div>
+<div>
+  <div class="tip">
+    <div class="tip-label">Memory trick — Thermodynamic Square</div>
+    <pre style="font-family:var(--mono); font-size:0.8rem; color:var(--accent); line-height:1.8">
+     S ←(1)— P
+     |               |
+    (2)           (3)
+     |               |
+     V —(4)→ T
+    </pre>
+    Arrows horizontal (→) anticlockwise = negative sign.<br>
+    Potentials at corners: S-P top, V-T bottom.<br>
+    Variables: each potential's natural vars are its two adjacent corners.
+  </div>
+  <div class="box-yellow" style="font-size:0.85rem">
+    <strong>Also remember:</strong> For 1st order phase transition (melting, boiling, sublimation) at constant T and P: $dG = 0$, so Gibbs potential per unit mass is <em>equal</em> in both phases: $g_\text{liquid} = g_\text{vapour}$.
+  </div>
+</div>
+</div>
+
+</div><!-- /s3 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 4: MAXWELL'S RELATIONS
+══════════════════════════════════════════ -->
+<div class="section" id="s4">
+<div class="section-num">04</div>
+<div class="section-title">Maxwell's <span>Relations</span></div>
+
+<p>From $dz = M\,dx + N\,dy$ exact: $(\partial M/\partial y)_x = (\partial N/\partial x)_y$. Apply to each thermodynamic potential:</p>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>From</th><th>Maxwell Relation</th><th>Physical meaning</th></tr>
+  <tr><td>$dU = TdS - PdV$</td><td>$\left(\dfrac{\partial T}{\partial V}\right)_S = -\left(\dfrac{\partial P}{\partial S}\right)_V$</td><td>Adiabatic: temp change with V = -(pressure change with entropy)</td></tr>
+  <tr><td>$dH = TdS + VdP$</td><td>$\left(\dfrac{\partial T}{\partial P}\right)_S = \left(\dfrac{\partial V}{\partial S}\right)_P$</td><td>Adiabatic compression</td></tr>
+  <tr><td>$dF = -SdT - PdV$</td><td>$\left(\dfrac{\partial P}{\partial T}\right)_V = \left(\dfrac{\partial S}{\partial V}\right)_T$</td><td style="color:var(--accent)">★ Most used in exam</td></tr>
+  <tr><td>$dG = -SdT + VdP$</td><td>$-\left(\dfrac{\partial S}{\partial P}\right)_T = \left(\dfrac{\partial V}{\partial T}\right)_P$</td><td style="color:var(--accent)">★ Used in Clausius-Clapeyron</td></tr>
+</table>
+</div>
+
+<div class="tip">
+  <div class="tip-label">💡 Key interpretation (from notes)</div>
+  $T\left(\dfrac{\partial P}{\partial T}\right)_V = \left(\dfrac{\partial Q}{\partial V}\right)_T$ — heat absorbed per unit volume in isothermal expansion. For 1st order transition: $T(\partial P/\partial T)_\text{sat} = L/(V_2-V_1)$ → Clausius-Clapeyron equation.
+</div>
+
+</div><!-- /s4 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 5: TdS EQUATIONS + Cp-Cv
+══════════════════════════════════════════ -->
+<div class="section" id="s5">
+<div class="section-num">05</div>
+<div class="section-title">TdS Equations <span>& $C_p - C_v$</span></div>
+
+<p style="margin-bottom:1rem">Since $S$ is a state function of any two variables, treat it as $S(V,T)$, $S(T,P)$, or $S(P,V)$:</p>
+
+<div class="grid-3">
+  <div class="formula">
+    <span class="label">1st TdS Equation — S(V,T):</span>
+    $TdS = C_v\,dT + T\!\left(\dfrac{\partial P}{\partial T}\right)_V\!\!dV$
+    <span class="sub">Use Maxwell: $(\partial P/\partial T)_V = (\partial S/\partial V)_T$</span>
+  </div>
+  <div class="formula">
+    <span class="label">2nd TdS Equation — S(T,P):</span>
+    $TdS = C_p\,dT - T\!\left(\dfrac{\partial V}{\partial T}\right)_P\!\!dP$
+    <span class="sub">Use Maxwell: $-(\partial S/\partial P)_T = (\partial V/\partial T)_P$</span>
+  </div>
+  <div class="formula">
+    <span class="label">3rd TdS Equation — S(P,V):</span>
+    $TdS = C_v\!\left(\dfrac{\partial T}{\partial P}\right)_V\!\!dP + C_p\!\left(\dfrac{\partial T}{\partial V}\right)_P\!\!dV$
+  </div>
+</div>
+
+<h3>Deriving $C_p - C_v$ <span class="pyq-badge">PYQ B2</span></h3>
+
+<p>Subtract 1st TdS equation from 2nd at constant pressure ($dP=0$):</p>
+
+<div class="formula">
+  <span class="label">General result:</span>
+  $C_p - C_v = T\!\left(\dfrac{\partial V}{\partial T}\right)_P\!\!\left(\dfrac{\partial P}{\partial T}\right)_V$
+</div>
+
+<div class="grid-2">
+  <div class="box-yellow">
+    <strong>Perfect gas:</strong> $PV = RT$ (per mole)<br>
+    $\left(\dfrac{\partial P}{\partial T}\right)_V = \dfrac{R}{V}$, $\left(\dfrac{\partial V}{\partial T}\right)_P = \dfrac{R}{P}$
+    <div class="formula" style="margin-top:0.5rem">$C_p - C_v = T \cdot \dfrac{R}{P} \cdot \dfrac{R}{V} = \dfrac{R^2 T}{PV} = R$</div>
+    <p style="font-size:0.82rem">Since $PV = RT$, so $C_p - C_v = R$ ✓</p>
+  </div>
+  <div class="box-green">
+    <strong>Real gas (vdW):</strong> $\left(P+\dfrac{a}{v^2}\right)(v-b) = RT$<br>
+    $\left(\dfrac{\partial P}{\partial T}\right)_V = \dfrac{R}{v-b}$, $\left(\dfrac{\partial V}{\partial T}\right)_P \approx \dfrac{v-b}{T} + \dfrac{2a}{RT^2}$
+    <div class="formula-green" style="margin-top:0.5rem">$C_p - C_v = R\!\left(1 + \dfrac{2a}{vRT}\right)$</div>
+    <p style="font-size:0.82rem">Since $v-b \approx v$ and $a/v^2$ term matters.</p>
+  </div>
+</div>
+
+<h3>Variation of $C_v$ with Volume & $C_p$ with Pressure</h3>
+<div class="grid-2">
+  <div class="formula">
+    <span class="label">From 1st TdS — since S is perfect differential:</span>
+    $\left(\dfrac{\partial C_v}{\partial V}\right)_T = T\!\left(\dfrac{\partial^2 P}{\partial T^2}\right)_V$
+    <span class="sub">Perfect gas: $\partial^2 P/\partial T^2 = 0$ → $C_v$ independent of V.</span>
+    <span class="sub">Real gas: $\partial^2 P/\partial T^2 = 0$ too → $C_v$ independent of V for vdW gas also!</span>
+  </div>
+  <div class="formula">
+    <span class="label">From 2nd TdS — since S is perfect differential:</span>
+    $\left(\dfrac{\partial C_p}{\partial P}\right)_T = -T\!\left(\dfrac{\partial^2 V}{\partial T^2}\right)_P$
+    <span class="sub">Perfect gas: $\partial^2 V/\partial T^2 = 0$ → $C_p$ independent of P.</span>
+    <span class="sub">Real gas: $(\partial C_p/\partial P)_T = +2a/RT^2$ → $C_p$ varies with P.</span>
+  </div>
+</div>
+
+</div><!-- /s5 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 6: J-T EFFECT + CLAUSIUS-CLAPEYRON
+══════════════════════════════════════════ -->
+<div class="section" id="s6">
+<div class="section-num">06</div>
+<div class="section-title">J-T Effect <span>& Clausius-Clapeyron</span></div>
+
+<div class="grid-2">
+<div class="card">
+  <div class="card-label">Joule-Thomson (Adiabatic Throttling)</div>
+  <p>Gas forced through porous plug adiabatically. Work done: $W = P_1V_1 - P_2V_2$. Since $dQ=0$:</p>
+  <p>$U_1 + P_1V_1 = U_2 + P_2V_2$ → $H = \text{const}$ → <strong>isenthalpic process</strong></p>
+  <div class="formula">
+    $\mu_{JT} = \left(\dfrac{\partial T}{\partial P}\right)_H = \dfrac{1}{C_p}\!\left[T\!\left(\dfrac{\partial V}{\partial T}\right)_P - V\right]$
+    <span class="label">J-T coefficient (from 2nd TdS eq. with dH=0)</span>
+  </div>
+  <ul style="font-size:0.85rem; margin-top:0.5rem">
+    <li>$\mu_{JT} > 0$ → cooling on expansion</li>
+    <li>$\mu_{JT} < 0$ → heating on expansion</li>
+    <li>$\mu_{JT} = 0$ at inversion temperature $T_i$</li>
+  </ul>
+</div>
+<div class="card">
+  <div class="card-label">J-T for van der Waals gas <span class="pyq-badge">PYQ B3</span></div>
+  <p>From vdW equation, $({\partial V}/{\partial T})_P = R/[P + a/v^2 - 2a/v^2]$</p>
+  <div class="formula">
+    $\mu_{JT} = \dfrac{1}{C_p}\!\left(\dfrac{2a}{RT} - b\right)$
+    <span class="label">J-T coefficient for vdW gas</span>
+  </div>
+  <div class="formula-green">
+    $T_i = \dfrac{2a}{bR}$ &nbsp;&nbsp; (Inversion temperature)
+  </div>
+  <div class="box-red" style="font-size:0.85rem; margin-top:0.5rem">
+    <strong>Cooling condition:</strong> $T < T_i$ → $\mu_{JT} > 0$ → gas cools<br>
+    <strong>Heating condition:</strong> $T > T_i$ → $\mu_{JT} < 0$ → gas heats<br>
+    H₂ and He: $T_i$ very low, so at room temp they heat up!
+  </div>
+</div>
+</div>
+
+<h3>Internal Energy Variation with Volume</h3>
+<div class="formula">
+  $\left(\dfrac{\partial U}{\partial V}\right)_T = T\!\left(\dfrac{\partial P}{\partial T}\right)_V - P$
+  <span class="label">From dU = TdS - PdV and 1st Maxwell relation</span>
+</div>
+<div class="grid-2">
+  <div class="box-yellow" style="font-size:0.85rem">Perfect gas: $(\partial P/\partial T)_V = R/V$ → $(\partial U/\partial V)_T = P - P = 0$ ✓ <em>(Joule's law)</em></div>
+  <div class="box-green" style="font-size:0.85rem">Real gas: $(\partial U/\partial V)_T = a/v^2$ → internal energy increases as volume increases (intermolecular attraction)</div>
+</div>
+
+<h3>Clausius-Clapeyron Equation (1st Order Phase Transitions)</h3>
+<p>At phase equilibrium: $g_l = g_v$ (Gibbs potential equal). From $dg_l = dg_v$:</p>
+<div class="formula">
+  $\dfrac{dP}{dT} = \dfrac{S_g - S_l}{V_g - V_l} = \dfrac{L}{T(V_g - V_l)}$
+  <span class="label">Clausius-Clapeyron equation. $L = T(S_g - S_l)$ = latent heat.</span>
+</div>
+<div class="tip">
+  <div class="tip-label">Applications</div>
+  Boiling (vaporisation): $V_g \gg V_l$ → $dP/dT = LP/RT^2 > 0$ always.<br>
+  Melting of ice: $V_\text{liquid} < V_\text{ice}$ → $dP/dT < 0$ → melting point decreases with pressure.
+</div>
+
+</div><!-- /s6 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 7: ENSEMBLES
+══════════════════════════════════════════ -->
+<div class="section" id="s7">
+<div class="section-num">07</div>
+<div class="section-title">Statistical Mechanics <span>— Ensembles</span></div>
+
+<div class="grid-3">
+  <div class="card">
+    <div class="card-label">Microcanonical Ensemble</div>
+    <h4>Isolated system</h4>
+    <p>Fixed: $E, V, N$</p>
+    <p>All accessible microstates equally probable.</p>
+    <div class="formula" style="margin-top:0.6rem">$S = k_B \ln \Omega(E,V,N)$</div>
+    <p style="font-size:0.82rem; margin-top:0.4rem">Temperature defined by: $\dfrac{1}{T} = \left(\dfrac{\partial S}{\partial E}\right)_{V,N}$</p>
+  </div>
+  <div class="card">
+    <div class="card-label">Canonical Ensemble</div>
+    <h4>System in heat bath</h4>
+    <p>Fixed: $T, V, N$. Exchange: Energy</p>
+    <p>Probability: $P_i = e^{-\beta E_i}/Z$</p>
+    <div class="formula" style="margin-top:0.6rem">$Z = \sum_i e^{-\beta E_i}$ &nbsp;&nbsp; $\beta = \dfrac{1}{k_B T}$</div>
+    <div class="formula-green" style="margin-top:0.4rem">$F = -k_B T \ln Z$</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Grand Canonical Ensemble</div>
+    <h4>Open system</h4>
+    <p>Fixed: $T, V, \mu$. Exchange: Energy + Particles</p>
+    <p>Probability: $P_{i,N} = e^{-\beta(E_i - \mu N)}/\Xi$</p>
+    <div class="formula" style="margin-top:0.6rem">$\Xi = \sum_{N=0}^{\infty} e^{\beta\mu N} Z_N$</div>
+    <div class="formula-green" style="margin-top:0.4rem">$\Omega = -k_B T \ln \Xi$ (grand potential)</div>
+  </div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Quantity</th><th>Microcanonical</th><th>Canonical</th><th>Grand Canonical</th></tr>
+  <tr><td>Key function</td><td>$\Omega(E,V,N)$</td><td>$Z(T,V,N)$</td><td>$\Xi(T,V,\mu)$</td></tr>
+  <tr><td>Entropy</td><td>$S = k_B\ln\Omega$</td><td>$S = -(\partial F/\partial T)_V$</td><td>$S = -(\partial\Omega/\partial T)_{V,\mu}$</td></tr>
+  <tr><td>Free energy</td><td>—</td><td>$F = -k_BT\ln Z$</td><td>$\Omega = -k_BT\ln\Xi$</td></tr>
+  <tr><td>Avg. energy</td><td>$E$ fixed</td><td>$\langle E\rangle = -\partial(\ln Z)/\partial\beta$</td><td>$\langle E\rangle = -(\partial\ln\Xi/\partial\beta)_{\mu,V} + \mu\langle N\rangle$</td></tr>
+  <tr><td>Pressure</td><td>$P = T(\partial S/\partial V)_E$</td><td>$P = -(\partial F/\partial V)_T$</td><td>$P = -(\partial\Omega/\partial V)_{T,\mu}$</td></tr>
+</table>
+</div>
+
+<div class="alert">
+  <div class="alert-label">⚠ Key distinction</div>
+  For <strong>N distinguishable</strong> particles: $Z_N = (Z_1)^N$ (no 1/N! factor — e.g. solid, fixed lattice sites, HO systems).<br>
+  For <strong>N indistinguishable</strong> particles: $Z_N = (Z_1)^N / N!$ (e.g. ideal gas — Gibbs correction factor).
+</div>
+
+</div><!-- /s7 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 8: CANONICAL ENSEMBLE — MACHINERY
+══════════════════════════════════════════ -->
+<div class="section" id="s8">
+<div class="section-num">08</div>
+<div class="section-title">Canonical <span>Ensemble Machinery</span></div>
+
+<p>The partition function in the classical continuous limit:</p>
+<div class="formula">
+  $Z = \dfrac{1}{N!\, h^{3N}} \int \!\!\int e^{-\beta H(\mathbf{q},\mathbf{p})}\, d^{3N}q\, d^{3N}p$
+  <span class="label">Factor $1/N!$ for indistinguishable, $1/h^{3N}$ for phase space volume per state</span>
+</div>
+
+<h3>Deriving everything from $Z$</h3>
+<div class="tbl-wrap">
+<table>
+  <tr><th>Quantity</th><th>Formula</th><th>Derived from</th></tr>
+  <tr><td>Helmholtz free energy</td><td>$F = -k_BT\ln Z$</td><td>Definition</td></tr>
+  <tr><td>Average energy</td><td>$\langle E\rangle = -\dfrac{\partial \ln Z}{\partial \beta} = k_BT^2 \dfrac{\partial \ln Z}{\partial T}$</td><td>$\langle E\rangle = \sum E_i e^{-\beta E_i}/Z$</td></tr>
+  <tr><td>Entropy</td><td>$S = -\!\left(\dfrac{\partial F}{\partial T}\right)_V = k_B\ln Z + k_BT\dfrac{\partial\ln Z}{\partial T}$</td><td>$S = k_B\ln Z + \langle E\rangle/T$</td></tr>
+  <tr><td>Pressure</td><td>$P = -\!\left(\dfrac{\partial F}{\partial V}\right)_T = k_BT\!\left(\dfrac{\partial \ln Z}{\partial V}\right)_T$</td><td>$P = -(∂F/∂V)_T$</td></tr>
+  <tr><td>Heat capacity</td><td>$C_v = \!\left(\dfrac{\partial\langle E\rangle}{\partial T}\right)_V$</td><td>Differentiate $\langle E\rangle$</td></tr>
+  <tr><td>Chemical potential</td><td>$\mu = \!\left(\dfrac{\partial F}{\partial N}\right)_{T,V}$</td><td>$dF = -SdT - PdV + \mu\,dN$</td></tr>
+</table>
+</div>
+
+<div class="tip">
+  <div class="tip-label">💡 The golden formula to memorize</div>
+  <div class="formula">$\ln Z_N = \ln Z_1^N = N\ln Z_1$ &nbsp;&nbsp;(distinguishable)</div>
+  <div class="formula">$\ln Z_N = N\ln Z_1 - \ln N! \approx N\ln Z_1 - N\ln N + N$ &nbsp;&nbsp;(indistinguishable, Stirling)</div>
+</div>
+
+<h3>Useful Gaussian Integral</h3>
+<div class="formula">
+  $\int_{-\infty}^{+\infty} e^{-\alpha x^2}\,dx = \sqrt{\dfrac{\pi}{\alpha}}$
+  <span class="sub">Used for momentum integrals. With $\alpha = \beta/2m$: $\int e^{-\beta p^2/2m}dp = \sqrt{2\pi m/\beta} = \sqrt{2\pi mk_BT}$</span>
+</div>
+
+</div><!-- /s8 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 9: IDEAL GAS
+══════════════════════════════════════════ -->
+<div class="section" id="s9">
+<div class="section-num">09</div>
+<div class="section-title">Classical <span>Ideal Gas</span></div>
+
+<p>Hamiltonian: $H = \mathbf{p}^2/2m$. In canonical ensemble with $N$ indistinguishable particles:</p>
+
+<div class="steps">
+<div class="step"><div><strong>Single-particle partition function:</strong><br>
+$Z_1 = \dfrac{1}{h^3}\int d^3q\,d^3p\, e^{-\beta p^2/2m} = \dfrac{V}{h^3}(2\pi mk_BT)^{3/2} = \dfrac{V}{\lambda^3}$</div></div>
+<div class="step"><div><strong>Thermal de Broglie wavelength:</strong></div></div>
+</div>
+
+<div class="formula">
+  $\lambda = \dfrac{h}{\sqrt{2\pi mk_BT}}$ &nbsp;&nbsp; (thermal de Broglie wavelength)
+  <span class="label">Condition for classical ideal gas: $V/N \gg \lambda^3$ (particles far apart)</span>
+</div>
+
+<div class="steps" style="counter-reset:step 2">
+<div class="step"><div><strong>N-particle partition function:</strong> $Z_N = \dfrac{1}{N!}\left(\dfrac{V}{\lambda^3}\right)^N$</div></div>
+<div class="step"><div>Using Stirling: $\ln Z_N = N\ln(V/\lambda^3) - N\ln N + N = N\ln(V/N\lambda^3) + N$</div></div>
+</div>
+
+<h3>Thermodynamic Properties of Ideal Gas</h3>
+<div class="tbl-wrap">
+<table>
+  <tr><th>Quantity</th><th>Result</th><th>Notes</th></tr>
+  <tr><td>Helmholtz free energy</td><td>$F = -Nk_BT\!\left[\ln\!\left(\dfrac{V}{N\lambda^3}\right) + 1\right]$</td><td>Stirling used</td></tr>
+  <tr><td>Internal energy</td><td>$U = \dfrac{3}{2}Nk_BT$</td><td>Equipartition: 3 translational d.o.f.</td></tr>
+  <tr><td>Pressure</td><td>$PV = Nk_BT$</td><td>Ideal gas law from stat mech ✓</td></tr>
+  <tr><td>Heat capacity</td><td>$C_v = \dfrac{3}{2}Nk_B$</td><td>Monatomic ideal gas</td></tr>
+  <tr><td>Entropy (Sackur-Tetrode)</td><td>$S = Nk_B\!\left[\ln\!\left(\dfrac{V}{N\lambda^3}\right) + \dfrac{5}{2}\right]$</td><td style="color:var(--accent)">★ Named equation — memorise form</td></tr>
+  <tr><td>Chemical potential</td><td>$\mu = k_BT\ln\!\left(\dfrac{N\lambda^3}{V}\right)$</td><td>$\mu < 0$ for classical ideal gas</td></tr>
+  <tr><td>Enthalpy</td><td>$H = \dfrac{5}{2}Nk_BT$</td><td>$H = U + PV = \frac{3}{2}Nk_BT + Nk_BT$</td></tr>
+</table>
+</div>
+
+<div class="box-yellow">
+  <strong>Sackur-Tetrode Entropy — expanded form:</strong>
+  $$S = Nk_B\left[\ln V - \ln N - \frac{3}{2}\ln\left(\frac{h^2}{2\pi mk_BT}\right) \cdot(-1) + \frac{5}{2}\right]$$
+  Simpler to write as: $S = Nk_B\left[\ln\left(\frac{V}{N\lambda^3}\right) + \frac{5}{2}\right]$ where $\lambda^3 = h^3/(2\pi mk_BT)^{3/2}$.
+</div>
+
+<h3>Law of Atmospheres <small style="color:var(--muted); font-weight:300; font-size:0.75rem">(canonical ensemble application)</small></h3>
+<p>Ideal gas in uniform gravitational field $\mathbf{g} = -g\hat{z}$. Potential: $U(z) = mgz$.</p>
+<div class="formula">
+  $n(z) = n_0\, e^{-mgz/k_BT}$ &nbsp;&nbsp;&nbsp; $P(z) = P_0\, e^{-mgz/k_BT}$
+  <span class="label">Barometric formula. $n_0$ = number density at $z=0$.</span>
+</div>
+
+</div><!-- /s9 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 10: CLASSICAL HARMONIC OSCILLATORS
+══════════════════════════════════════════ -->
+<div class="section" id="s10">
+<div class="section-num">10</div>
+<div class="section-title">Classical Harmonic <span>Oscillator Systems</span></div>
+
+<div class="alert">
+  <div class="alert-label">⚠ Critical distinction for exam</div>
+  Harmonic oscillators are on <strong>fixed lattice sites → they are DISTINGUISHABLE</strong> → $Z_N = (Z_1)^N$, <strong>no 1/N! factor</strong>. Gibbs correction does NOT apply.
+</div>
+
+<h3>1D Classical HO — N Distinguishable <span class="pyq-badge">PYQ C2</span></h3>
+<p>$H = \dfrac{p^2}{2m} + \dfrac{1}{2}m\omega^2 x^2$. Both momentum and position integrals are Gaussian:</p>
+
+<div class="grid-2">
+<div>
+<div class="formula">
+  <span class="label">Momentum integral:</span>
+  $\int_{-\infty}^{\infty}e^{-\beta p^2/2m}dp = \sqrt{2\pi m/\beta} = \sqrt{2\pi mk_BT}$
+</div>
+<div class="formula">
+  <span class="label">Position integral:</span>
+  $\int_{-\infty}^{\infty}e^{-\beta m\omega^2 x^2/2}dx = \sqrt{2\pi/(m\omega^2\beta)} = \sqrt{2\pi k_BT/(m\omega^2)}$
+</div>
+<div class="formula">
+  <span class="label">Single-particle partition function:</span>
+  $Z_1 = \dfrac{1}{h}\sqrt{2\pi mk_BT}\cdot\sqrt{\dfrac{2\pi k_BT}{m\omega^2}} = \dfrac{k_BT}{\hbar\omega}$
+</div>
+</div>
+<div>
+<div class="tbl-wrap">
+<table>
+  <tr><th>Quantity</th><th>1D HO</th></tr>
+  <tr><td>$Z_N$</td><td>$(k_BT/\hbar\omega)^N$</td></tr>
+  <tr><td>$F$</td><td>$-Nk_BT\ln(k_BT/\hbar\omega)$</td></tr>
+  <tr><td>$\langle E\rangle$</td><td>$Nk_BT$</td></tr>
+  <tr><td>$C_v$</td><td>$Nk_B$</td></tr>
+  <tr><td>$S$</td><td>$Nk_B[1 + \ln(k_BT/\hbar\omega)]$</td></tr>
+  <tr><td>$P$</td><td>$0$ (H indep. of V)</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<h3>2D Classical HO — N Distinguishable <span class="pyq-badge">In notes</span></h3>
+<p>$H = \dfrac{p_x^2+p_y^2}{2m} + \dfrac{1}{2}m\omega^2(x^2+y^2)$ — 4 degrees of freedom per particle:</p>
+
+<div class="grid-2">
+<div>
+<div class="formula">
+  $Z_1^{(2D)} = \left(\dfrac{k_BT}{\hbar\omega}\right)^2$ &nbsp;&nbsp;&nbsp; $Z_N = \left(\dfrac{k_BT}{\hbar\omega}\right)^{2N}$
+</div>
+<div class="formula-green">
+  $\langle E\rangle = 2Nk_BT$ &nbsp;&nbsp; $C_v = 2Nk_B$ &nbsp;&nbsp; $F = -2Nk_BT\ln\!\left(\dfrac{k_BT}{\hbar\omega}\right)$
+</div>
+<div class="formula-green">
+  $S = 2Nk_B\!\left[1 + \ln\!\left(\dfrac{k_BT}{\hbar\omega}\right)\right]$
+</div>
+</div>
+<div class="tip">
+  <div class="tip-label">💡 Equipartition Theorem</div>
+  Each quadratic degree of freedom contributes $\frac{1}{2}k_BT$ to average energy.<br><br>
+  1D HO: 2 d.o.f. (1 KE + 1 PE) → $\langle\varepsilon\rangle = k_BT$<br>
+  2D HO: 4 d.o.f. → $\langle\varepsilon\rangle = 2k_BT$<br>
+  3D HO: 6 d.o.f. → $\langle\varepsilon\rangle = 3k_BT$ (Dulong-Petit: $C_v = 3Nk_B$)
+</div>
+</div>
+</div>
+
+<h3>Microcanonical — N 1D Classical HO <span class="pyq-badge">PYQ C2</span></h3>
+<p>Find phase space volume $\Omega(E,V,N)$ for $H = \sum_{i=1}^N \left(\dfrac{p_i^2}{2m} + \dfrac{1}{2}m\omega^2 q_i^2\right) = E$.</p>
+
+<p>The surface $H = E$ is a $2N$-dimensional ellipsoid with semi-axes $a_i = \sqrt{2mE}$ (momentum) and $b_i = \sqrt{2E/m\omega^2}$ (position).</p>
+
+<div class="formula">
+  $\Omega(E) \propto \dfrac{1}{N!}\left(\dfrac{E}{\hbar\omega}\right)^N$
+  <span class="label">Phase space volume (shell between E-ΔE and E)</span>
+</div>
+<div class="formula">
+  $S(E,V,N) = k_B\left[N\ln\!\left(\dfrac{E}{N\hbar\omega}\right) + N\right]$
+  <span class="label">Using Stirling. This gives $E = Nk_BT$ consistent with canonical result ✓</span>
+</div>
+
+</div><!-- /s10 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 11: GRAND CANONICAL ENSEMBLE
+══════════════════════════════════════════ -->
+<div class="section" id="s11">
+<div class="section-num">11</div>
+<div class="section-title">Grand Canonical <span>Ensemble</span></div>
+
+<div class="qa-section">
+  <div class="qa-header purple">PYQ CO4 Q4 — Grand canonical probability & partition function</div>
+  <div class="qa-item">
+    <div class="qa-q">Open system S can exchange heat and particles with large reservoir. Find $P_{i,N_S}$ and grand canonical partition function $\Xi$.</div>
+    <div class="qa-a">
+      <span class="hlp">Setup:</span> System S in microstate $i$ with energy $E_i$ and particle number $N_S$. Reservoir has $E_R \gg E_S$, $N_R \gg N_S$.<br><br>
+      Probability $\propto$ number of reservoir states when system is in $(i, N_S)$:<br>
+      $P_{i,N_S} \propto \Omega_R(E_R - E_i, N_R - N_S) = e^{S_R(E_R - E_i, N_R - N_S)/k_B}$<br><br>
+      Expand $S_R$ using $\partial S_R/\partial E_R = 1/T$ and $\partial S_R/\partial N_R = -\mu/T$:<br>
+      $S_R \approx S_R(E_R, N_R) - E_i/T + \mu N_S/T$<br><br>
+      So: $P_{i,N_S} \propto e^{-\beta(E_i - \mu N_S)}$<br><br>
+      Normalising with grand canonical partition function:
+      <div class="formula-purple" style="margin:0.5rem 0">
+        $\boxed{P_{i,N_S} = \dfrac{e^{-\beta(E_i - \mu N_S)}}{\Xi}}$ &nbsp;&nbsp;&nbsp; $\boxed{\Xi = \sum_{N=0}^{\infty}\sum_i e^{-\beta(E_i - \mu N)} = \sum_{N=0}^{\infty} e^{\beta\mu N} Z_N}$
+      </div>
+      where $Z_N$ is the canonical partition function for $N$ particles. $\mu$ is the chemical potential.
+    </div>
+  </div>
+</div>
+
+<h3>Grand Canonical: Classical Ideal Gas</h3>
+<div class="steps">
+<div class="step"><div>$Z_N = \dfrac{1}{N!}\left(\dfrac{V}{\lambda^3}\right)^N$ → $\Xi = \sum_{N=0}^\infty \dfrac{1}{N!}\left(\dfrac{Ve^{\mu/k_BT}}{\lambda^3}\right)^N = \exp\!\left(\dfrac{V}{\lambda^3}e^{\mu/k_BT}\right)$</div></div>
+<div class="step"><div>Grand potential: $\Omega = -k_BT\ln\Xi = -k_BT \cdot \dfrac{V}{\lambda^3}e^{\mu/k_BT}$</div></div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Quantity</th><th>Grand Canonical Result</th></tr>
+  <tr><td>Average particle number</td><td>$\langle N\rangle = \dfrac{1}{\beta}\dfrac{\partial\ln\Xi}{\partial\mu} = k_BT\cdot\dfrac{\partial\ln\Xi}{\partial\mu} = \dfrac{V}{\lambda^3}e^{\mu/k_BT}$</td></tr>
+  <tr><td>Chemical potential</td><td>$\mu = k_BT\ln\!\left(\dfrac{\langle N\rangle\lambda^3}{V}\right)$ (from inverting above)</td></tr>
+  <tr><td>Average energy</td><td>$\langle E\rangle = -\dfrac{\partial\ln\Xi}{\partial\beta}\bigg|_{\mu,V} + \mu\langle N\rangle = \dfrac{3}{2}\langle N\rangle k_BT$</td></tr>
+  <tr><td>Pressure</td><td>$P = -\!\left(\dfrac{\partial\Omega}{\partial V}\right)_{T,\mu} = \dfrac{\langle N\rangle k_BT}{V}$ &nbsp; (ideal gas law ✓)</td></tr>
+  <tr><td>Entropy (Sackur-Tetrode)</td><td>$S = \langle N\rangle k_B\!\left[\dfrac{5}{2} - \ln\!\left(\dfrac{\langle N\rangle\lambda^3}{V}\right)\right]$</td></tr>
+  <tr><td>Helmholtz free energy</td><td>$F = \langle N\rangle k_BT\!\left[\ln\!\left(\dfrac{\langle N\rangle\lambda^3}{V}\right) - 1\right]$</td></tr>
+  <tr><td>Gibbs free energy</td><td>$G = \langle N\rangle\mu$</td></tr>
+</table>
+</div>
+
+</div><!-- /s11 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 12: RELATIVISTIC GAS
+══════════════════════════════════════════ -->
+<div class="section" id="s12">
+<div class="section-num">12</div>
+<div class="section-title">Relativistic <span>Ideal Gas</span></div>
+
+<h3>Ultrarelativistic Gas ($E = pc$) <span class="pyq-badge">PYQ C3</span></h3>
+
+<p>Hamiltonian: $H = \sum_{i=1}^N |\mathbf{p}_i|c = \sum_i p_i c$. Canonical partition function for $N$ indistinguishable particles:</p>
+
+<div class="steps">
+<div class="step"><div>Single-particle momentum integral using spherical coords in momentum space:<br>
+$Z_1^\text{mom} = \int d^3p\,e^{-\beta pc} = 4\pi\int_0^\infty p^2 e^{-\beta pc}\,dp$</div></div>
+<div class="step"><div>Substitute $u = \beta pc$, $p = u/\beta c$, $dp = du/\beta c$:<br>
+$= 4\pi\left(\dfrac{1}{\beta c}\right)^3\int_0^\infty u^2 e^{-u}\,du = \dfrac{4\pi}{(\beta c)^3}\cdot\Gamma(3) = \dfrac{4\pi\cdot 2}{(\beta c)^3} = \dfrac{8\pi}{\beta^3 c^3} = 8\pi(k_BT)^3/c^3$</div></div>
+<div class="step"><div>Position integral gives $V$, so:
+<div class="formula" style="margin:0.3rem 0">$Z_1 = \dfrac{V}{h^3}\cdot\dfrac{8\pi(k_BT)^3}{c^3} = \dfrac{8\pi V(k_BT)^3}{h^3 c^3} = 8\pi V\!\left(\dfrac{k_BT}{hc}\right)^3$</div>
+</div></div>
+<div class="step"><div>$N$-particle: $Z_N = \dfrac{1}{N!}(Z_1)^N = \dfrac{1}{N!}\left[\dfrac{8\pi V(k_BT)^3}{h^3c^3}\right]^N$</div></div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <tr><th>Quantity</th><th>Ultrarelativistic result</th></tr>
+  <tr><td>$\ln Z_N$</td><td>$-\ln N! + N\ln\!\left[\dfrac{8\pi V(k_BT)^3}{h^3c^3}\right] \approx N\ln\!\left[\dfrac{8\pi V(k_BT)^3}{Nh^3c^3}\right] + N$</td></tr>
+  <tr><td>Free energy $F$</td><td style="color:var(--accent)">$F = -Nk_BT\!\left\{1 + \ln\!\left[\dfrac{8\pi V(k_BT)^3}{Nh^3c^3}\right]\right\}$</td></tr>
+  <tr><td>Internal energy</td><td>$U = -\dfrac{\partial\ln Z}{\partial\beta} = 3Nk_BT$</td></tr>
+  <tr><td>Pressure</td><td>$PV = Nk_BT$ (same as non-rel.) &nbsp; OR &nbsp; $PV = U/3$</td></tr>
+  <tr><td>Entropy</td><td>$S = Nk_B\!\left[4 + \ln\!\left(\dfrac{8\pi V(k_BT)^3}{Nh^3c^3}\right)\right]$</td></tr>
+  <tr><td>$C_v$</td><td>$3Nk_B$</td></tr>
+</table>
+</div>
+
+<div class="alert">
+  <div class="alert-label">⚠ Compare with non-relativistic</div>
+  Non-rel: $U = \frac{3}{2}Nk_BT$. Ultrarel: $U = 3Nk_BT$ (twice as much!). Non-rel: $Z_1 \propto T^{3/2}$. Ultrarel: $Z_1 \propto T^3$.
+</div>
+
+<h3>General Relativistic Gas ($E = \sqrt{p^2c^2 + m^2c^4}$)</h3>
+<p>Integral for $Z_1$ gives modified Bessel function $K_2$:</p>
+<div class="formula">
+  $Z_1 = \dfrac{4\pi V m^2 c^2}{h^3 \beta} K_2(\beta mc^2) = \dfrac{4\pi V m^2 c k_BT}{h^3} K_2\!\left(\dfrac{mc^2}{k_BT}\right)$
+  <span class="label">Limiting cases: $m\to 0$ or $T\to\infty$: $K_2(\alpha)\to 2/\alpha^2$ → recovers ultrarelativistic result</span>
+</div>
+
+</div><!-- /s12 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 13: PLANCK'S RADIATION
+══════════════════════════════════════════ -->
+<div class="section" id="s13">
+<div class="section-num">13</div>
+<div class="section-title">Black Body <span>Radiation & Planck</span></div>
+
+<div class="qa-section">
+  <div class="qa-header" style="background:var(--accent4); color:#000">PYQ CO4 Q5 — Planck's hypothesis → distribution → Wien's law</div>
+  <div class="qa-item">
+    <div class="qa-q">State Planck's quantum hypothesis. Derive Planck's distribution. Show Wien's displacement law from it.</div>
+    <div class="qa-a">
+      <strong>Planck's Quantum Hypothesis:</strong><br>
+      A harmonic oscillator of frequency $\nu$ can only have discrete energies: $E_n = nh\nu$ where $n = 0, 1, 2, \ldots$ and $h$ is Planck's constant. Energy is exchanged in quanta of $h\nu$.
+      <br><br>
+      <strong>Mean energy of a quantum oscillator:</strong><br>
+      Single-oscillator partition function: $Z_1 = \sum_{n=0}^\infty e^{-n\beta h\nu} = \dfrac{1}{1-e^{-\beta h\nu}}$<br><br>
+      Mean energy: $\langle\varepsilon\rangle = -\dfrac{\partial\ln Z_1}{\partial\beta} = \dfrac{h\nu}{e^{h\nu/k_BT}-1}$
+      <br><br>
+      <strong>Planck's energy density:</strong><br>
+      Number of modes in $[\nu, \nu+d\nu]$: $g(\nu)d\nu = \dfrac{8\pi V\nu^2}{c^3}d\nu$ (density of states for EM field)<br><br>
+      <div class="formula-purple" style="margin:0.5rem 0">
+        $u(\nu)d\nu = \dfrac{8\pi h\nu^3/c^3}{e^{h\nu/k_BT}-1}\,d\nu$ &nbsp;&nbsp;&nbsp; (Planck distribution)
+      </div>
+      <strong>Wien's displacement law:</strong><br>
+      Maximise $u(\nu)$: differentiate, set to zero. Let $x = h\nu/k_BT$:<br>
+      $\dfrac{d}{d\nu}[u(\nu)] = 0$ → $3(1-e^{-x}) = x e^{-x}$ → solved numerically: $x \approx 2.82$<br>
+      So $h\nu_\text{max}/k_BT \approx 2.82$ → $\nu_\text{max} \propto T$ → $\lambda_\text{max}T = b = \dfrac{hc}{2.82k_B} \approx 2.898 \times 10^{-3}$ m·K<br><br>
+      <strong>Alternatively in $\lambda$ form:</strong> $u(\lambda) \propto \lambda^{-5}/(e^{hc/\lambda k_BT}-1)$, maximum at $\lambda_\text{max}T = \text{const}$.
+    </div>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <div class="card-label">Limiting cases of Planck's law</div>
+    <h4>Wien's law (high freq / low T: $h\nu \gg k_BT$)</h4>
+    <p>$e^{h\nu/k_BT} \gg 1$, so $e^{h\nu/k_BT}-1 \approx e^{h\nu/k_BT}$:</p>
+    <div class="formula" style="font-size:0.82rem">$u(\nu) \approx \dfrac{8\pi h\nu^3}{c^3}e^{-h\nu/k_BT}$</div>
+    <h4 style="margin-top:0.8rem">Rayleigh-Jeans (low freq / high T: $h\nu \ll k_BT$)</h4>
+    <p>$e^{h\nu/k_BT}-1 \approx h\nu/k_BT$:</p>
+    <div class="formula" style="font-size:0.82rem">$u(\nu) \approx \dfrac{8\pi\nu^2}{c^3}k_BT$ &nbsp; (classical, "ultraviolet catastrophe" at high $\nu$)</div>
+  </div>
+  <div class="card">
+    <div class="card-label">Key results to memorise</div>
+    <div class="formula" style="font-size:0.82rem">$u(\nu) = \dfrac{8\pi h\nu^3/c^3}{e^{h\nu/k_BT}-1}$ &nbsp; (Planck distribution)</div>
+    <div class="formula-green" style="font-size:0.82rem">$\lambda_\text{max} T = 2.898\times10^{-3}$ m·K &nbsp; (Wien's displacement)</div>
+    <div class="formula-purple" style="font-size:0.82rem">$U_\text{total} = \sigma T^4 V$ &nbsp; where $\sigma = \dfrac{2\pi^5 k_B^4}{15h^3c^3}$ (Stefan-Boltzmann)</div>
+    <p style="font-size:0.82rem; margin-top:0.5rem"><strong>Quantum oscillator partition function:</strong> $Z = 1/(1-e^{-\beta h\nu})$</p>
+    <p style="font-size:0.82rem"><strong>Mean energy:</strong> $\langle E\rangle = h\nu/(e^{h\nu/k_BT}-1)$</p>
+  </div>
+</div>
+
+</div><!-- /s13 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 14: PROBABILITY & STATISTICS
+══════════════════════════════════════════ -->
+<div class="section" id="s14">
+<div class="section-num">14</div>
+<div class="section-title">Probability <span>& Statistics</span></div>
+
+<div class="qa-section">
+  <div class="qa-header green">PYQ CO3 Q1 — Gaussian distribution, mean, most probable, SD</div>
+  <div class="qa-item">
+    <div class="qa-q">$f(x) = Ae^{-(x-5)^2/2}$, $-\infty < x < \infty$. Find normalisation $A$, mean, most probable value, and standard deviation.</div>
+    <div class="qa-a">
+      <span class="hl">Comparison with standard Gaussian:</span> $f(x) = \dfrac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu_0)^2/2\sigma^2}$<br><br>
+      From $f(x) = Ae^{-(x-5)^2/2}$: $\mu_0 = 5$ (centre), $2\sigma^2 = 2$ → <span class="hlr">$\sigma = 1$</span><br><br>
+      <strong>Normalisation:</strong> $\int_{-\infty}^\infty Ae^{-(x-5)^2/2}dx = A\sqrt{2\pi} = 1$ → <span class="hlr">$A = 1/\sqrt{2\pi} \approx 0.399$</span><br><br>
+      <strong>Mean value:</strong> $\langle x\rangle = \dfrac{\int_{-\infty}^\infty x\, f(x)\,dx}{\int f\,dx} =$ <span class="hlr">$5$</span> (by symmetry, since $f$ is symmetric about $x=5$)<br><br>
+      <strong>Most probable value:</strong> Maximum of $f$ → $df/dx = 0$ → $x-5 = 0$ → <span class="hlr">$x_\text{mp} = 5$</span><br><br>
+      <strong>Standard deviation:</strong> $\sigma^2 = \langle(x-\langle x\rangle)^2\rangle = \int(x-5)^2 f(x)\,dx$<br>
+      Using $\int u^2 e^{-u^2/2\sigma^2}du = \sigma^2\sqrt{2\pi}$: $\sigma^2 = 1$ → <span class="hlr">$\sigma = 1$</span><br><br>
+      <strong>Summary:</strong> Mean = Most probable = 5, SD = 1. For Gaussian, all three coincide.
+    </div>
+  </div>
+</div>
+
+<h3>Gaussian Distribution — Key Results</h3>
+<div class="formula">
+  $f(x) = \dfrac{1}{\sigma\sqrt{2\pi}}\exp\!\left[-\dfrac{(x-\mu)^2}{2\sigma^2}\right]$
+</div>
+<div class="tbl-wrap">
+<table>
+  <tr><th>Property</th><th>Formula</th><th>For $f(x)=Ae^{-(x-x_0)^2/2\sigma^2}$</th></tr>
+  <tr><td>Normalisation $A$</td><td>$1/(\sigma\sqrt{2\pi})$</td><td>Read off $\sigma$ from exponent, $A = 1/(\sigma\sqrt{2\pi})$</td></tr>
+  <tr><td>Mean $\langle x\rangle$</td><td>$\mu = x_0$</td><td>Centre of the distribution</td></tr>
+  <tr><td>Most probable $x_\text{mp}$</td><td>$x_0$ (where $f$ is max)</td><td>Set $df/dx = 0$</td></tr>
+  <tr><td>Standard deviation $\sigma$</td><td>$\sqrt{\langle(x-\mu)^2\rangle}$</td><td>Read from exponent: coeff of $x^2$ is $1/2\sigma^2$</td></tr>
+  <tr><td>Useful integral</td><td>$\int_{-\infty}^\infty e^{-\alpha x^2}dx = \sqrt{\pi/\alpha}$</td><td>$\int_{-\infty}^\infty x^2 e^{-\alpha x^2}dx = \sqrt{\pi}/(2\alpha^{3/2})$</td></tr>
+</table>
+</div>
+
+</div><!-- /s14 -->
+
+<!-- ══════════════════════════════════════════
+     SECTION 15: FORMULA SHEET
+══════════════════════════════════════════ -->
+<div class="section" id="s15">
+<div class="section-num">15</div>
+<div class="section-title">Master <span>Formula Sheet</span></div>
+
+<h3>Constants & Notation</h3>
+<div class="formula" style="font-size:0.82rem; line-height:2">
+  $k_B = 1.38\times10^{-23}$ J/K &nbsp;|&nbsp; $h = 6.626\times10^{-34}$ J·s &nbsp;|&nbsp; $\hbar = h/2\pi$ &nbsp;|&nbsp; $\beta = 1/k_BT$ &nbsp;|&nbsp; $\lambda = h/\sqrt{2\pi mk_BT}$ (thermal de Broglie wavelength)
+</div>
+
+<h3>Thermodynamics</h3>
+<div class="tbl-wrap">
+<table>
+  <tr><th>Formula</th><th>Context</th></tr>
+  <tr><td>$\eta = 1 - T_2/T_1$</td><td>Carnot efficiency</td></tr>
+  <tr><td>$\text{COP} = T_2/(T_1-T_2)$</td><td>Carnot refrigerator</td></tr>
+  <tr><td>$\Delta S = C_v\ln(T_2/T_1) + R\ln(V_2/V_1)$</td><td>Entropy change, perfect gas (T,V)</td></tr>
+  <tr><td>$\Delta S = C_p\ln(T_2/T_1) - R\ln(P_2/P_1)$</td><td>Entropy change, perfect gas (T,P)</td></tr>
+  <tr><td>$TdS = C_v dT + T(\partial P/\partial T)_V dV$</td><td>1st TdS equation</td></tr>
+  <tr><td>$TdS = C_p dT - T(\partial V/\partial T)_P dP$</td><td>2nd TdS equation</td></tr>
+  <tr><td>$C_p - C_v = T(\partial V/\partial T)_P(\partial P/\partial T)_V$</td><td>General</td></tr>
+  <tr><td>$C_p - C_v = R$ (perfect) &nbsp;|&nbsp; $= R(1+2a/vRT)$ (vdW)</td><td>Results</td></tr>
+  <tr><td>$(\partial U/\partial V)_T = T(\partial P/\partial T)_V - P$</td><td>Internal pressure; = 0 for perfect gas, $a/v^2$ for vdW</td></tr>
+  <tr><td>$\mu_{JT} = (1/C_p)[T(\partial V/\partial T)_P - V]$</td><td>J-T coefficient; $=(1/C_p)(2a/RT - b)$ for vdW</td></tr>
+  <tr><td>$T_i = 2a/bR$</td><td>Inversion temperature; J-T cooling for $T < T_i$</td></tr>
+  <tr><td>$dP/dT = L/[T(V_g-V_l)]$</td><td>Clausius-Clapeyron</td></tr>
+  <tr><td>$(\partial P/\partial T)_V = (\partial S/\partial V)_T$</td><td>Maxwell relation (from F)</td></tr>
+  <tr><td>$-(\partial S/\partial P)_T = (\partial V/\partial T)_P$</td><td>Maxwell relation (from G)</td></tr>
+</table>
+</div>
+
+<h3>Statistical Mechanics</h3>
+<div class="tbl-wrap">
+<table>
+  <tr><th>Formula</th><th>Context</th></tr>
+  <tr><td>$S = k_B\ln\Omega$</td><td>Boltzmann entropy</td></tr>
+  <tr><td>$Z = \sum_i e^{-\beta E_i}$</td><td>Canonical partition function</td></tr>
+  <tr><td>$F = -k_BT\ln Z$</td><td>Helmholtz free energy</td></tr>
+  <tr><td>$\langle E\rangle = -\partial(\ln Z)/\partial\beta = k_BT^2\partial(\ln Z)/\partial T$</td><td>Average energy (canonical)</td></tr>
+  <tr><td>$\lambda = h/\sqrt{2\pi mk_BT}$</td><td>Thermal de Broglie wavelength</td></tr>
+  <tr><td>$Z_1^\text{ideal} = V/\lambda^3$</td><td>Single-particle ideal gas</td></tr>
+  <tr><td>$Z_N^\text{ideal} = (1/N!)(V/\lambda^3)^N$</td><td>N indistinguishable ideal gas particles</td></tr>
+  <tr><td>$U = \frac{3}{2}Nk_BT$, $\;PV = Nk_BT$, $\;S = Nk_B[\ln(V/N\lambda^3)+\frac{5}{2}]$</td><td>Ideal gas thermodynamics</td></tr>
+  <tr><td>$Z_1^\text{HO(1D)} = k_BT/\hbar\omega$</td><td>1D classical HO, single particle</td></tr>
+  <tr><td>$Z_N^\text{HO(1D)} = (k_BT/\hbar\omega)^N$, distinguishable, no $N!$</td><td>N 1D HOs</td></tr>
+  <tr><td>$\langle E\rangle = Nk_BT$ (1D HO), $= 2Nk_BT$ (2D HO), $= 3Nk_BT$ (3D HO)</td><td>Equipartition</td></tr>
+  <tr><td>$S_\text{HO(1D)} = Nk_B[1+\ln(k_BT/\hbar\omega)]$</td><td>1D distinguishable HO entropy</td></tr>
+  <tr><td>$\Xi = \sum_N e^{\beta\mu N}Z_N = \exp(Ve^{\mu/k_BT}/\lambda^3)$</td><td>Grand canonical PF (ideal gas)</td></tr>
+  <tr><td>$\langle N\rangle = (V/\lambda^3)e^{\mu/k_BT}$</td><td>Average particle number</td></tr>
+  <tr><td>$P_{i,N} = e^{-\beta(E_i-\mu N)}/\Xi$</td><td>Grand canonical probability</td></tr>
+  <tr><td>$Z_1^\text{ultrarel} = 8\pi V(k_BT)^3/(h^3c^3)$</td><td>Ultrarelativistic gas ($E=pc$)</td></tr>
+  <tr><td>$U_\text{ultrarel} = 3Nk_BT$, $\;PV = Nk_BT$</td><td>Ultrarelativistic thermodynamics</td></tr>
+  <tr><td>$u(\nu) = \frac{8\pi h\nu^3/c^3}{e^{h\nu/k_BT}-1}$</td><td>Planck distribution</td></tr>
+  <tr><td>$\lambda_\text{max}T = 2.898\times10^{-3}$ m·K</td><td>Wien's displacement law</td></tr>
+  <tr><td>$\langle E_\text{Planck}\rangle = h\nu/(e^{h\nu/k_BT}-1)$</td><td>Mean energy of quantum oscillator</td></tr>
+  <tr><td>$n(z) = n_0 e^{-mgz/k_BT}$</td><td>Law of atmospheres</td></tr>
+</table>
+</div>
+
+<div class="tip">
+  <div class="tip-label">💡 Last-minute memory anchors</div>
+  <ul>
+    <li><strong>β = 1/k_BT</strong> — everything involves β. High T: β small → high energy states accessible.</li>
+    <li><strong>Ideal gas: U = (3/2)Nk_BT</strong>. Ultrarel: <strong>U = 3Nk_BT</strong>. HO(1D): <strong>U = Nk_BT</strong>.</li>
+    <li><strong>Distinguishable (HO lattice): no 1/N!</strong> &nbsp; Indistinguishable (gas): <strong>divide by N!</strong></li>
+    <li><strong>J-T: H = const</strong> (isenthalpic). Cooling: $T < T_i = 2a/bR$.</li>
+    <li><strong>TdS Eq. 1:</strong> $T$, $V$ independent. <strong>TdS Eq. 2:</strong> $T$, $P$ independent.</li>
+    <li><strong>Planck mean energy: $h\nu/(e^{h\nu/k_BT}-1)$</strong> — denominator is the key. At low T: → 0 (quantum freeze-out). At high T: → $k_BT$ (classical limit).</li>
+    <li><strong>For PYQ C Q2</strong>: phase space of $N$ HOs → $2N$-dim ellipsoid. $\Omega\propto E^N$. $S = Nk_B\ln(E/N\hbar\omega) + \text{const}$ → $E = Nk_BT$.</li>
+  </ul>
+</div>
+
+</div><!-- /s15 -->
+
+</main>
+
+<footer>
+  PHY-1536 · Thermodynamics & Statistical Mechanics I · BSc 2nd Year · 2025 · Built from SKS Sir + SSA Sir + SR Sir notes · Follow Greiner
+</footer>
+
+<script>
+document.querySelectorAll('.qa-q').forEach(q => {
+  q.addEventListener('click', () => {
+    q.parentElement.classList.toggle('open');
+  });
+});
+</script>
+
+</body>
+</html>
