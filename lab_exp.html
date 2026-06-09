@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab Procedures</title>
+<style>
+:root{--bg:#0f1117;--bg2:#181c27;--bg3:#1e2333;--card:#1a1f2e;--border:#2a3050;--border2:#3a4570;--text:#e8eaf6;--text2:#9aa0c0;--text3:#636b8a;--purple:#7c6fef;--purple2:#a99ef5;--teal:#4dd9ac;--teal2:#a0f0d8;--amber:#f5a623;--amber2:#ffd080;--coral:#f07060;--coral2:#f5b0a0;--mono:'Courier New',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;padding-bottom:3rem}
+/* HEADER */
+.site-header{background:linear-gradient(135deg,#0d1a1a 0%,#0d2020 100%);border-bottom:1px solid var(--border);padding:1rem 1.25rem .75rem;position:sticky;top:0;z-index:200}
+.site-header h1{font-size:17px;font-weight:500;color:var(--teal2);margin-bottom:6px}
+.site-header p{font-size:11px;color:var(--text3);margin-bottom:8px}
+.page-nav{display:flex;gap:6px;flex-wrap:wrap}
+.pnav-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:11px;font-weight:500;cursor:pointer;text-decoration:none;transition:all .15s}
+.pnav-btn:hover{background:var(--bg3);color:var(--text)}
+.pnav-btn.back{border-color:var(--border2);color:var(--text3)}
+.pnav-btn.back:hover{color:var(--text)}
+.pnav-btn.accent{border-color:var(--purple);color:var(--purple2)}
+.pnav-btn.accent:hover{background:#1e1a40}
+/* EXP TABS */
+.tabs{display:flex;gap:5px;flex-wrap:wrap;padding:.75rem 1.25rem;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:78px;z-index:150}
+.tab{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:12px;font-weight:500;transition:all .15s}
+.tab:hover{border-color:var(--border2);color:var(--text)}
+.tab.active{background:var(--teal);border-color:var(--teal);color:#0a1a14;font-weight:600}
+/* SECTIONS */
+.exp{display:none;padding:1.25rem}
+.exp.active{display:block}
+/* AIM BOX */
+.aim-box{background:#0d2018;border:1px solid #1a4030;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem}
+.aim-box .at{font-size:11px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.aim-box .av{font-size:13.5px;color:var(--teal2);line-height:1.6}
+/* SEC TITLE */
+.sec-title{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin:1.25rem 0 .75rem;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.sec-title:first-of-type{margin-top:0}
+/* STEPS */
+.step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.snum{width:26px;height:26px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);color:var(--teal2);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.scontent{flex:1}
+.stitle{font-size:13.5px;font-weight:500;color:var(--text);margin-bottom:3px}
+.sdesc{font-size:12.5px;color:var(--text2);line-height:1.7}
+.why{background:#0d2018;border:1px solid #1a4030;border-radius:5px;padding:6px 10px;margin-top:5px;font-size:12px;color:var(--teal2);line-height:1.6}
+.why::before{content:"Why? ";font-weight:600}
+.warn{background:#201208;border:1px solid #3a2010;border-radius:5px;padding:6px 10px;margin-top:5px;font-size:12px;color:var(--amber2);line-height:1.6}
+.warn::before{content:"Note: ";font-weight:600}
+/* CODE BOXES */
+.eq{background:var(--bg3);border-left:3px solid var(--purple);border-radius:0 6px 6px 0;padding:8px 12px;margin:6px 0;font-family:var(--mono);font-size:12px;color:var(--purple2);line-height:1.8;white-space:pre-wrap}
+/* RXN CARDS */
+.rxn-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.875rem 1rem;margin-bottom:8px}
+.rxn-title{font-size:11px;font-weight:500;color:var(--teal);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+/* TABLES */
+table.t{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0}
+table.t th{text-align:left;padding:6px 8px;background:var(--bg3);color:var(--text2);border:1px solid var(--border);font-weight:500}
+table.t td{padding:6px 8px;border:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.5}
+/* CALC BOX */
+.calc-box{background:var(--bg3);border-radius:8px;padding:.875rem 1rem;margin:8px 0;border:1px solid var(--border)}
+.calc-box .ct{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+/* HIGHLIGHT */
+.highlight{background:#201208;border:1px solid #3a2010;border-radius:6px;padding:8px 12px;font-size:12.5px;color:var(--amber2);margin:8px 0;line-height:1.6}
+/* PROSE */
+p.prose{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:7px}
+/* Q CARDS */
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.875rem 1rem;margin-bottom:8px;transition:border-color .15s}
+.q-card:hover{border-color:var(--border2)}
+.qtext{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:7px}
+.qtog{font-size:11px;font-weight:500;color:var(--teal2);background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:3px 10px;cursor:pointer;transition:all .15s}
+.qtog:hover{background:var(--border)}
+.qans{display:none;margin-top:8px;font-size:12.5px;color:var(--text2);line-height:1.7;border-top:1px solid var(--border);padding-top:8px}
+.qans.open{display:block}
+/* BADGES */
+.badge{font-size:10px;padding:2px 8px;border-radius:99px;margin-left:6px}
+.b-imp{background:#1e0c08;color:#f5a080;border:1px solid #3a2010}
+.b-calc{background:#0a1e0a;color:#80d890;border:1px solid #103a10}
+.b-def{background:#080e1e;color:#80b0f5;border:1px solid #101830}
+/* QA SECTION LABEL */
+.qa-section-label{font-size:11px;font-weight:500;color:var(--teal);text-transform:uppercase;letter-spacing:.07em;margin:1.25rem 0 .75rem;padding-bottom:5px;border-bottom:1px solid var(--border)}
+/* MOBILE */
+@media(max-width:600px){
+  .site-header h1{font-size:15px}
+  .tabs{top:90px;padding:.6rem 1rem}
+  .tab{font-size:11px;padding:5px 10px}
+  .exp{padding:1rem .875rem}
+  .step{gap:8px}
+  .snum{width:22px;height:22px;font-size:11px}
+  table.t{font-size:11px}
+  table.t th,table.t td{padding:5px 6px}
+}
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1>Lab Procedures</h1>
+  <p>Full walkthrough: aim → theory → step-by-step method with reasoning → calculations → Q&A</p>
+  <div class="page-nav">
+    <a href="chemistry_master_notes.html" class="pnav-btn back">&#8592; Back to Notes</a>
+    <a href="chem_question.html" class="pnav-btn accent">&#128221; Practice Questions &#8599;</a>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showExp('iron',this)">Experiment 1: Iron in Mohr's Salt</button>
+  <button class="tab" onclick="showExp('hard',this)">Experiment 2: Hardness of Water</button>
+  <button class="tab" onclick="showExp('qa',this)">Practice Q&amp;A (both)</button>
+</div>
+
+<!-- EXP 1 -->
+<div class="exp active" id="iron">
+
+  <div class="aim-box">
+    <div class="at">Aim</div>
+    <div class="av">To determine the amount of Iron(II) in Mohr's salt solution by titration against a standard potassium dichromate (K₂Cr₂O₇) solution using Barium Diphenylamine Sulphonate (BDS) as redox indicator.</div>
+  </div>
+
+  <div class="sec-title">Theory — why dichromate?</div>
+  <p class="prose">Dichromate is used as the oxidising titrant instead of permanganate for this experiment. Here's why it is often preferred:</p>
+  <table class="t">
+    <tr><th>Property</th><th>K₂Cr₂O₇</th><th>KMnO₄</th></tr>
+    <tr><td>Primary standard?</td><td>Yes — stable indefinitely in solution, high purity</td><td>No — secondary standard, changes strength over time</td></tr>
+    <tr><td>Needs indicator?</td><td>Yes (BDS)</td><td>No — self-indicator (purple → colourless)</td></tr>
+    <tr><td>E° value</td><td>1.33 V (weaker oxidiser)</td><td>1.51 V (stronger oxidiser)</td></tr>
+    <tr><td>Works in HCl?</td><td>Yes — does not oxidise Cl⁻</td><td>No — oxidises Cl⁻, cannot use HCl</td></tr>
+  </table>
+
+  <div class="sec-title">Key reactions</div>
+  <div class="rxn-card">
+    <div class="rxn-title">Half reaction — dichromate (oxidant, in burette)</div>
+    <div class="eq">Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O    E° = +1.33 V</div>
+  </div>
+  <div class="rxn-card">
+    <div class="rxn-title">Half reaction — iron(II) (reductant, in flask)</div>
+    <div class="eq">Fe²⁺ → Fe³⁺ + e⁻    E° = −0.77 V</div>
+  </div>
+  <div class="rxn-card">
+    <div class="rxn-title">Overall balanced reaction (×6 for iron)</div>
+    <div class="eq">Cr₂O₇²⁻ + 6Fe²⁺ + 14H⁺ → 2Cr³⁺ + 6Fe³⁺ + 7H₂O
+E°cell = 1.33 − (−0.77) = +0.56 V  (spontaneous ✓)
+Product: Cr³⁺ gives a light greenish colour</div>
+  </div>
+
+  <div class="sec-title">BDS indicator — how it works</div>
+  <p class="prose">BDS (Barium Diphenylamine Sulphonate) is a redox indicator — it has two different colours in its oxidised and reduced forms.</p>
+  <div class="eq">Reduced form: colourless (diphenylamine sulphonate)
+        ↓ [O] — oxidation by excess Cr₂O₇²⁻ after all Fe²⁺ is consumed
+Oxidised form: blue-violet (diphenylbenzidine violet sulphonate)</div>
+  <div class="why">BDS changes colour only when all Fe²⁺ is consumed and excess Cr₂O₇²⁻ is present to oxidise the indicator itself. So the first permanent blue-violet = endpoint.</div>
+  <div class="warn">The barium salt is used instead of diphenylamine itself because it has better solubility in water — the Ba²⁺ keeps the sulfonate salt dissolved.</div>
+
+  <div class="sec-title">Why H₃PO₄ is added — the most important reasoning point</div>
+  <p class="prose">This is a classic exam question. Without H₃PO₄, the endpoint is difficult to detect. Here's the exact reasoning:</p>
+  <div class="step">
+    <div class="snum">1</div>
+    <div class="scontent">
+      <div class="stitle">Problem: Fe³⁺ is yellow</div>
+      <div class="sdesc">As Fe²⁺ is oxidised → Fe³⁺ during titration, the yellow colour of Fe³⁺ builds up. The blue-violet of BDS is masked by this yellow — you can't see the colour change at the endpoint.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">2</div>
+    <div class="scontent">
+      <div class="stitle">Solution: add H₃PO₄ before titration</div>
+      <div class="sdesc">H₃PO₄ complexes Fe³⁺ → forms [Fe(HPO₄)(H₂O)₅]⁺ — a colourless complex. The yellow Fe³⁺ is removed from solution visually.</div>
+      <div class="eq">Fe³⁺ + H₂PO₄⁻ → [FeIII(HPO₄)(H₂O)₅]⁺  (colourless)</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">3</div>
+    <div class="scontent">
+      <div class="stitle">Bonus: lowers Fe³⁺/Fe²⁺ potential</div>
+      <div class="sdesc">Complexing Fe³⁺ stabilises it → lowers the standard potential of Fe³⁺/Fe²⁺ below 0.77 V. This sharpens the endpoint because BDS (E° ≈ 0.78 V) now changes colour at a potential just above the adjusted Fe couple — the transition is sharp and clear.</div>
+      <div class="why">If Fe³⁺/Fe²⁺ potential is not lowered, both the iron couple and BDS change at similar potentials → sluggish, indistinct endpoint.</div>
+    </div>
+  </div>
+
+  <div class="sec-title">Preparation of N/10 K₂Cr₂O₇ standard solution (250 mL)</div>
+
+  <div class="step">
+    <div class="snum">1</div>
+    <div class="scontent">
+      <div class="stitle">Calculate the mass needed</div>
+      <div class="sdesc">M(K₂Cr₂O₇) = 294.18 g/mol. n-factor for Cr₂O₇²⁻ = 6 (each Cr goes from +6 to +3, ×2 Cr atoms). Equivalent mass = 294.18/6 = 49.03 g/equiv. For N/10 in 250 mL: mass = (49.03/10) × (250/1000) = 1.225 g</div>
+      <div class="eq">Equivalent mass of K₂Cr₂O₇ = M/6 = 294.18/6 = 49.03 g/equiv
+Mass for N/10, 250 mL = 49.03 × (1/10) × (250/1000) = 1.225 g</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">2</div>
+    <div class="scontent">
+      <div class="stitle">Weigh accurately on digital balance</div>
+      <div class="sdesc">Weigh ~1.225 g of pure K₂Cr₂O₇ accurately. K₂Cr₂O₇ is a primary standard so its purity is high and it can be weighed directly without standardisation.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">3</div>
+    <div class="scontent">
+      <div class="stitle">Dissolve and transfer to 250 mL volumetric flask</div>
+      <div class="sdesc">Dissolve completely in a beaker with a little distilled water. Transfer quantitatively via a funnel into the 250 mL volumetric flask. Rinse the beaker and funnel 2–3 times to ensure complete transfer.</div>
+      <div class="why">Any material left behind would make the solution weaker than intended — the calculation assumes all 1.225 g is in solution.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">4</div>
+    <div class="scontent">
+      <div class="stitle">Make up to 250 mL mark with distilled water</div>
+      <div class="sdesc">Add distilled water dropwise using a dropper near the mark. The bottom of the meniscus must sit on the 250 mL line when viewed at eye level.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">5</div>
+    <div class="scontent">
+      <div class="stitle">Stopper and invert 15–20 times</div>
+      <div class="sdesc">Invert the stoppered flask repeatedly to ensure the solution is completely homogeneous. The concentration must be uniform throughout the volume.</div>
+    </div>
+  </div>
+
+  <div class="sec-title">Titration procedure — step by step</div>
+
+  <div class="step">
+    <div class="snum">1</div>
+    <div class="scontent">
+      <div class="stitle">Pipette 25 mL of Mohr's salt solution into 250 mL conical flask</div>
+      <div class="sdesc">Use a clean, rinsed pipette. Mohr's salt = (NH₄)₂SO₄·FeSO₄·6H₂O. This is the source of Fe²⁺ to be estimated.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">2</div>
+    <div class="scontent">
+      <div class="stitle">Dilute to 150 mL with distilled water</div>
+      <div class="sdesc">Add ~125 mL distilled water. Dilution doesn't affect the moles of Fe²⁺ — it just gives a bigger volume to observe colour changes in.</div>
+      <div class="why">A larger volume makes the colour change at the endpoint easier to see clearly.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">3</div>
+    <div class="scontent">
+      <div class="stitle">Add 25 mL of 4N H₂SO₄</div>
+      <div class="sdesc">Acidic medium is essential — the dichromate half-reaction requires 14H⁺. Without acid, the reaction doesn't proceed and no Cr³⁺ (green) forms. H₂SO₄ is used, not HCl (HCl would be oxidised by Cr₂O₇²⁻ — though less of an issue here than with KMnO₄).</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">4</div>
+    <div class="scontent">
+      <div class="stitle">Add 5 mL syrupy H₃PO₄</div>
+      <div class="sdesc">This complexes Fe³⁺ as it forms during titration → removes yellow colour masking and lowers Fe³⁺/Fe²⁺ potential → sharp endpoint with BDS.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">5</div>
+    <div class="scontent">
+      <div class="stitle">Add 5 drops of BDS indicator</div>
+      <div class="sdesc">BDS is colourless in reduced state. Very small amount used so it doesn't consume significant titrant.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">6</div>
+    <div class="scontent">
+      <div class="stitle">Titrate with standard K₂Cr₂O₇ from burette with constant swirling</div>
+      <div class="sdesc">Run K₂Cr₂O₇ slowly with constant shaking (swirling). The colour slowly changes from green (Cr³⁺ forming) toward blue-violet at endpoint.</div>
+      <div class="warn">Constant shaking is essential — the reaction between Fe²⁺ and Cr₂O₇²⁻ is not instantaneous near the endpoint. Sluggish mixing can give a false early endpoint.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">7</div>
+    <div class="scontent">
+      <div class="stitle">Endpoint: first permanent blue-violet colour</div>
+      <div class="sdesc">Stop at the first permanent blue-violet colour that does not disappear on swirling. Record burette reading. Repeat for concordant readings (within ±0.1 mL).</div>
+    </div>
+  </div>
+
+  <div class="sec-title">Calculation</div>
+  <div class="calc-box">
+    <div class="ct">Key equivalence relationship</div>
+    <div class="eq">1000 mL of 1N K₂Cr₂O₇ ≡ 55.847 g of Fe(II) ≡ 392.143 g of Mohr's salt
+
+General:  N₁V₁ = N₂V₂  (at equivalence point)
+N(K₂Cr₂O₇) × V(K₂Cr₂O₇) = N(Fe²⁺) × V(Fe²⁺)
+
+If V mL of N/10 K₂Cr₂O₇ is used:
+moles of Fe²⁺ = (N/10 × V)/1000 equivalents
+mass of Fe(II) = equivalents × 55.847 g/equiv</div>
+  </div>
+  <div class="highlight">The n-factor for Fe²⁺ is 1 (loses 1 electron). For Cr₂O₇²⁻ it is 6 (total 6 electrons gained — 3 per Cr × 2 Cr). This is why the equivalence relationship works out to 1:1 in equivalents despite 6:1 in moles.</div>
+
+</div>
+
+<!-- EXP 2 -->
+<div class="exp" id="hard">
+
+  <div class="aim-box">
+    <div class="at">Aim</div>
+    <div class="av">To determine the total hardness of a water sample by complexometric titration with standard EDTA solution using Eriochrome Black T (EBT) as indicator, and express the result as ppm of CaCO₃.</div>
+  </div>
+
+  <div class="sec-title">Theory — what is water hardness?</div>
+  <p class="prose">Hardness of water is caused by dissolved Ca²⁺ and Mg²⁺ ions (from bicarbonate, chloride, and sulfate salts). These ions form insoluble precipitates with soap, interfere with industrial processes, and cause scale in boilers.</p>
+  <table class="t">
+    <tr><th>Type</th><th>Cause</th><th>Removed by</th></tr>
+    <tr><td>Temporary hardness</td><td>Ca(HCO₃)₂, Mg(HCO₃)₂</td><td>Boiling (CO₂ driven off → CaCO₃ precipitates)</td></tr>
+    <tr><td>Permanent hardness</td><td>CaSO₄, MgSO₄, CaCl₂</td><td>EDTA titration, ion exchange, Na₂CO₃</td></tr>
+    <tr><td>Total hardness</td><td>All Ca²⁺ + Mg²⁺</td><td>Measured by EDTA in this experiment</td></tr>
+  </table>
+  <p class="prose" style="margin-top:8px">Hardness is expressed as mg/L (ppm) of CaCO₃ equivalent — this is because CaCO₃ (M = 100 g/mol) is a convenient reference; both Ca and Mg are expressed as if they were CaCO₃.</p>
+
+  <div class="sec-title">EDTA — why it works so well</div>
+  <p class="prose">EDTA (H₄Y, or H₄EDTA) is a hexadentate ligand — it wraps around metal ions using 4 oxygen atoms from carboxylate groups and 2 nitrogen atoms simultaneously, forming a very stable cage-like (chelate) complex.</p>
+  <div class="eq">M^n+ + Y⁴⁻ → [MY]^(n-4)+
+EDTA forms 1:1 complexes with virtually ALL metal ions
+Very large formation constants (log K_f often 8–18)</div>
+  <div class="why">The reaction must be done at pH 7–11 (using NH₃/NH₄Cl buffer) so that Y⁴⁻ (the reactive fully deprotonated form) is available in sufficient concentration. At low pH, Y⁴⁻ gets protonated → reacts less effectively.</div>
+
+  <div class="sec-title">EBT indicator — the heart of this experiment</div>
+  <p class="prose">EBT (Eriochrome Black T, also called Solochrome Black T) is a metallochromic indicator — it changes colour depending on whether it is free or complexed with a metal ion.</p>
+  <div class="eq">Free EBT (HD²⁻) at pH 7–11 → blue colour
+M²⁺ + HD²⁻ (blue) → M-D⁻ (wine-red) + H⁺
+                 metal-indicator complex</div>
+  <div class="highlight">Stability order (from your PDF): Ca-EDTA &gt; Mg-EDTA &gt; Mg-EBT &gt; Ca-EBT. This order drives the entire mechanism of the titration!</div>
+  <p class="prose">The titration sequence as EDTA is added dropwise:</p>
+  <div class="step">
+    <div class="snum">1</div>
+    <div class="scontent">
+      <div class="stitle">Before titration: solution is wine-red</div>
+      <div class="sdesc">All Ca²⁺ and Mg²⁺ are bound to EBT indicator → wine-red M-EBT complexes throughout the solution.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">2</div>
+    <div class="scontent">
+      <div class="stitle">During titration: EDTA first reacts with free Ca²⁺ and Mg²⁺</div>
+      <div class="sdesc">Since Ca-EDTA and Mg-EDTA are more stable than Ca-EBT and Mg-EBT, EDTA preferentially binds free metal ions first. Colour remains wine-red (EBT still bound to metals).</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">3</div>
+    <div class="scontent">
+      <div class="stitle">Near endpoint: EDTA starts displacing EBT from metal complexes</div>
+      <div class="sdesc">EDTA attacks Mg-EBT (the weakest M-EBT complex). Since Mg-EDTA &gt; Mg-EBT in stability, EDTA displaces EBT: Mg-EBT (wine-red) + EDTA → Mg-EDTA (colourless) + EBT (blue)</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">4</div>
+    <div class="scontent">
+      <div class="stitle">Endpoint: complete colour change from wine-red → clear blue</div>
+      <div class="sdesc">All metal ions are now held by EDTA. All EBT is free → clear blue colour. This is the endpoint. Record burette reading.</div>
+      <div class="why">The endpoint is wine-red → blue, NOT wine-red → colourless. The blue comes from free EBT, not from the absence of any colour.</div>
+    </div>
+  </div>
+
+  <div class="sec-title">Step-by-step procedure</div>
+  <div class="step">
+    <div class="snum">1</div>
+    <div class="scontent">
+      <div class="stitle">Pipette 25 mL of hard water into 250 mL conical flask</div>
+      <div class="sdesc">The water sample contains unknown amounts of Ca²⁺ and Mg²⁺. Using exactly 25 mL ensures reproducibility and simplifies calculation.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">2</div>
+    <div class="scontent">
+      <div class="stitle">Add 25 mL deionised water</div>
+      <div class="sdesc">Increases total volume → easier to observe colour change. Deionised water must be used — tap water would add more Ca²⁺/Mg²⁺ and give false results.</div>
+      <div class="warn">Never use tap water to dilute — it contains hardness ions and would make your result too high.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">3</div>
+    <div class="scontent">
+      <div class="stitle">Add 5 mL NH₃/NH₄Cl buffer solution (pH 7–11)</div>
+      <div class="sdesc">This maintains pH in the range 7–11 throughout titration. At this pH, EBT exists as HD²⁻ (blue free form) and EDTA as Y⁴⁻ (reactive form). Below pH 7 → EDTA gets protonated, reacts poorly. Above pH 11 → Mg(OH)₂ precipitates, Mg²⁺ not available for EDTA.</div>
+      <div class="why">The buffer is not optional — without it, the pH would change as H⁺ is released (from M²⁺ + HD²⁻ → MD⁻ + H⁺) and the indicator would stop working at the wrong pH range.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">4</div>
+    <div class="scontent">
+      <div class="stitle">Add 30–40 mg EBT indicator (with KNO₃)</div>
+      <div class="sdesc">EBT is added as a solid mixture with KNO₃ (to aid even distribution and prevent clumping). Solution turns wine-red confirming M-EBT complexes have formed. KNO₃ is inert — just a diluent to help measure out tiny amounts of EBT accurately.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">5</div>
+    <div class="scontent">
+      <div class="stitle">Titrate with standard EDTA from burette until wine-red → clear blue</div>
+      <div class="sdesc">Add EDTA slowly with swirling. The wine-red gradually lightens (purplish) until the sharp, clear blue endpoint. Record V (burette reading).</div>
+      <div class="warn">The last drop at the endpoint should give a clean blue with no reddish tinge. If the blue appears dull or greyish, the endpoint may have been missed — repeat.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="snum">6</div>
+    <div class="scontent">
+      <div class="stitle">Repeat for concordant readings</div>
+      <div class="sdesc">Repeat titration until two readings agree within ±0.1 mL. Take the average V. Concordant results confirm accuracy.</div>
+    </div>
+  </div>
+
+  <div class="sec-title">Calculation — total hardness in ppm</div>
+  <div class="calc-box">
+    <div class="ct">Step-by-step derivation</div>
+    <div class="eq">Given: 1000 mL of (M/100) EDTA ≡ 1 g CaCO₃  [since M(CaCO₃) = 100]
+
+V mL of f(M/100) EDTA ≡ (1 × V × f)/1000 g CaCO₃
+                       = V × f × 10⁻³ g CaCO₃
+where f = strength factor of M/100 EDTA
+
+Since 25 mL hard water ≡ V mL EDTA:
+25 parts water contain V×f×10⁻³ parts CaCO₃
+
+Scaling to 10⁶ parts water (ppm):
+10⁶ parts water contain (V×f×10⁻³ × 10⁶)/25 = V×f×40 parts CaCO₃
+
+∴ Total hardness = V × f × 40 ppm</div>
+  </div>
+  <div class="highlight">The factor 40 = 10⁶/(25 × 10³) comes directly from the volume used (25 mL) and unit conversion. For f = 1 (perfectly made EDTA), hardness = 40V ppm. Memorise: Total hardness = V × f × 40 ppm.</div>
+
+</div>
+
+<!-- Q&A -->
+<div class="exp" id="qa">
+
+  <p style="font-size:12.5px;color:var(--text3);margin-bottom:1rem">These are the kinds of questions your examiner is most likely to ask. Try answering before revealing.</p>
+
+  <div class="qa-section-label">Experiment 1 — Mohr's salt &amp; dichromate</div>
+
+  <div class="q-card">
+    <div class="qtext">1. Why is K₂Cr₂O₇ preferred over KMnO₄ for estimating iron(II) in Mohr's salt? <span class="badge b-imp">very likely</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">K₂Cr₂O₇ is a primary standard — it can be obtained in high purity and its solution is stable indefinitely. KMnO₄ is a secondary standard whose concentration changes over time due to decomposition. Additionally, K₂Cr₂O₇ does not oxidise Cl⁻, so HCl can be used in the medium if needed. The tradeoff is that K₂Cr₂O₇ (E° = 1.33V) is a weaker oxidiser than KMnO₄ (1.51V), and requires an external indicator (BDS).</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">2. What is the role of H₃PO₄ in the dichromate titration of iron? <span class="badge b-imp">very likely</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">H₃PO₄ serves two purposes: (1) It complexes Fe³⁺ as it forms during titration, producing the colourless [Fe(HPO₄)(H₂O)₅]⁺ complex. This removes the yellow colour of Fe³⁺ which would otherwise mask the blue-violet colour of the BDS indicator at the endpoint. (2) Complexing Fe³⁺ stabilises it and lowers the standard reduction potential of the Fe³⁺/Fe²⁺ couple below 0.77 V, creating a sharper and more easily detectable colour change at the endpoint.</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">3. Explain the mechanism of the BDS indicator in this titration. <span class="badge b-imp">very likely</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">BDS (Barium Diphenylamine Sulphonate) is a redox indicator. In its reduced form it is colourless. During titration, all Fe²⁺ is oxidised to Fe³⁺ by Cr₂O₇²⁻. Once all Fe²⁺ is consumed, the first excess drop of Cr₂O₇²⁻ oxidises the BDS indicator itself — irreversibly oxidising it first to the colourless diphenylbenzidine sulphonate and then to the blue-violet diphenylbenzidine violet sulphonate. This colour change (green solution → blue-violet) marks the endpoint. E° of BDS ≈ 0.78 V, which sits just between Fe³⁺/Fe²⁺ (after H₃PO₄ addition, ~0.77 V dropped) and Cr₂O₇²⁻/Cr³⁺ (1.33 V).</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">4. Write the balanced equation for the dichromate-iron reaction and calculate the n-factor for each species. <span class="badge b-calc">calculation</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">Cr₂O₇²⁻ + 6Fe²⁺ + 14H⁺ → 2Cr³⁺ + 6Fe³⁺ + 7H₂O. n-factor for Cr₂O₇²⁻: each Cr goes from +6 to +3 = 3e⁻ per Cr, and there are 2 Cr atoms → n-factor = 6. n-factor for Fe²⁺: each Fe goes from +2 to +3 = 1e⁻ → n-factor = 1. At equivalence: N₁V₁ = N₂V₂. The equivalent mass of K₂Cr₂O₇ = 294.18/6 = 49.03 g/equiv.</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">5. Why must constant swirling be maintained during the titration? <span class="badge b-def">reasoning</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">The reaction between Fe²⁺ and Cr₂O₇²⁻ can be slow near the endpoint, especially as Fe²⁺ concentration decreases. Without constant swirling, locally high concentrations of Cr₂O₇²⁻ at the drop entry point can prematurely oxidise the BDS indicator, giving a false early endpoint. Constant mixing ensures the reagents are uniformly distributed and the true endpoint is detected.</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">6. Why is H₂SO₄ added, and can HCl be used instead? <span class="badge b-def">reasoning</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">H₂SO₄ is added to provide the acidic medium needed for the Cr₂O₇²⁻ half-reaction (which requires 14H⁺). It also prevents hydrolysis of Cr³⁺. HCl is generally avoided with KMnO₄ (which would oxidise Cl⁻ to Cl₂, using up permanganate — the Zimmermann-Reinhardt problem). With K₂Cr₂O₇, HCl oxidation is less of a concern since E°(Cr₂O₇²⁻/Cr³⁺) = 1.33 V &lt; E°(Cl₂/Cl⁻) = 1.36 V, making the reaction thermodynamically unfavoured. However, H₂SO₄ is still preferred for cleanliness.</div>
+  </div>
+
+  <div class="qa-section-label">Experiment 2 — Hardness of water</div>
+
+  <div class="q-card">
+    <div class="qtext">7. What is meant by total hardness of water and how is it expressed? <span class="badge b-imp">very likely</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">Total hardness is the total concentration of Ca²⁺ and Mg²⁺ ions in water, expressed as the equivalent amount of CaCO₃ in mg per litre (ppm). CaCO₃ is used as the reference standard because of its convenient molar mass (100 g/mol) and historical convention. Both Ca²⁺ and Mg²⁺ are converted to their CaCO₃ equivalents for expression. Total hardness = temporary (removable by boiling) + permanent hardness.</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">8. Explain the role of the NH₃/NH₄Cl buffer in this titration. <span class="badge b-imp">very likely</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">The NH₃/NH₄Cl buffer maintains pH in the range 7–11, which is essential for two reasons: (1) At this pH, EDTA exists predominantly as Y⁴⁻ (the fully deprotonated, reactive form) in sufficient concentration to react completely with Ca²⁺ and Mg²⁺. At lower pH, EDTA is protonated and reacts incompletely. (2) EBT indicator functions correctly as HD²⁻ (blue free form) only in this pH range. If pH exceeds ~11, Mg(OH)₂ precipitates and Mg²⁺ is unavailable for titration, giving falsely low results.</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">9. Explain why the stability order Ca-EDTA &gt; Mg-EDTA &gt; Mg-EBT &gt; Ca-EBT governs the endpoint mechanism. <span class="badge b-imp">conceptual</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">At the start, both Ca²⁺ and Mg²⁺ are bound to EBT (wine-red). As EDTA is added, it first reacts with free Ca²⁺ and Mg²⁺ in solution (since Ca-EDTA and Mg-EDTA are more stable products). Near the endpoint, EDTA starts attacking Mg-EBT (weakest M-EBT complex), displacing EBT and forming the more stable Mg-EDTA. Finally EDTA also displaces EBT from Ca-EBT. All EBT is freed → blue. The driving force is always towards the formation of the most stable complex (EDTA complexes). Without this stability order, the displacement couldn't occur and no colour change would be seen.</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">10. Derive the formula: Total hardness = V × f × 40 ppm. <span class="badge b-calc">derivation</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">Start: 1000 mL of M/100 EDTA ≡ 1 g CaCO₃ (since M(CaCO₃)=100, 1 mole EDTA = 1 mole CaCO₃). So V mL of f(M/100) EDTA ≡ V×f/1000 g CaCO₃ = V×f×10⁻³ g CaCO₃. This came from 25 mL of hard water. Hardness in ppm = g CaCO₃ per 10⁶ g water. Since density of water ≈ 1, 25 mL ≈ 25 g. So 25 g water contains V×f×10⁻³ g CaCO₃. Scaling to 10⁶ g: hardness = (V×f×10⁻³/25) × 10⁶ = V×f×40 ppm.</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">11. Why must deionised water be used for dilution — not tap water? <span class="badge b-def">practical</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">Tap water itself contains Ca²⁺ and Mg²⁺ ions (it has hardness). Adding tap water to dilute the sample would add extra Ca²⁺/Mg²⁺ to the conical flask. These would consume additional EDTA during titration, giving a burette reading V that is too high → calculated hardness would be erroneously high. Deionised water contains no hardness ions so it doesn't interfere with the measurement.</div>
+  </div>
+
+  <div class="q-card">
+    <div class="qtext">12. Why is EBT used with KNO₃, and why is only 30–40 mg used? <span class="badge b-def">practical</span></div>
+    <button class="qtog" onclick="tA(this)">Show answer</button>
+    <div class="qans">EBT is used as a solid mixture with KNO₃ (usually 1:100 ratio) because EBT is needed in very small amounts and it's difficult to weigh out accurately at 1–2 mg scale. Diluting with inert KNO₃ allows a 30–40 mg portion to be weighed reliably while delivering the right amount of indicator. KNO₃ is chemically inert and does not interfere. Using too much EBT would make the solution too intensely wine-red and the endpoint colour change would be unclear; too little and the initial colour would be too faint to observe.</div>
+  </div>
+
+</div>
+
+<script>
+function showExp(id,btn){
+  document.querySelectorAll('.exp').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function tA(btn){
+  const a=btn.nextElementSibling;
+  a.classList.toggle('open');
+  btn.textContent=a.classList.contains('open')?'Hide answer':'Show answer';
+}
+</script>
+</body>
+</html>

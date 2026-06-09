@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry — Practice Questions</title>
+
+<style>
+:root{--bg:#0f1117;--bg2:#181c27;--bg3:#1e2333;--card:#1a1f2e;--border:#2a3050;--border2:#3a4570;--text:#e8eaf6;--text2:#9aa0c0;--text3:#636b8a;--purple:#7c6fef;--purple2:#a99ef5;--teal:#4dd9ac;--teal2:#a0f0d8;--amber:#f5a623;--amber2:#ffd080;--coral:#f07060;--coral2:#f5b0a0;--green:#5cc878;--blue:#60aaee;--mono:'Courier New',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;padding:0 0 3rem}
+.header{background:linear-gradient(135deg,#12172a 0%,#1a2040 100%);border-bottom:1px solid var(--border);padding:1.5rem 1.5rem 1rem;position:sticky;top:0;z-index:100}
+.header h1{font-size:18px;font-weight:500;color:var(--purple2);margin-bottom:2px}
+.header p{font-size:12px;color:var(--text3)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;padding:1rem 1.5rem;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:90px;z-index:99}
+.tab{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:12px;transition:all .15s}
+.tab:hover{border-color:var(--border2);color:var(--text)}
+.tab.active{background:var(--purple);border-color:var(--purple);color:#fff;font-weight:500}
+.stats{display:flex;gap:1rem;padding:.75rem 1.5rem;background:var(--bg2);border-bottom:1px solid var(--border);font-size:12px;color:var(--text3)}
+.stat{display:flex;align-items:center;gap:5px}
+.stat b{color:var(--text2)}
+.sec{display:none;padding:1.5rem}
+.sec.active{display:block}
+.sec-title{font-size:16px;font-weight:500;color:var(--purple2);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:'';width:3px;height:20px;background:var(--purple);border-radius:2px;flex-shrink:0}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;transition:border-color .15s}
+.qcard:hover{border-color:var(--border2)}
+.qhead{padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px}
+.qnum{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:500;color:var(--text3);flex-shrink:0;margin-top:2px;min-width:30px;text-align:center}
+.qnum.num{border-color:var(--amber);color:var(--amber)}
+.qnum.hard{border-color:var(--coral);color:var(--coral)}
+.qnum.concept{border-color:var(--teal);color:var(--teal)}
+.qtxt{flex:1;font-size:13.5px;color:var(--text);line-height:1.6}
+.qtxt .formula{font-family:var(--mono);background:var(--bg3);padding:1px 6px;border-radius:4px;font-size:12px;color:var(--purple2)}
+.qtxt sub{font-size:10px}
+.qtxt sup{font-size:10px}
+.qarrow{color:var(--text3);font-size:12px;flex-shrink:0;transition:transform .2s;margin-top:3px}
+.qcard.open .qarrow{transform:rotate(180deg)}
+.qcard.open{border-color:var(--purple)}
+.ans{display:none;padding:0 16px 14px;border-top:1px solid var(--border)}
+.qcard.open .ans{display:block}
+.ans-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin:12px 0 6px}
+.ans-label:first-child{margin-top:12px}
+.ans p{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:5px}
+.ans p b{color:var(--text)}
+.box{background:var(--bg3);border-left:3px solid var(--purple);border-radius:0 6px 6px 0;padding:8px 12px;margin:6px 0;font-family:var(--mono);font-size:12px;color:var(--purple2);line-height:1.8;white-space:pre-wrap}
+.box.teal{border-left-color:var(--teal);color:var(--teal2)}
+.box.amber{border-left-color:var(--amber);color:var(--amber2)}
+.box.coral{border-left-color:var(--coral);color:var(--coral2)}
+.tip{background:#0d2018;border:1px solid #1a4030;border-radius:6px;padding:8px 12px;font-size:12.5px;color:var(--teal2);margin:7px 0;line-height:1.6}
+.warn{background:#201208;border:1px solid #3a2010;border-radius:6px;padding:8px 12px;font-size:12.5px;color:var(--amber2);margin:7px 0;line-height:1.6}
+.badge{display:inline-block;font-size:10px;padding:1px 8px;border-radius:99px;margin-left:6px;vertical-align:middle}
+.b-n{background:#1e1a08;color:var(--amber);border:1px solid #3a3010}
+.b-c{background:#081e1a;color:var(--teal);border:1px solid #103a30}
+.b-h{background:#1e0808;color:var(--coral);border:1px solid #3a1010}
+.ans table{width:100%;border-collapse:collapse;font-size:12.5px;margin:7px 0}
+.ans th{padding:6px 10px;background:var(--bg3);color:var(--text2);border:1px solid var(--border);text-align:left;font-weight:500}
+.ans td{padding:6px 10px;border:1px solid var(--border);color:var(--text2)}
+.step{display:flex;gap:10px;margin:5px 0;align-items:flex-start}
+.step-n{width:22px;height:22px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--purple2);flex-shrink:0;margin-top:1px}
+.step p{font-size:13px;color:var(--text2);line-height:1.6;flex:1;margin:0}
+
+.page-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:2px}
+.pnav-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:11px;font-weight:500;cursor:pointer;text-decoration:none;transition:all .15s}
+.pnav-btn:hover{background:var(--bg3);color:var(--text)}
+.pnav-btn.back{border-color:var(--border);color:var(--text3)}
+.pnav-btn.back:hover{color:var(--text)}
+.pnav-btn.teal-btn{border-color:var(--teal);color:var(--teal2)}
+.pnav-btn.teal-btn:hover{background:#0d2018}
+@media(max-width:600px){
+  .header{padding:1rem 1rem .75rem}
+  .header h1{font-size:15px}
+  .tabs{top:92px;padding:.6rem 1rem}
+  .tab{font-size:10px;padding:4px 8px}
+  .stats{flex-wrap:wrap;gap:.5rem}
+  .sec{padding:1rem .875rem}
+  .qhead{padding:10px 12px;gap:8px}
+  .ans{padding:0 12px 12px}
+  .step{gap:6px}
+  .step-n{width:20px;height:20px;font-size:10px}
+}
+</style>
+
+<div class="header">
+<h1>Practice Questions</h1>
+<div class="page-nav">
+<a href="chemistry_master_notes.html" class="pnav-btn back">&#8592; Back to Notes</a>
+<a href="lab_experiments_guide.html" class="pnav-btn teal-btn">&#128249; Lab Procedures &#8599;</a>
+</div>
+<p id="prog" style="margin-top:6px">All topics · Click any question to reveal the detailed solution</p>
+</div>
+<div class="tabs">
+<button class="tab active" onclick="showSec('all',this)">All questions</button>
+<button class="tab" onclick="showSec('coord',this)">Coordination</button>
+<button class="tab" onclick="showSec('cft',this)">CFT &amp; CFSE</button>
+<button class="tab" onclick="showSec('spinel',this)">Spinel</button>
+<button class="tab" onclick="showSec('colour',this)">Colour &amp; spectra</button>
+<button class="tab" onclick="showSec('mag',this)">Magnetic</button>
+<button class="tab" onclick="showSec('redox',this)">Redox titrations</button>
+<button class="tab" onclick="showSec('edta',this)">Complexometric</button>
+<button class="tab" onclick="showSec('grav',this)">Gravimetry</button>
+<button class="tab" onclick="showSec('ph',this)">pH &amp; acid-base</button>
+</div>
+<div class="stats">
+<div class="stat"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber);display:inline-block"></span><b id="ncount">0</b> numerical</div>
+<div class="stat"><span style="width:8px;height:8px;border-radius:50%;background:var(--teal);display:inline-block"></span><b id="ccount">0</b> conceptual</div>
+<div class="stat"><span style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block"></span><b id="hcount">0</b> challenging</div>
+<div class="stat" style="margin-left:auto"><b id="opencount">0</b>&nbsp;solved</div>
+</div>
+
+<div class="sec active" id="all">
+
+<div class="sec-title">Coordination compounds &amp; Werner's theory</div>
+
+<div class="qcard" data-cat="coord concept">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum concept">C</span>
+<div class="qtxt">Werner isolated only <b>2</b> isomers of [Co(NH₃)₄Cl₂]Cl from the reaction mixture. Using this experimental fact, explain how Werner ruled out the planar and trigonal prismatic geometries and proved the octahedral structure.</div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Full explanation</div>
+<p>Werner reasoned from the number of isomers backwards. For a compound MA₄B₂, the number of geometric isomers depends entirely on the geometry around the central metal:</p>
+<div class="box">Planar geometry  → 3 possible arrangements for MA₄B₂
+Trigonal prism   → 3 possible arrangements
+Octahedral       → only 2 arrangements (cis and trans)</div>
+<p>Since Werner could only ever isolate <b>2</b> isomers of [Co(NH₃)₄Cl₂]Cl experimentally, planar and trigonal prismatic geometries were eliminated — they would predict 3 isomers. Only the octahedral geometry accounts for exactly 2.</p>
+<p>He further confirmed this with MA₃B₃ compounds (e.g. [Co(NH₃)₃Cl₃]): octahedral predicts exactly <b>2 isomers</b> (facial where all 3 B are on one triangular face, and meridional where 3 B span a meridional plane). Werner isolated exactly 2, confirming octahedral.</p>
+<div class="tip">Exam tip: always state the predicted isomer count for each geometry, then contrast with the experimental observation. The logic is purely deductive — ruling out geometries by elimination.</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="coord concept">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum concept">C</span>
+<div class="qtxt">Explain why [Co(NH₃)₆]Cl₃ gives 3 moles of AgCl with AgNO₃, but [Co(NH₃)₄Cl₂]Cl gives only 1 mole. How does this relate to Werner's primary and secondary valency?</div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Werner's valency theory</div>
+<p><b>Primary valency</b> is the oxidation state of the metal — it is ionisable and must be satisfied by anions outside the coordination sphere. <b>Secondary valency</b> is the coordination number — it is non-ionisable and must be satisfied by ligands directly bonded inside.</p>
+<div class="box teal">[Co(NH₃)₆]Cl₃:
+Primary valency = 3 → 3 Cl⁻ outside coordination sphere → ionisable
+→ 3 AgCl with AgNO₃; total ions in solution = 4 (1 complex cation + 3 Cl⁻)
+
+[Co(NH₃)₄Cl₂]Cl:
+Primary valency = 3 → only 1 Cl⁻ outside (satisfies 1 primary valency unit)
+2 Cl⁻ are inside coordination sphere as ligands (satisfy secondary valency)
+→ only 1 AgCl with AgNO₃; total ions = 2</div>
+<div class="tip">The inner Cl⁻ in [Co(NH₃)₄Cl₂]Cl simultaneously acts as a ligand AND as a charge-balance ion — this is the key dual role. The outer Cl⁻ only balances charge and is freely ionisable.</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="coord concept">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum hard">H</span>
+<div class="qtxt">Determine the oxidation state of the central metal, coordination number, and primary/secondary valency for each: (a) [Cr(H₂O)₄Cl₂]Cl·2H₂O, (b) K₂[PtCl₄], (c) [Co(en)₂Cl₂]NO₃</div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Systematic analysis</div>
+<div class="box">(a) [Cr(H₂O)₄Cl₂]Cl · 2H₂O
+Inside [  ]: Cr + 4H₂O + 2Cl⁻
+Outside: 1 Cl⁻ counter-ion, 2H₂O lattice water
+Charge balance: Cr + 2(−1) = +1 → Cr = +3
+Oxidation state = +3; Primary valency = 3; Secondary valency = 6; CN = 6
+With AgNO₃: 1 AgCl (1 ionisable Cl⁻)
+
+(b) K₂[PtCl₄]
+Outside: 2 K⁺; Inside: [PtCl₄]²⁻
+Pt + 4(−1) = −2 → Pt = +2
+Oxidation state = +2; Primary valency = 2; Secondary valency = 4; CN = 4
+Geometry: square planar (d⁸, strong field)
+
+(c) [Co(en)₂Cl₂]NO₃
+en = ethylenediamine (bidentate, neutral)
+Inside: Co + 2en (4 N-donors) + 2Cl⁻; Outside: NO₃⁻
+Co + 2(−1) = +1 → Co = +3
+Oxidation state = +3; CN = 6; Primary valency = 3; Secondary valency = 6
+With AgNO₃: 0 AgCl (Cl is inside, NO₃ is outside but doesn't precipitate)</div>
+</div>
+</div>
+
+<div class="sec-title" style="margin-top:1.5rem">Crystal field theory &amp; CFSE</div>
+
+<div class="qcard" data-cat="cft concept">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum concept">C</span>
+<div class="qtxt">Explain why d–d transitions in octahedral complexes are "Laporte forbidden" yet still produce colour. Why are tetrahedral complexes more intensely coloured than octahedral?</div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Selection rules and colour intensity</div>
+<p><b>Laporte rule</b>: transitions between orbitals of the same parity (both gerade: g→g, or both ungerade: u→u) are forbidden. In an octahedral field, all 5 d-orbitals are gerade (g). Therefore d→d means g→g → Laporte forbidden.</p>
+<p>Despite this, octahedral complexes still show colour (weakly) because <b>vibronic coupling</b> occurs: molecular vibrations (particularly asymmetric modes) temporarily remove the centre of symmetry. During these brief distortions, the Laporte rule is momentarily relaxed, allowing weak d–d transitions. This is why octahedral d–d bands are pale (low molar absorptivity, ε ≈ 5–50 L mol⁻¹ cm⁻¹).</p>
+<div class="box">Tetrahedral complexes (e.g. [CoCl₄]²⁻):
+→ NO centre of symmetry (T_d point group)
+→ d and p orbitals of the SAME symmetry species mix freely
+→ d-orbitals gain partial p-character
+→ transitions are effectively d→(d+p) which has Δl ≠ 0 → allowed
+→ ε ≈ 200–1000 L mol⁻¹ cm⁻¹ → intense, dark colour
+
+[Co(H₂O)₆]²⁺: pale pink (ε ≈ 5)
+[CoCl₄]²⁻:   dark blue (ε ≈ 600)</div>
+<div class="tip">The number of photons absorbed = number of transitions. More allowed transitions → more intense absorption → darker, richer colour.</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="cft num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">Calculate the CFSE for the following, clearly showing electron configurations and pairing energy corrections: (a) [Mn(CN)₆]⁴⁻ (low spin, Mn²⁺), (b) high-spin [Co(H₂O)₆]²⁺ (Co²⁺), (c) low-spin [Co(CN)₆]⁴⁻ (Co²⁺) <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Step-by-step CFSE calculations</div>
+<div class="ans-label">(a) [Mn(CN)₆]⁴⁻ — Mn²⁺, d⁵, low spin, octahedral</div>
+<div class="box">Mn²⁺ → d⁵
+Low spin → t₂g⁵ eₘ⁰ (all 5 in t₂g, 2 pairs + 1 single)
+CFSE = 5 × (−4Dq) + 0 × (+6Dq) = −20Dq = −2.0Δₒ
+Pairing energy correction:
+  Free ion d⁵ (HS): t₂g³ eₘ² → 0 pairs
+  Low spin d⁵: t₂g⁵ → 2 pairs
+  Extra pairs = 2 → add +2P
+Final CFSE = −20Dq + 2P</div>
+<div class="ans-label">(b) [Co(H₂O)₆]²⁺ — Co²⁺, d⁷, high spin, octahedral</div>
+<div class="box">Co²⁺ → d⁷
+High spin → t₂g⁵ eₘ² (Hund's rule, fill t₂g half before pairing)
+CFSE = 5×(−4Dq) + 2×(+6Dq) = −20 + 12 = −8Dq
+Pairing energy: Free ion d⁷ (HS) already has 2 pairs (same as t₂g⁵)
+→ NO extra pairing → no P correction
+Final CFSE = −8Dq = −0.8Δₒ</div>
+<div class="ans-label">(c) [Co(CN)₆]⁴⁻ — Co²⁺, d⁷, low spin, octahedral</div>
+<div class="box">Co²⁺ → d⁷
+Low spin → t₂g⁶ eₘ¹ (3 pairs in t₂g, 1 single in eₘ)
+CFSE = 6×(−4Dq) + 1×(+6Dq) = −24 + 6 = −18Dq = −1.8Δₒ
+Pairing energy:
+  Free ion d⁷ (HS): t₂g⁵ → 2 pairs
+  Low spin d⁷: t₂g⁶ → 3 pairs
+  Extra pairs = 3 − 2 = 1 → add +1P (NOT +2P)
+Final CFSE = −18Dq + P</div>
+<div class="warn">Common error: adding +2P for low-spin Co²⁺. Only 1 extra pair is forced compared to the free ion (which naturally has 2 paired electrons). Your PM Sir's note specifically flags this.</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="cft num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">For Ni²⁺ (d⁸): (a) calculate CFSE in both octahedral and tetrahedral fields in units of Dqₒₒₜ, (b) calculate the octahedral site preference energy (OSPE), (c) explain why Ni²⁺ with CN⁻ forms square planar but with Cl⁻ forms tetrahedral. <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Ni²⁺ CFSE comparison</div>
+<div class="box amber">(a) Octahedral Ni²⁺ (d⁸):
+Config: t₂g⁶ eₘ²
+CFSE = 6×(−4Dq) + 2×(+6Dq) = −24 + 12 = −12Dq_oct
+
+Tetrahedral Ni²⁺ (d⁸):
+Inverted splitting: e set lower (dz², dx²-y²), t₂ set higher
+e⁴ t₂⁴ configuration
+CFSE = 4×(−6Dq_tet) + 4×(+4Dq_tet)
+     = −24Dq_tet + 16Dq_tet = −8Dq_tet
+Using (Dq_tet) = (4/9)(Dq_oct):
+     = −8 × (4/9) Dq_oct = −(32/9) Dq_oct ≈ −3.56 Dq_oct
+
+(b) OSPE = CFSE(oct) − CFSE(tet)
+        = −12Dq_oct − (−3.56Dq_oct)
+        = −8.44 Dq_oct
+Ni²⁺ gains ~8.4 Dq more stabilisation per mole in oct than tet</div>
+<div class="ans-label">Why CN⁻ → square planar but Cl⁻ → tetrahedral</div>
+<p>Two competing factors determine geometry:</p>
+<p><b>CFSE factor</b>: Square planar has the largest energy gap (dx²-y² pushed very high). Strong-field ligands like CN⁻ create large Δₒ → splitting large enough that sq. planar CFSE &gt; tet CFSE. With CN⁻, CFSE factor dominates → [Ni(CN)₄]²⁻ square planar, diamagnetic.</p>
+<p><b>Size factor</b>: Cl⁻ is a large ligand. Steric repulsion between 4 large Cl⁻ ligands in square planar (all in same plane, 90° apart) is severe. Tetrahedral geometry (109.5°) relieves this repulsion. For Cl⁻, size factor overrides CFSE → [NiCl₄]²⁻ tetrahedral, paramagnetic (2 unpaired, μ = 2.83 BM).</p>
+</div>
+</div>
+
+<div class="qcard" data-cat="cft concept">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum concept">C</span>
+<div class="qtxt">State and explain the three main factors that affect the magnitude of Δₒ (10Dq). Illustrate with the example [V(H₂O)₆]³⁺ vs [V(H₂O)₆]²⁺.</div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Factors affecting Δₒ</div>
+<p><b>1. Nature of ligand (spectrochemical series)</b>: Strong-field ligands (CO, CN⁻) cause large splitting; weak-field (Cl⁻, Br⁻, H₂O) cause small splitting. CN⁻ can π-backbond with metal d-orbitals (accepting electron density into π* orbitals) → enhances splitting dramatically.</p>
+<div class="box">Weak:    I⁻ &lt; Br⁻ &lt; Cl⁻ &lt; F⁻ &lt; OH⁻ &lt; H₂O
+Moderate: NH₃ &lt; en
+Strong:  NO₂⁻ &lt; CN⁻ ≈ CO</div>
+<p><b>2. Charge of the metal ion</b>: Higher oxidation state → metal nucleus pulls ligands closer → ligand field acts more strongly → larger Δₒ. [V(H₂O)₆]³⁺ has Δₒ significantly greater than [V(H₂O)₆]²⁺ because V³⁺ is smaller and pulls water ligands nearer, intensifying the field.</p>
+<p><b>3. Period/nature of the metal (3d &lt; 4d &lt; 5d)</b>: Heavier metals have more diffuse, spatially extended d-orbitals that overlap better with ligand orbitals → larger splitting. Same charge: Co³⁺ &lt; Rh³⁺ &lt; Ir³⁺. This is why 4d and 5d metals almost always form low-spin complexes regardless of ligand.</p>
+</div>
+</div>
+
+<div class="sec-title" style="margin-top:1.5rem">Spinel structures</div>
+
+<div class="qcard" data-cat="spinel hard">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum hard">H</span>
+<div class="qtxt">Using CFSE arguments, determine and justify whether Fe₃O₄, Mn₃O₄, and Co₃O₄ adopt normal or inverse spinel structures. Note: O²⁻ is a weak-field ligand throughout. <span class="badge b-h">challenging</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Systematic CFSE-based spinel analysis</div>
+<p>In spinel AB₂O₄, O²⁻ (weak field) means all complexes are HIGH SPIN. The ion with greater octahedral site preference (larger OSPE) occupies the octahedral holes.</p>
+<div class="box">(1) Fe₃O₄ = Fe²⁺Fe₂³⁺O₄
+Fe³⁺ (d⁵ HS): CFSE(oct) = 3(−4)+2(+6) = 0; CFSE(tet) = 0 → OSPE = 0
+Fe²⁺ (d⁶ HS): CFSE(oct) = 4(−4)+2(+6) = −4Dq; CFSE(tet) ≈ −1.6Dq
+              OSPE(Fe²⁺) = −4 − (−1.6) = −2.4Dq_oct (oct preferred)
+
+Fe²⁺ strongly prefers octahedral → takes oct holes
+Fe³⁺ has no preference → one goes to tet, one to oct
+→ INVERSE SPINEL: [Fe³⁺]tet [Fe²⁺Fe³⁺]oct O₄ ✓</div>
+<div class="box">(2) Mn₃O₄ = Mn²⁺Mn₂³⁺O₄
+Mn³⁺ (d⁴ HS): CFSE(oct) = 3(−4)+1(+6) = −6Dq
+               CFSE(tet) = 3(−6)+1(+4) Dq_tet; scale to oct: approx −2.7Dq_oct
+               OSPE(Mn³⁺) = −6 − (−2.7) = −3.3Dq_oct → prefers oct
+
+Mn³⁺ occupies oct holes → NORMAL SPINEL ✓</div>
+<div class="box">(3) Co₃O₄ = Co²⁺Co₂³⁺O₄
+Co³⁺ (d⁶): Co³⁺ is a special case.
+  Despite O²⁻ being weak field, Co³⁺ almost ALWAYS goes low spin
+  because its intrinsically large Δₒ (3d series position) exceeds P.
+  Exceptions: ONLY [CoF₆]³⁻ and [CoF₃(H₂O)₃] are high spin.
+  Low-spin Co³⁺: CFSE(oct) = 6(−4)+0(+6) = −24Dq → huge oct preference
+→ Co³⁺ takes ALL oct holes → NORMAL SPINEL ✓
+  (Calculation would predict inverse; experiment says normal)
+→ This is the classic exception to note!</div>
+<div class="warn">Fe³⁺ and Mn²⁺ (both d⁵ HS) always have CFSE = 0 in BOTH sites — they never decide spinel type. The deciding ion is always the one with non-zero CFSE.</div>
+</div>
+</div>
+
+<div class="sec-title" style="margin-top:1.5rem">Colour &amp; spectra</div>
+
+<div class="qcard" data-cat="colour concept">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum concept">C</span>
+<div class="qtxt">KMnO₄ is intensely purple while [Co(H₂O)₆]²⁺ is only pale pink. Both absorb visible light — explain why there is such a dramatic difference in intensity using selection rules.</div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Charge transfer vs d-d transition intensity</div>
+<p><b>KMnO₄ — charge transfer band (intense):</b> The absorption arises from ligand-to-metal charge transfer (LMCT): electron transfers from filled O²⁻ p-orbitals to empty Mn 3d orbitals (Mn is +7, highly electron-deficient). This is a <b>p→d transition</b> (Δl = 1) — fully Laporte-allowed. Additionally, ΔS = 0 is satisfied. Both selection rules are obeyed → very high molar absorptivity (ε ~ 10⁴ L mol⁻¹ cm⁻¹).</p>
+<p><b>[Co(H₂O)₆]²⁺ — d-d transition (weak):</b> Absorption is from t₂g → eₘ within the d-subshell. This is a <b>d→d transition</b> (Δl = 0) — Laporte forbidden. Spin selection rule (ΔS = 0) is satisfied. But the Laporte-forbidden nature means the transition is only weakly allowed via vibronic coupling (vibrations briefly disturb octahedral symmetry). ε ~ 5–50 L mol⁻¹ cm⁻¹ → pale colour.</p>
+<div class="box">Intensity hierarchy:
+Spin-forbidden d–d:           ε ~ 0.01–1
+Spin-allowed d–d (oct):       ε ~ 5–50
+Spin-allowed d–d (tet):       ε ~ 50–500   (Laporte relaxed)
+Charge transfer (LMCT/MLCT):  ε ~ 10³–10⁵  (fully allowed)</div>
+</div>
+</div>
+
+<div class="sec-title" style="margin-top:1.5rem">Magnetic properties</div>
+
+<div class="qcard" data-cat="mag num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">Calculate the spin-only magnetic moment for: (a) [FeF₆]³⁻, (b) [Fe(CN)₆]³⁻, (c) [CoF₆]³⁻ (high spin Co³⁺), (d) [Co(CN)₆]³⁻ (low spin Co³⁺). Identify each as para- or diamagnetic. <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Magnetic moment calculations: μₛ = √[n(n+2)] BM</div>
+<div class="box">(a) [FeF₆]³⁻ — Fe³⁺ (d⁵), F⁻ is weak field → HIGH SPIN
+Config: t₂g³ eₘ²
+Unpaired electrons n = 5
+μₛ = √[5×7] = √35 = 5.92 BM → PARAMAGNETIC
+
+(b) [Fe(CN)₆]³⁻ — Fe³⁺ (d⁵), CN⁻ is strong field → LOW SPIN
+Config: t₂g⁵ eₘ⁰
+Unpaired electrons n = 1
+μₛ = √[1×3] = √3 = 1.73 BM → PARAMAGNETIC
+
+(c) [CoF₆]³⁻ — Co³⁺ (d⁶), F⁻ weak field → HIGH SPIN (rare exception)
+Config: t₂g⁴ eₘ²
+Unpaired electrons n = 4
+μₛ = √[4×6] = √24 = 4.90 BM → PARAMAGNETIC
+
+(d) [Co(CN)₆]³⁻ — Co³⁺ (d⁶), CN⁻ strong field → LOW SPIN
+Config: t₂g⁶ eₘ⁰
+Unpaired electrons n = 0
+μₛ = 0 BM → DIAMAGNETIC ✓</div>
+<div class="tip">Co³⁺ is almost always diamagnetic (low spin). [CoF₆]³⁻ is one of only two high-spin Co³⁺ complexes known — F⁻ is the weakest-field ligand and is the exception, not the rule.</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="mag hard">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum hard">H</span>
+<div class="qtxt">Derive the ground state term symbol for Co²⁺ (d⁷) from first principles. Show the electron filling diagram, calculate L, S, J, and write the complete term symbol ²ˢ⁺¹L_J. <span class="badge b-h">challenging</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Full term symbol derivation</div>
+<div class="step"><div class="step-n">1</div><p>Co²⁺ → [Ar]3d⁷. Draw the seven d-electrons in boxes (ml = −2, −1, 0, +1, +2), applying Hund's rules: fill each box singly first (maximize spin), then pair.</p></div>
+<div class="box">ml:   −2   −1    0   +1   +2
+      ↑↓   ↑↓   ↑↓   ↑    ↑
+Pairs in −2, −1, 0; singles in +1, +2</div>
+<div class="step"><div class="step-n">2</div><p>Calculate total orbital angular momentum L = |ΣML| for maximum ML (paired electrons contribute sum of both):</p></div>
+<div class="box">L = |2(−2) + 2(−1) + 2(0) + 1(+1) + 1(+2)|
+  = |−4 − 2 + 0 + 1 + 2|
+  = |−3| = 3
+L = 3 → F (L=0:S, 1:P, 2:D, 3:F, 4:G)</div>
+<div class="step"><div class="step-n">3</div><p>Calculate total spin S: 3 unpaired electrons, each contributing ½.</p></div>
+<div class="box">S = 3 × ½ = 3/2
+Spin multiplicity = 2S+1 = 2(3/2)+1 = 4 → quartet</div>
+<div class="step"><div class="step-n">4</div><p>Calculate J: d⁷ is more than half-filled (>5 electrons) → J = L + S (Hund's third rule).</p></div>
+<div class="box">J = L + S = 3 + 3/2 = 9/2
+
+Ground state term symbol: ⁴F₉/₂</div>
+<div class="tip">Memory rule: less than half-filled → J = L−S (minimum J); more than half-filled → J = L+S (maximum J); exactly half-filled → L=0, J=S.</div>
+</div>
+</div>
+
+<div class="sec-title" style="margin-top:1.5rem">Redox titrations — numerical</div>
+
+<div class="qcard" data-cat="redox num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">250 mL of N/10 K₂Cr₂O₇ solution is prepared using 1.225 g of pure K₂Cr₂O₇. (a) Calculate the equivalent mass of K₂Cr₂O₇ and verify the preparation. (b) 25 mL of Mohr's salt solution required 18.5 mL of this N/10 K₂Cr₂O₇. Find the strength of Mohr's salt solution in g/L. [M(K₂Cr₂O₇) = 294.18; M(Fe) = 55.85; M(Mohr's salt) = 392.14] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Calculation</div>
+<div class="step"><div class="step-n">1</div><p>n-factor of K₂Cr₂O₇: each Cr goes +6 → +3 (gain of 3e⁻), 2 Cr atoms → n-factor = 6</p></div>
+<div class="box">Equivalent mass = Molar mass / n-factor = 294.18 / 6 = 49.03 g/equiv</div>
+<div class="step"><div class="step-n">2</div><p>Verify preparation: for N/10 in 250 mL</p></div>
+<div class="box">Required mass = Eq. mass × Normality × Volume(L)
+             = 49.03 × (1/10) × (250/1000)
+             = 49.03 × 0.1 × 0.25 = 1.226 g ✓ (agrees with 1.225 g)</div>
+<div class="step"><div class="step-n">3</div><p>Apply N₁V₁ = N₂V₂ (at equivalence point, equivalents are equal)</p></div>
+<div class="box">N(K₂Cr₂O₇) × V(K₂Cr₂O₇) = N(Fe²⁺) × V(Fe²⁺)
+(1/10) × 18.5 = N(Fe²⁺) × 25
+N(Fe²⁺) = (0.1 × 18.5) / 25 = 0.074 N</div>
+<div class="step"><div class="step-n">4</div><p>Convert normality to g/L for Mohr's salt:</p></div>
+<div class="box">n-factor of Mohr's salt (Fe²⁺) = 1 (loses 1 electron)
+Eq. mass of Mohr's salt = 392.14 / 1 = 392.14 g/equiv
+Strength = Normality × Eq. mass = 0.074 × 392.14 = 29.02 g/L</div>
+<div class="tip">1000 mL of 1N K₂Cr₂O₇ ≡ 55.85 g Fe(II) ≡ 392.14 g Mohr's salt. Cross-check: 0.074 × 55.85 = 4.13 g/L Fe(II); × (392.14/55.85) = 29.02 g/L ✓</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="redox num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">Using the Nernst equation, calculate the reduction potential of the MnO₄⁻/Mn²⁺ couple when [MnO₄⁻] = 0.01 M, [Mn²⁺] = 0.1 M, and pH = 3. [E°(MnO₄⁻/Mn²⁺) = 1.51 V; T = 298 K] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Nernst equation application</div>
+<div class="step"><div class="step-n">1</div><p>Write the half-reaction (from your notes): MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O, n = 5</p></div>
+<div class="step"><div class="step-n">2</div><p>Write Nernst equation:</p></div>
+<div class="box">E = E° + (0.059/n) × log([MnO₄⁻][H⁺]⁸ / [Mn²⁺])
+pH = 3 → [H⁺] = 10⁻³ M</div>
+<div class="step"><div class="step-n">3</div><p>Substitute values:</p></div>
+<div class="box">E = 1.51 + (0.059/5) × log([0.01 × (10⁻³)⁸] / [0.1])
+  = 1.51 + 0.0118 × log([0.01 × 10⁻²⁴] / 0.1)
+  = 1.51 + 0.0118 × log(10⁻²⁷)
+  = 1.51 + 0.0118 × (−27)
+  = 1.51 − 0.319
+  = 1.191 V</div>
+<p>The potential drops significantly from E° = 1.51 V because low [H⁺] disfavours the forward reaction (8H⁺ on the reactant side makes the potential highly pH-sensitive).</p>
+<div class="tip">Each unit increase in pH decreases E by (0.059 × 8)/5 = 0.0944 V for permanganate. This is why permanganometry must be done in strongly acidic medium.</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="redox num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">In an iodometric determination of Cu²⁺: 25 mL of a copper solution was treated with excess KI. The liberated I₂ required 22.4 mL of 0.1 N Na₂S₂O₃. Calculate the amount of Cu²⁺ in the solution in g/L. [M(Cu) = 63.5 g/mol] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Iodometric back calculation</div>
+<div class="box">Reactions:
+2Cu²⁺ + 4I⁻ → 2CuI↓ + I₂  (n-factor of Cu²⁺ = 1, gains 1e⁻ from I⁻)
+I₂ + 2S₂O₃²⁻ → S₄O₆²⁻ + 2I⁻  (n-factor of S₂O₃²⁻ = 1)</div>
+<div class="step"><div class="step-n">1</div><p>Milliequivalents of Na₂S₂O₃ used = N × V (mL)</p></div>
+<div class="box">meq(Na₂S₂O₃) = 0.1 × 22.4 = 2.24 meq</div>
+<div class="step"><div class="step-n">2</div><p>At equivalence point: meq(Cu²⁺) = meq(I₂) = meq(Na₂S₂O₃)</p></div>
+<div class="box">meq(Cu²⁺) = 2.24 meq
+Eq. mass of Cu²⁺ = 63.5 / 1 = 63.5 g/equiv
+Mass of Cu²⁺ in 25 mL = (2.24 / 1000) × 63.5 = 0.1422 g</div>
+<div class="step"><div class="step-n">3</div><p>Scale to per litre:</p></div>
+<div class="box">Concentration = 0.1422 × (1000/25) = 5.69 g/L</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="redox num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">Calculate the potential of the Fe³⁺/Fe²⁺ couple when Fe³⁺ is complexed by H₃PO₄. Given: when [Fe³⁺] is reduced to 10⁻⁶ M due to complexation and [Fe²⁺] = 0.1 M, find E. Why does this matter for dichrometry? [E°(Fe³⁺/Fe²⁺) = 0.77 V] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Effect of complexation on redox potential</div>
+<div class="box">Half-reaction: Fe³⁺ + e⁻ → Fe²⁺,  n = 1
+Nernst: E = E° + (0.059/1) × log([Fe³⁺]/[Fe²⁺])
+E = 0.77 + 0.059 × log(10⁻⁶ / 0.1)
+  = 0.77 + 0.059 × log(10⁻⁵)
+  = 0.77 + 0.059 × (−5)
+  = 0.77 − 0.295
+  = 0.475 V</div>
+<p>The Fe³⁺/Fe²⁺ potential drops from 0.77 V to <b>0.475 V</b> upon H₃PO₄ complexation.</p>
+<p><b>Why this matters for dichrometry:</b> The BDS indicator changes colour at E° ≈ 0.78 V. Without H₃PO₄, the Fe³⁺/Fe²⁺ couple (0.77 V) and BDS (0.78 V) are almost identical in potential — the endpoint colour change is gradual and smeared over a large volume of titrant (poor endpoint). After H₃PO₄ addition, the Fe couple drops to ~0.48 V while BDS remains at 0.78 V. Now there is a clear potential gap between the two — the titration curve shows a sharper jump at the endpoint, giving a precise blue-violet colour change.</p>
+</div>
+</div>
+
+<div class="sec-title" style="margin-top:1.5rem">Complexometric titrations — numerical</div>
+
+<div class="qcard" data-cat="edta num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">In a water hardness determination: 25 mL of hard water required 15.2 mL of (M/100) EDTA (f = 1.0) with EBT indicator at pH 10. In a second titration, after precipitating Mg²⁺ with NaOH, 25 mL of the same water required 9.8 mL of EDTA with Calcon indicator. Calculate: (a) total hardness, (b) Ca²⁺ hardness, (c) Mg²⁺ hardness — all in ppm of CaCO₃. <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Complete hardness calculation</div>
+<div class="box">Formula: Hardness (ppm CaCO₃) = V × f × 40
+V₁ = 15.2 mL (total: Ca²⁺ + Mg²⁺ at pH 10 with EBT)
+V₂ = 9.8 mL  (Ca²⁺ only at pH 12.3 with Calcon)
+
+(a) Total hardness = V₁ × f × 40 = 15.2 × 1.0 × 40 = 608 ppm CaCO₃
+
+(b) Ca²⁺ hardness = V₂ × f × 40 = 9.8 × 1.0 × 40 = 392 ppm CaCO₃
+
+(c) Mg²⁺ hardness = (V₁ − V₂) × f × 40
+                  = (15.2 − 9.8) × 40 = 5.4 × 40 = 216 ppm CaCO₃
+
+Verification: 392 + 216 = 608 ppm ✓</div>
+<div class="ans-label">Derivation of the ×40 factor</div>
+<div class="box">1000 mL of (M/100) EDTA ≡ 1 g CaCO₃  [M(CaCO₃)=100, 1:1 molar ratio]
+V mL ≡ V×f×10⁻³ g CaCO₃  (from 25 mL sample)
+25 parts water contain V×f×10⁻³ parts CaCO₃
+10⁶ parts water contain (V×f×10⁻³ × 10⁶)/25 = V×f×40 ppm</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="edta num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">In a back titration: 25 mL of a metal ion solution (Mn²⁺) was treated with 50 mL of (M/100) EDTA (excess). The excess EDTA required 22.3 mL of standard Zn-acetate solution (M/100) to back-titrate. Calculate the amount of Mn²⁺ in the solution in mg/25 mL. [M(Mn) = 54.94] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Back titration calculation</div>
+<div class="box">Given:
+V₁ (EDTA added) = 50 mL of M/100
+V₂ (Zn-acetate for excess) = 22.3 mL of M/100
+n-factor of all species = 1 (1:1 EDTA:metal)
+
+EDTA consumed by Mn²⁺ = (2V₁ − V₂)  [from TKM Sir's formula]
+Wait — direct: EDTA reacted with Mn²⁺ = V₁ − V₂ (simple excess method)
+= 50 − 22.3 = 27.7 mL of M/100 EDTA
+
+Millimoles of Mn²⁺ = M × V(L) = (1/100) × (27.7/1000) × 1000
+                   = 0.01 × 27.7 = 0.277 mmol
+Mass of Mn²⁺ = 0.277 × 54.94 = 15.22 mg in 25 mL</div>
+<div class="tip">The formula (2V₁ − V₂) applies when V is expressed in specific unit sets per TKM Sir's back-titration formula. In the simpler approach, if V₁ is total EDTA added and V₂ is EDTA equivalent to excess: Mn²⁺ consumed = V₁ − V₂.</div>
+</div>
+</div>
+
+<div class="sec-title" style="margin-top:1.5rem">Gravimetric analysis — numerical</div>
+
+<div class="qcard" data-cat="grav num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">A solution of Ni²⁺ was precipitated with DMG. The Ni(DMG)₂ precipitate weighed 0.5842 g after drying. (a) Calculate the mass of Ni²⁺ in the sample. (b) If this precipitate came from 25 mL of solution, calculate the concentration in g/L. [M(Ni) = 58.69; M(DMG) = 116.12; M(Ni(DMG)₂) = 288.93] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Gravimetric calculation using DMG</div>
+<div class="step"><div class="step-n">1</div><p>Reaction: Ni²⁺ + 2 DMG → Ni(DMG)₂↓. 1 mole Ni²⁺ gives 1 mole precipitate.</p></div>
+<div class="box">GF = M(Ni) / M(Ni(DMG)₂) = 58.69 / 288.93 = 0.2031</div>
+<div class="step"><div class="step-n">2</div><p>Mass of Ni²⁺ in sample:</p></div>
+<div class="box">mass(Ni²⁺) = mass(precipitate) × GF
+            = 0.5842 × 0.2031
+            = 0.1186 g</div>
+<div class="step"><div class="step-n">3</div><p>Concentration in g/L (scale from 25 mL):</p></div>
+<div class="box">Concentration = 0.1186 × (1000/25) = 0.1186 × 40 = 4.744 g/L</div>
+<div class="tip">The ×40 factor (1000/25) appears again here — same scaling as EDTA hardness. Whenever 25 mL is the sample volume, multiply by 40 to convert to g/L.</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="grav num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">A 0.6200 g sample containing sulphate was dissolved, and SO₄²⁻ was precipitated as BaSO₄. The precipitate weighed 0.4850 g. (a) Calculate the % of SO₄²⁻ in the sample. (b) Calculate % S. [M(SO₄²⁻)=96.06; M(BaSO₄)=233.39; M(S)=32.06] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="box">GF(SO₄²⁻) = 96.06 / 233.39 = 0.4116
+GF(S)     = 32.06 / 233.39 = 0.1374
+
+(a) mass of SO₄²⁻ = 0.4850 × 0.4116 = 0.1996 g
+% SO₄²⁻ = (0.1996 / 0.6200) × 100 = 32.19%
+
+(b) mass of S = 0.4850 × 0.1374 = 0.0666 g
+% S = (0.0666 / 0.6200) × 100 = 10.74%
+
+Cross-check: % S / % SO₄²⁻ = 10.74 / 32.19 = 0.334 = 32.06/96.06 ✓</div>
+</div>
+</div>
+
+<div class="sec-title" style="margin-top:1.5rem">pH, acid-base &amp; salt hydrolysis — numerical</div>
+
+<div class="qcard" data-cat="ph num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">Construct the titration of 25 mL of 0.1 M CH₃COOH with 0.1 M NaOH. Calculate the pH at: (a) start, (b) half-equivalence point, (c) equivalence point, (d) after adding 30 mL NaOH. [Ka(CH₃COOH) = 1.8×10⁻⁵; Kw = 10⁻¹⁴] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Weak acid–strong base titration curve</div>
+<div class="ans-label">(a) Start — pure 0.1 M CH₃COOH</div>
+<div class="box">CH₃COOH ⇌ CH₃COO⁻ + H⁺,  Ka = 1.8×10⁻⁵
+[H⁺] = √(Ka × C) = √(1.8×10⁻⁵ × 0.1) = √(1.8×10⁻⁶) = 1.342×10⁻³ M
+pH = −log(1.342×10⁻³) = 2.87</div>
+<div class="ans-label">(b) Half-equivalence point — 12.5 mL NaOH added</div>
+<div class="box">At half-equivalence: [CH₃COOH] = [CH₃COO⁻]
+Henderson-Hasselbalch: pH = pKa + log([A⁻]/[HA]) = pKa + log(1) = pKa
+pH = −log(1.8×10⁻⁵) = 4.74
+(This is also the most effective buffer point)</div>
+<div class="ans-label">(c) Equivalence point — 25 mL NaOH added</div>
+<div class="box">All acetic acid converted to CH₃COONa (weak base hydrolysis)
+Total volume = 50 mL; [CH₃COO⁻] = (0.1×25)/50 = 0.05 M
+Kb = Kw/Ka = 10⁻¹⁴ / 1.8×10⁻⁵ = 5.56×10⁻¹⁰
+[OH⁻] = √(Kb × C) = √(5.56×10⁻¹⁰ × 0.05) = √(2.78×10⁻¹¹) = 5.27×10⁻⁶
+pOH = 5.28 → pH = 14 − 5.28 = 8.72
+(pH > 7 at equivalence — alkaline, as expected for weak acid/strong base)</div>
+<div class="ans-label">(d) After 30 mL NaOH — excess base region</div>
+<div class="box">Excess NaOH = (30 − 25) mL × 0.1 M = 0.5 mmol excess OH⁻
+Total volume = 25 + 30 = 55 mL
+[OH⁻] = 0.5 / 55 = 9.09×10⁻³ M  (excess NaOH dominates)
+pOH = −log(9.09×10⁻³) = 2.04
+pH = 14 − 2.04 = 11.96</div>
+<div class="tip">Indicator selection: phenolphthalein (pH 8.3–10) is suitable — it changes colour right around the equivalence point pH of 8.72. Methyl orange (3.1–4.4) would be unsuitable — the equivalence point is far outside its range.</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="ph num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">Calculate the pH of: (a) 0.01 M HCl, (b) 0.01 M NaOH, (c) a buffer made from 0.1 M CH₃COOH + 0.15 M CH₃COONa, (d) 0.05 M NH₄Cl solution. [Ka(CH₃COOH)=1.8×10⁻⁵; Kb(NH₃)=1.8×10⁻⁵; Kw=10⁻¹⁴] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">Four pH calculations</div>
+<div class="box">(a) 0.01 M HCl — strong acid, fully ionised
+[H⁺] = 0.01 = 10⁻² M
+pH = 2.00
+
+(b) 0.01 M NaOH — strong base, fully ionised
+[OH⁻] = 0.01 = 10⁻² M → pOH = 2
+pH = 14 − 2 = 12.00
+
+(c) Buffer: 0.1 M CH₃COOH + 0.15 M CH₃COONa
+Henderson-Hasselbalch: pH = pKa + log([A⁻]/[HA])
+pKa = −log(1.8×10⁻⁵) = 4.74
+pH = 4.74 + log(0.15/0.1)
+   = 4.74 + log(1.5)
+   = 4.74 + 0.176
+   = 4.92
+
+(d) 0.05 M NH₄Cl — salt of weak base + strong acid → acidic
+NH₄⁺ hydrolyses: NH₄⁺ + H₂O ⇌ NH₃ + H₃O⁺
+Kh = Kw/Kb = 10⁻¹⁴ / 1.8×10⁻⁵ = 5.56×10⁻¹⁰
+[H⁺] = √(Kh × C) = √(5.56×10⁻¹⁰ × 0.05)
+      = √(2.78×10⁻¹¹) = 5.27×10⁻⁶
+pH = −log(5.27×10⁻⁶) = 5.28  (acidic, as expected)</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="ph num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">A polyprotic acid H₃PO₄ (0.1 M). Given pKa₁=2.15, pKa₂=7.20, pKa₃=12.35. (a) Calculate the pH of 0.1 M H₃PO₄ (use only Ka₁). (b) What volume of 0.1 M NaOH is needed to reach the second equivalence point starting from 25 mL H₃PO₄? (c) At the first equivalence point, what is the pH? [Ka₁=7.08×10⁻³] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="box">(a) pH of 0.1 M H₃PO₄:
+Ka₁ = 7.08×10⁻³ (dominant ionisation)
+[H⁺] = √(Ka₁ × C) = √(7.08×10⁻³ × 0.1)
+      = √(7.08×10⁻⁴) = 0.02661 M
+pH = −log(0.02661) = 1.58
+
+(b) Volume of NaOH to second equivalence point:
+First equivalence: H₃PO₄ + NaOH → NaH₂PO₄  (1:1 ratio)
+Second equivalence: NaH₂PO₄ + NaOH → Na₂HPO₄ (another 1:1)
+Total NaOH needed = 2 × moles of H₃PO₄
+moles H₃PO₄ = 0.1 × 0.025 = 2.5×10⁻³ mol
+moles NaOH needed = 5×10⁻³ mol
+Volume = 5×10⁻³ / 0.1 = 0.05 L = 50 mL
+
+(c) At first equivalence point: solution is NaH₂PO₄
+H₂PO₄⁻ is amphoteric (can donate or accept H⁺)
+pH = (pKa₁ + pKa₂) / 2 = (2.15 + 7.20) / 2 = 4.68</div>
+<div class="tip">For an amphoteric species (H₂PO₄⁻, HPO₄²⁻), pH = (pKa_n + pKa_{n+1}) / 2. This is a clean result that does not depend on concentration (valid when Ka's are not too different).</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="ph num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">Calculate the solubility of AgCl in: (a) pure water, (b) 0.1 M NaCl solution (common ion effect), (c) 0.1 M AgNO₃. Comment on what you observe. [Ksp(AgCl) = 1.8×10⁻¹⁰] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="box">(a) Solubility in pure water:
+AgCl ⇌ Ag⁺ + Cl⁻,  Ksp = [Ag⁺][Cl⁻] = s²
+s = √Ksp = √(1.8×10⁻¹⁰) = 1.34×10⁻⁵ mol/L
+
+(b) Solubility in 0.1 M NaCl (common ion Cl⁻):
+Ksp = [Ag⁺][Cl⁻] = s × (s + 0.1) ≈ s × 0.1  (since s &lt;&lt; 0.1)
+1.8×10⁻¹⁰ = s × 0.1
+s = 1.8×10⁻⁹ mol/L
+
+(c) Solubility in 0.1 M AgNO₃ (common ion Ag⁺):
+Ksp = [Ag⁺][Cl⁻] = (s + 0.1) × s ≈ 0.1 × s
+s = 1.8×10⁻⁹ mol/L  (same result, same common ion concentration)
+
+Comparison:
+Pure water:     s = 1.34×10⁻⁵ mol/L  (= 1.92 mg/L)
+0.1 M NaCl:    s = 1.8×10⁻⁹ mol/L   (10,000× less soluble)
+0.1 M AgNO₃:  s = 1.8×10⁻⁹ mol/L   (10,000× less soluble)</div>
+<p>The common ion effect reduces solubility by ~4 orders of magnitude. This is the basis for gravimetric analysis — adding excess AgNO₃ or Cl⁻ ensures essentially complete precipitation.</p>
+</div>
+</div>
+
+<div class="qcard" data-cat="ph num">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum num">N</span>
+<div class="qtxt">Calculate the degree of hydrolysis and pH of 0.01 M CH₃COONa solution. [Ka = 1.8×10⁻⁵; Kw = 10⁻¹⁴] <span class="badge b-n">numerical</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="box">Salt of weak acid (CH₃COOH) + strong base (NaOH) → alkaline hydrolysis
+CH₃COO⁻ + H₂O ⇌ CH₃COOH + OH⁻
+
+Kh = Kw / Ka = 10⁻¹⁴ / 1.8×10⁻⁵ = 5.56×10⁻¹⁰
+
+Degree of hydrolysis h = √(Kh / C)
+                       = √(5.56×10⁻¹⁰ / 0.01)
+                       = √(5.56×10⁻⁸) = 2.36×10⁻⁴
+
+h = 0.0236%  (very small, as expected for a common salt)
+
+[OH⁻] = h × C = 2.36×10⁻⁴ × 0.01 = 2.36×10⁻⁶ M
+pOH = −log(2.36×10⁻⁶) = 5.63
+pH = 14 − 5.63 = 8.37  (alkaline ✓)</div>
+<div class="tip">Alternatively: [OH⁻] = √(Kh × C) = √(5.56×10⁻¹²) = 2.36×10⁻⁶ M. Same result — the degree of hydrolysis and [OH⁻] routes both work.</div>
+</div>
+</div>
+
+<div class="qcard" data-cat="ph num hard">
+<div class="qhead" onclick="tog(this)">
+<span class="qnum hard">H</span>
+<div class="qtxt">25 mL of 0.1 M acetic acid was titrated with 0.1 M NaOH. (a) Select the appropriate indicator and justify using pH range calculations. (b) Calculate the pH at 20 mL of NaOH added. (c) Calculate the change in pH per mL of NaOH added near the equivalence point (at 24.9 mL and 25.1 mL). [Ka = 1.8×10⁻⁵] <span class="badge b-n">numerical</span> <span class="badge b-h">challenging</span></div>
+<span class="qarrow">&#9660;</span>
+</div>
+<div class="ans">
+<div class="ans-label">(a) Indicator selection</div>
+<p>Equivalence point pH = 8.72 (weak acid/strong base, calculated above). Phenolphthalein changes colour from pH 8.3 to 10.0. Since equivalence point (8.72) falls within this range, <b>phenolphthalein is correct</b>. Methyl orange (3.1–4.4) is completely wrong — the equivalence point is far outside its range.</p>
+<div class="ans-label">(b) pH at 20 mL NaOH — buffer region</div>
+<div class="box">Moles CH₃COOH initial = 0.1 × 0.025 = 2.5 mmol
+Moles NaOH added = 0.1 × 0.020 = 2.0 mmol
+After reaction:
+  CH₃COOH remaining = 2.5 − 2.0 = 0.5 mmol
+  CH₃COO⁻ formed = 2.0 mmol
+  (Volume = 45 mL, but concentrations cancel in H-H equation)
+pH = pKa + log([A⁻]/[HA]) = 4.74 + log(2.0/0.5)
+   = 4.74 + log(4) = 4.74 + 0.602 = 5.34</div>
+<div class="ans-label">(c) Sharpness of endpoint — dpH/dV</div>
+<div class="box">At 24.9 mL NaOH (just before equivalence):
+  Remaining CH₃COOH = 0.1 mmol; CH₃COO⁻ = 2.4 mmol
+  pH = 4.74 + log(2.4/0.1) = 4.74 + 1.38 = 6.12
+  Volume = 49.9 mL
+
+At 25.1 mL NaOH (just after equivalence):
+  Excess OH⁻ = 0.01 mmol in 50.1 mL
+  [OH⁻] = 0.01/50.1 × 1000 = 1.996×10⁻⁴ M
+  pOH = 3.70 → pH = 10.30
+
+ΔpH = 10.30 − 6.12 = 4.18 per 0.2 mL = 20.9 pH units/mL
+
+This very steep gradient is why the indicator changes sharply.</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function tog(h){
+  const c=h.parentElement;
+  c.classList.toggle('open');
+  updateCount();
+}
+function showSec(id,btn){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const sec=document.getElementById('all');
+  const cards=document.querySelectorAll('.qcard');
+  if(id==='all'){cards.forEach(c=>c.style.display='');document.getElementById('prog').textContent='All questions · Click any question to reveal the detailed solution';return;}
+  cards.forEach(c=>{
+    const cats=c.dataset.cat||'';
+    c.style.display=cats.includes(id)?'':'none';
+  });
+  document.getElementById('prog').textContent='Filtered by: '+id;
+}
+function updateCount(){
+  const open=document.querySelectorAll('.qcard.open').length;
+  document.getElementById('opencount').textContent=open;
+}
+function initCounts(){
+  const all=document.querySelectorAll('.qcard');
+  let n=0,c=0,h=0;
+  all.forEach(q=>{
+    const cat=q.dataset.cat||'';
+    if(cat.includes('num'))n++;
+    if(cat.includes('concept'))c++;
+    if(cat.includes('hard')||cat.includes('challenging'))h++;
+  });
+  document.getElementById('ncount').textContent=n;
+  document.getElementById('ccount').textContent=c;
+  document.getElementById('hcount').textContent=h;
+}
+initCounts();
+</script>

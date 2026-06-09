@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFT & Coordination Chemistry — Exam Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #141414;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --accent: #e8c547;
+    --accent2: #4ecdc4;
+    --accent3: #ff6b6b;
+    --text: #e8e8e0;
+    --muted: #888;
+    --mono: 'DM Mono', monospace;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .header-title {
+    font-family: var(--display);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .header-sub {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .exam-badge {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    background: var(--accent3);
+    color: #000;
+    padding: 0.3rem 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; } 50% { opacity: 0.6; }
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    position: sticky;
+    top: 88px;
+    z-index: 99;
+  }
+  nav::-webkit-scrollbar { height: 2px; }
+  nav::-webkit-scrollbar-thumb { background: var(--accent); }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+  }
+  nav a {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-decoration: none;
+    color: var(--muted);
+    padding: 0.75rem 1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* ── SECTION BLOCK ── */
+  .section {
+    margin-bottom: 4rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2.5rem;
+  }
+  .section-num {
+    font-family: var(--display);
+    font-size: 5rem;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: -1.5rem;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    letter-spacing: 0.05em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .section-title span { color: var(--accent); }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .card-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.6rem;
+  }
+  .card h4 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+  }
+  .card p, .card li { font-size: 0.9rem; color: var(--text); }
+
+  /* ── TABLE ── */
+  .tbl-wrap { overflow-x: auto; margin: 1rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  th {
+    background: var(--surface);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.7rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(232,197,71,0.04); }
+
+  /* ── FORMULA BOX ── */
+  .formula {
+    background: #0a0a0a;
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.2rem;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+  .formula .comment { color: var(--muted); font-style: italic; }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* ── Q&A ── */
+  .qa-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+  .qa-header {
+    background: var(--accent);
+    color: #000;
+    font-family: var(--display);
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    padding: 0.6rem 1.2rem;
+  }
+  .qa-item { border-bottom: 1px solid var(--border); }
+  .qa-item:last-child { border-bottom: none; }
+  .qa-q {
+    padding: 1rem 1.2rem 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    user-select: none;
+  }
+  .qa-q:hover { color: var(--accent); }
+  .qa-q::after {
+    content: '▸';
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    margin-top: 0.1rem;
+  }
+  .qa-item.open .qa-q::after { transform: rotate(90deg); color: var(--accent); }
+  .qa-a {
+    display: none;
+    padding: 0 1.2rem 1rem 1.2rem;
+    font-size: 0.88rem;
+    color: #bbb;
+    line-height: 1.75;
+  }
+  .qa-item.open .qa-a { display: block; }
+  .qa-a .highlight { color: var(--accent2); font-family: var(--mono); }
+  .qa-a ul { padding-left: 1.2rem; margin-top: 0.4rem; }
+  .qa-a li { margin-bottom: 0.3rem; }
+
+  /* ── ORBITAL DIAGRAM (SVG) ── */
+  .orbital-wrap {
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+  .orbital-wrap svg { display: block; }
+
+  /* ── TAG ── */
+  .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    padding: 0.15rem 0.5rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+  .tag-oct { background: rgba(78,205,196,0.15); color: var(--accent2); border: 1px solid var(--accent2); }
+  .tag-tet { background: rgba(255,107,107,0.15); color: var(--accent3); border: 1px solid var(--accent3); }
+  .tag-sq  { background: rgba(232,197,71,0.15);  color: var(--accent);  border: 1px solid var(--accent); }
+
+  /* ── ALERT ── */
+  .alert {
+    border-left: 3px solid var(--accent3);
+    background: rgba(255,107,107,0.07);
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+  }
+  .alert-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 0.3rem;
+  }
+
+  /* ── ENERGY LEVEL DIAGRAM ── */
+  .energy-diag {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #0a0a0a;
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .topics-bar {
+    display: flex;
+    gap: 0.4rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+  .topic-pill {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    padding: 0.3rem 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .topic-pill.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(232,197,71,0.08);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  ul { padding-left: 1.2rem; }
+  li { margin-bottom: 0.3rem; }
+  p + p { margin-top: 0.6rem; }
+  strong { font-weight: 600; color: var(--text); }
+
+  sup { font-size: 0.7em; }
+  sub { font-size: 0.7em; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="header-title">CFT & Coordination Chemistry</div>
+      <div class="header-sub">Crystal Field Theory · Spinels · Transitions · Titrations · pH · Buffers</div>
+    </div>
+    <div class="exam-badge">🔴 Exam in 2 Days</div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#s1">01 · CFT</a>
+    <a href="#s2">02 · CFSE</a>
+    <a href="#s3">03 · Spinels</a>
+    <a href="#s4">04 · E-Transitions</a>
+    <a href="#s5">05 · Mag. Moment</a>
+    <a href="#s6">06 · Structure Pred.</a>
+    <a href="#t1">07 · EDTA Titration</a>
+    <a href="#t2">08 · Redox Titration</a>
+    <a href="#t3">09 · pH Calc.</a>
+    <a href="#t4">10 · Buffers</a>
+    <a href="#ct">📝 Class Test</a>
+  </div>
+</nav>
+
+<main>
+
+  <div class="topics-bar">
+    <div class="topic-pill active">CFT Splitting</div>
+    <div class="topic-pill active">CFSE Calc.</div>
+    <div class="topic-pill active">Spinel Calc.</div>
+    <div class="topic-pill active">d-d Transitions</div>
+    <div class="topic-pill active">Charge Transfer</div>
+    <div class="topic-pill active">Spin-Only μ</div>
+    <div class="topic-pill active">Structure Pred.</div>
+    <div class="topic-pill active">EDTA Titration</div>
+    <div class="topic-pill active">Redox Titration</div>
+    <div class="topic-pill active">pH Calculations</div>
+    <div class="topic-pill active">Buffer Theory</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 1: CFT
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s1">
+    <div class="section-num">01</div>
+    <div class="section-title">CFT for <span>Octahedral, Tetrahedral</span> &amp; Square Planar</div>
+
+    <p>Crystal Field Theory models the electrostatic interaction between the central metal ion and the surrounding ligands (treated as point charges). It explains colour, magnetism, and stability of coordination compounds.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div class="card">
+        <div class="card-label">Octahedral</div>
+        <h4>d-orbital Splitting — Δ<sub>o</sub></h4>
+        <p>Ligands approach along ±x, ±y, ±z axes. Orbitals pointing <em>towards</em> ligands experience greater repulsion.</p>
+        <div class="formula">
+          e<sub>g</sub>: d<sub>z²</sub>, d<sub>x²−y²</sub> → +0.6Δ<sub>o</sub> (+6Dq)<br>
+          t<sub>2g</sub>: d<sub>xy</sub>, d<sub>xz</sub>, d<sub>yz</sub> → −0.4Δ<sub>o</sub> (−4Dq)
+        </div>
+        <p>Barycentre rule: <span style="color:var(--accent2)">2(+6Dq) + 3(−4Dq) = 0</span> ✓</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Tetrahedral</div>
+        <h4>d-orbital Splitting — Δ<sub>t</sub></h4>
+        <p>Ligands approach along face diagonals. No orbitals point directly at ligands — splitting is <strong>smaller</strong>.</p>
+        <div class="formula">
+          e: d<sub>z²</sub>, d<sub>x²−y²</sub> → −0.6Δ<sub>t</sub> (−6Dq')<br>
+          t<sub>2</sub>: d<sub>xy</sub>, d<sub>xz</sub>, d<sub>yz</sub> → +0.4Δ<sub>t</sub> (+4Dq')
+        </div>
+        <div class="formula">
+          Δ<sub>t</sub> = (4/9)Δ<sub>o</sub> ≈ 0.44Δ<sub>o</sub>
+        </div>
+        <p style="font-size:0.82rem;color:var(--accent3);">Note: e is lower, t₂ is higher — <em>inverted</em> vs octahedral.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="card-label">Square Planar</div>
+      <h4>d-orbital Splitting (derived from octahedral by removing two axial ligands)</h4>
+      <p>Removing z-axis ligands lowers d<sub>z²</sub> drastically. Energy order (lowest to highest):</p>
+      <div class="formula">
+        d<sub>xz</sub>, d<sub>yz</sub> &lt; d<sub>z²</sub> &lt; d<sub>xy</sub> &lt; d<sub>x²−y²</sub>
+      </div>
+      <p>The HOMO–LUMO gap (d<sub>xy</sub> → d<sub>x²−y²</sub>) = Δ<sub>sp</sub> ≈ 1.3Δ<sub>o</sub>. Very large splitting → almost always <strong>low spin, 4 pairs</strong> for d<sup>8</sup>.</p>
+    </div>
+
+    <div class="alert">
+      <div class="alert-label">⚠ Key Comparison</div>
+      Δ<sub>sp</sub> ≈ 1.3Δ<sub>o</sub> &gt;&gt; Δ<sub>o</sub> &gt; Δ<sub>t</sub> ≈ 0.44Δ<sub>o</sub>. Tetrahedral complexes are <em>almost always</em> high spin because Δ<sub>t</sub> is too small to force pairing.
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — CFT</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. Why is Δ<sub>t</sub> = (4/9)Δ<sub>o</sub> and not equal to Δ<sub>o</sub>?</div>
+        <div class="qa-a">
+          Three reasons combine: <br>
+          <ul>
+            <li><strong>Fewer ligands</strong>: tetrahedral has 4 vs 6 in octahedral (factor ~2/3).</li>
+            <li><strong>No direct approach</strong>: no tetrahedral orbital points directly at a ligand (factor ~2/3 again).</li>
+            <li>Combined: (2/3)(2/3) = 4/9 ≈ 0.44.</li>
+          </ul>
+          So Δ<sub>t</sub> = (4/9)Δ<sub>o</sub>.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. In an octahedral field, which orbitals are in the e<sub>g</sub> set and why are they raised in energy?</div>
+        <div class="qa-a">
+          <span class="highlight">d<sub>z²</sub></span> and <span class="highlight">d<sub>x²−y²</sub></span> form the e<sub>g</sub> set. Ligands in an octahedral complex approach along the x, y, and z axes. These two orbitals have their lobes pointing <em>directly</em> toward the ligands, so they experience maximum electrostatic repulsion → raised by +0.6Δ<sub>o</sub> (= +6Dq) above the barycentre.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. How does square planar geometry arise from octahedral? Sketch the energy level diagram.</div>
+        <div class="qa-a">
+          Start with an octahedral complex. Gradually remove the two axial (z-axis) ligands to infinity. As they leave:
+          <ul>
+            <li>d<sub>z²</sub> drops sharply (loses axial repulsion).</li>
+            <li>d<sub>x²−y²</sub> rises (equatorial ligands now dominate even more).</li>
+            <li>d<sub>xy</sub> rises moderately; d<sub>xz</sub> and d<sub>yz</sub> drop.</li>
+          </ul>
+          Final order (↑ energy): d<sub>xz</sub> ≈ d<sub>yz</sub> &lt; d<sub>z²</sub> &lt; d<sub>xy</sub> &lt; d<sub>x²−y²</sub>.<br>
+          The large gap between d<sub>xy</sub> and d<sub>x²−y²</sub> (≈1.3Δ<sub>o</sub>) is why d<sup>8</sup> metals with strong-field ligands always adopt square planar geometry and are diamagnetic.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2: CFSE
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s2">
+    <div class="section-num">02</div>
+    <div class="section-title"><span>CFSE Calculation</span> for d<sup>n</sup> Systems</div>
+
+    <p>Crystal Field Stabilization Energy (CFSE) is the net energy gained by a complex due to the d-orbital splitting. It equals the total energy of electrons in split levels minus their energy at the hypothetical barycentre.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Octahedral CFSE</div>
+        <div class="formula">
+          Each t<sub>2g</sub> electron: −0.4Δ<sub>o</sub> (−4Dq)<br>
+          Each e<sub>g</sub> electron: +0.6Δ<sub>o</sub> (+6Dq)<br><br>
+          CFSE = (−0.4 × n<sub>t₂g</sub> + 0.6 × n<sub>eg</sub>)Δ<sub>o</sub>
+        </div>
+        <p>Add <strong>+P per extra pair</strong> if comparing to free ion for pairing energy correction.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Tetrahedral CFSE</div>
+        <div class="formula">
+          Each e electron: −0.6Δ<sub>t</sub> (−6Dq')<br>
+          Each t<sub>2</sub> electron: +0.4Δ<sub>t</sub> (+4Dq')<br><br>
+          CFSE = (−0.6 × n<sub>e</sub> + 0.4 × n<sub>t₂</sub>)Δ<sub>t</sub>
+        </div>
+        <p>Since Δ<sub>t</sub> = 4/9 Δ<sub>o</sub>, convert: multiply by 4/9 to express in Δ<sub>o</sub>.</p>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>d<sup>n</sup></th>
+            <th>Oct (High Spin) Config.</th>
+            <th>CFSE (oct, HS)</th>
+            <th>Oct (Low Spin) Config.</th>
+            <th>CFSE (oct, LS)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>d⁰</td><td>t<sub>2g</sub>⁰ e<sub>g</sub>⁰</td><td>0</td><td>—</td><td>0</td></tr>
+          <tr><td>d¹</td><td>t<sub>2g</sub>¹</td><td>−0.4Δ<sub>o</sub></td><td>t<sub>2g</sub>¹</td><td>−0.4Δ<sub>o</sub></td></tr>
+          <tr><td>d²</td><td>t<sub>2g</sub>²</td><td>−0.8Δ<sub>o</sub></td><td>t<sub>2g</sub>²</td><td>−0.8Δ<sub>o</sub></td></tr>
+          <tr><td>d³</td><td>t<sub>2g</sub>³</td><td>−1.2Δ<sub>o</sub></td><td>t<sub>2g</sub>³</td><td>−1.2Δ<sub>o</sub></td></tr>
+          <tr><td>d⁴</td><td>t<sub>2g</sub>³ e<sub>g</sub>¹</td><td>−0.6Δ<sub>o</sub></td><td>t<sub>2g</sub>⁴</td><td>−1.6Δ<sub>o</sub> + P</td></tr>
+          <tr><td>d⁵</td><td>t<sub>2g</sub>³ e<sub>g</sub>²</td><td>0</td><td>t<sub>2g</sub>⁵</td><td>−2.0Δ<sub>o</sub> + 2P</td></tr>
+          <tr><td>d⁶</td><td>t<sub>2g</sub>⁴ e<sub>g</sub>²</td><td>−0.4Δ<sub>o</sub></td><td>t<sub>2g</sub>⁶</td><td>−2.4Δ<sub>o</sub> + 2P</td></tr>
+          <tr><td>d⁷</td><td>t<sub>2g</sub>⁵ e<sub>g</sub>²</td><td>−0.8Δ<sub>o</sub></td><td>t<sub>2g</sub>⁶ e<sub>g</sub>¹</td><td>−1.8Δ<sub>o</sub> + P</td></tr>
+          <tr><td>d⁸</td><td>t<sub>2g</sub>⁶ e<sub>g</sub>²</td><td>−1.2Δ<sub>o</sub></td><td>t<sub>2g</sub>⁶ e<sub>g</sub>²</td><td>−1.2Δ<sub>o</sub></td></tr>
+          <tr><td>d⁹</td><td>t<sub>2g</sub>⁶ e<sub>g</sub>³</td><td>−0.6Δ<sub>o</sub></td><td>—</td><td>—</td></tr>
+          <tr><td>d¹⁰</td><td>t<sub>2g</sub>⁶ e<sub>g</sub>⁴</td><td>0</td><td>—</td><td>0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert">
+      <div class="alert-label">📌 Exam Tip — CFSE Calculation Steps</div>
+      1. Determine d<sup>n</sup> (oxidation state → count d electrons).<br>
+      2. Fill orbitals using Hund's rule (high spin) OR pair up (low spin, strong field ligands).<br>
+      3. Count n<sub>t₂g</sub> and n<sub>eg</sub> (oct) or n<sub>e</sub> and n<sub>t₂</sub> (tet).<br>
+      4. Apply formula. For tetra, use Δ<sub>t</sub> = 4/9 Δ<sub>o</sub> to convert to Δ<sub>o</sub> units.
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — CFSE</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. Calculate CFSE for [Fe(H₂O)₆]²⁺ (high spin, d⁶) in units of Δ<sub>o</sub>.</div>
+        <div class="qa-a">
+          Fe²⁺ is d⁶. H₂O is a weak-field ligand → high spin.<br>
+          HS d⁶ configuration: <span class="highlight">t<sub>2g</sub>⁴ e<sub>g</sub>²</span><br>
+          CFSE = (4 × −0.4 + 2 × 0.6)Δ<sub>o</sub> = (−1.6 + 1.2)Δ<sub>o</sub> = <span class="highlight">−0.4Δ<sub>o</sub></span>
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. Calculate CFSE for [Co(CN)₆]³⁻ (low spin, d⁶). CN⁻ is a strong-field ligand.</div>
+        <div class="qa-a">
+          Co³⁺ is d⁶. CN⁻ is strong field → low spin.<br>
+          LS d⁶: <span class="highlight">t<sub>2g</sub>⁶ e<sub>g</sub>⁰</span><br>
+          CFSE = (6 × −0.4 + 0 × 0.6)Δ<sub>o</sub> = <span class="highlight">−2.4Δ<sub>o</sub></span> (+ 2P for extra pairing energy cost).<br>
+          Net CFSE is much larger in magnitude than HS → complex is highly stable and kinetically inert.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. What is the CFSE of a tetrahedral d⁵ complex (high spin) in terms of Δ<sub>o</sub>?</div>
+        <div class="qa-a">
+          Tetrahedral d⁵ HS: e² t<sub>2</sub>³<br>
+          CFSE = (2 × −0.6 + 3 × 0.4)Δ<sub>t</sub> = (−1.2 + 1.2)Δ<sub>t</sub> = <span class="highlight">0</span><br>
+          This makes sense — d⁵ HS in both geometries has zero CFSE (half-filled, symmetrical). This explains why Mn²⁺ (d⁵) doesn't show strong preference for either geometry.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q4. For a d⁸ metal ion, compare octahedral vs tetrahedral CFSE. Which is preferred?</div>
+        <div class="qa-a">
+          Oct d⁸ (always HS): t<sub>2g</sub>⁶ e<sub>g</sub>² → CFSE = (6×−0.4 + 2×0.6)Δ<sub>o</sub> = <span class="highlight">−1.2Δ<sub>o</sub></span><br>
+          Tet d⁸ HS: e⁴ t<sub>2</sub>⁴ → CFSE = (4×−0.6 + 4×0.4)Δ<sub>t</sub> = (−2.4 + 1.6)×(4/9)Δ<sub>o</sub> = −0.8×(4/9)Δ<sub>o</sub> ≈ <span class="highlight">−0.36Δ<sub>o</sub></span><br>
+          Octahedral CFSE (−1.2Δ<sub>o</sub>) &gt;&gt; Tetrahedral (−0.36Δ<sub>o</sub>) → d⁸ strongly prefers octahedral (or square planar with strong-field ligands like CN⁻).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3: SPINELS
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s3">
+    <div class="section-num">03</div>
+    <div class="section-title">Normal &amp; <span>Inverse Spinel</span> Calculations</div>
+
+    <p>Spinels have the general formula <strong>AB₂O₄</strong>. The oxygen ions form an FCC lattice with tetrahedral (A-sites, 8 per unit cell, 1/8 occupied) and octahedral (B-sites, 16 per unit cell, 1/2 occupied) holes.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Normal Spinel</div>
+        <h4>A[B₂]O₄</h4>
+        <p>A²⁺ occupies <span class="tag tag-tet">Tetrahedral</span> sites.<br>
+        B³⁺ occupies <span class="tag tag-oct">Octahedral</span> sites.</p>
+        <div class="formula">
+          Example: MgAl₂O₄<br>
+          Mg²⁺ → Tet | Al³⁺ → Oct
+        </div>
+        <p>Degree of inversion λ = 0</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Inverse Spinel</div>
+        <h4>B[AB]O₄</h4>
+        <p>Half of B³⁺ occupies <span class="tag tag-tet">Tetrahedral</span> sites.<br>
+        A²⁺ + remaining B³⁺ occupy <span class="tag tag-oct">Octahedral</span> sites.</p>
+        <div class="formula">
+          Example: Fe₃O₄ (magnetite)<br>
+          Fe³⁺[Fe²⁺Fe³⁺]O₄<br>
+          Fe³⁺ → Tet | Fe²⁺,Fe³⁺ → Oct
+        </div>
+        <p>Degree of inversion λ = 1</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">How to Predict — CFSE Method</div>
+      <h4>Step-by-step: Calculate site preference energy</h4>
+      <ol style="padding-left:1.2rem; font-size:0.9rem; line-height:2;">
+        <li>Identify the two metal ions (A²⁺ and B³⁺) and their d-electron counts.</li>
+        <li>Calculate CFSE for each ion in tetrahedral (Δ<sub>t</sub>) AND octahedral (Δ<sub>o</sub>) sites.</li>
+        <li>Calculate <strong>octahedral site preference energy (OSPE)</strong> = CFSE(oct) − CFSE(tet).</li>
+        <li>The ion with larger OSPE goes to the octahedral site.</li>
+        <li>If both have significant OSPE → inverse; if A²⁺ has little/no OSPE → normal.</li>
+      </ol>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Worked Example: Fe₃O₄</div>
+      <h4>Why is magnetite (Fe₃O₄) an inverse spinel?</h4>
+      <p>Fe₃O₄ = Fe²⁺Fe₂³⁺O₄. Need to place Fe²⁺ (d⁶) and Fe³⁺ (d⁵) in tet and oct sites.</p>
+      <div class="formula">
+        Fe³⁺ (d⁵, HS): CFSE(oct) = 0 | CFSE(tet) = 0 → OSPE = 0<br>
+        Fe²⁺ (d⁶, HS): CFSE(oct) = −0.4Δ<sub>o</sub><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CFSE(tet) = −0.27Δ<sub>o</sub> [from −0.6×(4/9)Δ<sub>o</sub>]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OSPE(Fe²⁺) = −0.4 − (−0.27) = −0.13Δ<sub>o</sub> (prefers oct)
+      </div>
+      <p>Fe³⁺ has zero OSPE → no preference → it can go into tetrahedral. Fe²⁺ prefers octahedral. Result: <strong>inverse spinel</strong> Fe³⁺[Fe²⁺Fe³⁺]O₄.</p>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Worked Example: ZnFe₂O₄</div>
+      <h4>Why is zinc ferrite a normal spinel?</h4>
+      <div class="formula">
+        Zn²⁺ (d¹⁰): CFSE everywhere = 0 → OSPE = 0<br>
+        Fe³⁺ (d⁵, HS): CFSE everywhere = 0 → OSPE = 0
+      </div>
+      <p>Both have zero OSPE. However, Zn²⁺ has an electrostatic preference for tetrahedral sites (it's a closed-shell d¹⁰ ion with no CFSE contribution). ZnFe₂O₄ is a <strong>normal spinel</strong>: Zn²⁺[Fe₂³⁺]O₄.</p>
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — SPINELS</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. What is the difference between normal and inverse spinel? Give one example of each.</div>
+        <div class="qa-a">
+          <strong>Normal spinel</strong> A[B₂]O₄: A²⁺ ions in tetrahedral holes, B³⁺ in octahedral holes. Example: MgAl₂O₄ (Mg²⁺ in tet, Al³⁺ in oct).<br><br>
+          <strong>Inverse spinel</strong> B[AB]O₄: B³⁺ split between tet and oct; A²⁺ in octahedral. Example: Fe₃O₄ (Fe³⁺ in tet, Fe²⁺+Fe³⁺ in oct).
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. Predict the structure (normal/inverse) of NiFe₂O₄. Ni²⁺ is d⁸.</div>
+        <div class="qa-a">
+          Ni²⁺ (d⁸): CFSE(oct, HS) = −1.2Δ<sub>o</sub> | CFSE(tet, HS) = (−0.6×4 + 0.4×4)×(4/9)Δ<sub>o</sub> = −0.8×(4/9) ≈ −0.36Δ<sub>o</sub><br>
+          OSPE(Ni²⁺) = −1.2 − (−0.36) = −0.84Δ<sub>o</sub> → <strong>very strong octahedral preference</strong><br><br>
+          Fe³⁺ (d⁵ HS): OSPE = 0.<br><br>
+          Ni²⁺ strongly prefers octahedral → Fe³⁺ goes to tetrahedral. Result: <span class="highlight">Inverse spinel</span>: Fe³⁺[Ni²⁺Fe³⁺]O₄.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. Why does Co₃O₄ adopt a normal spinel structure?</div>
+        <div class="qa-a">
+          Co₃O₄ = Co²⁺Co₂³⁺O₄.<br>
+          Co³⁺ (d⁶, low spin with oxygen): CFSE(oct, LS) = −2.4Δ<sub>o</sub> → huge octahedral preference.<br>
+          Co²⁺ (d⁷, HS): CFSE(oct) = −0.8Δ<sub>o</sub> | CFSE(tet) ≈ −0.27Δ<sub>o</sub> → OSPE = −0.53Δ<sub>o</sub>.<br><br>
+          Both prefer octahedral, but Co³⁺ preference is much stronger. Co³⁺ occupies all octahedral sites → Co²⁺ must go to tetrahedral → <span class="highlight">normal spinel</span>: Co²⁺[Co₂³⁺]O₄.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 4: ELECTRONIC TRANSITIONS
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s4">
+    <div class="section-num">04</div>
+    <div class="section-title"><span>Electronic Transitions</span></div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Type I</div>
+        <h4>d–d Transitions</h4>
+        <p>Electrons jump between split d-orbitals (t<sub>2g</sub> ↔ e<sub>g</sub>). Energy = Δ (visible light) → colour.</p>
+        <div class="formula">
+          hν = Δ<sub>o</sub> (or Δ<sub>t</sub>)<br>
+          <span class="comment">// Absorption of specific wavelength</span>
+        </div>
+        <p><strong>Selection rules</strong> (formally forbidden, but weakly observed):</p>
+        <ul style="font-size:0.85rem; margin-top:0.4rem;">
+          <li>Laporte rule: Δl = ±1 (g→g forbidden)</li>
+          <li>Spin rule: ΔS = 0</li>
+          <li>Relaxed by: vibronic coupling (oct), mixing (tet has no inversion → stronger bands)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Type II</div>
+        <h4>Charge Transfer (CT) Transitions</h4>
+        <p>Electron moves between metal and ligand. Very intense (ε ~ 10³–10⁵ L mol⁻¹ cm⁻¹) — <em>Laporte allowed</em>.</p>
+        <ul style="font-size:0.85rem; margin-top:0.4rem;">
+          <li><strong>LMCT</strong>: Ligand → Metal (ligand oxidized, metal reduced)</li>
+          <li><strong>MLCT</strong>: Metal → Ligand (metal oxidized)</li>
+        </ul>
+        <div class="formula">
+          KMnO₄: O→Mn LMCT → intense purple<br>
+          K₂Cr₂O₇: O→Cr LMCT → intense orange
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Case Study — Co²⁺</div>
+      <h4>Why is [Co(H₂O)₆]²⁺ pink but [CoCl₄]²⁻ blue?</h4>
+      <div class="formula">
+        [Co(H₂O)₆]²⁺: Co²⁺ (d⁷), octahedral, Δ<sub>o</sub> ≈ 9000 cm⁻¹<br>
+        Absorbs red/orange (≈500 nm) → transmits pink/rose<br><br>
+        [CoCl₄]²⁻: Co²⁺ (d⁷), tetrahedral, Δ<sub>t</sub> ≈ 3100 cm⁻¹<br>
+        Absorbs orange/yellow (≈600–650 nm) → transmits blue
+      </div>
+      <ul style="font-size:0.88rem;">
+        <li>Cl⁻ is a weak-field ligand → smaller Δ → absorption shifts to longer wavelength (lower energy).</li>
+        <li>Tetrahedral geometry: Δ<sub>t</sub> ≈ 0.44 Δ<sub>o</sub> → even smaller splitting.</li>
+        <li>Also: tetrahedral bands are <em>more intense</em> (no inversion centre → Laporte rule less strictly forbidden).</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">LMCT Details</div>
+      <h4>KMnO₄ &amp; K₂Cr₂O₇ — Ligand to Metal CT</h4>
+      <p>Both MnO₄⁻ and Cr₂O₇²⁻ are d⁰ metal centres — <em>no d-d transitions possible</em>. Their intense colours are entirely due to LMCT:</p>
+      <div class="formula">
+        MnO₄⁻: O(2p) → Mn(3d) LMCT<br>
+        Absorbs green (≈525 nm) → intense purple/violet<br><br>
+        Cr₂O₇²⁻: O(2p) → Cr(3d) LMCT<br>
+        Absorbs blue/violet (≈350–450 nm) → intense orange
+      </div>
+      <p>High oxidation states (+7 for Mn, +6 for Cr) → low-lying empty d-orbitals → easy electron transfer → low energy CT → visible absorption → strong colour.</p>
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — ELECTRONIC TRANSITIONS</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. Why are d–d transitions Laporte-forbidden, yet coordination compounds are coloured?</div>
+        <div class="qa-a">
+          d–d transitions involve Δl = 0 (d→d), violating the Laporte selection rule (Δl = ±1 required). In a centrosymmetric (octahedral) complex, g→g transitions are forbidden.<br><br>
+          However, the rule is relaxed by:
+          <ul>
+            <li><strong>Vibronic coupling</strong>: molecular vibrations momentarily destroy the inversion centre, mixing d and p character → weakly allowed transitions.</li>
+            <li><strong>Spin-orbit coupling</strong>: mixes states of different multiplicity.</li>
+          </ul>
+          Result: small but non-zero molar absorptivities (ε ~ 1–100 L mol⁻¹ cm⁻¹) → pale colours observed.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. Why are charge-transfer bands so much more intense than d–d bands?</div>
+        <div class="qa-a">
+          CT transitions involve electron movement between ligand and metal orbitals (e.g., O 2p → metal d). These are transitions between orbitals of <em>different symmetry and different atom type</em>, so:<br>
+          <ul>
+            <li>They are <strong>Laporte-allowed</strong> (Δl = ±1 satisfied for the transition as a whole).</li>
+            <li>There's also better orbital overlap across the charge-transfer pathway.</li>
+          </ul>
+          ε (CT) ~ 10³–10⁵ vs ε (d–d) ~ 1–100 L mol⁻¹ cm⁻¹. Hence KMnO₄ is intensely coloured at small concentrations.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. [Mn(H₂O)₆]²⁺ is very faintly pink (ε ≈ 0.03). Explain this extremely weak absorption.</div>
+        <div class="qa-a">
+          Mn²⁺ is d⁵ in a high-spin complex. All d orbitals are singly occupied (t<sub>2g</sub>³ e<sub>g</sub>²). Any d–d transition must involve electron spin-flip (changing a parallel-spin electron to antiparallel) because all possible target configurations have a different spin multiplicity.<br><br>
+          This means transitions are <em>both</em> Laporte-forbidden (g→g) <em>and</em> spin-forbidden (ΔS ≠ 0). Doubly forbidden → ε ≈ 0.01–0.1 → extremely pale colour.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 5: MAGNETIC MOMENT
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s5">
+    <div class="section-num">05</div>
+    <div class="section-title"><span>Spin-Only Magnetic Moment</span></div>
+
+    <div class="card">
+      <div class="card-label">Formula</div>
+      <div class="formula">
+        μ<sub>s.o.</sub> = √[n(n+2)] BM<br><br>
+        <span class="comment">// n = number of unpaired electrons</span><br>
+        <span class="comment">// BM = Bohr Magneton (9.274×10⁻²⁴ J/T)</span>
+      </div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-label">📌 Critical Step — From Prof's Notes</div>
+      <strong>First do the orbital splitting, THEN count unpaired electrons.</strong> Don't just count from the free ion — the geometry determines the filling order, which changes the number of unpaired electrons (especially for d⁴–d⁷).
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>d<sup>n</sup></th>
+            <th>Oct HS config.</th>
+            <th>n (HS)</th>
+            <th>μ (HS) BM</th>
+            <th>Oct LS config.</th>
+            <th>n (LS)</th>
+            <th>μ (LS) BM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>d¹</td><td>t<sub>2g</sub>¹</td><td>1</td><td>1.73</td><td>—</td><td>1</td><td>1.73</td></tr>
+          <tr><td>d²</td><td>t<sub>2g</sub>²</td><td>2</td><td>2.83</td><td>—</td><td>2</td><td>2.83</td></tr>
+          <tr><td>d³</td><td>t<sub>2g</sub>³</td><td>3</td><td>3.87</td><td>—</td><td>3</td><td>3.87</td></tr>
+          <tr><td>d⁴</td><td>t<sub>2g</sub>³ e<sub>g</sub>¹</td><td>4</td><td>4.90</td><td>t<sub>2g</sub>⁴</td><td>2</td><td>2.83</td></tr>
+          <tr><td>d⁵</td><td>t<sub>2g</sub>³ e<sub>g</sub>²</td><td>5</td><td>5.92</td><td>t<sub>2g</sub>⁵</td><td>1</td><td>1.73</td></tr>
+          <tr><td>d⁶</td><td>t<sub>2g</sub>⁴ e<sub>g</sub>²</td><td>4</td><td>4.90</td><td>t<sub>2g</sub>⁶</td><td>0</td><td>0 (diamag.)</td></tr>
+          <tr><td>d⁷</td><td>t<sub>2g</sub>⁵ e<sub>g</sub>²</td><td>3</td><td>3.87</td><td>t<sub>2g</sub>⁶ e<sub>g</sub>¹</td><td>1</td><td>1.73</td></tr>
+          <tr><td>d⁸</td><td>t<sub>2g</sub>⁶ e<sub>g</sub>²</td><td>2</td><td>2.83</td><td>—</td><td>2</td><td>2.83</td></tr>
+          <tr><td>d⁹</td><td>t<sub>2g</sub>⁶ e<sub>g</sub>³</td><td>1</td><td>1.73</td><td>—</td><td>1</td><td>1.73</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:1rem;">
+      <div class="card-label">Square Planar Magnetic Moments</div>
+      <h4>Square Planar: Almost Always Diamagnetic for d⁸</h4>
+      <p>In square planar geometry, the d<sub>x²−y²</sub> orbital is so high in energy that all 8 d-electrons pair into the four lower orbitals:</p>
+      <div class="formula">
+        d⁸ sq. planar: (d<sub>xz</sub>,d<sub>yz</sub>)⁴ (d<sub>z²</sub>)² (d<sub>xy</sub>)² (d<sub>x²−y²</sub>)⁰<br>
+        n = 0 → μ = 0 BM (diamagnetic)
+      </div>
+      <p>Examples: [Ni(CN)₄]²⁻, [PdCl₄]²⁻, [PtCl₄]²⁻, [AuCl₄]⁻</p>
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — MAGNETIC MOMENT</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. A complex has μ = 4.90 BM. What is the likely d-configuration?</div>
+        <div class="qa-a">
+          μ = 4.90 BM → solve: √[n(n+2)] = 4.90 → n(n+2) = 24 → n = 4 unpaired electrons.<br>
+          This corresponds to high-spin d⁴ octahedral (t<sub>2g</sub>³ e<sub>g</sub>¹) or high-spin d⁶ octahedral (t<sub>2g</sub>⁴ e<sub>g</sub>²). Examples: Cr²⁺ (d⁴), Fe²⁺ (d⁶) as high-spin complexes.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. [CoF₆]³⁻ has μ ≈ 5.0 BM while [Co(CN)₆]³⁻ is diamagnetic. Explain.</div>
+        <div class="qa-a">
+          Both are Co³⁺ (d⁶) octahedral complexes. The difference is the field strength of the ligand:<br>
+          <ul>
+            <li><span class="highlight">F⁻ is weak field</span>: Δ<sub>o</sub> &lt; P → high spin → t<sub>2g</sub>⁴ e<sub>g</sub>² → 4 unpaired → μ ≈ 4.90 BM.</li>
+            <li><span class="highlight">CN⁻ is strong field</span>: Δ<sub>o</sub> &gt; P → low spin → t<sub>2g</sub>⁶ → 0 unpaired → diamagnetic.</li>
+          </ul>
+          This is a classic example of why we must determine strong/weak field before counting unpaired electrons.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. Calculate μ for [NiCl₄]²⁻ (tetrahedral). Ni²⁺ is d⁸.</div>
+        <div class="qa-a">
+          Tetrahedral Ni²⁺ d⁸: Since Δ<sub>t</sub> is always small, tetrahedral complexes are always high spin.<br>
+          Tetrahedral d⁸: e⁴ t<sub>2</sub>⁴ → fill 4+4 = 8 electrons with max unpaired in each level.<br>
+          e: ↑↓ ↑↓ (4 electrons, 0 unpaired in e set since 4 fill 2 orbitals)<br>
+          t<sub>2</sub>: ↑↓ ↑↓ ↑↓ wait — t<sub>2</sub> has 3 orbitals, 4 electrons → 2 paired + 2 unpaired? No:<br>
+          t<sub>2</sub>⁴: ↑↓ ↑ ↑ = 2 unpaired in t<sub>2</sub> | e⁴: ↑↓ ↑↓ = 0 unpaired.<br>
+          Total: <span class="highlight">n = 2</span> → μ = √[2(4)] = √8 ≈ <span class="highlight">2.83 BM</span>.<br>
+          This matches experimental values for tetrahedral Ni²⁺ complexes.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 6: STRUCTURE PREDICTION
+  ══════════════════════════════════════════ -->
+  <section class="section" id="s6">
+    <div class="section-num">06</div>
+    <div class="section-title">Structure <span>Prediction</span> from Ligands</div>
+
+    <p>For a given metal ion, the geometry adopted depends on the field strength of the ligand. The key insight is the relationship between CFSE and the pairing energy P.</p>
+
+    <div class="card">
+      <div class="card-label">Ni²⁺ (d⁸) — Three Geometries</div>
+      <h4>The Classic Ni²⁺ Example</h4>
+      <div class="grid-2" style="margin-top:0.8rem;">
+        <div>
+          <span class="tag tag-oct">Octahedral</span>
+          <div class="formula" style="margin-top:0.5rem;">
+            Ligands: H₂O, NH₃, en<br>
+            [Ni(NH₃)₆]²⁺, [Ni(H₂O)₆]²⁺<br>
+            Bond angles: ~90°<br>
+            μ ≈ 2.83 BM (2 unpaired)
+          </div>
+        </div>
+        <div>
+          <span class="tag tag-tet">Tetrahedral</span>
+          <div class="formula" style="margin-top:0.5rem;">
+            Ligands: Cl⁻, Br⁻, I⁻<br>
+            [NiCl₄]²⁻, [NiBr₄]²⁻<br>
+            Bond angles: ~109°28'<br>
+            μ ≈ 2.83 BM (2 unpaired)
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:0.8rem;">
+        <span class="tag tag-sq">Square Planar</span>
+        <div class="formula" style="margin-top:0.5rem;">
+          Ligands: CN⁻, dmgH, diphosphines<br>
+          [Ni(CN)₄]²⁻, Ni-dimethylglyoximate<br>
+          Bond angles: 90° (planar)<br>
+          μ = 0 BM (diamagnetic — all electrons paired)
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Decision Rule</div>
+      <h4>When does Ni²⁺ go square planar?</h4>
+      <p>Square planar requires the Δ<sub>sp</sub> ≈ 1.3Δ<sub>o</sub> to exceed the pairing energy P. For Ni²⁺:</p>
+      <ul style="font-size:0.88rem; margin-top:0.5rem;">
+        <li><strong>Weak field (Cl⁻, Br⁻)</strong>: Δ small → tetrahedral preferred (avoids pairing, fewer ligands).</li>
+        <li><strong>Intermediate field (H₂O, NH₃)</strong>: octahedral → maximises number of ligands, modest CFSE.</li>
+        <li><strong>Strong field (CN⁻, PR₃)</strong>: Δ<sub>sp</sub> large enough to force pairing → square planar, diamagnetic, maximum CFSE for d⁸.</li>
+      </ul>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ligand Field</th>
+            <th>Example Ligands</th>
+            <th>Ni²⁺ Geometry</th>
+            <th>Unpaired e⁻</th>
+            <th>Min. Bond Angle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Weak</td>
+            <td>Cl⁻, Br⁻, I⁻, NCS⁻</td>
+            <td><span class="tag tag-tet">Tetrahedral</span></td>
+            <td>2</td>
+            <td>109°28′</td>
+          </tr>
+          <tr>
+            <td>Medium</td>
+            <td>H₂O, NH₃, py, en</td>
+            <td><span class="tag tag-oct">Octahedral</span></td>
+            <td>2</td>
+            <td>90°</td>
+          </tr>
+          <tr>
+            <td>Strong</td>
+            <td>CN⁻, CO, dmgH⁻, PR₃</td>
+            <td><span class="tag tag-sq">Square Planar</span></td>
+            <td>0</td>
+            <td>90° (planar)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert">
+      <div class="alert-label">📌 General Rule for d⁸ Metals</div>
+      <strong>2nd and 3rd row transition metals</strong> (Pd²⁺, Pt²⁺, Au³⁺) are <em>always</em> square planar regardless of ligand, because their larger d-orbitals give intrinsically large Δ. First-row d⁸ (Ni²⁺) can be all three geometries depending on ligand field strength.
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — STRUCTURE PREDICTION</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. Predict the geometry of [Ni(en)₂]²⁺ and [NiCl₄]²⁻. Explain your reasoning.</div>
+        <div class="qa-a">
+          <strong>[Ni(en)₂]²⁺</strong>: en (ethylenediamine) is a medium-to-strong bidentate ligand. With 2 bidentate ligands, coordination number = 4. en constrains bond angles close to 90°. But actually [Ni(en)₂]²⁺ tends toward square planar when only 4 N donors present in 2D plane. With strong en ligands → square planar geometry is possible; typically <span class="highlight">square planar</span>, μ ≈ 0 or slightly paramagnetic depending on exact Δ.<br><br>
+          <strong>[NiCl₄]²⁻</strong>: Cl⁻ is a weak-field ligand. Δ is small, pairing energy not overcome. Geometry: <span class="highlight">tetrahedral</span>. μ ≈ 2.83 BM (2 unpaired).
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. [PtCl₄]²⁻ is square planar and diamagnetic, while [NiCl₄]²⁻ is tetrahedral and paramagnetic. Why?</div>
+        <div class="qa-a">
+          Both are d⁸ ions with the same ligand (Cl⁻). The difference is the row of the periodic table:
+          <ul>
+            <li>Pt²⁺ is a 3rd-row transition metal: 5d orbitals are more diffuse and larger → intrinsically much larger crystal field splitting regardless of ligand strength.</li>
+            <li>For Pt²⁺, even weak-field Cl⁻ creates Δ large enough to force square planar geometry and full pairing.</li>
+            <li>For Ni²⁺, a 1st-row metal: 3d orbitals are smaller → Cl⁻ creates insufficient splitting → remains tetrahedral HS.</li>
+          </ul>
+          As a rule: all 2nd/3rd row d⁸ metals = square planar. 1st row d⁸ = geometry depends on ligand.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. Why is it said that Ni²⁺ with NH₃ gives octahedral geometry (min. angle 90°), with Cl⁻ gives tetrahedral (min. 109°28'), and with CN⁻ gives square planar?</div>
+        <div class="qa-a">
+          The bond angles directly reflect the geometry:
+          <ul>
+            <li><strong>Octahedral</strong>: 6 ligands arranged at 90° to each other (along ±x, ±y, ±z). Minimum (and most common) L-M-L angle = 90°. NH₃ is medium field → 6 NH₃ = octahedral.</li>
+            <li><strong>Tetrahedral</strong>: 4 ligands at tetrahedral angles. The ideal tetrahedral angle is 109°28'. Cl⁻ is weak field → tends to give tetrahedral.</li>
+            <li><strong>Square planar</strong>: 4 ligands in a plane, all at 90° to each other. Strong field CN⁻ creates Δ large enough to pair all electrons and stabilize this geometry enormously for d⁸.</li>
+          </ul>
+          The angles are a geometric consequence of the coordination geometry — they're a diagnostic tool!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       QUICK REFERENCE
+  ══════════════════════════════════════════ -->
+  <section class="section" id="qr">
+    <div class="section-title">Quick <span>Reference Card</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Spectrochemical Series (partial)</div>
+        <div class="formula" style="font-size:0.78rem; line-height:2;">
+          I⁻ &lt; Br⁻ &lt; Cl⁻ &lt; F⁻ &lt; OH⁻ &lt; H₂O<br>
+          &lt; NH₃ &lt; en &lt; bpy &lt; phen<br>
+          &lt; NO₂⁻ &lt; CN⁻ ≈ CO<br><br>
+          <span class="comment">// Left = weak field, small Δ, high spin</span><br>
+          <span class="comment">// Right = strong field, large Δ, low spin</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">μ Values</div>
+        <div class="formula" style="font-size:0.82rem; line-height:2.2;">
+          n=1: μ = 1.73 BM<br>
+          n=2: μ = 2.83 BM<br>
+          n=3: μ = 3.87 BM<br>
+          n=4: μ = 4.90 BM<br>
+          n=5: μ = 5.92 BM<br>
+          <span class="comment">// Maximum for first-row TM</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Key Relationships</div>
+        <div class="formula" style="font-size:0.82rem; line-height:2;">
+          Δ<sub>t</sub> = (4/9)Δ<sub>o</sub><br>
+          Δ<sub>sp</sub> ≈ 1.3Δ<sub>o</sub><br>
+          μ = √[n(n+2)] BM<br>
+          CFSE(oct) = −0.4n<sub>t₂g</sub> + 0.6n<sub>eg</sub> (in Δ<sub>o</sub>)
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Spinel Formula</div>
+        <div class="formula" style="font-size:0.82rem; line-height:2;">
+          Normal: A²⁺[B₂³⁺]O₄<br>
+          &nbsp;&nbsp;A²⁺ in Tet | B³⁺ in Oct<br><br>
+          Inverse: B³⁺[A²⁺B³⁺]O₄<br>
+          &nbsp;&nbsp;B³⁺ in Tet | A²⁺,B³⁺ in Oct<br><br>
+          <span class="comment">// Predict via OSPE comparison</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CLASS TEST — BDS QUESTIONS
+  ══════════════════════════════════════════ -->
+  <section class="section" id="ct">
+    <div class="section-num">★</div>
+    <div class="section-title"><span>Class Test</span> — BDS Questions (Solved)</div>
+
+    <div class="alert" style="border-color: var(--accent); background: rgba(232,197,71,0.07); margin-bottom:1.5rem;">
+      <div class="alert-label" style="color:var(--accent);">📋 From Your Class Test</div>
+      These are the exact questions from your class test paper. Marks in brackets. Click each to reveal the model answer.
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header" style="background:var(--accent2); color:#000;">CLASS TEST — ALL 8 QUESTIONS ANSWERED</div>
+
+      <!-- Q1 -->
+      <div class="qa-item">
+        <div class="qa-q">Q1 [2 marks] — Predict the structure of NiFe₂O₄ spinel (normal or inverse).</div>
+        <div class="qa-a">
+          NiFe₂O₄ contains Ni²⁺ (d⁸) and Fe³⁺ (d⁵).<br><br>
+          <strong>Step 1 — OSPE of Fe³⁺ (d⁵, HS):</strong><br>
+          CFSE(oct) = 0, CFSE(tet) = 0 → OSPE = 0 (no preference).<br><br>
+          <strong>Step 2 — OSPE of Ni²⁺ (d⁸, HS):</strong><br>
+          CFSE(oct): t<sub>2g</sub>⁶ e<sub>g</sub>² → (6×−0.4 + 2×0.6)Δ<sub>o</sub> = <span class="highlight">−1.2Δ<sub>o</sub></span><br>
+          CFSE(tet): e⁴ t<sub>2</sub>⁴ → (4×−0.6 + 4×0.4)×(4/9)Δ<sub>o</sub> = −0.8×(4/9) ≈ <span class="highlight">−0.356Δ<sub>o</sub></span><br>
+          OSPE(Ni²⁺) = −1.2 − (−0.356) = <span class="highlight">−0.844Δ<sub>o</sub></span> → strong octahedral preference.<br><br>
+          <strong>Conclusion:</strong> Ni²⁺ occupies octahedral sites. Fe³⁺ (no preference) goes to tetrahedral. Structure: <span class="highlight">Inverse Spinel</span> — Fe³⁺[Ni²⁺Fe³⁺]O₄.
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="qa-item">
+        <div class="qa-q">Q2 [1 mark] — Explain the structure of [CoCl₄]²⁻.</div>
+        <div class="qa-a">
+          Co²⁺ is a d⁷ ion. Cl⁻ is a <strong>weak-field ligand</strong> (low in the spectrochemical series).<br><br>
+          <ul>
+            <li>Coordination number = 4, and since Cl⁻ creates a small Δ, tetrahedral geometry is favoured over square planar (no gain in CFSE sufficient to force pairing).</li>
+            <li>Geometry: <span class="highlight">Tetrahedral</span>. Four Cl⁻ ligands at bond angles of ~109°28'.</li>
+            <li>d⁷ HS tetrahedral config: e⁴ t<sub>2</sub>³ → 3 unpaired electrons → <span class="highlight">μ = 3.87 BM</span> (paramagnetic).</li>
+            <li>The complex is intensely blue because tetrahedral d–d transitions are less Laporte-forbidden (no inversion centre) → higher molar absorptivity than octahedral.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="qa-item">
+        <div class="qa-q">Q3 [1 mark] — How can you differentiate between tetrahedral and square-planar Ni²⁺ complexes through magnetic measurement?</div>
+        <div class="qa-a">
+          Ni²⁺ is d⁸ in both cases. The distinction is simple and direct:<br><br>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin:0.6rem 0;">
+            <div style="background:#0f0f0f; padding:0.8rem; border:1px solid var(--border);">
+              <div style="color:var(--accent3); font-family:var(--mono); font-size:0.65rem; margin-bottom:0.4rem;">TETRAHEDRAL</div>
+              Config: e⁴ t<sub>2</sub>⁴<br>
+              Unpaired e⁻: <span class="highlight">2</span><br>
+              μ = <span class="highlight">2.83 BM</span><br>
+              <strong>Paramagnetic</strong>
+            </div>
+            <div style="background:#0f0f0f; padding:0.8rem; border:1px solid var(--border);">
+              <div style="color:var(--accent2); font-family:var(--mono); font-size:0.65rem; margin-bottom:0.4rem;">SQUARE PLANAR</div>
+              Config: all paired<br>
+              Unpaired e⁻: <span class="highlight">0</span><br>
+              μ = <span class="highlight">0 BM</span><br>
+              <strong>Diamagnetic</strong>
+            </div>
+          </div>
+          Measure the magnetic moment. If μ ≈ 2.83 BM → tetrahedral. If μ = 0 → square planar.
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="qa-item">
+        <div class="qa-q">Q4 [1 mark] — NaCl is colourless but FeCl₃ is yellow coloured. Give the reason.</div>
+        <div class="qa-a">
+          <strong>NaCl:</strong> Na⁺ is a closed-shell ion (d⁰ or noble-gas configuration) with no d-electrons. There are no d–d transitions or charge-transfer transitions in the visible range → <span class="highlight">colourless</span>.<br><br>
+          <strong>FeCl₃:</strong> Fe³⁺ is a d⁵ ion. Although d–d transitions are doubly forbidden for d⁵ HS (spin and Laporte), the yellow colour of FeCl₃ is primarily due to <span class="highlight">Ligand-to-Metal Charge Transfer (LMCT)</span>:<br>
+          <ul>
+            <li>Cl⁻ has filled p-orbitals that can donate electron density to the partially-filled 3d orbitals of Fe³⁺.</li>
+            <li>This Cl(3p) → Fe(3d) CT transition absorbs in the violet/blue region (≈400–450 nm) → the complementary colour transmitted is <span class="highlight">yellow</span>.</li>
+          </ul>
+          In short: NaCl has no available d-orbitals for transitions; FeCl₃ has LMCT in the visible range.
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="qa-item">
+        <div class="qa-q">Q5 [2 marks] — Give one example of an acidic buffer. Explain how it resists changes in pH when small amounts of strong acid and strong base are added.</div>
+        <div class="qa-a">
+          <strong>Example:</strong> CH₃COOH / CH₃COONa (acetic acid / sodium acetate buffer), pH ≈ 4.74 (pKₐ of acetic acid).<br><br>
+          The buffer contains a reservoir of both the weak acid (CH₃COOH) and its conjugate base (CH₃COO⁻).<br><br>
+          <strong>When strong acid (H⁺) is added:</strong><br>
+          The conjugate base neutralises it:
+          <div class="formula" style="font-size:0.82rem;">
+            CH₃COO⁻ + H⁺ → CH₃COOH
+          </div>
+          The added H⁺ is consumed, [H⁺] barely changes → pH stays nearly constant.<br><br>
+          <strong>When strong base (OH⁻) is added:</strong><br>
+          The weak acid neutralises it:
+          <div class="formula" style="font-size:0.82rem;">
+            CH₃COOH + OH⁻ → CH₃COO⁻ + H₂O
+          </div>
+          The added OH⁻ is consumed, [OH⁻] barely changes → pH stays nearly constant.<br><br>
+          <strong>Henderson–Hasselbalch equation:</strong>
+          <div class="formula" style="font-size:0.82rem;">
+            pH = pKₐ + log([A⁻]/[HA])
+          </div>
+          Since both [A⁻] and [HA] are large reservoirs, small additions cause only tiny ratio changes → minimal pH shift.
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="qa-item">
+        <div class="qa-q">Q6 [1 mark] — Explain the role of syrupy phosphoric acid (H₃PO₄) in the titration of Fe²⁺ with KMnO₄.</div>
+        <div class="qa-a">
+          H₃PO₄ is added to serve two purposes:<br><br>
+          <strong>1. Remove interfering colour of Fe³⁺:</strong><br>
+          The titration of Fe²⁺ with KMnO₄ produces Fe³⁺ as a product. Fe³⁺ is yellow-brown in solution, which would mask the faint pink endpoint colour of excess KMnO₄.
+          <div class="formula" style="font-size:0.82rem;">
+            Fe³⁺ + H₃PO₄ → [Fe(HPO₄)]⁺ (colourless complex)
+          </div>
+          H₃PO₄ forms a colourless phosphate complex with Fe³⁺, removing its colour and making the pink endpoint visible clearly.<br><br>
+          <strong>2. Prevent oxidation of Cl⁻:</strong><br>
+          If the solution contains Cl⁻ (e.g., from HCl used for dissolving the sample), KMnO₄ could oxidise Cl⁻ to Cl₂ (a side reaction). Using H₃PO₄/H₂SO₄ instead avoids introducing Cl⁻. H₃PO₄ also maintains the acidic medium required for the reaction:<br>
+          <div class="formula" style="font-size:0.82rem;">
+            MnO₄⁻ + 5Fe²⁺ + 8H⁺ → Mn²⁺ + 5Fe³⁺ + 4H₂O
+          </div>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="qa-item">
+        <div class="qa-q">Q7 [1 mark] — Why is a small amount of Mg-EDTA complex added during estimation of Ca²⁺ using Eriochrome Black-T (EBT) indicator?</div>
+        <div class="qa-a">
+          <strong>The problem:</strong> EBT forms a <em>stable but wine-red complex with Ca²⁺</em> at the start. However, the Ca²⁺–EBT complex is so stable that EDTA cannot easily displace EBT from Ca²⁺ at the endpoint — the endpoint colour change (wine-red → blue) would be <strong>sluggish or not sharp</strong>.<br><br>
+          <strong>The solution — Mg-EDTA displacement trick:</strong>
+          <div class="formula" style="font-size:0.82rem;">
+            Mg-EDTA + Ca²⁺ → Ca-EDTA + Mg²⁺ (displacement, since Ca-EDTA is more stable)<br>
+            Mg²⁺ + EBT → Mg-EBT complex (wine red, forms readily)
+          </div>
+          The added Mg-EDTA liberates Mg²⁺ which binds EBT readily. The Mg²⁺–EBT complex gives a sharp colour. At the endpoint, EDTA easily displaces EBT from Mg²⁺ (weaker complex) → solution turns <span class="highlight">pure blue</span> sharply.<br><br>
+          In short: Mg²⁺ acts as a <strong>bridge to give a clean, sharp endpoint</strong> because Mg–EBT is less stable than Ca–EDTA but more reactive toward EDTA at the endpoint than Ca–EBT would be.
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="qa-item">
+        <div class="qa-q">Q8 [1 mark] — Give an example of a metal ion indicator.</div>
+        <div class="qa-a">
+          A <strong>metal ion indicator</strong> (metallochromic indicator) is a compound that forms a coloured complex with metal ions and shows a distinct colour change at the equivalence point in complexometric titrations.<br><br>
+          <strong>Examples:</strong>
+          <ul>
+            <li><span class="highlight">Eriochrome Black-T (EBT)</span> — most common; wine-red with Ca²⁺, Mg²⁺, Zn²⁺; turns blue at endpoint. Used in water hardness determination (EDTA titration).</li>
+            <li><span class="highlight">Murexide</span> — used for Ca²⁺ alone; pink with Ca²⁺, turns violet/purple at endpoint.</li>
+            <li><span class="highlight">Xylenol Orange</span> — used in acidic medium for Pb²⁺, Zn²⁺, Bi³⁺.</li>
+          </ul>
+          The indicator must form a <em>less stable</em> complex with the metal than EDTA does, so EDTA can displace it at the endpoint.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       TKM DIVIDER
+  ══════════════════════════════════════════ -->
+  <div style="border:2px solid var(--accent2); padding:1rem 1.5rem; margin:2rem 0; display:flex; align-items:center; gap:1rem;">
+    <div style="font-family:var(--display); font-size:2rem; color:var(--accent2); line-height:1;">TKM SIR</div>
+    <div>
+      <div style="font-family:var(--mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent2);">Analytical Chemistry Module</div>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:0.2rem;">Complexometric &amp; Redox Titrations · pH Calculations · Buffer Theory</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 7: EDTA COMPLEXOMETRIC TITRATION
+  ══════════════════════════════════════════ -->
+  <section class="section" id="t1">
+    <div class="section-num">07</div>
+    <div class="section-title"><span>EDTA Complexometric</span> Titration</div>
+
+    <p>Complexometric titration uses complex-ion formation between a metal ion (analyte) and a ligand (titrant). EDTA (H₄Y, ethylenediaminetetraacetic acid) is the standard titrant — a hexadentate ligand that forms extremely stable 1:1 chelate complexes with almost every metal ion.</p>
+
+    <div class="card">
+      <div class="card-label">EDTA Structure &amp; Charge</div>
+      <h4>H₄Y ⇌ H₂Y²⁻ + 2H⁺ (in solution)</h4>
+      <p>EDTA has <strong>6 donor atoms</strong>: 2 nitrogen + 4 carboxylate oxygens. The fully deprotonated form Y⁴⁻ is the active chelating species.</p>
+      <div class="formula">
+        M<sup>n+</sup> + H₂Y²⁻ ⇌ [MY]<sup>(n−4)+</sup> + 2H⁺<br><br>
+        Overall charge on complex = (n − 4)+<br>
+        where n = metal oxidation state
+      </div>
+      <p>Chelated complexes are far more stable than non-chelated ones (chelate effect — large ΔS of formation due to release of water molecules and entropy gain).</p>
+    </div>
+
+    <div class="alert">
+      <div class="alert-label">📌 End Point vs Equivalence Point</div>
+      <strong>Equivalence point</strong>: the theoretical point where moles of titrant = moles of analyte (stoichiometric). <strong>End point</strong>: the experimentally observed point (colour change of indicator). End point is slightly beyond equivalence point — indicator needs a small excess to change colour.
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Type 1 — Direct Titration</div>
+        <h4>Most common; metal titrated directly with EDTA</h4>
+        <ul style="font-size:0.88rem;">
+          <li>Solution buffered to correct pH (e.g. pH 10 with NH₄⁺/NH₄OH buffer).</li>
+          <li>Metal ion + indicator → coloured complex (wine-red).</li>
+          <li>Titrate with standard EDTA until indicator is displaced → colour changes to free indicator colour (blue for EBT).</li>
+          <li>Auxiliary complexing agents (e.g. triethanolamine) may be added to prevent metal hydroxide precipitation at high pH.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Type 2 — Back Titration</div>
+        <h4>Used when direct titration is not feasible</h4>
+        <p>Used when: (a) metal precipitates at titration pH, (b) metal–indicator complex too stable to give sharp endpoint, (c) reaction with EDTA is too slow.</p>
+        <ul style="font-size:0.88rem; margin-top:0.5rem;">
+          <li>Add known <em>excess</em> standard EDTA to metal solution.</li>
+          <li>Buffer to desired pH.</li>
+          <li>Back-titrate excess EDTA with standard Zn²⁺ or Mg²⁺ solution using EBT indicator.</li>
+          <li>Metal consumed = total EDTA added − excess EDTA back-titrated.</li>
+        </ul>
+        <div class="formula" style="font-size:0.8rem;">
+          n(M) = n(EDTA added) − n(EDTA back-titrated)
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Type 3 — Replacement / Substitution</div>
+        <h4>For metals that react poorly with metal ion indicators</h4>
+        <p>The metal M<sup>n+</sup> is reacted with Mg-EDTA (or Zn-EDTA):</p>
+        <div class="formula" style="font-size:0.82rem;">
+          M<sup>n+</sup> + Mg-EDTA → [M-EDTA]<sup>(n−4)+</sup> + Mg²⁺
+        </div>
+        <p>Condition: M<sup>n+</sup>–EDTA stability > Mg²⁺–EDTA stability. The released Mg²⁺ is titrated with standard EDTA using EBT indicator. Mg²⁺ released ≡ amount of M<sup>n+</sup> originally present.</p>
+        <p style="color:var(--accent3); font-size:0.82rem; margin-top:0.4rem;">Example: Ca²⁺ determination — Ca²⁺ reacts poorly with EBT, so Mg-EDTA is used to generate titratable Mg²⁺.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Type 4 — Alkalimetric / Acid-Liberation</div>
+        <h4>EDTA releases H⁺ on complexation → titrate with NaOH</h4>
+        <div class="formula" style="font-size:0.82rem;">
+          M<sup>n+</sup> + H₂Y²⁻ ⇌ [MY]<sup>(n−4)+</sup> + 2H⁺
+        </div>
+        <p>The 2 H⁺ ions released per metal ion are titrated with standard NaOH. The solution must be carefully neutralised before the experiment so background H⁺ doesn't interfere. This method does not need a metal-ion indicator.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Metal Ion Indicators — Properties Required</div>
+      <h4>Four essential conditions for a good metallochromic indicator</h4>
+      <ol style="padding-left:1.2rem; font-size:0.88rem; line-height:2.2;">
+        <li>Solution must be <strong>strongly coloured</strong> when all metal ions form complex with indicator.</li>
+        <li>Colour reaction must be <strong>specific or at least selective</strong> for the metal ion.</li>
+        <li>Metal-indicator complex must have a <strong>much stable colour but less stable</strong> than the metal-EDTA complex, so EDTA can displace indicator at endpoint.</li>
+        <li>Colour contrast between <strong>free indicator</strong> and <strong>metal-indicator complex</strong> must be sharp and visible.</li>
+      </ol>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Key Indicators Compared</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Indicator</th><th>Metal Detected</th><th>pH Range</th><th>Colour Change (start → end)</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>EBT (Eriochrome Black-T)</td><td>Mg²⁺, Zn²⁺, Ca²⁺ (with Mg)</td><td>7–11 (NH₄⁺/NH₄OH buffer)</td><td>Wine-red → Blue</td><td>Can't detect Ca²⁺ alone; needs Mg-EDTA trick</td></tr>
+            <tr><td>Calcon / Eriochrome Dark Blue</td><td>Ca²⁺ (in NaOH medium)</td><td>12–13 (NaOH)</td><td>Pink → Pure Blue</td><td>Mg(OH)₂ precipitates at this pH, removing Mg²⁺ interference</td></tr>
+            <tr><td>Fast Sulphon Black F</td><td>Cu²⁺, Ni²⁺ (in ammoniacal)</td><td>~9–10 (ammoniacal)</td><td>Magenta/Pale blue → Bright green</td><td>Virtually specific for Cu²⁺; Ni²⁺ reaction is poor</td></tr>
+            <tr><td>BDS (Barium diphenylsulfonate)</td><td>Fe²⁺ (in K₂Cr₂O₇ titration)</td><td>Acidic (H₂SO₄ + H₃PO₄)</td><td>Colourless → Green → Violet</td><td>Redox indicator; oxidised form is violet</td></tr>
+            <tr><td>Xylenol Orange</td><td>Pb²⁺, Zn²⁺, Bi³⁺, Fe³⁺</td><td>Acidic (pH 1–6)</td><td>Red → Yellow</td><td>Used in acidic pH where EBT doesn't work</td></tr>
+            <tr><td>Murexide</td><td>Ca²⁺ (alone, no Mg²⁺)</td><td>~11</td><td>Pink/Red → Violet</td><td>Cannot detect Mg²⁺; more selective than EBT for Ca²⁺</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Ca²⁺/Mg²⁺ Mixture Analysis — Full Procedure</div>
+      <h4>Separating Ca²⁺ and Mg²⁺ in a mixture</h4>
+      <div class="formula" style="font-size:0.82rem; line-height:2.2;">
+        Step 1: Titrate whole solution (Ca²⁺ + Mg²⁺) at pH 10 with EDTA/EBT → total volume V₁<br>
+        Step 2: Adjust pH to 12.3 with NaOH → Mg(OH)₂ precipitates, only Ca²⁺ remains in solution<br>
+        Step 3: Titrate Ca²⁺ only using Calcon indicator at pH 12.3 → volume V₂<br><br>
+        ∴ Ca²⁺ ≡ V₂ | Mg²⁺ ≡ (V₁ − V₂)
+      </div>
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — EDTA TITRATION</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. Why can't Ca²⁺ be determined directly using EBT as indicator?</div>
+        <div class="qa-a">
+          Two reasons:
+          <ul>
+            <li><strong>Ca²⁺–EBT complex is too stable</strong>: The Ca–EBT complex, once formed, is not easily displaced by EDTA at the endpoint → sluggish, indistinct endpoint.</li>
+            <li><strong>EBT works best at pH 7–11</strong>: At this pH, Ca²⁺ alone doesn't react sharply with EBT (reaction is slow and endpoint is poor).</li>
+          </ul>
+          Solution: add a small amount of Mg-EDTA. Ca²⁺ displaces Mg²⁺ from Mg-EDTA (since Ca-EDTA is more stable). The released Mg²⁺ binds EBT readily, giving a sharp wine-red colour. At the endpoint, excess EDTA displaces EBT from Mg²⁺ easily → sharp blue endpoint.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. In a back titration for Al³⁺, 50 mL of 0.01 M EDTA is added to the Al³⁺ solution. The excess EDTA required 10 mL of 0.01 M Zn²⁺ to back-titrate. How many mmol of Al³⁺ were present?</div>
+        <div class="qa-a">
+          mmol EDTA added = 50 × 0.01 = <span class="highlight">0.50 mmol</span><br>
+          mmol EDTA back-titrated (excess) = 10 × 0.01 = <span class="highlight">0.10 mmol</span><br>
+          mmol Al³⁺ = 0.50 − 0.10 = <span class="highlight">0.40 mmol</span><br><br>
+          Since EDTA reacts 1:1 with Al³⁺, 0.40 mmol of Al³⁺ was present.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. Why is an auxiliary complexing agent (e.g. tartrate) sometimes added in direct EDTA titration?</div>
+        <div class="qa-a">
+          At the pH required for the titration (e.g. pH 10 for Mg²⁺, Zn²⁺), many metal ions can form insoluble hydroxides — for example Pb(OH)₂ or Al(OH)₃ — which precipitate out of solution and are unavailable for titration.<br><br>
+          An auxiliary complexing agent like tartrate or citrate forms a <em>weak, soluble complex</em> with the metal ion, keeping it in solution at high pH without competing with EDTA at the endpoint (since the auxiliary complex is much weaker than M-EDTA). This ensures an accurate titration.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q4. Why is Calcon used at pH 12.3 for Ca²⁺ titration, and what happens to Mg²⁺ at this pH?</div>
+        <div class="qa-a">
+          Calcon (Eriochrome Dark Blue) has pKₐ values of 7.4 and 13.5. At pH 12.3 (NaOH medium), Calcon is in the HD⁻ form and forms a stable pink complex with Ca²⁺.<br><br>
+          At pH 12.3, Mg²⁺ is precipitated as <span class="highlight">Mg(OH)₂</span> (white precipitate), completely removing it from solution. Only Ca²⁺ remains to be titrated. The colour change at the endpoint is pink → pure blue, which is sharp and distinct.<br><br>
+          This is why Calcon is used for <em>selective determination of Ca²⁺ in the presence of Mg²⁺</em>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 8: REDOX TITRATION
+  ══════════════════════════════════════════ -->
+  <section class="section" id="t2">
+    <div class="section-num">08</div>
+    <div class="section-title"><span>Redox Titration</span> — KMnO₄ &amp; K₂Cr₂O₇</div>
+
+    <p>Redox titrations involve electron transfer between the analyte and titrant. The two main oxidising titrants are <strong>KMnO₄</strong> (self-indicating, acidic medium) and <strong>K₂Cr₂O₇</strong> (requires external indicator like BDS).</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">KMnO₄ — Permanganate Titration</div>
+        <h4>Self-indicator; acidic medium (H₂SO₄)</h4>
+        <div class="formula" style="font-size:0.82rem;">
+          MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O<br>
+          E° = +1.51 V (very strong oxidiser)<br><br>
+          Nernst: E = 1.51 + (0.059/5) log([MnO₄⁻][H⁺]⁸/[Mn²⁺])
+        </div>
+        <ul style="font-size:0.85rem; margin-top:0.4rem;">
+          <li>KMnO₄ is <em>deep purple</em>; Mn²⁺ is <em>nearly colourless</em>.</li>
+          <li>First drop excess → permanent faint pink = endpoint.</li>
+          <li>H₂SO₄ used (not HCl — KMnO₄ would oxidise Cl⁻).</li>
+          <li>High [H⁺] increases formal potential → stronger oxidiser.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">K₂Cr₂O₇ — Dichromate Titration</div>
+        <h4>Needs redox indicator (BDS); acidic medium</h4>
+        <div class="formula" style="font-size:0.82rem;">
+          Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O<br>
+          E° = +1.33 V
+        </div>
+        <ul style="font-size:0.85rem; margin-top:0.4rem;">
+          <li>Cr₂O₇²⁻ is orange; Cr³⁺ is green → colour change at endpoint is masked.</li>
+          <li>Needs external redox indicator: <strong>BDS (Barium diphenylamine sulfonate)</strong>.</li>
+          <li>H₃PO₄ + H₂SO₄ added; H₃PO₄ complexes Fe³⁺ → colourless + lowers E°(Fe³⁺/Fe²⁺) → sharper endpoint.</li>
+          <li>K₂Cr₂O₇ is a primary standard (stable, accurate weighing); KMnO₄ is not.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">BDS Indicator — Mechanism</div>
+      <h4>How BDS works in K₂Cr₂O₇ titration of Fe²⁺</h4>
+      <p>BDS is a redox indicator. In its reduced (colourless) form, it does not react initially with Fe²⁺ because BDS has a lower E° — it waits. The reaction sequence is:</p>
+      <div class="formula" style="font-size:0.82rem; line-height:2.2;">
+        Before endpoint: Fe²⁺ + Cr₂O₇²⁻ → Fe³⁺ + Cr³⁺ (solution stays green from Cr³⁺)<br>
+        At endpoint: all Fe²⁺ consumed. Cr₂O₇²⁻ now oxidises BDS<br>
+        BDS (colourless) → BDS-oxidised (violet/purple) → ENDPOINT<br><br>
+        Indicator needs E° higher than the reductant (Fe²⁺) but lower than the titrant (Cr₂O₇²⁻).
+      </div>
+      <p>Also: H₃PO₄ is added to complex yellow Fe³⁺ → [Fe(HPO₄)]⁺ (colourless), which removes interfering colour before the BDS endpoint appears.</p>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Cu²⁺ Determination — Iodometric Method</div>
+      <h4>Why direct EDTA titration of Cu²⁺ is avoided; iodometry is used instead</h4>
+      <p>Cu²⁺ forms a stable complex with Fast Sulphon Black F indicator, but Ni²⁺ reaction is poor. More importantly, direct EDTA titration of Cu²⁺ is slow. Instead:</p>
+      <div class="formula" style="font-size:0.82rem; line-height:2.2;">
+        CuSO₄ + excess KI → Cu₂I₂↓ (white) + I₂<br>
+        I₂ + excess KI → I₃⁻ (keeps I₂ in solution)<br>
+        I₂ then titrated with standard Na₂S₂O₃<br><br>
+        S₂O₃²⁻ + I₂ → S₄O₆²⁻ + I⁻    [Indicator: Starch — blue → colourless]
+      </div>
+      <p>This is <strong>iodometry</strong> (I₂ generated in the reaction, then used). Direct use of I₂ = iodimetry. Note: CuI precipitate makes solution cloudy (whitish) — no clear endpoint visible without starch.</p>
+      <div class="alert" style="margin-top:0.8rem;">
+        <div class="alert-label">Why does Cu²⁺ react with I⁻ even though E°(Cu²⁺/Cu⁺) &lt; E°(I₂/I⁻)?</div>
+        Normally Cu²⁺ (E° = 0.15 V) cannot oxidise I⁻ since I₂/I⁻ has E° = 0.54 V. But CuI precipitates (Ksp = 10⁻¹²), drastically lowering [Cu⁺]. From Nernst: formal potential of Cu²⁺/Cu⁺ system increases to ~0.85 V, exceeding E°(I₂/I⁻). This makes the reaction thermodynamically feasible.
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Mn²⁺ Estimation (Back Titration with KMnO₄)</div>
+      <h4>Why Mn²⁺ cannot be directly titrated with KMnO₄</h4>
+      <p>KMnO₄ + Mn²⁺ → MnO₂ (brown ppt) forms in a redox comproportionation reaction. This is not a clean endpoint. Instead:</p>
+      <div class="formula" style="font-size:0.82rem; line-height:2.2;">
+        Step 1: Mn²⁺ + NaBiO₃ + HNO₃ → MnO₄⁻ (purple/pink) + Bi³⁺<br>
+        [This detects/colours Mn²⁺, colour = defect of Mn²⁺]<br>
+        Step 2: Add measured excess Mohr's salt (FeSO₄) solution → say 50 mL<br>
+        [Fe²⁺ reduces MnO₄⁻ back]<br>
+        Step 3: Titrate excess Fe²⁺ with KMnO₄ → let volume = V₁<br>
+        Step 4: Blank — 50 mL Mohr's salt titrated separately with KMnO₄ → V₂<br><br>
+        Volume of KMnO₄ for Mn²⁺ = (V₂ − V₁)
+      </div>
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — REDOX TITRATION</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. Why is HCl not used to acidify KMnO₄ titrations?</div>
+        <div class="qa-a">
+          KMnO₄ is a powerful oxidising agent (E° = +1.51 V). In HCl medium, it would oxidise Cl⁻ to Cl₂:
+          <div class="formula" style="font-size:0.82rem;">
+            2KMnO₄ + 16HCl → 2KCl + 2MnCl₂ + 5Cl₂ + 8H₂O
+          </div>
+          This <em>consumes extra KMnO₄</em> (not just for the analyte) → positive error in titration. Therefore, <span class="highlight">dilute H₂SO₄</span> is used instead (SO₄²⁻ is not oxidised by KMnO₄). H₃PO₄ can also be used safely.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. Why is K₂Cr₂O₇ preferred over KMnO₄ as a primary standard?</div>
+        <div class="qa-a">
+          <ul>
+            <li>K₂Cr₂O₇ can be obtained in <strong>high purity</strong>, dried, and weighed accurately — it is a true <strong>primary standard</strong>.</li>
+            <li>KMnO₄ is not a primary standard: it reacts with trace organic matter in water, its solutions decompose slowly (MnO₂ precipitates), and it must be standardised before use.</li>
+            <li>K₂Cr₂O₇ solutions are <strong>stable indefinitely</strong>; KMnO₄ solutions change over time.</li>
+            <li>K₂Cr₂O₇ can be used with HCl (dichromate does not oxidise Cl⁻ under normal conditions since E°(Cr₂O₇²⁻) &lt; E°(Cl₂/Cl⁻)).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. In an iodometric titration of Cu²⁺: 25 mL of CuSO₄ solution reacts with excess KI. The I₂ produced required 18.4 mL of 0.1 M Na₂S₂O₃. Find molarity of CuSO₄.</div>
+        <div class="qa-a">
+          Reactions:
+          <div class="formula" style="font-size:0.82rem;">
+            2Cu²⁺ + 4I⁻ → 2CuI↓ + I₂ &nbsp;&nbsp;&nbsp; (1 mol I₂ per 2 mol Cu²⁺)<br>
+            I₂ + 2S₂O₃²⁻ → 2I⁻ + S₄O₆²⁻ &nbsp;&nbsp;&nbsp; (1 mol I₂ per 2 mol thiosulfate)
+          </div>
+          mmol S₂O₃²⁻ = 18.4 × 0.1 = 1.84 mmol<br>
+          mmol I₂ = 1.84/2 = 0.92 mmol<br>
+          mmol Cu²⁺ = 2 × 0.92 = <span class="highlight">1.84 mmol</span><br>
+          Molarity CuSO₄ = 1.84/25 = <span class="highlight">0.0736 M</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 9: pH CALCULATIONS
+  ══════════════════════════════════════════ -->
+  <section class="section" id="t3">
+    <div class="section-num">09</div>
+    <div class="section-title"><span>pH Calculations</span> — Acids, Bases &amp; Salts</div>
+
+    <div class="card">
+      <div class="card-label">Strong Acid / Strong Base</div>
+      <h4>Direct from concentration — but careful at very low concentrations!</h4>
+      <div class="formula" style="font-size:0.85rem; line-height:2.2;">
+        [H⁺] = C<sub>a</sub> (for strong acid) if C<sub>a</sub> ≫ 10⁻⁷<br>
+        pH = −log(C<sub>a</sub>)<br><br>
+        For very dilute strong acid (C ≤ 10⁻⁶ M) — cannot ignore water contribution:<br>
+        [H⁺] = (C + √(C² + 4K<sub>w</sub>)) / 2 &nbsp;&nbsp; [K<sub>w</sub> = 10⁻¹⁴]<br><br>
+        Example: 10⁻⁸ N HCl → [H⁺] ≈ 10⁻⁶·⁷⁹ (not 10⁻⁸ — water H⁺ dominates!)
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Weak Acid (HA)</div>
+      <h4>Derive from equilibrium — degree of dissociation α</h4>
+      <div class="formula" style="font-size:0.85rem; line-height:2.2;">
+        HA ⇌ H⁺ + A⁻<br>
+        At eq: (1−α)C &nbsp;&nbsp;&nbsp;&nbsp; αC &nbsp;&nbsp;&nbsp;&nbsp; αC<br><br>
+        Ka = [H⁺][A⁻]/[HA] = (αC·αC)/((1−α)C) = α²C/(1−α)<br><br>
+        Since α ≪ 1: &nbsp; Ka ≈ α²C<br>
+        ∴ α = √(Ka/C)<br>
+        [H⁺] = αC = √(Ka·C)<br><br>
+        pH = ½pKa − ½log(C) &nbsp;&nbsp; [or: pH = ½(pKa − log C)]
+      </div>
+      <p style="font-size:0.85rem; margin-top:0.4rem; color:var(--muted);">Valid when α ≪ 1, i.e. Ka ≪ C (dilution doesn't cause full dissociation). Always verify.</p>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Weak Base (B)</div>
+      <div class="formula" style="font-size:0.85rem; line-height:2.2;">
+        pOH = ½pKb − ½log(C<sub>b</sub>)<br>
+        pH = 14 − pOH &nbsp;&nbsp;&nbsp; [since pH + pOH = 14 at 25°C]<br><br>
+        Or: pH = 14 − ½pKb + ½log(C<sub>b</sub>)
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Salt of Weak Acid + Strong Base (e.g. CH₃COONa)</div>
+      <h4>Hydrolysis — basic solution</h4>
+      <div class="formula" style="font-size:0.85rem; line-height:2.2;">
+        CH₃COO⁻ + H₂O ⇌ CH₃COOH + OH⁻ &nbsp;&nbsp;(hydrolysis)<br><br>
+        Kh = Kw/Ka<br>
+        [OH⁻] = √(Kw·C/Ka)<br>
+        pOH = ½(pKw − pKa − log C) = ½(14 − pKa − log C)<br>
+        pH = 14 − pOH = 7 + ½pKa + ½log C
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Salt of Strong Acid + Weak Base (e.g. NH₄Cl)</div>
+      <h4>Hydrolysis — acidic solution</h4>
+      <div class="formula" style="font-size:0.85rem; line-height:2.2;">
+        NH₄⁺ + H₂O ⇌ NH₃ + H₃O⁺<br><br>
+        [H⁺] = √(Kw·C/Kb)<br>
+        pH = 7 − ½pKb + ½log C &nbsp;&nbsp;&nbsp; (note: acidic → pH &lt; 7)
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:1rem;">
+      <table>
+        <thead>
+          <tr><th>System</th><th>pH Formula</th><th>Nature</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Strong acid (C mol/L)</td><td>pH = −log C (if C ≫ 10⁻⁷)</td><td>Acidic</td></tr>
+          <tr><td>Strong base (C mol/L)</td><td>pH = 14 + log C</td><td>Basic</td></tr>
+          <tr><td>Weak acid (Ka, C)</td><td>pH = ½pKa − ½log C</td><td>Acidic</td></tr>
+          <tr><td>Weak base (Kb, C)</td><td>pH = 14 − ½pKb + ½log C</td><td>Basic</td></tr>
+          <tr><td>Salt of WA + SB (CH₃COONa)</td><td>pH = 7 + ½pKa + ½log C</td><td>Basic</td></tr>
+          <tr><td>Salt of SA + WB (NH₄Cl)</td><td>pH = 7 − ½pKb + ½log C</td><td>Acidic</td></tr>
+          <tr><td>Salt of WA + WB</td><td>pH = 7 + ½pKa − ½pKb</td><td>Depends on Ka vs Kb</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — pH CALCULATIONS</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. Find pH of 100 mL 0.1N acetic acid (pKa = 4.76) + 25 mL 0.1N NaOH mixed together.</div>
+        <div class="qa-a">
+          This is a <strong>buffer problem</strong> (partial neutralisation of weak acid).<br><br>
+          mmol CH₃COOH initially = 100 × 0.1 = 10 mmol<br>
+          mmol NaOH added = 25 × 0.1 = 2.5 mmol<br>
+          NaOH neutralises CH₃COOH: 2.5 mmol acid consumed → 2.5 mmol CH₃COONa formed<br><br>
+          After reaction: CH₃COOH = 10 − 2.5 = 7.5 mmol | CH₃COO⁻ = 2.5 mmol<br>
+          Total volume = 125 mL<br>
+          [Acid] = 7.5/125 = 0.06 N | [Salt] = 2.5/125 = 0.02 N<br><br>
+          Henderson–Hasselbalch: pH = pKa + log([A⁻]/[HA]) = 4.76 + log(0.02/0.06) = 4.76 + log(1/3) = 4.76 − 0.477 = <span class="highlight">3.66</span>
+          <br>(This matches TKM Sir's example directly!)
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. What is the pH of 10⁻⁸ N HCl? (Don't just say 8!)</div>
+        <div class="qa-a">
+          At this ultra-low concentration, HCl contributes [H⁺] = 10⁻⁸ M, but water autoionisation contributes ~10⁻⁷ M. We cannot ignore water.<br><br>
+          Use the exact formula:
+          <div class="formula" style="font-size:0.82rem;">
+            [H⁺] = (C + √(C² + 4Kw)) / 2<br>
+            = (10⁻⁸ + √(10⁻¹⁶ + 4×10⁻¹⁴)) / 2<br>
+            = (10⁻⁸ + √(4.0001×10⁻¹⁴)) / 2<br>
+            ≈ (10⁻⁸ + 2.00002×10⁻⁷) / 2<br>
+            ≈ (10⁻⁸ + 2×10⁻⁷) / 2 ≈ 1.05×10⁻⁷ M
+          </div>
+          pH = −log(1.05×10⁻⁷) ≈ <span class="highlight">6.98</span> (slightly acidic, not 8!)
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. Calculate pH of 0.01 M acetic acid (Ka = 1.8×10⁻⁵).</div>
+        <div class="qa-a">
+          [H⁺] = √(Ka × C) = √(1.8×10⁻⁵ × 0.01) = √(1.8×10⁻⁷) = 4.24×10⁻⁴ M<br>
+          pH = −log(4.24×10⁻⁴) = <span class="highlight">3.37</span><br><br>
+          Check α: α = √(Ka/C) = √(1.8×10⁻⁵/0.01) = √(1.8×10⁻³) ≈ 0.042 = 4.2% ≪ 1 ✓ (approximation valid)
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q4. 0.1 N NaOH (10 mL) + 0.1 N CH₃COOH (25 mL) mixed. Find pH. (pKa = 4.76)</div>
+        <div class="qa-a">
+          mmol NaOH = 1 | mmol CH₃COOH = 2.5<br>
+          NaOH completely consumed, neutralising 1 mmol of acid:<br>
+          Remaining: CH₃COOH = 1.5 mmol | CH₃COO⁻ = 1 mmol | Total volume = 35 mL<br><br>
+          [HA] = 1.5/35 | [A⁻] = 1/35<br>
+          pH = 4.76 + log(1/1.5) = 4.76 − 0.176 = <span class="highlight">4.58</span>
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q5. Find pH of 0.1 M NH₄Cl (pKb of NH₃ = 4.74).</div>
+        <div class="qa-a">
+          NH₄Cl is a salt of strong acid (HCl) and weak base (NH₃) → acidic hydrolysis.<br>
+          Formula: pH = 7 − ½pKb + ½log C<br>
+          = 7 − ½(4.74) + ½log(0.1)<br>
+          = 7 − 2.37 + ½(−1)<br>
+          = 7 − 2.37 − 0.5 = <span class="highlight">4.13</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 10: BUFFERS
+  ══════════════════════════════════════════ -->
+  <section class="section" id="t4">
+    <div class="section-num">10</div>
+    <div class="section-title"><span>Buffer Solutions</span> — Theory, Capacity &amp; Indicators</div>
+
+    <p>A buffer solution resists changes in pH when small amounts of strong acid or base are added. It consists of a <strong>weak acid + its conjugate base</strong> (acidic buffer) or a <strong>weak base + its conjugate acid</strong> (basic buffer).</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">Acidic Buffer</div>
+        <h4>Weak acid + conjugate base salt</h4>
+        <div class="formula" style="font-size:0.85rem; line-height:2.2;">
+          Example: CH₃COOH + CH₃COONa<br><br>
+          pH = pKa + log([A⁻]/[HA])<br>
+          &nbsp;&nbsp;&nbsp;&nbsp; = pKa + log([salt]/[acid])
+        </div>
+        <p>Made by: partially neutralising weak acid with strong base (NaOH), or dissolving weak acid + its sodium salt.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Basic Buffer</div>
+        <h4>Weak base + conjugate acid salt</h4>
+        <div class="formula" style="font-size:0.85rem; line-height:2.2;">
+          Example: NH₃ + NH₄Cl<br><br>
+          pOH = pKb + log([BH⁺]/[B])<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = pKb + log([salt]/[base])<br>
+          pH = 14 − pOH
+        </div>
+        <p>Used when pH &gt; 7 is required (e.g. pH 10 for EDTA titrations of Mg²⁺, Zn²⁺).</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">How a Buffer Works — Mechanism</div>
+      <h4>CH₃COOH / CH₃COONa system</h4>
+      <p>In solution: CH₃COOH (partial dissociation) + CH₃COO⁻ (from complete dissociation of salt) + Na⁺ + H⁺ all present.</p>
+      <div class="grid-2" style="margin-top:0.8rem;">
+        <div>
+          <div style="color:var(--accent); font-family:var(--mono); font-size:0.65rem; margin-bottom:0.4rem; letter-spacing:0.08em;">ADD STRONG ACID (H⁺)</div>
+          <div class="formula" style="font-size:0.82rem;">
+            CH₃COO⁻ + H⁺ → CH₃COOH
+          </div>
+          <p style="font-size:0.85rem;">Conjugate base reservoir consumes H⁺. [CH₃COOH] increases slightly, [CH₃COO⁻] decreases slightly. Ratio changes minimally → pH barely changes.</p>
+        </div>
+        <div>
+          <div style="color:var(--accent2); font-family:var(--mono); font-size:0.65rem; margin-bottom:0.4rem; letter-spacing:0.08em;">ADD STRONG BASE (OH⁻)</div>
+          <div class="formula" style="font-size:0.82rem;">
+            CH₃COOH + OH⁻ → CH₃COO⁻ + H₂O
+          </div>
+          <p style="font-size:0.85rem;">Weak acid reservoir neutralises OH⁻. [CH₃COOH] decreases slightly, [CH₃COO⁻] increases slightly. Ratio changes minimally → pH barely changes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Buffer Capacity (β)</div>
+      <h4>A measure of how well a buffer resists pH change</h4>
+      <div class="formula" style="font-size:0.85rem; line-height:2.2;">
+        β = moles of strong acid (or base) needed to change pH by 1 unit<br><br>
+        Buffer capacity is MAXIMUM when [salt] = [acid] i.e. pH = pKa<br>
+        (for basic: when [salt] = [base] i.e. pOH = pKb)<br><br>
+        Higher total buffer concentration → higher capacity
+      </div>
+      <p>Buffer is most effective within ±1 pH unit of pKa: pKa − 1 ≤ pH ≤ pKa + 1. Outside this range, the buffer becomes ineffective.</p>
+    </div>
+
+    <div class="card" style="margin-top:0.5rem;">
+      <div class="card-label">Acid-Base Indicators</div>
+      <h4>HIn ⇌ H⁺ + In⁻ (weak acid indicator)</h4>
+      <p>The undissociated form HIn and dissociated form In⁻ have <em>different colours</em>. The ratio determines which colour is seen:</p>
+      <div class="formula" style="font-size:0.85rem; line-height:2.2;">
+        pH = pKIn + log([In⁻]/[HIn])<br><br>
+        When [In⁻] = 10×[HIn]: log = +1 → colour of In⁻ seen → pH = pKIn + 1<br>
+        When [HIn] = 10×[In⁻]: log = −1 → colour of HIn seen → pH = pKIn − 1<br><br>
+        ∴ Indicator transition range: pKIn ± 1
+      </div>
+      <p>For sharp endpoint: choose indicator whose pKIn ≈ pH at equivalence point of the titration.</p>
+      <div class="tbl-wrap" style="margin-top:0.8rem;">
+        <table>
+          <thead><tr><th>Indicator</th><th>pKIn (approx)</th><th>Range</th><th>Acid colour</th><th>Base colour</th></tr></thead>
+          <tbody>
+            <tr><td>Methyl Orange</td><td>3.5</td><td>3.1–4.4</td><td>Red</td><td>Yellow</td></tr>
+            <tr><td>Methyl Red</td><td>5.1</td><td>4.2–6.3</td><td>Red</td><td>Yellow</td></tr>
+            <tr><td>Phenolphthalein</td><td>9.1</td><td>8.2–10.0</td><td>Colourless</td><td>Pink/Magenta</td></tr>
+            <tr><td>Litmus</td><td>6.5–7</td><td>5.0–8.0</td><td>Red</td><td>Blue</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="qa-section">
+      <div class="qa-header">PRACTICE QUESTIONS — BUFFERS &amp; INDICATORS</div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q1. Why is buffer capacity maximum when pH = pKa?</div>
+        <div class="qa-a">
+          At pH = pKa, [salt] = [acid] (Henderson–Hasselbalch gives log(1) = 0). At this composition:
+          <ul>
+            <li>Adding acid: maximum [A⁻] available to neutralise it (ratio shifts from 1:1 to something smaller — log changes by only a small amount).</li>
+            <li>Adding base: maximum [HA] available to neutralise it.</li>
+          </ul>
+          Mathematically, the derivative d(moles base)/d(pH) is maximised when [HA] = [A⁻]. Away from this point, one component is depleted and the other dominates — the buffer becomes less effective. So the buffer works best symmetrically around pH = pKa.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q2. Why is phenolphthalein used for NaOH + HCl titrations but methyl orange for NaOH + acetic acid? (Or is it the other way?)</div>
+        <div class="qa-a">
+          <strong>Strong acid + Strong base</strong> (HCl + NaOH): equivalence point is at pH 7. Both phenolphthalein (range 8.2–10) and methyl orange (range 3.1–4.4) work here because the pH jumps steeply from ~4 to ~10 around the equivalence point — both indicator transitions fall within this steep jump. Either can be used.<br><br>
+          <strong>Strong base + Weak acid</strong> (NaOH + CH₃COOH): equivalence point is at pH ~9 (basic, salt hydrolysis). Use <span class="highlight">phenolphthalein</span> (range 8.2–10) — its colour change occurs right at the equivalence point. Methyl orange would change colour long before the equivalence point (at pH ~4) and give a false endpoint.<br><br>
+          <strong>Weak base + Strong acid</strong> (NH₃ + HCl): equivalence point at pH ~5. Use <span class="highlight">methyl red or methyl orange</span>.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q3. A buffer is prepared by mixing 200 mL of 0.2 M CH₃COOH with 100 mL of 0.2 M NaOH. Find its pH. (pKa = 4.76)</div>
+        <div class="qa-a">
+          mmol CH₃COOH = 200 × 0.2 = 40 mmol<br>
+          mmol NaOH = 100 × 0.2 = 20 mmol<br>
+          NaOH reacts: 20 mmol acid neutralised → 20 mmol CH₃COO⁻ formed<br>
+          Remaining: [HA] = 20 mmol, [A⁻] = 20 mmol, total volume = 300 mL<br><br>
+          Since [HA] = [A⁻], log([A⁻]/[HA]) = log(1) = 0<br>
+          pH = 4.76 + 0 = <span class="highlight">4.76</span><br><br>
+          This is exactly at the pKa — maximum buffer capacity point.
+        </div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q">Q4. What is the transition range of an indicator with pKIn = 6.2? In what type of titration would you use it?</div>
+        <div class="qa-a">
+          Transition range = pKIn ± 1 = <span class="highlight">5.2 to 7.2</span><br><br>
+          This is close to neutral — suitable for titrations with equivalence point near pH 6–7. For example: weak acid + weak base titrations where the equivalence point falls near neutral, or litmus-like indicators in certain acid-base combinations. However, weak acid + weak base titrations generally give a poor endpoint; this indicator would be more useful for titrations of intermediate-strength acids or bases where the equivalence point falls in this range.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Inorganic / Coordination Chemistry · CFT Study Guide · Semester Exam Prep
+</footer>
+
+<script>
+  // Q&A accordion
+  document.querySelectorAll('.qa-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.qa-item');
+      const wasOpen = item.classList.contains('open');
+      item.closest('.qa-section').querySelectorAll('.qa-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Highlight active nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.style.borderBottomColor = 'transparent');
+        const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (link) { link.style.color = 'var(--accent)'; link.style.borderBottomColor = 'var(--accent)'; }
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
