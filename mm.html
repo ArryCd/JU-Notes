@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elementary Particles — Complete Class Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── THEME TOKENS ─────────────────────────────────────── */
+:root {
+  --bg:        #080810;
+  --bg-card:   #0f0f1c;
+  --bg-lift:   #14142a;
+  --bg-deep:   #1a1a32;
+  --border:    #2a2a4a;
+  --border-hi: #3d3d6a;
+  --text:      #dcdcf0;
+  --text-dim:  #8888b0;
+  --text-mute: #55557a;
+  --gold:      #f0b347;
+  --gold-dim:  #7a5c20;
+  --teal:      #3dd6c4;
+  --teal-dim:  #1a5c56;
+  --rose:      #f05c7a;
+  --rose-dim:  #6a1a28;
+  --indigo:    #7a8cff;
+  --indigo-dim:#2a2e6a;
+  --sage:      #7adf90;
+  --sage-dim:  #1a4a26;
+  --radius:    8px;
+  --font-body: 'Outfit', sans-serif;
+  --font-serif:'EB Garamond', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme="light"] {
+  --bg:        #f5f5f0;
+  --bg-card:   #ffffff;
+  --bg-lift:   #ededea;
+  --bg-deep:   #e4e4df;
+  --border:    #d0cfc8;
+  --border-hi: #b0afaa;
+  --text:      #1a1a2e;
+  --text-dim:  #4a4a6a;
+  --text-mute: #9090a8;
+  --gold:      #b07820;
+  --gold-dim:  #f5e8d0;
+  --teal:      #1a8878;
+  --teal-dim:  #d0f0ec;
+  --rose:      #c02050;
+  --rose-dim:  #fde8ee;
+  --indigo:    #4050cc;
+  --indigo-dim:#eaeeff;
+  --sage:      #2a7840;
+  --sage-dim:  #e0f5e8;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.75;
+  min-height:100vh;
+  transition:background .3s,color .3s;
+}
+
+/* ─── HERO ──────────────────────────────────────────────── */
+#hero{
+  background:linear-gradient(135deg,var(--bg) 0%,var(--bg-deep) 60%,var(--bg) 100%);
+  border-bottom:1px solid var(--border);
+  padding:3rem 2rem 2.5rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+[data-theme="dark"] #hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 50%,rgba(122,140,255,.07) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 35% at 70% 40%,rgba(61,214,196,.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-tag{
+  display:inline-block;
+  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--teal);
+  background:rgba(61,214,196,.08);border:1px solid rgba(61,214,196,.2);
+  padding:.25rem .8rem;border-radius:2rem;margin-bottom:1rem;
+}
+#hero h1{
+  font-family:var(--font-serif);font-size:clamp(2rem,4.5vw,3.2rem);
+  font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:1.15;
+}
+#hero h1 span{color:var(--gold);}
+.hero-sub{
+  font-size:1rem;color:var(--text-dim);margin-top:.6rem;
+  font-style:italic;font-family:var(--font-serif);
+}
+.hero-meta{
+  display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;
+}
+.hero-meta span{
+  font-family:var(--font-mono);font-size:.72rem;
+  color:var(--text-mute);letter-spacing:.08em;text-transform:uppercase;
+}
+.hero-meta span b{color:var(--text-dim);}
+
+/* ─── STICKY NAV (desktop) ──────────────────────────────── */
+#sticky-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,8,16,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:.55rem 1.2rem;
+  display:flex;gap:.2rem;flex-wrap:wrap;justify-content:center;
+}
+[data-theme="light"] #sticky-nav{background:rgba(245,245,240,.96);}
+#sticky-nav a{
+  font-family:var(--font-mono);font-size:.68rem;color:var(--text-mute);
+  text-decoration:none;padding:.3rem .55rem;border-radius:4px;
+  letter-spacing:.04em;white-space:nowrap;transition:background .15s,color .15s;
+}
+#sticky-nav a:hover{background:var(--bg-deep);color:var(--teal);}
+#sticky-nav .theme-btn{
+  margin-left:auto;padding:.25rem .6rem;
+  font-family:var(--font-mono);font-size:.7rem;color:var(--text-mute);
+  background:transparent;border:1px solid var(--border);
+  border-radius:4px;cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+#sticky-nav .theme-btn:hover{border-color:var(--teal);color:var(--teal);}
+
+/* ─── HAMBURGER NAV ──────────────────────────────────────── */
+.nav-burger{
+  display:none;position:sticky;top:0;z-index:101;
+  background:rgba(8,8,16,.96);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:.55rem 1.2rem;justify-content:space-between;align-items:center;
+}
+[data-theme="light"] .nav-burger{background:rgba(245,245,240,.98);}
+.nav-burger-label{
+  font-family:var(--font-mono);font-size:.72rem;
+  color:var(--teal);letter-spacing:.1em;text-transform:uppercase;
+}
+.burger-right{display:flex;align-items:center;gap:.7rem;}
+.theme-btn-mobile{
+  font-family:var(--font-mono);font-size:.7rem;color:var(--text-mute);
+  background:transparent;border:1px solid var(--border);
+  border-radius:4px;padding:.2rem .5rem;cursor:pointer;transition:all .15s;
+}
+.theme-btn-mobile:hover{border-color:var(--teal);color:var(--teal);}
+.burger-btn{
+  background:none;border:none;cursor:pointer;
+  padding:.3rem;display:flex;flex-direction:column;gap:4px;
+}
+.burger-btn span{
+  display:block;width:20px;height:1.5px;
+  background:var(--text-dim);transition:transform .2s,opacity .2s;
+}
+.burger-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+.burger-btn.open span:nth-child(2){opacity:0;}
+.burger-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+.nav-dropdown{
+  position:sticky;top:2.45rem;z-index:100;display:none;
+  background:rgba(8,8,16,.99);border-bottom:1px solid var(--border);
+  padding:.3rem 0;max-height:70vh;overflow-y:auto;
+}
+[data-theme="light"] .nav-dropdown{background:rgba(245,245,240,.99);}
+.nav-dropdown.open{display:block;}
+.nav-dropdown a{
+  display:block;font-family:var(--font-mono);font-size:.8rem;
+  color:var(--text-mute);text-decoration:none;padding:.7rem 1.4rem;
+  letter-spacing:.04em;border-left:2px solid transparent;
+  transition:color .15s,border-color .15s,background .15s;
+}
+.nav-dropdown a:hover{
+  color:var(--teal);border-left-color:var(--teal);
+  background:rgba(61,214,196,.05);
+}
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+main{max-width:880px;margin:0 auto;padding:1.5rem 1.5rem 5rem;}
+
+/* ─── SECTION BLOCKS ─────────────────────────────────────── */
+.lec{margin:2.5rem 0;position:relative;}
+.lec-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;}
+.lec-num{
+  flex-shrink:0;width:2.8rem;height:2.8rem;
+  background:var(--bg-deep);border:1px solid var(--border-hi);
+  border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:.78rem;font-weight:500;
+  color:var(--indigo);line-height:1;text-align:center;
+}
+.lec-title-block{flex:1;}
+.lec-title-block h2{
+  font-family:var(--font-serif);font-size:1.6rem;
+  font-weight:500;color:var(--text);line-height:1.2;
+}
+.lec-date{
+  font-family:var(--font-mono);font-size:.68rem;
+  color:var(--text-mute);letter-spacing:.1em;margin-top:.2rem;
+}
+.lec-body{padding-left:3.8rem;}
+hr.sec-div{border:none;border-top:1px solid var(--border);margin:2rem 0;}
+
+/* ─── HEADINGS ───────────────────────────────────────────── */
+h3{
+  font-family:var(--font-serif);font-size:1.25rem;
+  color:var(--gold);margin:1.8rem 0 .7rem;font-weight:400;
+}
+h4{
+  font-size:.95rem;font-weight:600;color:var(--text);
+  margin:1.2rem 0 .4rem;letter-spacing:.02em;
+}
+p{margin:.5rem 0;}
+
+/* ─── BOXES ──────────────────────────────────────────────── */
+.box{
+  border-radius:var(--radius);padding:1rem 1.1rem;
+  margin:1rem 0;border-left:3px solid transparent;font-size:.93rem;
+}
+.box-key{background:rgba(240,179,71,.06);border-color:var(--gold);}
+.box-key .box-title{color:var(--gold);}
+.box-concept{background:rgba(122,140,255,.06);border-color:var(--indigo);}
+.box-concept .box-title{color:var(--indigo);}
+.box-warn{background:rgba(240,92,122,.06);border-color:var(--rose);}
+.box-warn .box-title{color:var(--rose);}
+.box-sage{background:rgba(122,223,144,.05);border-color:var(--sage);}
+.box-sage .box-title{color:var(--sage);}
+.box-teal{background:rgba(61,214,196,.05);border-color:var(--teal);}
+.box-teal .box-title{color:var(--teal);}
+.box-title{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;font-weight:500;margin-bottom:.5rem;
+}
+
+/* ─── EQUATION DISPLAY ───────────────────────────────────── */
+.eq-block{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:.9rem 1.2rem;margin:.8rem 0;
+  font-family:var(--font-serif);font-size:1.05rem;
+  text-align:center;line-height:2;overflow-x:auto;
+}
+.eq-block .eq-label{
+  font-family:var(--font-mono);font-size:.65rem;color:var(--text-mute);
+  display:block;text-align:right;margin-top:.3rem;letter-spacing:.06em;
+}
+.eq-inline{
+  font-family:var(--font-serif);font-size:1.05em;
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  padding:.05em .3em;border-radius:4px;
+}
+
+/* ─── STEPS ──────────────────────────────────────────────── */
+.steps{counter-reset:step;margin:.8rem 0;}
+.step{display:flex;gap:.9rem;margin:.5rem 0;align-items:flex-start;}
+.step::before{
+  counter-increment:step;content:counter(step);flex-shrink:0;
+  width:1.5rem;height:1.5rem;background:var(--bg-deep);
+  border:1px solid var(--border-hi);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:.65rem;color:var(--indigo);margin-top:.15rem;
+}
+
+/* ─── DERIVATION / EXPANDABLE ────────────────────────────── */
+details.deriv{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius);margin:1rem 0;overflow:hidden;
+}
+details.deriv > summary{
+  cursor:pointer;padding:.8rem 1rem;display:flex;align-items:center;
+  gap:.7rem;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.05em;
+  color:var(--teal);user-select:none;list-style:none;
+  background:var(--bg-lift);border-bottom:1px solid transparent;transition:background .15s;
+}
+details.deriv > summary:hover{background:var(--bg-deep);}
+details.deriv[open] > summary{border-bottom-color:var(--border);color:var(--text);}
+details.deriv > summary::before{
+  content:'▶';font-size:.6rem;color:var(--teal);transition:transform .2s;
+}
+details.deriv[open] > summary::before{transform:rotate(90deg);}
+details.deriv .deriv-body{padding:1rem 1.2rem;}
+
+/* ─── Q&A ────────────────────────────────────────────────── */
+.qa-block{margin:1.5rem 0;}
+.qa-block h4{
+  color:var(--text-dim);font-size:.82rem;font-family:var(--font-mono);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem;
+}
+details.qa{
+  border:1px solid var(--border);border-radius:var(--radius);
+  margin:.5rem 0;overflow:hidden;
+}
+details.qa > summary{
+  cursor:pointer;padding:.75rem 1rem;background:var(--bg-card);
+  font-size:.9rem;color:var(--text);list-style:none;
+  display:flex;align-items:flex-start;gap:.7rem;transition:background .15s;
+}
+details.qa > summary:hover{background:var(--bg-lift);}
+details.qa > summary::before{
+  content:'▶';font-size:.6rem;color:var(--gold);
+  flex-shrink:0;margin-top:.3rem;transition:transform .2s;
+}
+details.qa[open] > summary::before{transform:rotate(90deg);}
+details.qa .qa-ans{
+  padding:.9rem 1.1rem;border-top:1px solid var(--border);
+  font-size:.9rem;color:var(--text-dim);line-height:1.75;
+}
+
+/* ─── DIAGRAM ────────────────────────────────────────────── */
+.diagram{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1rem;margin:1rem 0;text-align:center;
+}
+.diagram figcaption{
+  font-size:.78rem;color:var(--text-mute);font-style:italic;
+  margin-top:.6rem;font-family:var(--font-serif);line-height:1.4;
+}
+
+/* ─── TABLE ──────────────────────────────────────────────── */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;}
+table{width:100%;border-collapse:collapse;font-size:.85rem;}
+th{
+  background:var(--bg-deep);color:var(--text);font-weight:600;
+  padding:.5rem .8rem;text-align:left;border-bottom:2px solid var(--border-hi);
+  font-family:var(--font-mono);font-size:.74rem;letter-spacing:.05em;
+}
+td{padding:.45rem .8rem;border-bottom:1px solid var(--border);color:var(--text-dim);}
+tr:hover td{background:rgba(255,255,255,.02);}
+
+/* ─── TIMELINE ───────────────────────────────────────────── */
+.timeline{margin:1rem 0;padding-left:.5rem;}
+.tl-item{
+  display:flex;gap:1rem;margin:.7rem 0;align-items:flex-start;
+}
+.tl-year{
+  font-family:var(--font-mono);font-size:.75rem;color:var(--teal);
+  min-width:3.5rem;padding-top:.1rem;letter-spacing:.04em;flex-shrink:0;
+}
+.tl-dot{
+  flex-shrink:0;width:8px;height:8px;border-radius:50%;
+  background:var(--teal);margin-top:.45rem;
+}
+.tl-content{font-size:.9rem;color:var(--text-dim);}
+.tl-content strong{color:var(--text);}
+
+/* ─── GRID ───────────────────────────────────────────────── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:.8rem 0;}
+
+/* ─── TAGS ───────────────────────────────────────────────── */
+.tag{
+  display:inline-block;font-family:var(--font-mono);font-size:.65rem;
+  padding:.1rem .45rem;border-radius:3px;letter-spacing:.05em;
+}
+.tag-ref{background:rgba(122,140,255,.12);color:var(--indigo);}
+.tag-exam{background:rgba(240,92,122,.1);color:var(--rose);}
+.tag-nobel{background:rgba(240,179,71,.12);color:var(--gold);}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer{
+  text-align:center;padding:2rem;border-top:1px solid var(--border);
+  font-family:var(--font-mono);font-size:.68rem;color:var(--text-mute);letter-spacing:.08em;
+}
+.footer-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.2rem;margin:.4rem 0;}
+.footer-row span{color:var(--text-dim);}
+
+sub,sup{font-size:.7em;}
+em{font-style:italic;color:var(--text);}
+strong{font-weight:600;color:var(--text);}
+
+/* ─── MOBILE ─────────────────────────────────────────────── */
+@media(max-width:680px){
+  #sticky-nav{display:none !important;}
+  .nav-burger{display:flex;}
+  .lec-body{padding-left:0;}
+  .lec-header{flex-direction:column;gap:.5rem;}
+  .grid2{grid-template-columns:1fr;}
+  .eq-block{font-size:.88rem;text-align:left;}
+}
+@media(min-width:681px){
+  .nav-burger,.nav-dropdown{display:none !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ HERO ════════════════ -->
+<header id="hero">
+  <div class="hero-tag">Particle Physics · Complete Notes · 2026</div>
+  <h1>Elementary Particles<br><span>— From Leptons to Quarks</span></h1>
+  <p class="hero-sub">Subatomic structure, quantum numbers, symmetry classifications, and the quark model — with diagrams, derivations &amp; exam questions</p>
+  <div class="hero-meta">
+    <span><b>Ref:</b> D. Griffiths · Introduction to Elementary Particles</span>
+    <span><b>Ref:</b> Krane · Introductory Nuclear Physics</span>
+    <span><b>Level:</b> Advanced Undergraduate</span>
+    <span><b>Sections:</b> S-1 through S-9</span>
+  </div>
+</header>
+
+<!-- ════════════════ DESKTOP NAV ════════════════ -->
+<nav id="sticky-nav">
+  <a href="#s1">S1 · Scale &amp; Overview</a>
+  <a href="#s2">S2 · Classification</a>
+  <a href="#s3">S3 · Leptons</a>
+  <a href="#s4">S4 · Neutrinos</a>
+  <a href="#s5">S5 · Hadrons</a>
+  <a href="#s6">S6 · Quantum Numbers</a>
+  <a href="#s7">S7 · Eightfold Way</a>
+  <a href="#s8">S8 · Quarks</a>
+  <a href="#s9">S9 · Compound Nucleus</a>
+  <button class="theme-btn" id="themeToggle">☀ Light</button>
+</nav>
+
+<!-- ════════════════ HAMBURGER ════════════════ -->
+<div class="nav-burger" id="navBurger">
+  <span class="nav-burger-label">Elementary Particles</span>
+  <div class="burger-right">
+    <button class="theme-btn-mobile" id="themeToggleMob">☀</button>
+    <button class="burger-btn" id="burgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</div>
+<nav class="nav-dropdown" id="navDropdown">
+  <a href="#s1" onclick="closeMenu()">S-1 · Scale &amp; Overview</a>
+  <a href="#s2" onclick="closeMenu()">S-2 · Particle Classification</a>
+  <a href="#s3" onclick="closeMenu()">S-3 · Leptons</a>
+  <a href="#s4" onclick="closeMenu()">S-4 · Neutrinos</a>
+  <a href="#s5" onclick="closeMenu()">S-5 · Hadrons</a>
+  <a href="#s6" onclick="closeMenu()">S-6 · Quantum Numbers</a>
+  <a href="#s7" onclick="closeMenu()">S-7 · Eightfold Way</a>
+  <a href="#s8" onclick="closeMenu()">S-8 · Quark Model</a>
+  <a href="#s9" onclick="closeMenu()">S-9 · Compound Nucleus (Ghoshal)</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════ S-1 ═══════════════ -->
+<section class="lec" id="s1">
+  <div class="lec-header">
+    <div class="lec-num">S<br>1</div>
+    <div class="lec-title-block">
+      <h2>Probing Matter — Scales &amp; the Big Picture</h2>
+      <div class="lec-date">Topic · What is matter made of?</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>The quest to understand matter is really the quest to answer one question: <em>what is the smallest indivisible unit of matter?</em> The ancient idea of atoms has been replaced — through centuries of deeper probing — by a hierarchy of structure that extends to scales far smaller than anything imaginable.</p>
+
+    <h3>The Hierarchy of Matter</h3>
+
+    <div class="diagram">
+      <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
+        <defs>
+          <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#8888b0"/>
+          </marker>
+        </defs>
+        <!-- Arrow line -->
+        <line x1="30" y1="100" x2="650" y2="100" stroke="#2a2a4a" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="340" y="195" fill="#55557a" font-size="11" font-family="JetBrains Mono" text-anchor="middle">increasing resolution / decreasing scale →</text>
+
+        <!-- Atom -->
+        <circle cx="80" cy="100" r="34" fill="none" stroke="#3dd6c4" stroke-width="1.5"/>
+        <circle cx="80" cy="100" r="8" fill="#1a1a32" stroke="#f0b347" stroke-width="1.2"/>
+        <ellipse cx="80" cy="100" rx="28" ry="10" fill="none" stroke="#3dd6c4" stroke-width=".8" stroke-dasharray="3,2"/>
+        <text x="80" y="152" fill="#3dd6c4" font-size="11" text-anchor="middle" font-family="JetBrains Mono">atom</text>
+        <text x="80" y="164" fill="#55557a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">~10⁻⁸ cm</text>
+
+        <!-- Nucleus -->
+        <circle cx="220" cy="100" r="20" fill="#1a1a32" stroke="#f0b347" stroke-width="1.5"/>
+        <circle cx="213" cy="96" r="5" fill="#f0b347" opacity=".7"/>
+        <circle cx="225" cy="103" r="5" fill="#8888b0" opacity=".7"/>
+        <circle cx="217" cy="107" r="5" fill="#f0b347" opacity=".6"/>
+        <text x="220" y="137" fill="#f0b347" font-size="11" text-anchor="middle" font-family="JetBrains Mono">nucleus</text>
+        <text x="220" y="149" fill="#55557a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">~10⁻¹² cm</text>
+
+        <!-- Proton -->
+        <circle cx="360" cy="100" r="22" fill="#1a1a32" stroke="#7a8cff" stroke-width="1.5"/>
+        <circle cx="352" cy="95" r="6" fill="#3dd6c4" opacity=".6"/>
+        <circle cx="367" cy="106" r="6" fill="#f05c7a" opacity=".6"/>
+        <circle cx="360" cy="95" r="6" fill="#f0b347" opacity=".6"/>
+        <text x="360" y="139" fill="#7a8cff" font-size="11" text-anchor="middle" font-family="JetBrains Mono">proton/n</text>
+        <text x="360" y="151" fill="#55557a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">~10⁻¹³ cm</text>
+
+        <!-- Quark -->
+        <circle cx="510" cy="100" r="16" fill="#1a1a32" stroke="#7adf90" stroke-width="1.5"/>
+        <circle cx="510" cy="100" r="7" fill="#7adf90" opacity=".4"/>
+        <circle cx="510" cy="100" r="3" fill="#7adf90" opacity=".8"/>
+        <text x="510" y="133" fill="#7adf90" font-size="11" text-anchor="middle" font-family="JetBrains Mono">quark</text>
+        <text x="510" y="145" fill="#55557a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">&lt;10⁻¹⁶ cm</text>
+
+        <!-- Electron -->
+        <circle cx="610" cy="100" r="12" fill="#1a1a32" stroke="#f05c7a" stroke-width="1.5"/>
+        <circle cx="610" cy="100" r="4" fill="#f05c7a" opacity=".7"/>
+        <text x="610" y="128" fill="#f05c7a" font-size="11" text-anchor="middle" font-family="JetBrains Mono">electron</text>
+        <text x="610" y="140" fill="#55557a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">&lt;10⁻¹⁶ cm</text>
+
+        <!-- zoom arrows -->
+        <line x1="117" y1="100" x2="196" y2="100" stroke="#2a2a4a" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="245" y1="100" x2="334" y2="100" stroke="#2a2a4a" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="386" y1="100" x2="490" y2="100" stroke="#2a2a4a" stroke-width="1" marker-end="url(#arr)"/>
+      </svg>
+      <figcaption>Fig 1.1 — Hierarchy of matter. Successive levels of probing reveal smaller and smaller structures. The atom (∼10⁻⁸ cm) contains a nucleus (∼10⁻¹² cm) surrounded by electrons. The nucleus contains protons and neutrons (∼10⁻¹³ cm), which in turn are composed of quarks (&lt;10⁻¹⁶ cm). The electron appears point-like at all measured scales. Each step requires much higher energy probes.</figcaption>
+    </div>
+
+    <div class="box box-concept">
+      <div class="box-title">Why High Energy = Small Scale</div>
+      By the de Broglie relation, <em>λ = h/p</em>. A probe can only resolve features <em>larger</em> than its wavelength. To probe smaller distances, you need shorter λ, which means larger momentum p, which means higher kinetic energy. This is why particle physics requires enormous accelerators — the LHC probes scales of ~10⁻⁹ m using protons accelerated to 6.5 TeV each.
+    </div>
+
+    <div class="box box-key">
+      <div class="box-title">The Goal of Particle Physics</div>
+      To identify the truly elementary (structureless) constituents of matter and the fundamental forces between them. As of today, the <strong>Standard Model</strong> describes matter in terms of 6 quarks, 6 leptons, and 5 force-carrying bosons (photon, W±, Z⁰, gluon, Higgs). No substructure has been found in any of these — they appear point-like down to ∼10⁻¹⁸ m.
+    </div>
+
+    <div class="qa-block">
+      <h4>Questions — Section 1</h4>
+      <details class="qa">
+        <summary>Why is it not enough to just build a more powerful microscope to see inside a proton?</summary>
+        <div class="qa-ans">
+          Optical microscopes are limited by the wavelength of visible light (∼400–700 nm = 4–7 × 10⁻⁵ cm). The proton is ∼10⁻¹³ cm — roughly 8 orders of magnitude smaller than visible light wavelengths. Even X-ray or electron microscopes don't get close. To probe inside a proton, you need a particle with de Broglie wavelength λ ≲ 10⁻¹³ cm, which by λ = hc/E gives E ≳ hc/(10⁻¹³ cm) ≈ 1.24 GeV. This is why particle accelerators (which can produce beams at GeV–TeV energies) are the "microscopes" of particle physics.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What does it mean for a particle to be "elementary"?</summary>
+        <div class="qa-ans">
+          A particle is called <em>elementary</em> if it has no observed internal structure — it behaves as a point particle in all experiments performed so far. This is always provisional: historically, atoms were thought to be elementary (Greek: <em>atomos</em> = indivisible), then the nucleus, then the proton. Today, quarks and leptons are treated as elementary because no scattering experiment at any accessible energy has revealed any substructure. An operational definition: a particle is elementary if its cross-section at high energy is consistent with a point-like charge distribution.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══════════════ S-2 ═══════════════ -->
+<section class="lec" id="s2">
+  <div class="lec-header">
+    <div class="lec-num">S<br>2</div>
+    <div class="lec-title-block">
+      <h2>Classification of Subatomic Particles</h2>
+      <div class="lec-date">Topic · The particle zoo and how to organise it</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>By the mid-20th century, experiments had revealed dozens of subatomic particles. The first task was to organise them. The primary classification is based on <em>spin</em> (quantum of angular momentum) and <em>whether the particle feels the strong nuclear force</em>.</p>
+
+    <h3>The Master Classification Tree</h3>
+
+    <div class="diagram">
+      <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
+        <!-- Root -->
+        <rect x="255" y="10" width="170" height="36" rx="6" fill="#1a1a32" stroke="#3d3d6a" stroke-width="1.5"/>
+        <text x="340" y="33" fill="#dcdcf0" font-size="13" font-weight="500" text-anchor="middle" font-family="Outfit">Subatomic Particles</text>
+
+        <!-- Lines from root -->
+        <line x1="290" y1="46" x2="170" y2="90" stroke="#2a2a4a" stroke-width="1.5"/>
+        <line x1="390" y1="46" x2="510" y2="90" stroke="#2a2a4a" stroke-width="1.5"/>
+
+        <!-- Elementary box -->
+        <rect x="80" y="90" width="180" height="36" rx="6" fill="#14142a" stroke="#f0b347" stroke-width="1.5"/>
+        <text x="170" y="113" fill="#f0b347" font-size="12" font-weight="500" text-anchor="middle" font-family="Outfit">Elementary Particles</text>
+
+        <!-- Composite box -->
+        <rect x="420" y="90" width="180" height="36" rx="6" fill="#14142a" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="510" y="113" fill="#3dd6c4" font-size="12" font-weight="500" text-anchor="middle" font-family="Outfit">Composite (Hadrons)</text>
+
+        <!-- Elementary → Fermions -->
+        <line x1="130" y1="126" x2="80" y2="170" stroke="#2a2a4a" stroke-width="1.2"/>
+        <!-- Elementary → Bosons -->
+        <line x1="210" y1="126" x2="250" y2="170" stroke="#2a2a4a" stroke-width="1.2"/>
+
+        <!-- Fermions box -->
+        <rect x="18" y="170" width="120" height="32" rx="5" fill="#0f0f1c" stroke="#7a8cff" stroke-width="1.2"/>
+        <text x="78" y="191" fill="#7a8cff" font-size="11" text-anchor="middle" font-family="Outfit">Fermions (spin ½)</text>
+
+        <!-- Bosons box -->
+        <rect x="195" y="170" width="120" height="32" rx="5" fill="#0f0f1c" stroke="#7adf90" stroke-width="1.2"/>
+        <text x="255" y="191" fill="#7adf90" font-size="11" text-anchor="middle" font-family="Outfit">Bosons (integer spin)</text>
+
+        <!-- Fermions → Leptons, Quarks -->
+        <line x1="48" y1="202" x2="30" y2="240" stroke="#2a2a4a" stroke-width="1"/>
+        <line x1="108" y1="202" x2="120" y2="240" stroke="#2a2a4a" stroke-width="1"/>
+
+        <rect x="5" y="240" width="85" height="28" rx="4" fill="#080810" stroke="#f05c7a" stroke-width="1"/>
+        <text x="47" y="259" fill="#f05c7a" font-size="10" text-anchor="middle" font-family="Outfit">6 Leptons</text>
+        <text x="47" y="270" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">(+ antileptons)</text>
+
+        <rect x="98" y="240" width="85" height="28" rx="4" fill="#080810" stroke="#f0b347" stroke-width="1"/>
+        <text x="140" y="259" fill="#f0b347" font-size="10" text-anchor="middle" font-family="Outfit">6 Quarks</text>
+        <text x="140" y="270" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">(+ antiquarks)</text>
+
+        <!-- Bosons children -->
+        <line x1="255" y1="202" x2="255" y2="238" stroke="#2a2a4a" stroke-width="1"/>
+        <rect x="196" y="238" width="120" height="72" rx="4" fill="#080810" stroke="#7adf90" stroke-width="1"/>
+        <text x="256" y="253" fill="#7adf90" font-size="9" text-anchor="middle" font-family="JetBrains Mono">γ Photon (EM)</text>
+        <text x="256" y="265" fill="#7adf90" font-size="9" text-anchor="middle" font-family="JetBrains Mono">W±, Z⁰ (weak)</text>
+        <text x="256" y="277" fill="#7adf90" font-size="9" text-anchor="middle" font-family="JetBrains Mono">g Gluon (strong)</text>
+        <text x="256" y="289" fill="#7adf90" font-size="9" text-anchor="middle" font-family="JetBrains Mono">G Graviton (gravity?)</text>
+        <text x="256" y="301" fill="#55557a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">H Higgs (mass)</text>
+
+        <!-- Hadron children -->
+        <line x1="470" y1="126" x2="450" y2="170" stroke="#2a2a4a" stroke-width="1.2"/>
+        <line x1="550" y1="126" x2="570" y2="170" stroke="#2a2a4a" stroke-width="1.2"/>
+
+        <!-- Baryons -->
+        <rect x="385" y="170" width="115" height="32" rx="5" fill="#0f0f1c" stroke="#f05c7a" stroke-width="1.2"/>
+        <text x="442" y="191" fill="#f05c7a" font-size="11" text-anchor="middle" font-family="Outfit">Baryons (3q)</text>
+
+        <!-- Mesons -->
+        <rect x="520" y="170" width="115" height="32" rx="5" fill="#0f0f1c" stroke="#f0b347" stroke-width="1.2"/>
+        <text x="577" y="191" fill="#f0b347" font-size="11" text-anchor="middle" font-family="Outfit">Mesons (qq̄)</text>
+
+        <!-- Baryon info -->
+        <rect x="388" y="218" width="110" height="52" rx="4" fill="#080810" stroke="#f05c7a" stroke-width="1"/>
+        <text x="443" y="232" fill="#8888b0" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">Half-integer spin</text>
+        <text x="443" y="245" fill="#8888b0" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">Fermions, B = +1</text>
+        <text x="443" y="258" fill="#8888b0" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">e.g. p (uud), n (udd)</text>
+        <text x="443" y="262" fill="#55557a" font-size="7.5" text-anchor="middle" font-family="JetBrains Mono">Λ, Σ, Ξ, Ω</text>
+
+        <!-- Meson info -->
+        <rect x="523" y="218" width="110" height="52" rx="4" fill="#080810" stroke="#f0b347" stroke-width="1"/>
+        <text x="578" y="232" fill="#8888b0" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">Integer spin</text>
+        <text x="578" y="245" fill="#8888b0" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">Bosons, B = 0</text>
+        <text x="578" y="258" fill="#8888b0" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">e.g. π (ud̄), K (us̄)</text>
+        <text x="578" y="262" fill="#55557a" font-size="7.5" text-anchor="middle" font-family="JetBrains Mono">All unstable</text>
+      </svg>
+      <figcaption>Fig 2.1 — Complete classification tree of subatomic particles. Elementary particles (no known substructure) split into fermions (spin-½) and bosons (integer spin). Composite particles (hadrons) feel the strong force and split into baryons (3 quarks) and mesons (quark-antiquark pairs).</figcaption>
+    </div>
+
+    <h3>The Spin-Statistics Connection</h3>
+    <p>The classification into fermions and bosons is not arbitrary — it is a consequence of the <em>spin-statistics theorem</em> (Pauli, 1940), one of the deepest results in quantum field theory:</p>
+    <div class="box box-key">
+      <div class="box-title">Spin-Statistics Theorem</div>
+      <strong>Fermions</strong> (half-integer spin: ½, 3/2, …) obey the <em>Pauli Exclusion Principle</em> — no two identical fermions can occupy the same quantum state. Their wavefunction is antisymmetric under particle exchange: ψ(1,2) = −ψ(2,1). This underlies all of chemistry and the structure of matter.<br><br>
+      <strong>Bosons</strong> (integer spin: 0, 1, 2, …) have no such restriction — many identical bosons can occupy the same state (Bose-Einstein condensation). Their wavefunction is symmetric: ψ(1,2) = +ψ(2,1). Force-carrying particles are bosons.
+    </div>
+
+    <h3>Antiparticles</h3>
+    <p>Predicted by Dirac's relativistic wave equation (1928) and confirmed experimentally (1932), every particle has a corresponding <em>antiparticle</em> with the same mass and spin but all charges (electric, colour, lepton number, etc.) reversed.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;">
+        <defs>
+          <marker id="arrf" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#3dd6c4"/>
+          </marker>
+          <marker id="arrgam" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#f0b347"/>
+          </marker>
+        </defs>
+        <!-- electron approaching -->
+        <circle cx="60" cy="80" r="14" fill="#1a1a32" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="60" y="85" fill="#3dd6c4" font-size="12" text-anchor="middle">e⁻</text>
+        <text x="60" y="55" fill="#3dd6c4" font-size="9" text-anchor="middle" font-family="JetBrains Mono">charge: −1</text>
+        <line x1="78" y1="80" x2="168" y2="80" stroke="#3dd6c4" stroke-width="1.2" marker-end="url(#arrf)"/>
+
+        <!-- positron approaching -->
+        <circle cx="440" cy="80" r="14" fill="#1a1a32" stroke="#f05c7a" stroke-width="1.5"/>
+        <text x="440" y="85" fill="#f05c7a" font-size="12" text-anchor="middle">e⁺</text>
+        <text x="440" y="55" fill="#f05c7a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">charge: +1</text>
+        <line x1="422" y1="80" x2="332" y2="80" stroke="#f05c7a" stroke-width="1.2" marker-end="url(#arrf)"/>
+
+        <!-- collision point -->
+        <circle cx="250" cy="80" r="6" fill="#f0b347" opacity=".8"/>
+        <text x="250" y="130" fill="#f0b347" font-size="9" text-anchor="middle" font-family="JetBrains Mono">annihilation</text>
+        <text x="250" y="142" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">total charge = 0 conserved</text>
+
+        <!-- two photons emerging -->
+        <line x1="256" y1="75" x2="300" y2="45" stroke="#f0b347" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrgam)"/>
+        <line x1="244" y1="75" x2="200" y2="45" stroke="#f0b347" stroke-width="1.2" stroke-dasharray="4,2" marker-end="url(#arrgam)"/>
+        <text x="315" y="40" fill="#f0b347" font-size="11" font-family="JetBrains Mono">γ</text>
+        <text x="180" y="40" fill="#f0b347" font-size="11" font-family="JetBrains Mono">γ</text>
+        <text x="250" y="30" fill="#55557a" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">2 photons (E = 2 × 0.511 MeV each at rest)</text>
+      </svg>
+      <figcaption>Fig 2.2 — Electron-positron annihilation. When a particle meets its antiparticle, they annihilate to produce photons. Two photons are required (minimum) to conserve both energy and momentum. The total charge 0 is conserved throughout. Each photon has energy ≥ m<sub>e</sub>c² = 0.511 MeV.</figcaption>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-title">Note — self-conjugate particles</div>
+      Some particles are their own antiparticle — they are <em>self-conjugate</em>. Examples: the photon (γ), the neutral pion (π⁰), the Z⁰ boson, and the η meson. The neutron is <em>not</em> self-conjugate — it has a distinct antineutron with B = −1. The decisive test is baryon number B or lepton number L: if both are zero, the particle may be self-conjugate (though still may not be — depends on other quantum numbers).
+    </div>
+
+    <div class="qa-block">
+      <h4>Questions — Section 2</h4>
+      <details class="qa">
+        <summary>Why must at least two photons be produced in electron-positron annihilation? Why not just one?</summary>
+        <div class="qa-ans">
+          In the centre-of-mass (CM) frame of the e⁺e⁻ pair at rest, the total momentum is zero. A single photon always carries nonzero momentum (p = E/c ≠ 0), so it would violate conservation of momentum. Therefore, at minimum, two photons must be emitted in opposite directions so their momenta cancel to give zero net momentum. The two photons each have energy E = m<sub>e</sub>c² = 0.511 MeV (when the pair is essentially at rest). This 511 keV γ-ray line is a characteristic signature of positron annihilation used in PET scanning.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What is the difference between a baryon and a meson in terms of quark content and quantum numbers?</summary>
+        <div class="qa-ans">
+          <strong>Baryons</strong> are composed of three quarks (qqq). Each quark has B = +1/3, so a baryon has B = 3 × 1/3 = +1. Baryons are fermions (half-integer spin) because combining 3 spin-½ particles gives half-integer total spin (½ or 3/2). Examples: p (uud), n (udd), Λ (uds), Ω⁻ (sss).<br><br>
+          <strong>Mesons</strong> are composed of one quark and one antiquark (qq̄). A quark has B = +1/3, antiquark has B = −1/3, so B = 0 for mesons. Mesons are bosons (integer spin) since combining spin-½ and spin-½ gives spin 0 or 1. Examples: π⁺ (ud̄), K⁰ (ds̄), J/ψ (cc̄). All mesons are unstable.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══════════════ S-3 ═══════════════ -->
+<section class="lec" id="s3">
+  <div class="lec-header">
+    <div class="lec-num">S<br>3</div>
+    <div class="lec-title-block">
+      <h2>Leptons — Properties &amp; Discovery</h2>
+      <div class="lec-date">Topic · The lightest fermions and their antiparticles</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>Leptons are the simplest elementary particles — structureless, spin-½ fermions that do <em>not</em> participate in the strong nuclear interaction. There are six leptons (plus six antileptons), arranged in three generations of increasing mass.</p>
+
+    <div class="box box-teal">
+      <div class="box-title">Key Properties of All Leptons</div>
+      1. Point-like — no observed internal structure down to ∼10⁻¹⁸ m<br>
+      2. Spin ½ — obey Fermi-Dirac statistics, subject to Pauli exclusion<br>
+      3. <strong>No strong interaction</strong> — feel only gravity, weak force, and (if charged) electromagnetism<br>
+      4. Three conserved lepton numbers: L<sub>e</sub>, L<sub>μ</sub>, L<sub>τ</sub> — each separately conserved (approximately)
+    </div>
+
+    <h3>The Lepton Table</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Gen</th><th>Lepton</th><th>Symbol</th><th>Charge</th><th>Mass (MeV/c²)</th><th>Lifetime (s)</th><th>Principal decay</th></tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2"><strong>1st</strong></td><td>Electron</td><td>e⁻</td><td>−1</td><td>0.51100</td><td>∞ (stable)</td><td>—</td></tr>
+          <tr><td>Electron neutrino</td><td>ν<sub>e</sub></td><td>0</td><td>&lt; 2 eV/c²</td><td>∞</td><td>—</td></tr>
+          <tr><td rowspan="2"><strong>2nd</strong></td><td>Muon</td><td>μ⁻</td><td>−1</td><td>105.658</td><td>2.197 × 10⁻⁶</td><td>e⁻ ν̄<sub>e</sub> ν<sub>μ</sub></td></tr>
+          <tr><td>Muon neutrino</td><td>ν<sub>μ</sub></td><td>0</td><td>&lt; 0.19 MeV/c²</td><td>∞</td><td>—</td></tr>
+          <tr><td rowspan="2"><strong>3rd</strong></td><td>Tau</td><td>τ⁻</td><td>−1</td><td>1776.9</td><td>2.9 × 10⁻¹³</td><td>μ⁻ ν̄<sub>μ</sub> ν<sub>τ</sub>, e⁻ ν̄<sub>e</sub> ν<sub>τ</sub></td></tr>
+          <tr><td>Tau neutrino</td><td>ν<sub>τ</sub></td><td>0</td><td>&lt; 18.2 MeV/c²</td><td>∞</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Discovery of the Positron — Anderson's Experiment (1932)</h3>
+    <p>The positron was the first antiparticle ever observed, confirming Dirac's 1928 prediction. Carl Anderson discovered it while studying cosmic rays using a cloud chamber in a magnetic field.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:540px;">
+        <defs>
+          <marker id="arrb" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#f0b347"/>
+          </marker>
+        </defs>
+        <!-- Chamber outline -->
+        <rect x="30" y="20" width="460" height="260" rx="10" fill="#0f0f1c" stroke="#2a2a4a" stroke-width="1.5"/>
+        <!-- Magnetic field arrows (pointing into page represented by ×) -->
+        <text x="50" y="45" fill="#55557a" font-size="9" font-family="JetBrains Mono">B (into page) →</text>
+        <text x="80" y="55" fill="#55557a" font-size="8" font-family="JetBrains Mono">× × × × × × × × × × × ×</text>
+        <text x="80" y="68" fill="#55557a" font-size="8" font-family="JetBrains Mono">× × × × × × × × × × × ×</text>
+
+        <!-- Lead plate -->
+        <rect x="80" y="140" width="360" height="14" fill="#3d3d6a" rx="2"/>
+        <text x="265" y="151" fill="#8888b0" font-size="10" text-anchor="middle" font-family="JetBrains Mono">LEAD PLATE (6 mm)</text>
+
+        <!-- Electron track (below the plate — larger radius, more energy) -->
+        <!-- Entry side arc (below plate): larger radius -->
+        <path d="M 200 280 Q 140 230 150 154" fill="none" stroke="#3dd6c4" stroke-width="2"/>
+        <text x="140" y="250" fill="#3dd6c4" font-size="9" font-family="JetBrains Mono">entering</text>
+        <text x="125" y="262" fill="#3dd6c4" font-size="9" font-family="JetBrains Mono">positron</text>
+        <text x="115" y="275" fill="#55557a" font-size="8" font-family="JetBrains Mono">r₁ (larger)</text>
+        <!-- Exit side arc (above plate): smaller radius (more curved, lost energy) -->
+        <path d="M 150 140 Q 175 95 230 80" fill="none" stroke="#f05c7a" stroke-width="2" marker-end="url(#arrb)"/>
+        <text x="225" y="70" fill="#f05c7a" font-size="9" font-family="JetBrains Mono">exiting positron</text>
+        <text x="225" y="82" fill="#55557a" font-size="8" font-family="JetBrains Mono">r₂ &lt; r₁ (smaller)</text>
+
+        <!-- Label showing curving direction in B -->
+        <text x="390" y="100" fill="#8888b0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">B field into page</text>
+        <text x="390" y="112" fill="#8888b0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">positive charge</text>
+        <text x="390" y="124" fill="#8888b0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">curves rightward</text>
+        <text x="390" y="175" fill="#55557a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">same curvature</text>
+        <text x="390" y="187" fill="#55557a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">direction → confirms</text>
+        <text x="390" y="199" fill="#55557a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">positive charge</text>
+
+        <!-- Formula -->
+        <text x="340" y="250" fill="#f0b347" font-size="11" font-family="JetBrains Mono" text-anchor="middle">r = mv / qB</text>
+        <text x="340" y="264" fill="#55557a" font-size="9" font-family="JetBrains Mono" text-anchor="middle">momentum loss in Pb → r decreases</text>
+      </svg>
+      <figcaption>Fig 3.1 — Anderson's cloud chamber setup for positron discovery. A 6 mm lead plate across the middle slows the particle. Since the radius r = mv/qB decreases when momentum decreases (energy lost in lead), the more curved track on the exit side tells us the direction of travel. The curvature direction in the magnetic field confirmed positive charge. The ionisation density matched an electron mass — hence: positron.</figcaption>
+    </div>
+
+    <div class="box box-concept">
+      <div class="box-title">The Key Argument — Why Lead Was Needed</div>
+      Without the lead plate, one cannot tell which direction the particle was moving. A negative particle moving upward curves the same way as a positive particle moving downward. Anderson inserted the lead plate precisely to <em>break this degeneracy</em>. Since momentum is lost in the plate (r = mv/qB decreases), the more curved (smaller radius) arc is the exit side. Combined with the curvature direction in the known B field, this uniquely determines both the charge sign and the direction of motion. The ionisation density along the track (proportional to the particle's charge²/v²) confirmed the particle had electron mass, not proton mass.
+    </div>
+
+    <h3>Lepton Number Conservation</h3>
+    <p>Each generation of lepton carries its own conserved quantum number L<sub>e</sub>, L<sub>μ</sub>, L<sub>τ</sub>. For leptons: L = +1; for antileptons: L = −1; for all others: L = 0.</p>
+    <div class="box box-key">
+      <div class="box-title">Example — Muon Decay</div>
+      μ⁻ → e⁻ + ν̄<sub>e</sub> + ν<sub>μ</sub><br><br>
+      Check L<sub>e</sub>: 0 → +1 + (−1) + 0 = 0 ✓<br>
+      Check L<sub>μ</sub>: +1 → 0 + 0 + 1 = 1 ✓<br><br>
+      The process μ⁻ → e⁻ + γ is <em>forbidden</em> — it would violate L<sub>μ</sub> = 1 → 0 and L<sub>e</sub> = 0 → 1. The branching ratio is &lt;10⁻¹¹, an extraordinarily tight constraint.
+    </div>
+
+    <h3>Discovery Timeline</h3>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-year">1897</div><div class="tl-dot"></div><div class="tl-content"><strong>Electron</strong> discovered by J.J. Thomson via cathode ray deflection experiments. First subatomic particle identified.</div></div>
+      <div class="tl-item"><div class="tl-year">1928</div><div class="tl-dot"></div><div class="tl-content"><strong>Positron predicted</strong> by P.A.M. Dirac from his relativistic wave equation — the "negative energy sea" implied an antielectron.</div></div>
+      <div class="tl-item"><div class="tl-year">1932</div><div class="tl-dot"></div><div class="tl-content"><strong>Positron discovered</strong> by C.D. Anderson in cosmic ray tracks. <span class="tag tag-nobel">Nobel 1936</span></div></div>
+      <div class="tl-item"><div class="tl-year">1936</div><div class="tl-dot"></div><div class="tl-content"><strong>Muon discovered</strong> by C.D. Anderson &amp; Seth Neddermeyer in cosmic rays. Initially mistaken for Yukawa's predicted pion.</div></div>
+      <div class="tl-item"><div class="tl-year">1975</div><div class="tl-dot"></div><div class="tl-content"><strong>Tau lepton discovered</strong> by Martin Perl's group at SLAC from e⁺e⁻ collisions at SPEAR. <span class="tag tag-nobel">Nobel 1995</span></div></div>
+    </div>
+
+    <div class="qa-block">
+      <h4>Questions — Section 3</h4>
+      <details class="qa">
+        <summary>The muon has the same charge and spin as the electron but is 207 times heavier. It decays in 2.2 μs. Why does it not decay into just an electron and a photon?</summary>
+        <div class="qa-ans">
+          The decay μ⁻ → e⁻ + γ is forbidden by lepton number conservation. Assigning L<sub>μ</sub>(μ⁻) = +1 and L<sub>e</sub>(e⁻) = +1: the initial state has L<sub>μ</sub> = 1, L<sub>e</sub> = 0. The final state has L<sub>μ</sub> = 0, L<sub>e</sub> = 1. Both muon and electron lepton numbers change — this violates separate conservation of L<sub>μ</sub> and L<sub>e</sub>. The allowed decay μ⁻ → e⁻ + ν̄<sub>e</sub> + ν<sub>μ</sub> preserves both: L<sub>μ</sub> changes 1 → 0 + 0 + 1 = 1 ✓ and L<sub>e</sub> changes 0 → 1 − 1 + 0 = 0 ✓. The neutrinos carry away the "missing" lepton numbers.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why is the electron stable while the muon decays? What would happen if lepton number were not conserved?</summary>
+        <div class="qa-ans">
+          The electron is stable because it is the <em>lightest charged lepton</em>. Any decay would have to produce a lighter charged particle — but there is none. The only lighter particle with charge −1 would need to be a lighter lepton, which doesn't exist. It also cannot decay into only neutral particles (photons) and conserve electric charge. So by conservation of electric charge alone, the electron is absolutely stable.<br><br>
+          If lepton number were not conserved, the muon could decay via μ⁻ → e⁻ + γ (much faster, dominant channel). The branching ratio for this mode is &lt;4.2 × 10⁻¹³, an exquisitely sensitive test. If seen, it would signal physics beyond the Standard Model (e.g., supersymmetric particles in loops). Experiments like MEG-II search for this decay.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why did Anderson need a magnetic field in the cloud chamber to discover the positron?</summary>
+        <div class="qa-ans">
+          The cloud chamber makes visible the ionisation trails left by charged particles passing through supersaturated vapour. Without a magnetic field, the trail is a straight line and tells you only the direction of travel — not the charge sign or momentum. In a magnetic field B, a particle of charge q and momentum p follows a circular arc with radius r = p/(qB). From r one gets the momentum. The sign of the curvature tells you the sign of the charge (positive charge curves one way, negative charge curves the other). Without B, Anderson could not have distinguished a positron from an electron.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══════════════ S-4 ═══════════════ -->
+<section class="lec" id="s4">
+  <div class="lec-header">
+    <div class="lec-num">S<br>4</div>
+    <div class="lec-title-block">
+      <h2>Neutrinos — From Hypothesis to Oscillation</h2>
+      <div class="lec-date">Topic · The ghost particles of the universe</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>The Beta Decay Puzzle — Why Pauli Needed a New Particle</h3>
+
+    <p>In β-decay, a nucleus transforms: <span class="eq-inline">A(Z,N) → A(Z+1,N−1) + e⁻</span>. If only the nucleus and electron exist in the final state, energy-momentum conservation requires the electron to have a <em>unique, fixed energy</em> (like in α-decay). But experiments revealed a <em>continuous spectrum</em>:</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;">
+        <!-- Axes -->
+        <line x1="60" y1="170" x2="420" y2="170" stroke="#3d3d6a" stroke-width="1.5"/>
+        <line x1="60" y1="30" x2="60" y2="170" stroke="#3d3d6a" stroke-width="1.5"/>
+        <!-- Axis labels -->
+        <text x="240" y="195" fill="#55557a" font-size="11" text-anchor="middle" font-family="JetBrains Mono">Electron kinetic energy</text>
+        <text x="20" y="100" fill="#55557a" font-size="11" text-anchor="middle" font-family="JetBrains Mono" transform="rotate(-90 20 100)">N(E)</text>
+        <!-- Endpoint line -->
+        <line x1="360" y1="30" x2="360" y2="170" stroke="#f05c7a" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="362" y="28" fill="#f05c7a" font-size="9" font-family="JetBrains Mono">E_max</text>
+        <text x="362" y="40" fill="#f05c7a" font-size="8" font-family="JetBrains Mono">(endpoint)</text>
+        <!-- Expected sharp line (2-body) -->
+        <line x1="360" y1="60" x2="360" y2="170" stroke="#f0b347" stroke-width="2.5"/>
+        <text x="390" y="60" fill="#f0b347" font-size="9" font-family="JetBrains Mono">Expected</text>
+        <text x="390" y="72" fill="#f0b347" font-size="9" font-family="JetBrains Mono">(2-body)</text>
+        <!-- Observed continuous curve -->
+        <path d="M 70 170 Q 150 60 240 50 Q 310 48 360 170" fill="rgba(61,214,196,0.1)" stroke="#3dd6c4" stroke-width="2"/>
+        <text x="200" y="40" fill="#3dd6c4" font-size="9" font-family="JetBrains Mono">Observed</text>
+        <text x="200" y="52" fill="#3dd6c4" font-size="9" font-family="JetBrains Mono">continuous</text>
+        <!-- Arrows -->
+        <text x="70" y="185" fill="#55557a" font-size="8" font-family="JetBrains Mono">0</text>
+      </svg>
+      <figcaption>Fig 4.1 — The continuous β-decay electron energy spectrum. If β-decay were a two-body process (nucleus + e⁻ only), the electron would always have the same fixed energy E<sub>max</sub> (yellow line). Instead, a continuous distribution is observed (teal curve), with the electron taking any energy from 0 to E<sub>max</sub>. Pauli proposed in 1930 that a third particle (neutrino) takes the remaining energy.</figcaption>
+    </div>
+
+    <div class="box box-concept">
+      <div class="box-title">Pauli's Letter (1930) — The Desperate Remedy</div>
+      Wolfgang Pauli wrote his famous letter beginning <em>"Dear Radioactive Ladies and Gentlemen"</em> at a physics conference in Tübingen in 1930, proposing a "neutron" (later renamed neutrino by Fermi) to save the law of conservation of energy in β-decay. He required the new particle to be:<br><br>
+      (1) electrically neutral, (2) spin-½, (3) very light mass, (4) very weakly interacting. He admitted: <em>"I have done a terrible thing; I have postulated a particle that cannot be detected."</em> It took 23 years to prove him wrong.
+    </div>
+
+    <h3>Detection of the Electron Antineutrino — Cowan &amp; Reines (1953)</h3>
+    <p>The key reaction used was <em>inverse beta decay</em>:</p>
+    <div class="eq-block">
+      p + ν̄<sub>e</sub> → e⁺ + n
+      <span class="eq-label">inverse β-decay</span>
+    </div>
+    <p>The signature: a positron annihilates immediately (two 511 keV photons), then the slow neutron is captured by cadmium a few microseconds later (more photons). This delayed coincidence is a very specific signature.</p>
+
+    <div class="box box-sage">
+      <div class="box-title">The Cowan-Reines Experiment — Setup</div>
+      A nuclear reactor at Hanford, USA emits ∼5 × 10¹² ν̄<sub>e</sub>/cm²/s. A large tank filled with water + cadmium chloride was placed near the reactor core. Liquid scintillators surrounded the tank. Despite the enormous flux, only a few interactions per hour were observed — confirming that the interaction cross-section is ∼10⁻⁴³ cm² (extraordinarily small). Frederick Reines was awarded the <span class="tag tag-nobel">Nobel Prize 1995</span>.
+    </div>
+
+    <h3>The Three Neutrino Types</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Discovery</th><th>Lab / Group</th><th>Nobel</th></tr></thead>
+        <tbody>
+          <tr><td>Electron neutrino ν<sub>e</sub></td><td>1953 — Cowan &amp; Reines</td><td>Hanford reactor, USA</td><td>1995 (Reines)</td></tr>
+          <tr><td>Muon neutrino ν<sub>μ</sub></td><td>1962 — Lederman, Schwartz, Steinberger</td><td>Brookhaven National Lab</td><td>1988</td></tr>
+          <tr><td>Tau neutrino ν<sub>τ</sub></td><td>2000 — DONUT collaboration</td><td>Fermilab, USA</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The existence of ν<sub>μ</sub> was confirmed by showing that the neutrinos from pion decay (π⁺ → μ⁺ + ν) produce muons but never electrons when they interact — proving the muon neutrino is a distinct particle from the electron neutrino.</p>
+
+    <h3>Neutrino Oscillation and the Solar Neutrino Problem</h3>
+    <p>The Sun generates energy via the proton-proton chain, producing only ν<sub>e</sub>. The flux predicted by the Standard Solar Model (SSM) is well-calculated. But experiments (Davis's Homestake Mine chlorine detector, 1968) found only <strong>⅓</strong> of the predicted ν<sub>e</sub> — the "Solar Neutrino Problem".</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;">
+        <defs>
+          <marker id="arrneu" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#f0b347"/>
+          </marker>
+        </defs>
+        <!-- Sun -->
+        <circle cx="70" cy="130" r="35" fill="#f0b347" opacity=".15"/>
+        <circle cx="70" cy="130" r="22" fill="#f0b347" opacity=".3"/>
+        <text x="70" y="135" fill="#f0b347" font-size="11" text-anchor="middle" font-family="Outfit">SUN</text>
+        <text x="70" y="180" fill="#f0b347" font-size="9" text-anchor="middle" font-family="JetBrains Mono">100% ν_e</text>
+
+        <!-- Arrow -->
+        <line x1="110" y1="130" x2="215" y2="130" stroke="#f0b347" stroke-width="1.5" marker-end="url(#arrneu)"/>
+        <text x="163" y="120" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">1.5 × 10⁸ km</text>
+
+        <!-- Oscillation cloud -->
+        <ellipse cx="280" cy="130" rx="55" ry="40" fill="rgba(122,140,255,0.05)" stroke="#7a8cff" stroke-width="1" stroke-dasharray="4,2"/>
+        <text x="280" y="105" fill="#7a8cff" font-size="9" text-anchor="middle" font-family="JetBrains Mono">oscillation zone</text>
+        <text x="255" y="125" fill="#f05c7a" font-size="10" font-family="JetBrains Mono">ν_e</text>
+        <text x="280" y="133" fill="#3dd6c4" font-size="10" font-family="JetBrains Mono">⇄ ν_μ</text>
+        <text x="280" y="148" fill="#7adf90" font-size="10" font-family="JetBrains Mono">⇄ ν_τ</text>
+
+        <!-- Earth detector -->
+        <circle cx="430" cy="130" r="25" fill="#3d3d6a" opacity=".5"/>
+        <text x="430" y="128" fill="#dcdcf0" font-size="9" text-anchor="middle" font-family="Outfit">Earth</text>
+        <text x="430" y="142" fill="#8888b0" font-size="8" text-anchor="middle" font-family="Outfit">detector</text>
+        <text x="430" y="170" fill="#f05c7a" font-size="9" text-anchor="middle" font-family="JetBrains Mono">~⅓ ν_e</text>
+        <text x="430" y="183" fill="#3dd6c4" font-size="9" text-anchor="middle" font-family="JetBrains Mono">+ ⅓ ν_μ</text>
+        <text x="430" y="196" fill="#7adf90" font-size="9" text-anchor="middle" font-family="JetBrains Mono">+ ⅓ ν_τ</text>
+        <!-- arrow to earth -->
+        <line x1="338" y1="130" x2="402" y2="130" stroke="#f0b347" stroke-width="1.5" marker-end="url(#arrneu)"/>
+
+        <!-- explanation box -->
+        <rect x="40" y="215" width="420" height="38" rx="4" fill="#0f0f1c" stroke="#2a2a4a"/>
+        <text x="250" y="229" fill="#8888b0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">Oscillation is only possible if neutrinos have MASS.</text>
+        <text x="250" y="244" fill="#55557a" font-size="8.5" text-anchor="middle" font-family="JetBrains Mono">A massless particle travels at c — its internal quantum state cannot evolve in time.</text>
+      </svg>
+      <figcaption>Fig 4.2 — Solar neutrino oscillation. Electron neutrinos (ν<sub>e</sub>) produced in the solar core oscillate between ν<sub>e</sub>, ν<sub>μ</sub>, and ν<sub>τ</sub> flavours during their 8-minute journey to Earth. Early detectors sensitive only to ν<sub>e</sub> saw only ⅓ of the expected flux. The SNO detector (Canada, 2001) measured all three flavours, confirming the total flux matched SSM predictions and that ν<sub>e</sub> had oscillated.</figcaption>
+    </div>
+
+    <div class="box box-key">
+      <div class="box-title">Why Oscillation Requires Mass</div>
+      In quantum mechanics, a neutrino created as ν<sub>e</sub> (a flavour eigenstate) is actually a quantum superposition of three mass eigenstates (ν<sub>1</sub>, ν<sub>2</sub>, ν<sub>3</sub>) with different masses m₁, m₂, m₃. Each mass eigenstate evolves with a different phase e<sup>−iE<sub>k</sub>t/ℏ</sup>. If all masses were equal (including zero), all phases would evolve identically and the superposition would never change — no oscillation. Only when Δm² = m<sub>i</sub>² − m<sub>j</sub>² ≠ 0 do the phases diverge, causing the flavour composition to change with time. Thus oscillation ↔ mass differences ↔ at least some m<sub>ν</sub> ≠ 0.
+    </div>
+
+    <p>The <span class="tag tag-nobel">2015 Nobel Prize in Physics</span> was awarded to <strong>Takaaki Kajita</strong> (Super-Kamiokande, Japan) and <strong>Arthur B. McDonald</strong> (SNO, Canada) for the discovery of neutrino oscillations.</p>
+
+    <div class="qa-block">
+      <h4>Questions — Section 4</h4>
+      <details class="qa">
+        <summary>How does the detection of neutrinos via inverse beta decay work, and why is the cross-section so small?</summary>
+        <div class="qa-ans">
+          Inverse beta decay: p + ν̄<sub>e</sub> → e⁺ + n. The cross-section is approximately σ ≈ G<sub>F</sub>²E<sub>ν</sub>²/π where G<sub>F</sub> ≈ 1.166 × 10⁻⁵ GeV⁻² is the Fermi constant. At typical reactor antineutrino energies (E<sub>ν</sub> ∼ few MeV), σ ∼ 10⁻⁴³ cm². To compare: the proton geometric cross-section is ∼10⁻²⁶ cm². So the neutrino cross-section is 10¹⁷ times smaller than the geometric size of the proton.<br><br>
+          The smallness arises because neutrinos interact only via the weak force. The weak force is "weak" because its carriers (W±, Z⁰ bosons) are very heavy (∼80–90 GeV), suppressing the interaction amplitude at low energies by a factor of (E/M<sub>W</sub>)² ≪ 1. This is why a neutrino can travel through a light-year of lead with only 50% probability of interaction.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What experiment resolved the solar neutrino problem and how?</summary>
+        <div class="qa-ans">
+          The Sudbury Neutrino Observatory (SNO) in Canada used 1000 tonnes of heavy water (D₂O). SNO could detect three reactions:<br><br>
+          (1) Charged current: ν<sub>e</sub> + d → p + p + e⁻ — sensitive only to ν<sub>e</sub><br>
+          (2) Neutral current: ν<sub>x</sub> + d → p + n + ν<sub>x</sub> — sensitive to all flavours equally<br>
+          (3) Elastic scattering: ν<sub>x</sub> + e⁻ → ν<sub>x</sub> + e⁻ — mostly ν<sub>e</sub> but some contribution from ν<sub>μ</sub>, ν<sub>τ</sub><br><br>
+          The neutral current reaction (2) measures the total neutrino flux regardless of flavour. SNO found that the total flux agreed with SSM predictions, but the ν<sub>e</sub> flux was only ∼1/3 of that. This proved that ν<sub>e</sub> had oscillated into ν<sub>μ</sub> and ν<sub>τ</sub> en route — not that the Sun was producing fewer neutrinos. The solar neutrino problem was solved.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══════════════ S-5 ═══════════════ -->
+<section class="lec" id="s5">
+  <div class="lec-header">
+    <div class="lec-num">S<br>5</div>
+    <div class="lec-title-block">
+      <h2>Hadrons — Mesons, Baryons &amp; Strange Particles</h2>
+      <div class="lec-date">Topic · The strongly interacting particle zoo</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>Hadrons are composite particles that interact via the strong nuclear force. By the early 1960s, over 100 hadron species had been discovered — earning the description <em>"particle zoo"</em>. Understanding this zoo required the quark model.</p>
+
+    <div class="grid2">
+      <div class="box box-teal">
+        <div class="box-title">Mesons</div>
+        Quark content: q + q̄ &nbsp;(baryon number B = 0)<br>
+        Spin: integer (0, 1, 2…) → bosons<br>
+        All are <strong>unstable</strong>. Outside nuclei, they are short-lived products of high-energy collisions.<br>
+        Heavier mesons decay into lighter mesons and ultimately into stable e⁻, ν, γ.
+      </div>
+      <div class="box box-rose" style="background:rgba(240,92,122,.06);border-left:3px solid var(--rose);">
+        <div class="box-title" style="color:var(--rose)">Baryons</div>
+        Quark content: q + q + q &nbsp;(baryon number B = +1)<br>
+        Spin: half-integer (½, 3/2…) → fermions<br>
+        The <strong>proton is the only stable baryon</strong>. All others eventually decay into protons.<br>
+        Baryons with S ≠ 0 are called <strong>hyperons</strong>.
+      </div>
+    </div>
+
+    <h3>Key Mesons</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Meson</th><th>Quarks</th><th>Charge</th><th>Mass (MeV/c²)</th><th>Lifetime (s)</th><th>Main decay</th><th>S</th></tr></thead>
+        <tbody>
+          <tr><td>π⁺</td><td>ud̄</td><td>+1</td><td>139.57</td><td>2.60 × 10⁻⁸</td><td>μ⁺ ν<sub>μ</sub></td><td>0</td></tr>
+          <tr><td>π⁰</td><td>(uū−dd̄)/√2</td><td>0</td><td>134.98</td><td>8.7 × 10⁻¹⁷</td><td>γγ (~98%)</td><td>0</td></tr>
+          <tr><td>π⁻</td><td>ūd</td><td>−1</td><td>139.57</td><td>2.60 × 10⁻⁸</td><td>μ⁻ ν̄<sub>μ</sub></td><td>0</td></tr>
+          <tr><td>K⁺</td><td>us̄</td><td>+1</td><td>493.68</td><td>1.24 × 10⁻⁸</td><td>μ⁺ ν<sub>μ</sub></td><td>+1</td></tr>
+          <tr><td>K⁰</td><td>ds̄</td><td>0</td><td>497.61</td><td>K<sub>S</sub>: 0.89×10⁻¹⁰ / K<sub>L</sub>: 5.1×10⁻⁸</td><td>π⁺π⁻ / πe ν</td><td>+1</td></tr>
+          <tr><td>η</td><td>(uū+dd̄−2ss̄)/√6</td><td>0</td><td>547.9</td><td>5.0 × 10⁻¹⁹</td><td>γγ, π⁰γγ</td><td>0</td></tr>
+          <tr><td>J/ψ</td><td>cc̄</td><td>0</td><td>3097</td><td>7.2 × 10⁻²¹</td><td>e⁺e⁻, μ⁺μ⁻</td><td>0</td></tr>
+          <tr><td>Υ</td><td>bb̄</td><td>0</td><td>9460</td><td>1.2 × 10⁻²⁰</td><td>μ⁺μ⁻, τ⁺τ⁻</td><td>0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Key Baryons</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Baryon</th><th>Quarks</th><th>Charge</th><th>Mass (MeV/c²)</th><th>Lifetime (s)</th><th>S</th></tr></thead>
+        <tbody>
+          <tr><td>p (proton)</td><td>uud</td><td>+1</td><td>938.27</td><td>∞ (stable)</td><td>0</td></tr>
+          <tr><td>n (neutron)</td><td>udd</td><td>0</td><td>939.57</td><td>879.6</td><td>0</td></tr>
+          <tr><td>Δ⁺⁺</td><td>uuu</td><td>+2</td><td>1232</td><td>5.6 × 10⁻²⁴</td><td>0</td></tr>
+          <tr><td>Λ⁰</td><td>uds</td><td>0</td><td>1115.7</td><td>2.63 × 10⁻¹⁰</td><td>−1</td></tr>
+          <tr><td>Σ⁺</td><td>uus</td><td>+1</td><td>1189.4</td><td>8.02 × 10⁻¹¹</td><td>−1</td></tr>
+          <tr><td>Σ⁰</td><td>uds</td><td>0</td><td>1192.6</td><td>7.4 × 10⁻²⁰</td><td>−1</td></tr>
+          <tr><td>Σ⁻</td><td>dds</td><td>−1</td><td>1197.4</td><td>1.48 × 10⁻¹⁰</td><td>−1</td></tr>
+          <tr><td>Ξ⁰</td><td>uss</td><td>0</td><td>1314.9</td><td>2.90 × 10⁻¹⁰</td><td>−2</td></tr>
+          <tr><td>Ξ⁻</td><td>dss</td><td>−1</td><td>1321.7</td><td>1.64 × 10⁻¹⁰</td><td>−2</td></tr>
+          <tr><td>Ω⁻</td><td>sss</td><td>−1</td><td>1672.5</td><td>8.21 × 10⁻¹¹</td><td>−3</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Strange Particles — The Production-Decay Puzzle</h3>
+    <p>Kaons (K) and hyperons (Λ, Σ, Ξ, Ω) exhibited two bizarre properties when first observed in the early 1950s:</p>
+
+    <div class="box box-warn">
+      <div class="box-title">The Strange Behaviour</div>
+      <strong>(1) Always produced in pairs:</strong> π⁻ + p → K⁰ + Λ is observed, but π⁻ + p → K⁰ alone never occurs.<br><br>
+      <strong>(2) Production is fast, decay is slow:</strong> Strange particles are created via the strong interaction (τ ∼ 10⁻²³ s) but decay via the weak interaction (τ ∼ 10⁻¹⁰ s). This 13-order-of-magnitude discrepancy was completely mysterious until strangeness was introduced.
+    </div>
+
+    <p>In 1953, Gell-Mann and Nishijima independently proposed a new additive quantum number <em>strangeness S</em>, conserved in strong and electromagnetic interactions but violated (by ΔS = ±1) in the weak interaction. This explained both puzzles simultaneously.</p>
+
+    <div class="qa-block">
+      <h4>Questions — Section 5</h4>
+      <details class="qa">
+        <summary>The Δ⁺⁺ baryon has quark content uuu. Why does this apparently violate the Pauli Exclusion Principle, and how is it resolved?</summary>
+        <div class="qa-ans">
+          The Δ⁺⁺ has spin-3/2, which means all three quarks have their spins aligned (spin-up). All three quarks are also of the same flavour (u) and in the same spatial ground state (l=0). This seems to put three identical fermions in the same quantum state — violating Pauli exclusion.<br><br>
+          The resolution is <strong>colour charge</strong>. Each quark carries one of three colour charges: red (R), green (G), blue (B). The three u quarks in Δ⁺⁺ each have a <em>different colour</em>: one R, one G, one B. Their overall wavefunction is:<br><br>
+          ψ<sub>total</sub> = ψ<sub>spatial</sub> × ψ<sub>spin</sub> × ψ<sub>colour</sub><br><br>
+          The colour part ψ<sub>colour</sub> = (RGB − RBG + BRG − BGR + GBR − GRB)/√6 is <em>totally antisymmetric</em> under exchange. The spatial and spin parts are symmetric. The product is antisymmetric overall — satisfying Pauli. This is one of the strongest pieces of evidence for the existence of colour.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why does π⁰ decay to two photons but π⁺ cannot?</summary>
+        <div class="qa-ans">
+          π⁰ is electrically neutral (charge = 0), so it can decay to γγ (photons carry no charge — no charge conservation problem). The dominant decay π⁰ → 2γ (∼98.8%) proceeds via the axial anomaly (a quantum field theory effect involving quark triangle diagrams). The lifetime is 8.7 × 10⁻¹⁷ s — very short because it is an electromagnetic process.<br><br>
+          π⁺ has electric charge +1. Photons are neutral, so π⁺ → γγ would violate charge conservation — strictly forbidden. The only way π⁺ can decay is by changing a quark flavour (u → d or d → u), which requires the weak interaction. Hence π⁺ decays weakly: π⁺ → μ⁺ + ν<sub>μ</sub> (~99.99%), with a much longer lifetime of 26 ns.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══════════════ S-6 ═══════════════ -->
+<section class="lec" id="s6">
+  <div class="lec-header">
+    <div class="lec-num">S<br>6</div>
+    <div class="lec-title-block">
+      <h2>Quantum Numbers — Organising the Particle Zoo</h2>
+      <div class="lec-date">Topic · Conserved charges and selection rules</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>Quantum numbers are conserved additive charges that label particles and constrain which reactions are allowed. Each conservation law corresponds to a symmetry (Noether's theorem).</p>
+
+    <h3>The Key Quantum Numbers</h3>
+
+    <div class="grid2">
+      <div class="box box-key">
+        <div class="box-title">Baryon Number (B)</div>
+        B = +1 for baryons, −1 for antibaryons, 0 for all others.<br>
+        <strong>Conserved in all known interactions.</strong><br>
+        Equivalent: each quark has B = +1/3, antiquark B = −1/3.
+      </div>
+      <div class="box box-concept">
+        <div class="box-title">Strangeness (S)</div>
+        S = −1 for s quark, S = +1 for s̄ antiquark, 0 for u,d quarks.<br>
+        <strong>Conserved in strong and EM interactions.</strong><br>
+        <strong>Violated (ΔS = ±1) in weak interactions.</strong>
+      </div>
+      <div class="box box-teal">
+        <div class="box-title">Hypercharge (Y)</div>
+        Y = S + B (Gell-Mann's definition).<br>
+        After charm etc.: Y = S + B + C + B' + T.<br>
+        Conserved same as strangeness.
+      </div>
+      <div class="box box-sage">
+        <div class="box-title">Isospin (I, I₃)</div>
+        Introduced by Heisenberg (1932). Nuclear force is <em>charge-independent</em> — p and n are two states of the same "nucleon" (isospin doublet I=½).<br>
+        I₃ distinguishes multiplet members. Conserved in strong interactions only.
+      </div>
+    </div>
+
+    <h3>Strangeness Assignments</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>S value</th><th>Particles</th></tr></thead>
+        <tbody>
+          <tr><td>S = 0</td><td>p, n, π±, π⁰, η, all Δ baryons</td></tr>
+          <tr><td>S = −1</td><td>Λ⁰, Σ±, Σ⁰, K⁻, K̄⁰</td></tr>
+          <tr><td>S = +1</td><td>K⁺, K⁰ (and their antiparticles)</td></tr>
+          <tr><td>S = −2</td><td>Ξ⁰, Ξ⁻ (also called "cascade" particles)</td></tr>
+          <tr><td>S = −3</td><td>Ω⁻</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Isospin Multiplets</h3>
+    <p>Particles nearly degenerate in mass, differing only in charge, are grouped into <em>isospin multiplets</em>. The multiplet number M = 2I + 1.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Multiplet</th><th>I</th><th>Members (I₃ values)</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Singlet</td><td>0</td><td>I₃ = 0</td><td>Λ⁰, η</td></tr>
+          <tr><td>Doublet</td><td>½</td><td>I₃ = +½, −½</td><td>p, n; K⁺, K⁰</td></tr>
+          <tr><td>Triplet</td><td>1</td><td>I₃ = +1, 0, −1</td><td>π⁺, π⁰, π⁻; Σ⁺, Σ⁰, Σ⁻</td></tr>
+          <tr><td>Quadruplet</td><td>3/2</td><td>I₃ = +3/2, +½, −½, −3/2</td><td>Δ⁺⁺, Δ⁺, Δ⁰, Δ⁻</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The Gell-Mann–Nishijima Formula</h3>
+    <p>Independently derived by Gell-Mann (USA) and Nishijima (Japan) in 1953–1955, this formula relates the electric charge to other quantum numbers:</p>
+    <div class="eq-block">
+      q/e = I₃ + (S + B)/2 = I₃ + Y/2
+      <span class="eq-label">Gell-Mann–Nishijima relation</span>
+    </div>
+    <p>After the discovery of charm, bottom, and top quarks, the generalised formula is:</p>
+    <div class="eq-block">
+      q/e = I₃ + (S + B + C + B' + T)/2
+      <span class="eq-label">generalised G-N relation (C = charmness, B' = bottomness, T = topness)</span>
+    </div>
+
+    <details class="deriv">
+      <summary>▶ Verify the G-N formula for the proton, neutron, K⁺, and Ω⁻</summary>
+      <div class="deriv-body">
+        <strong>Proton (p, uud):</strong> B=+1, S=0 → Y=1; I₃=+½ (member of nucleon doublet). q/e = +½ + 1/2 = +1 ✓<br><br>
+        <strong>Neutron (n, udd):</strong> B=+1, S=0 → Y=1; I₃=−½. q/e = −½ + 1/2 = 0 ✓<br><br>
+        <strong>K⁺ (us̄):</strong> B=0, S=+1 → Y=1; I₃=+½ (member of kaon doublet). q/e = +½ + 1/2 = +1 ✓<br><br>
+        <strong>Ω⁻ (sss):</strong> B=+1, S=−3 → Y=−2; I₃=0 (singlet). q/e = 0 + (−2)/2 = −1 ✓<br><br>
+        The formula works for all hadrons when the correct quantum numbers are assigned.
+      </div>
+    </details>
+
+    <h3>Conservation Law Summary</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Quantity</th><th>Strong</th><th>Electromagnetic</th><th>Weak</th></tr></thead>
+        <tbody>
+          <tr><td>Electric charge q</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Baryon number B</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Lepton numbers L<sub>e</sub>, L<sub>μ</sub>, L<sub>τ</sub></td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Strangeness S</td><td>✓</td><td>✓</td><td>✗ (ΔS=±1)</td></tr>
+          <tr><td>Hypercharge Y</td><td>✓</td><td>✓</td><td>✗</td></tr>
+          <tr><td>Isospin I (total)</td><td>✓</td><td>✗</td><td>✗</td></tr>
+          <tr><td>I₃ component</td><td>✓</td><td>✓</td><td>✗</td></tr>
+          <tr><td>Parity P</td><td>✓</td><td>✓</td><td>✗ (maximal)</td></tr>
+          <tr><td>CP</td><td>✓</td><td>✓</td><td>✗ (small)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="qa-block">
+      <h4>Questions — Section 6</h4>
+      <details class="qa">
+        <summary>Is the reaction π⁻ + p → K⁰ + n allowed by the strong interaction? Check all conservation laws.</summary>
+        <div class="qa-ans">
+          Check all relevant quantum numbers:<br><br>
+          <strong>Charge:</strong> π⁻(−1) + p(+1) = 0 → K⁰(0) + n(0) = 0. ✓<br>
+          <strong>Baryon number:</strong> 0 + 1 = 1 → 0 + 1 = 1. ✓<br>
+          <strong>Strangeness:</strong> 0 + 0 = 0 → K⁰(S=+1) + n(0) = +1. ✗<br><br>
+          Strangeness changes from 0 to +1 (ΔS = +1). Since the strong interaction conserves strangeness, this reaction is <em>forbidden by the strong interaction</em>.<br><br>
+          However, it can proceed via the weak interaction (which allows ΔS = ±1), but with a much smaller cross-section. In practice, this reaction is effectively forbidden at energies typical for strong interaction processes.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Using the G-N formula, find the charge of the Xi-minus (Ξ⁻) with B=+1, S=−2, I₃=−½.</summary>
+        <div class="qa-ans">
+          Using q/e = I₃ + (S + B)/2:<br><br>
+          Y = S + B = (−2) + 1 = −1<br>
+          q/e = I₃ + Y/2 = (−½) + (−1)/2 = −½ − ½ = −1<br><br>
+          Therefore charge q = −1e. ✓ (Ξ⁻ is indeed singly negatively charged, consistent with its quark content dss: charges +⅔−⅓−⅓ wait — that's 0. Actually Ξ⁻ is dss: d(−1/3) + s(−1/3) + s(−1/3) = −1. ✓)
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══════════════ S-7 ═══════════════ -->
+<section class="lec" id="s7">
+  <div class="lec-header">
+    <div class="lec-num">S<br>7</div>
+    <div class="lec-title-block">
+      <h2>The Eightfold Way — Symmetry of Hadrons</h2>
+      <div class="lec-date">Topic · SU(3) flavour symmetry, weight diagrams &amp; the prediction of Ω⁻</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>By 1961, Murray Gell-Mann (USA) and Yuval Ne'eman (Israel) independently discovered that hadrons could be organised into geometrically beautiful families using the SU(3) Lie group. Gell-Mann named this the <em>Eightfold Way</em>, borrowing from the Buddhist Noble Eightfold Path. The theory not only organised known particles but predicted an unknown one — the Ω⁻.</p>
+
+    <div class="box box-concept">
+      <div class="box-title">Weight Diagrams</div>
+      Hadrons with the same spin-parity J<sup>P</sup> are plotted on a 2D diagram with I₃ on the horizontal axis and Y (hypercharge) on the vertical axis. The resulting geometric pattern reflects the underlying SU(3) symmetry. Lines of constant electric charge Q = I₃ + Y/2 run diagonally across the diagram.
+    </div>
+
+    <h3>Pseudoscalar Meson Octet (J<sup>P</sup> = 0⁻)</h3>
+
+    <div class="diagram">
+      <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:540px;">
+        <defs>
+          <marker id="axa" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#55557a"/>
+          </marker>
+        </defs>
+        <!-- Axes -->
+        <line x1="80" y1="265" x2="460" y2="265" stroke="#55557a" stroke-width="1" marker-end="url(#axa)"/>
+        <line x1="265" y1="290" x2="265" y2="30" stroke="#55557a" stroke-width="1" marker-end="url(#axa)"/>
+        <text x="465" y="270" fill="#55557a" font-size="11" font-family="JetBrains Mono">I₃</text>
+        <text x="270" y="28" fill="#55557a" font-size="11" font-family="JetBrains Mono">Y</text>
+
+        <!-- Y axis labels -->
+        <text x="50" y="110" fill="#55557a" font-size="10" font-family="JetBrains Mono" text-anchor="middle">+1</text>
+        <line x1="62" y1="107" x2="80" y2="107" stroke="#2a2a4a" stroke-width="0.5"/>
+        <text x="50" y="185" fill="#55557a" font-size="10" font-family="JetBrains Mono" text-anchor="middle">0</text>
+        <text x="50" y="265" fill="#55557a" font-size="10" font-family="JetBrains Mono" text-anchor="middle">−1</text>
+        <line x1="62" y1="262" x2="80" y2="262" stroke="#2a2a4a" stroke-width="0.5"/>
+
+        <!-- I3 labels -->
+        <text x="143" y="282" fill="#55557a" font-size="10" font-family="JetBrains Mono" text-anchor="middle">−1</text>
+        <text x="205" y="282" fill="#55557a" font-size="10" font-family="JetBrains Mono" text-anchor="middle">−½</text>
+        <text x="265" y="282" fill="#55557a" font-size="10" font-family="JetBrains Mono" text-anchor="middle">0</text>
+        <text x="325" y="282" fill="#55557a" font-size="10" font-family="JetBrains Mono" text-anchor="middle">+½</text>
+        <text x="388" y="282" fill="#55557a" font-size="10" font-family="JetBrains Mono" text-anchor="middle">+1</text>
+
+        <!-- Hexagon edges (meson octet) -->
+        <polygon points="205,107 325,107 388,185 325,262 205,262 143,185" fill="none" stroke="#3d3d6a" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+        <!-- Diagonal Q lines (faint) -->
+        <line x1="90" y1="150" x2="420" y2="220" stroke="#2a2a4a" stroke-width=".5" stroke-dasharray="3,4"/>
+        <line x1="140" y1="80" x2="420" y2="155" stroke="#2a2a4a" stroke-width=".5" stroke-dasharray="3,4"/>
+        <line x1="90" y1="220" x2="370" y2="295" stroke="#2a2a4a" stroke-width=".5" stroke-dasharray="3,4"/>
+        <text x="430" y="218" fill="#55557a" font-size="8" font-family="JetBrains Mono">Q=0</text>
+        <text x="430" y="148" fill="#55557a" font-size="8" font-family="JetBrains Mono">Q=+1</text>
+        <text x="420" y="288" fill="#55557a" font-size="8" font-family="JetBrains Mono">Q=−1</text>
+
+        <!-- K⁰ (I3=−½, Y=+1) -->
+        <circle cx="205" cy="107" r="16" fill="#1a1a32" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="205" y="112" fill="#3dd6c4" font-size="11" text-anchor="middle" font-family="Outfit">K⁰</text>
+        <text x="205" y="88" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">ds̄</text>
+
+        <!-- K⁺ (I3=+½, Y=+1) -->
+        <circle cx="325" cy="107" r="16" fill="#1a1a32" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="325" y="112" fill="#3dd6c4" font-size="11" text-anchor="middle" font-family="Outfit">K⁺</text>
+        <text x="325" y="88" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">us̄</text>
+
+        <!-- π⁻ (I3=−1, Y=0) -->
+        <circle cx="143" cy="185" r="16" fill="#1a1a32" stroke="#7a8cff" stroke-width="1.5"/>
+        <text x="143" y="190" fill="#7a8cff" font-size="11" text-anchor="middle" font-family="Outfit">π⁻</text>
+        <text x="115" y="185" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">ūd</text>
+
+        <!-- π⁰, η (I3=0, Y=0) -->
+        <circle cx="255" cy="185" r="13" fill="#1a1a32" stroke="#7a8cff" stroke-width="1.2"/>
+        <text x="255" y="189" fill="#7a8cff" font-size="10" text-anchor="middle" font-family="Outfit">π⁰</text>
+        <circle cx="278" cy="185" r="13" fill="#1a1a32" stroke="#f0b347" stroke-width="1.2"/>
+        <text x="278" y="189" fill="#f0b347" font-size="10" text-anchor="middle" font-family="Outfit">η</text>
+        <text x="265" y="165" fill="#55557a" font-size="7" text-anchor="middle" font-family="JetBrains Mono">(singlet η')</text>
+
+        <!-- π⁺ (I3=+1, Y=0) -->
+        <circle cx="388" cy="185" r="16" fill="#1a1a32" stroke="#7a8cff" stroke-width="1.5"/>
+        <text x="388" y="190" fill="#7a8cff" font-size="11" text-anchor="middle" font-family="Outfit">π⁺</text>
+        <text x="415" y="185" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">ud̄</text>
+
+        <!-- K⁻ (I3=−½, Y=−1) -->
+        <circle cx="205" cy="262" r="16" fill="#1a1a32" stroke="#f05c7a" stroke-width="1.5"/>
+        <text x="205" y="267" fill="#f05c7a" font-size="11" text-anchor="middle" font-family="Outfit">K⁻</text>
+        <text x="205" y="283" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">ūs</text>
+
+        <!-- K̄⁰ (I3=+½, Y=−1) -->
+        <circle cx="325" cy="262" r="16" fill="#1a1a32" stroke="#f05c7a" stroke-width="1.5"/>
+        <text x="325" y="267" fill="#f05c7a" font-size="11" text-anchor="middle" font-family="Outfit">K̄⁰</text>
+        <text x="325" y="283" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">sd̄</text>
+
+        <!-- Strangeness labels on right -->
+        <text x="490" y="112" fill="#8888b0" font-size="9" font-family="JetBrains Mono">S=+1</text>
+        <text x="490" y="189" fill="#8888b0" font-size="9" font-family="JetBrains Mono">S=0</text>
+        <text x="490" y="266" fill="#8888b0" font-size="9" font-family="JetBrains Mono">S=−1</text>
+      </svg>
+      <figcaption>Fig 7.1 — Pseudoscalar meson octet (J<sup>P</sup> = 0⁻) in the weight diagram (I₃ vs Y). The six outer particles form a hexagon; two (π⁰ and η) sit at the centre. The diagonal lines are lines of constant electric charge Q = I₃ + Y/2. This hexagonal pattern is the signature of the <strong>8-dimensional representation of SU(3)</strong>.</figcaption>
+    </div>
+
+    <h3>Baryon Decuplet (J<sup>P</sup> = 3/2⁺) and the Prediction of Ω⁻</h3>
+
+    <div class="diagram">
+      <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:540px;">
+        <!-- Axes -->
+        <line x1="60" y1="280" x2="480" y2="280" stroke="#55557a" stroke-width="1" marker-end="url(#axa)"/>
+        <line x1="265" y1="300" x2="265" y2="25" stroke="#55557a" stroke-width="1" marker-end="url(#axa)"/>
+        <text x="486" y="285" fill="#55557a" font-size="11" font-family="JetBrains Mono">I₃</text>
+        <text x="270" y="22" fill="#55557a" font-size="11" font-family="JetBrains Mono">Y</text>
+
+        <!-- Y labels -->
+        <text x="40" y="95" fill="#55557a" font-size="9" font-family="JetBrains Mono">+1</text>
+        <text x="40" y="158" fill="#55557a" font-size="9" font-family="JetBrains Mono">0</text>
+        <text x="40" y="220" fill="#55557a" font-size="9" font-family="JetBrains Mono">−1</text>
+        <text x="40" y="280" fill="#55557a" font-size="9" font-family="JetBrains Mono">−2</text>
+        <!-- Triangle outline -->
+        <polygon points="143,91 388,91 265,281" fill="none" stroke="#3d3d6a" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- horizontal lines inside triangle -->
+        <line x1="175" y1="154" x2="355" y2="154" stroke="#2a2a4a" stroke-width="0.8"/>
+        <line x1="205" y1="218" x2="325" y2="218" stroke="#2a2a4a" stroke-width="0.8"/>
+
+        <!-- Row 1 (Y=+1, S=0): Δ⁻, Δ⁰, Δ⁺, Δ⁺⁺ -->
+        <circle cx="143" cy="91" r="14" fill="#1a1a32" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="143" y="95" fill="#3dd6c4" font-size="9.5" text-anchor="middle" font-family="Outfit">Δ⁻</text>
+        <circle cx="204" cy="91" r="14" fill="#1a1a32" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="204" y="95" fill="#3dd6c4" font-size="9.5" text-anchor="middle" font-family="Outfit">Δ⁰</text>
+        <circle cx="327" cy="91" r="14" fill="#1a1a32" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="327" y="95" fill="#3dd6c4" font-size="9.5" text-anchor="middle" font-family="Outfit">Δ⁺</text>
+        <circle cx="388" cy="91" r="14" fill="#1a1a32" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="388" y="95" fill="#3dd6c4" font-size="9.5" text-anchor="middle" font-family="Outfit">Δ⁺⁺</text>
+
+        <!-- Row 2 (Y=0, S=−1): Σ*⁻, Σ*⁰, Σ*⁺ -->
+        <circle cx="175" cy="154" r="14" fill="#1a1a32" stroke="#7a8cff" stroke-width="1.5"/>
+        <text x="175" y="159" fill="#7a8cff" font-size="9" text-anchor="middle" font-family="Outfit">Σ*⁻</text>
+        <circle cx="265" cy="154" r="14" fill="#1a1a32" stroke="#7a8cff" stroke-width="1.5"/>
+        <text x="265" y="159" fill="#7a8cff" font-size="9" text-anchor="middle" font-family="Outfit">Σ*⁰</text>
+        <circle cx="355" cy="154" r="14" fill="#1a1a32" stroke="#7a8cff" stroke-width="1.5"/>
+        <text x="355" y="159" fill="#7a8cff" font-size="9" text-anchor="middle" font-family="Outfit">Σ*⁺</text>
+
+        <!-- Row 3 (Y=−1, S=−2): Ξ*⁻, Ξ*⁰ -->
+        <circle cx="205" cy="218" r="14" fill="#1a1a32" stroke="#f0b347" stroke-width="1.5"/>
+        <text x="205" y="223" fill="#f0b347" font-size="9" text-anchor="middle" font-family="Outfit">Ξ*⁻</text>
+        <circle cx="325" cy="218" r="14" fill="#1a1a32" stroke="#f0b347" stroke-width="1.5"/>
+        <text x="325" y="223" fill="#f0b347" font-size="9" text-anchor="middle" font-family="Outfit">Ξ*⁰</text>
+
+        <!-- Row 4 (Y=−2, S=−3): Ω⁻ — the PREDICTED particle -->
+        <circle cx="265" cy="281" r="15" fill="#2a0a10" stroke="#f05c7a" stroke-width="2.5"/>
+        <text x="265" y="286" fill="#f05c7a" font-size="11" text-anchor="middle" font-weight="bold" font-family="Outfit">Ω⁻</text>
+
+        <!-- Prediction annotation -->
+        <line x1="285" y1="278" x2="360" y2="250" stroke="#f05c7a" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="365" y="245" fill="#f05c7a" font-size="9" font-family="JetBrains Mono">PREDICTED 1962</text>
+        <text x="365" y="258" fill="#f05c7a" font-size="9" font-family="JetBrains Mono">FOUND 1964</text>
+        <text x="365" y="271" fill="#55557a" font-size="8" font-family="JetBrains Mono">sss, m≈1680 MeV</text>
+
+        <!-- Strangeness labels -->
+        <text x="460" y="95" fill="#8888b0" font-size="8" font-family="JetBrains Mono">S=0</text>
+        <text x="460" y="158" fill="#8888b0" font-size="8" font-family="JetBrains Mono">S=−1</text>
+        <text x="460" y="222" fill="#8888b0" font-size="8" font-family="JetBrains Mono">S=−2</text>
+        <text x="460" y="284" fill="#8888b0" font-size="8" font-family="JetBrains Mono">S=−3</text>
+
+        <!-- Mass arrow -->
+        <line x1="75" y1="85" x2="75" y2="275" stroke="#2a2a4a" stroke-width="1" marker-end="url(#axa)"/>
+        <text x="30" y="190" fill="#55557a" font-size="9" transform="rotate(-90 30 190)" font-family="JetBrains Mono">mass →</text>
+      </svg>
+      <figcaption>Fig 7.2 — Baryon decuplet (J<sup>P</sup> = 3/2⁺) in the weight diagram. The triangular pattern has 4 rows, each with one fewer member than the row above. By 1961, the Δ, Σ*, and Ξ* rows were known; the apex at S=−3 was empty. Gell-Mann predicted that an Ω⁻ (sss) particle must exist with charge −1, strangeness −3, and mass ∼1680 MeV/c². It was discovered at Brookhaven in 1964, exactly as predicted. <span style="color:var(--f05c7a, #f05c7a)">This triumph of the Eightfold Way cemented the quark model.</span></figcaption>
+    </div>
+
+    <div class="box box-key">
+      <div class="box-title">The Group Theory Behind It — SU(3)</div>
+      The three lightest quarks (u, d, s) form a triplet that transforms as the fundamental representation <strong>3</strong> of the SU(3) symmetry group. Combining quarks and antiquarks according to the group theory rules gives:<br><br>
+      <strong>Mesons (qq̄):</strong> 3 ⊗ 3̄ = 8 ⊕ 1 → an octet + a singlet (nonet of 9)<br>
+      <strong>Baryons (qqq):</strong> 3 ⊗ 3 ⊗ 3 = 10 ⊕ 8 ⊕ 8 ⊕ 1 → a decuplet, two octets, a singlet<br><br>
+      This explains why only 1, 8, and 10-member families appear — they are the dimensions of the allowed SU(3) representations.
+    </div>
+
+    <div class="qa-block">
+      <h4>Questions — Section 7</h4>
+      <details class="qa">
+        <summary>How did the Eightfold Way predict the Ω⁻? What properties were predicted and how well did the discovery confirm them?</summary>
+        <div class="qa-ans">
+          By 1961, the baryon decuplet (J<sup>P</sup> = 3/2⁺) had 9 known members: Δ (S=0, I=3/2, 4 members), Σ* (S=−1, I=1, 3 members), Ξ* (S=−2, I=½, 2 members). The SU(3) decuplet must have exactly 10 members. The triangular pattern had an empty spot at S=−3, I=0 (singlet).<br><br>
+          Gell-Mann predicted at the 1962 CERN conference: a new particle Ω⁻ must exist with (1) charge = −1 [from q/e = 0 + (−3+1)/2 = −1], (2) strangeness S = −3, (3) isospin I = 0 (singlet), (4) mass ≈ 1680 MeV/c² [by extrapolating the mass spacing ~150 MeV between rows: 1385 + 150 ≈ 1535 + 150 ≈ 1680], (5) decay via weak interaction (ΔS=1): Ω⁻ → Λ⁰ + K⁻ or Ξ⁰ + π⁻.<br><br>
+          The Ω⁻ was discovered at Brookhaven in 1964 with mass 1672.5 MeV/c², charge −1, strangeness −3, and exactly the predicted decay modes. The agreement was spectacular and the discovery convinced the physics community that the Eightfold Way (and hence the quark model) was correct.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══════════════ S-8 ═══════════════ -->
+<section class="lec" id="s8">
+  <div class="lec-header">
+    <div class="lec-num">S<br>8</div>
+    <div class="lec-title-block">
+      <h2>The Quark Model — Structure of Hadrons</h2>
+      <div class="lec-date">Topic · Fractional charges, confinement &amp; the discovery of all six quarks</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>In 1964, Murray Gell-Mann and George Zweig (independently) proposed that hadrons are built from more fundamental particles. Gell-Mann named them <em>quarks</em> (from James Joyce's <em>Finnegans Wake</em>: "Three quarks for Muster Mark!"). Zweig called them <em>aces</em>.</p>
+
+    <h3>The Six Quarks — Properties</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Quark</th><th>Symbol</th><th>Charge (e)</th><th>Spin</th><th>B</th><th>S</th><th>C</th><th>Mass (approx)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Up</strong></td><td>u</td><td>+2/3</td><td>½</td><td>+1/3</td><td>0</td><td>0</td><td>1.7–3.3 MeV</td></tr>
+          <tr><td><strong>Down</strong></td><td>d</td><td>−1/3</td><td>½</td><td>+1/3</td><td>0</td><td>0</td><td>4.1–5.8 MeV</td></tr>
+          <tr><td><strong>Strange</strong></td><td>s</td><td>−1/3</td><td>½</td><td>+1/3</td><td>−1</td><td>0</td><td>101 MeV</td></tr>
+          <tr><td><strong>Charm</strong></td><td>c</td><td>+2/3</td><td>½</td><td>+1/3</td><td>0</td><td>+1</td><td>1.27 GeV</td></tr>
+          <tr><td><strong>Bottom</strong></td><td>b</td><td>−1/3</td><td>½</td><td>+1/3</td><td>0</td><td>0</td><td>4.19 GeV</td></tr>
+          <tr><td><strong>Top</strong></td><td>t</td><td>+2/3</td><td>½</td><td>+1/3</td><td>0</td><td>0</td><td>172 GeV</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-title">Confinement — Why You Can Never See a Free Quark</div>
+      Despite extensive searches, no free quark has ever been detected. The force between quarks (carried by gluons) does not decrease with distance — it is approximately constant at large distances, like a rubber band. To pull two quarks apart, you must supply enough energy to create a new quark-antiquark pair from the vacuum before the quarks separate. So instead of getting a free quark, you always get new hadrons. This property is called <em>colour confinement</em>, and it is a non-perturbative property of Quantum Chromodynamics (QCD).
+    </div>
+
+    <h3>Evidence for Quarks — Deep Inelastic Scattering (1968–69)</h3>
+    <p>The first direct (though indirect!) evidence came from the Stanford Linear Accelerator Center (SLAC). This was the modern analogue of Rutherford's gold foil experiment.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:580px;">
+        <defs>
+          <marker id="arrd" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#3dd6c4"/>
+          </marker>
+          <marker id="arrd2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#f05c7a"/>
+          </marker>
+          <marker id="arrd3" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L0,7 L7,3.5 z" fill="#7a8cff"/>
+          </marker>
+        </defs>
+        <!-- Proton -->
+        <circle cx="310" cy="110" r="42" fill="rgba(122,140,255,0.05)" stroke="#7a8cff" stroke-width="1.5"/>
+        <text x="310" y="170" fill="#7a8cff" font-size="10" text-anchor="middle" font-family="JetBrains Mono">proton</text>
+        <!-- quarks inside proton -->
+        <circle cx="295" cy="100" r="9" fill="#3dd6c4" opacity=".6"/>
+        <text x="295" y="104" fill="#1a1a32" font-size="9" text-anchor="middle" font-weight="bold">u</text>
+        <circle cx="320" cy="118" r="9" fill="#f05c7a" opacity=".6"/>
+        <text x="320" y="122" fill="#1a1a32" font-size="9" text-anchor="middle" font-weight="bold">u</text>
+        <circle cx="305" cy="118" r="9" fill="#f0b347" opacity=".6"/>
+        <text x="305" y="122" fill="#1a1a32" font-size="9" text-anchor="middle" font-weight="bold">d</text>
+
+        <!-- Elastic scattering (diffuse) — top -->
+        <line x1="60" y1="90" x2="264" y2="105" stroke="#3dd6c4" stroke-width="1.5" marker-end="url(#arrd)"/>
+        <text x="80" y="80" fill="#3dd6c4" font-size="9" font-family="JetBrains Mono">e⁻ (20 GeV)</text>
+        <line x1="355" y1="108" x2="460" y2="78" stroke="#3dd6c4" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrd)"/>
+        <text x="445" y="68" fill="#3dd6c4" font-size="9" font-family="JetBrains Mono">e⁻ (soft scatter)</text>
+        <text x="445" y="80" fill="#55557a" font-size="8" font-family="JetBrains Mono">proton stays intact</text>
+
+        <!-- Inelastic scattering — hits quark -->
+        <line x1="60" y1="140" x2="282" y2="117" stroke="#f05c7a" stroke-width="1.8" marker-end="url(#arrd2)"/>
+        <text x="80" y="160" fill="#f05c7a" font-size="9" font-family="JetBrains Mono">e⁻ (hits quark!)</text>
+        <line x1="326" y1="123" x2="455" y2="150" stroke="#f05c7a" stroke-width="1.8" stroke-dasharray="3,2" marker-end="url(#arrd2)"/>
+        <text x="445" y="140" fill="#f05c7a" font-size="9" font-family="JetBrains Mono">e⁻ (hard scatter)</text>
+        <text x="445" y="152" fill="#55557a" font-size="8" font-family="JetBrains Mono">large angle deflection</text>
+        <text x="445" y="164" fill="#55557a" font-size="8" font-family="JetBrains Mono">→ quark inside!</text>
+
+        <!-- SLAC label -->
+        <rect x="60" y="195" width="440" height="18" rx="4" fill="#0f0f1c" stroke="#2a2a4a"/>
+        <text x="280" y="208" fill="#8888b0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">SLAC 2-mile linear accelerator: λ = hc/E ≈ 10⁻¹⁸ m at 20 GeV → resolves quark structure</text>
+      </svg>
+      <figcaption>Fig 8.1 — Deep inelastic electron-proton scattering at SLAC (1968–69). Most electrons scatter softly (elastic), consistent with a diffuse charge distribution. In rare events, the electron scatters at large angles — exactly as Rutherford saw with α particles on gold. This "hard scattering" implies the proton contains point-like scatterers (quarks) smaller than 10⁻¹⁸ m. The Nobel Prize in Physics 1990 was awarded to Friedman, Kendall, and Taylor for this discovery.</figcaption>
+    </div>
+
+    <h3>Discovery Timeline of the Six Quarks</h3>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-year">1964</div><div class="tl-dot"></div><div class="tl-content"><strong>u, d, s quarks proposed</strong> by Gell-Mann and Zweig to explain the Eightfold Way. No experimental confirmation yet.</div></div>
+      <div class="tl-item"><div class="tl-year">1968–69</div><div class="tl-dot"></div><div class="tl-content"><strong>Deep inelastic scattering at SLAC</strong> (Friedman, Kendall, Taylor) provides first dynamical evidence for point-like quarks inside the proton. <span class="tag tag-nobel">Nobel 1990</span></div></div>
+      <div class="tl-item"><div class="tl-year">1970</div><div class="tl-dot"></div><div class="tl-content"><strong>Charm quark predicted</strong> by Glashow, Iliopoulos, Maiani (GIM mechanism) to explain suppression of certain strangeness-changing neutral currents.</div></div>
+      <div class="tl-item"><div class="tl-year">1974</div><div class="tl-dot"></div><div class="tl-content"><strong>J/ψ meson (cc̄) discovered simultaneously</strong> by Ting's group at Brookhaven (called J) and Richter's group at SLAC (called ψ). Mass = 3097 MeV, lifetime ∼10⁻²⁰ s. Confirmed charm quark. <span class="tag tag-nobel">Nobel 1976</span></div></div>
+      <div class="tl-item"><div class="tl-year">1977</div><div class="tl-dot"></div><div class="tl-content"><strong>Upsilon meson (bb̄) discovered</strong> at Fermilab by Lederman's group. Mass ≈ 9460 MeV. First evidence for bottom quark.</div></div>
+      <div class="tl-item"><div class="tl-year">1995</div><div class="tl-dot"></div><div class="tl-content"><strong>Top quark discovered</strong> at Fermilab (CDF and D0 detectors, Tevatron collider, √s = 1.8 TeV). Mass ≈ 172 GeV — heaviest known elementary particle. <span class="tag tag-nobel">Nobel 2008 (Kobayashi &amp; Maskawa)</span></div></div>
+    </div>
+
+    <h3>The J/ψ — "November Revolution" (1974)</h3>
+    <div class="box box-sage">
+      <div class="box-title">Why J/ψ Was So Significant</div>
+      The J/ψ meson (cc̄) was extraordinarily narrow in width (Γ ≈ 0.093 MeV) — its lifetime was 1000× longer than expected for a particle of its mass. This is explained by the <em>OZI rule</em>: J/ψ → hadrons requires the cc̄ pair to annihilate, which is suppressed if the products cannot contain c quarks. The slow decay served as proof that the charm quantum number was a real new conserved quantity, and cc̄ was a genuine <em>charmonium</em> bound state (the QCD analogue of positronium). This discovery confirmed the GIM mechanism and established the quark model on firm footing — it is called the "November Revolution" of particle physics.
+    </div>
+
+    <h3>Quark Composition — Building Hadrons</h3>
+    <div class="grid2">
+      <div class="box box-key">
+        <div class="box-title">Building Mesons (qq̄)</div>
+        Take any quark + any antiquark.<br><br>
+        π⁺ = ud̄ : Q = +2/3 − (−1/3) = +1 ✓<br>
+        K⁻ = ūs : Q = −2/3 + (−1/3) = −1 ✓<br>
+        J/ψ = cc̄ : Q = +2/3 − 2/3 = 0 ✓<br><br>
+        Group theory: 3⊗3̄ = 8⊕1 (nonet)
+      </div>
+      <div class="box box-teal">
+        <div class="box-title">Building Baryons (qqq)</div>
+        Take any three quarks.<br><br>
+        p = uud : Q = 2/3+2/3−1/3 = +1 ✓<br>
+        n = udd : Q = 2/3−1/3−1/3 = 0 ✓<br>
+        Ω⁻ = sss : Q = −1/3−1/3−1/3 = −1 ✓<br><br>
+        Group theory: 3⊗3⊗3 = 10⊕8⊕8⊕1
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <h4>Questions — Section 8</h4>
+      <details class="qa">
+        <summary>Why is the top quark so special compared to other quarks? What happens to a top quark before it can form a hadron?</summary>
+        <div class="qa-ans">
+          The top quark has mass ≈ 172 GeV/c² — heavier than a gold atom. Its lifetime is approximately 5 × 10⁻²⁵ s, which is shorter than the QCD hadronisation time scale (∼1/Λ<sub>QCD</sub> ∼ 10⁻²³ s). This means the top quark decays (via t → W⁺ + b, essentially 100% of the time) <em>before it has time to form a hadron</em>. Therefore, <em>there are no "top mesons" or "top baryons"</em> — the top quark is the only quark we can study in its "bare" state, without the confusing effects of confinement. This makes the top quark a unique laboratory for testing QCD and electroweak physics at high scales.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What is Bjorken scaling and what does it tell us about quark structure?</summary>
+        <div class="qa-ans">
+          In deep inelastic scattering e + p → e + X, the cross-section is written in terms of dimensionless structure functions F₁(x,Q²) and F₂(x,Q²), where Q² is the momentum transfer and x = Q²/(2Mν) is the Bjorken scaling variable (M = proton mass, ν = energy transfer). Bjorken predicted in 1968 that at large Q², the structure functions should become functions of x <em>only</em> — independent of Q². This is called <strong>Bjorken scaling</strong>.<br><br>
+          It was observed at SLAC and has a simple interpretation: if the proton contains point-like constituents (partons/quarks), then the cross-section at high Q² is just the sum of electron-parton cross-sections, which depends only on the fraction x of proton momentum carried by the struck quark. The observed scaling confirmed the proton has a granular structure — point-like quarks inside. (Technically, scaling is violated logarithmically at very large Q² due to QCD gluon emissions, which provides a further precision test of QCD.)
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Determine the charge, strangeness, and baryon number of the meson with quark content cs̄.</summary>
+        <div class="qa-ans">
+          Quark: c has charge +2/3, B = +1/3, S = 0, C = +1<br>
+          Antiquark: s̄ has charge +1/3, B = −1/3, S = +1, C = 0<br><br>
+          Electric charge: q = +2/3 + (+1/3) = +1e<br>
+          Baryon number: B = +1/3 + (−1/3) = 0 (it is a meson ✓)<br>
+          Strangeness: S = 0 + (+1) = +1<br>
+          Charmness: C = +1 + 0 = +1<br><br>
+          This is the D<sub>s</sub>⁺ meson (formerly called F⁺), mass ≈ 1969 MeV/c², which carries both charm and strangeness.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══════════════ S-9 ═══════════════ -->
+<section class="lec" id="s9">
+  <div class="lec-header">
+    <div class="lec-num">S<br>9</div>
+    <div class="lec-title-block">
+      <h2>Bohr's Compound Nucleus — Ghoshal's Experiment</h2>
+      <div class="lec-date">Topic · Independence hypothesis &amp; nuclear reaction cross-sections</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>Niels Bohr (1936) proposed the <em>compound nucleus model</em> for nuclear reactions: when a projectile a strikes target nucleus X, a highly excited intermediate nucleus C* is formed. The key claim — the <strong>independence hypothesis</strong> — is that C* decays independently of how it was formed.</p>
+
+    <div class="box box-key">
+      <div class="box-title">Bohr's Independence Hypothesis</div>
+      A nuclear reaction proceeds in two completely separate stages:<br><br>
+      <div class="steps">
+        <div class="step"><strong>Formation:</strong> a + X → [C*] — the projectile merges with the target. The available energy is shared among all nucleons (typically 8+ MeV per nucleon for a 64-nucleon compound). The compound nucleus "forgets" how it was formed.</div>
+        <div class="step"><strong>Decay:</strong> [C*] → Y + b — the compound nucleus decays by emitting particles. The decay probability depends only on the excitation energy, angular momentum, and parity of C*, not on which projectile formed it.</div>
+      </div>
+      Mathematically: σ(a+X → Y+b) = σ<sub>c</sub>(a+X) × Γ<sub>b</sub>/Γ<sub>total</sub>
+    </div>
+
+    <h3>Ghoshal's Experimental Verification</h3>
+    <p>S.N. Ghoshal (1950) devised an elegant test. He found two different ways to produce the same compound nucleus <span class="eq-inline">[⁶⁴Zn*]</span>:</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 580 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;">
+        <!-- Route 1 -->
+        <text x="30" y="40" fill="#3dd6c4" font-size="11" font-family="JetBrains Mono">Route 1: p + ⁶³Cu</text>
+        <rect x="30" y="50" width="100" height="30" rx="4" fill="#1a1a32" stroke="#3dd6c4" stroke-width="1"/>
+        <text x="80" y="70" fill="#3dd6c4" font-size="10" text-anchor="middle" font-family="Outfit">p + ⁶³Cu</text>
+
+        <!-- Route 2 -->
+        <text x="30" y="130" fill="#f0b347" font-size="11" font-family="JetBrains Mono">Route 2: α + ⁶⁰Ni</text>
+        <rect x="30" y="140" width="100" height="30" rx="4" fill="#1a1a32" stroke="#f0b347" stroke-width="1"/>
+        <text x="80" y="160" fill="#f0b347" font-size="10" text-anchor="middle" font-family="Outfit">α + ⁶⁰Ni</text>
+
+        <!-- Arrows to compound -->
+        <line x1="133" y1="65" x2="210" y2="90" stroke="#3dd6c4" stroke-width="1.2" marker-end="url(#arrd)"/>
+        <line x1="133" y1="155" x2="210" y2="125" stroke="#f0b347" stroke-width="1.2" marker-end="url(#arrd)"/>
+
+        <!-- Compound nucleus -->
+        <rect x="215" y="88" width="120" height="38" rx="6" fill="#2a0a30" stroke="#7a8cff" stroke-width="2"/>
+        <text x="275" y="108" fill="#7a8cff" font-size="12" text-anchor="middle" font-family="Outfit">[⁶⁴Zn*]</text>
+        <text x="275" y="122" fill="#55557a" font-size="8" text-anchor="middle" font-family="JetBrains Mono">same compound!</text>
+
+        <!-- Decay channels -->
+        <line x1="338" y1="100" x2="400" y2="60" stroke="#7a8cff" stroke-width="1" marker-end="url(#arrd3)"/>
+        <line x1="338" y1="107" x2="400" y2="107" stroke="#7a8cff" stroke-width="1" marker-end="url(#arrd3)"/>
+        <line x1="338" y1="114" x2="400" y2="155" stroke="#7a8cff" stroke-width="1" marker-end="url(#arrd3)"/>
+
+        <text x="405" y="55" fill="#dcdcf0" font-size="10" font-family="JetBrains Mono">⁶³Zn + n</text>
+        <text x="405" y="67" fill="#55557a" font-size="8" font-family="JetBrains Mono">(p,n) and (α,n)</text>
+        <text x="405" y="103" fill="#dcdcf0" font-size="10" font-family="JetBrains Mono">⁶²Cu + n + p</text>
+        <text x="405" y="115" fill="#55557a" font-size="8" font-family="JetBrains Mono">(p,np) and (α,np)</text>
+        <text x="405" y="151" fill="#dcdcf0" font-size="10" font-family="JetBrains Mono">⁶²Zn + 2n</text>
+        <text x="405" y="163" fill="#55557a" font-size="8" font-family="JetBrains Mono">(p,2n) and (α,2n)</text>
+
+        <!-- Independence statement -->
+        <rect x="30" y="210" width="520" height="30" rx="4" fill="#0f0f1c" stroke="#2a2a4a"/>
+        <text x="290" y="230" fill="#8888b0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">If Bohr is right: σ(α,n)/σ(p,n) = σ(α,np)/σ(p,np) = σ(α,2n)/σ(p,2n) = σ_c(α)/σ_c(p)</text>
+      </svg>
+      <figcaption>Fig 9.1 — Ghoshal's experimental setup. Two different reactions produce the same compound nucleus [⁶⁴Zn*]: proton on ⁶³Cu and alpha on ⁶⁰Ni. The compound then decays via three channels. Bohr's independence hypothesis predicts that the ratio of cross-sections for any two exit channels must be the same regardless of which entrance channel was used.</figcaption>
+    </div>
+
+    <h3>The Cross-Section Formulae</h3>
+
+    <div class="eq-block">
+      σ(p,n) = σ<sub>c</sub>(p) × Γ<sub>n</sub>/Γ &nbsp;&nbsp;&nbsp;&nbsp; σ(α,n) = σ<sub>c</sub>(α) × Γ<sub>n</sub>/Γ
+      <span class="eq-label">single neutron emission</span>
+    </div>
+    <div class="eq-block">
+      σ(p,np) = σ<sub>c</sub>(p) × Γ<sub>np</sub>/Γ &nbsp;&nbsp;&nbsp;&nbsp; σ(α,np) = σ<sub>c</sub>(α) × Γ<sub>np</sub>/Γ
+      <span class="eq-label">neutron + proton emission</span>
+    </div>
+    <div class="eq-block">
+      σ(p,2n) = σ<sub>c</sub>(p) × Γ<sub>2n</sub>/Γ &nbsp;&nbsp;&nbsp;&nbsp; σ(α,2n) = σ<sub>c</sub>(α) × Γ<sub>2n</sub>/Γ
+      <span class="eq-label">two neutron emission</span>
+    </div>
+
+    <p>Dividing corresponding equations eliminates the partial width Γ<sub>x</sub>/Γ, giving the key prediction:</p>
+
+    <div class="eq-block">
+      σ(α,n) / σ(p,n) = σ(α,np) / σ(p,np) = σ(α,2n) / σ(p,2n) = σ<sub>c</sub>(α) / σ<sub>c</sub>(p)
+      <span class="eq-label">Ghoshal's independence hypothesis test — all ratios must be equal</span>
+    </div>
+
+    <div class="box box-teal">
+      <div class="box-title">Ghoshal's Result</div>
+      When Ghoshal measured the excitation functions (cross-section vs energy), the shapes of the curves for the same exit channel but different entrance channels were <strong>identical</strong> (when plotted against the energy above threshold for compound nucleus formation). The ratios were indeed constant — beautifully confirming Bohr's compound nucleus model. This remains one of the cleanest experimental verifications of a nuclear model.
+    </div>
+
+    <div class="qa-block">
+      <h4>Questions — Section 9</h4>
+      <details class="qa">
+        <summary>State and explain Bohr's independence hypothesis. Why is the compound nucleus formed at such high excitation energy?</summary>
+        <div class="qa-ans">
+          <strong>Statement:</strong> When a projectile is captured by a target nucleus to form a compound nucleus C*, the probability of a particular decay mode of C* is independent of how C* was formed. Mathematically: σ(a+X→Y+b) = σ<sub>c</sub>(a) × Γ<sub>b</sub>/Γ, where σ<sub>c</sub>(a) is the cross-section for compound nucleus formation and Γ<sub>b</sub>/Γ is the branching ratio for decay to channel b.<br><br>
+          <strong>Why high excitation?</strong> When the projectile enters the target nucleus, it immediately undergoes multiple collisions with the nucleons inside. Each nucleon-nucleon collision shares the kinetic energy among more particles. With A~60 nucleons, the initial projectile energy (say 10 MeV) gets distributed among all nucleons, giving each only ~0.17 MeV — far below the ~8 MeV binding energy per nucleon needed to escape. So the compound nucleus is "trapped" in a highly excited state. The energy is quickly thermalised, and the system retains no memory of the initial configuration — just total energy, angular momentum, and parity.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>In Ghoshal's experiment, the energy scales for p+⁶³Cu and α+⁶⁰Ni reactions are different. How did Ghoshal compare the cross-sections?</summary>
+        <div class="qa-ans">
+          The same compound nucleus [⁶⁴Zn*] is formed in both cases, but at different incident energies. The excitation energy E* of the compound nucleus is:<br><br>
+          E*(p+⁶³Cu) = Q<sub>1</sub> + T<sub>p</sub> × m<sub>p</sub>/(m<sub>p</sub> + m<sub>Cu</sub>) [CM kinetic energy + Q-value]<br>
+          E*(α+⁶⁰Ni) = Q<sub>2</sub> + T<sub>α</sub> × m<sub>α</sub>/(m<sub>α</sub> + m<sub>Ni</sub>)<br><br>
+          Ghoshal converted the laboratory projectile energies to excitation energies of the compound nucleus. He then plotted both cross-sections as functions of E* (the common variable — excitation energy of [⁶⁴Zn*]). The shapes of corresponding curves (same exit channel, different entrance) were identical when plotted this way, confirming the independence hypothesis. The ratio of cross-sections was constant = σ<sub>c</sub>(α)/σ<sub>c</sub>(p), consistent with the Coulomb barrier penetration formula.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-row">
+    <span>Elementary Particles · Complete Notes</span>
+  </div>
+  <div class="footer-row" style="margin-top:.6rem;">
+    <span>Ref: D. Griffiths — Introduction to Elementary Particles</span>
+    <span>Ref: Krane — Introductory Nuclear Physics</span>
+  </div>
+  <div class="footer-row" style="margin-top:.4rem;font-size:.62rem;color:var(--text-mute);">
+    All diagrams hand-coded in SVG · Questions expand on click
+  </div>
+</footer>
+
+<script>
+/* ── Theme Toggle ── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  const label = isDark ? '☾ Dark' : '☀ Light';
+  document.getElementById('themeToggle').textContent = label;
+  document.getElementById('themeToggleMob').textContent = isDark ? '☾' : '☀';
+  localStorage.setItem('ep-theme', isDark ? 'light' : 'dark');
+}
+document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+document.getElementById('themeToggleMob').addEventListener('click', toggleTheme);
+
+/* Restore saved theme */
+const saved = localStorage.getItem('ep-theme');
+if (saved && saved !== 'dark') {
+  document.documentElement.setAttribute('data-theme', 'light');
+  document.getElementById('themeToggle').textContent = '☾ Dark';
+  document.getElementById('themeToggleMob').textContent = '☾';
+}
+
+/* ── Hamburger Nav ── */
+const burgerBtn   = document.getElementById('burgerBtn');
+const navDropdown = document.getElementById('navDropdown');
+
+burgerBtn.addEventListener('click', function () {
+  const isOpen = navDropdown.classList.toggle('open');
+  burgerBtn.classList.toggle('open', isOpen);
+  burgerBtn.setAttribute('aria-expanded', isOpen);
+});
+
+function closeMenu() {
+  navDropdown.classList.remove('open');
+  burgerBtn.classList.remove('open');
+  burgerBtn.setAttribute('aria-expanded', 'false');
+}
+
+document.addEventListener('click', function (e) {
+  if (!e.target.closest('#navBurger') && !e.target.closest('#navDropdown')) {
+    closeMenu();
+  }
+});
+
+/* ── Active nav highlight on scroll ── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sticky-nav a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--teal)' : '';
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
