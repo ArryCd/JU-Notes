@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Notes · Central Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Design Tokens ─────────────────────────────────── */
+    :root {
+      --bg:            #0d0f14;
+      --bg-card:       #13161e;
+      --bg-card-hover: #181c28;
+      --border:        #232840;
+      --border-bright: #3a4070;
+      --accent:        #7eb8f7;
+      --accent2:       #a78bfa;
+      --accent3:       #6ee7b7;
+      --dim:           #4a5280;
+      --muted:         #7a85b0;
+      --text:          #d8ddf5;
+      --text-bright:   #eef0fc;
+      --soon-bg:       #0f1118;
+      --soon-border:   #1e2235;
+      --soon-text:     #3a4060;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Grid texture ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(126,184,247,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126,184,247,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Glow orbs ── */
+    .glow-orb {
+      position: fixed; border-radius: 50%;
+      filter: blur(120px); pointer-events: none; z-index: 0;
+    }
+    .glow-orb-1 {
+      width: 600px; height: 600px; top: -200px; left: -100px;
+      background: radial-gradient(circle, rgba(126,184,247,0.07) 0%, transparent 70%);
+    }
+    .glow-orb-2 {
+      width: 500px; height: 500px; bottom: -100px; right: -100px;
+      background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%);
+    }
+
+    /* ── Layout ── */
+    .wrapper {
+      position: relative; z-index: 1;
+      max-width: 900px; margin: 0 auto; padding: 0 24px;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 64px 0 48px;
+      text-align: center;
+      animation: fadeUp 0.7s ease both;
+    }
+    .header-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--accent); opacity: 0.8; margin-bottom: 18px;
+    }
+    .header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-weight: 300; letter-spacing: -0.01em;
+      color: var(--text-bright); line-height: 1.1; margin-bottom: 10px;
+    }
+    .header-title em { font-style: italic; color: var(--accent); font-weight: 300; }
+    .header-sub {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem; color: var(--muted); font-style: italic;
+    }
+    .header-rule {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 24px auto 0;
+    }
+
+    /* ══════════════════════════════════════════════════
+       SEMESTER TABS
+    ══════════════════════════════════════════════════ */
+    .sem-tabs {
+      display: flex;
+      gap: 10px;
+      margin: 44px 0 32px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .sem-tab {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 4px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s, transform .15s;
+      user-select: none;
+    }
+    .sem-tab:hover {
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+    }
+    .sem-tab.active {
+      border-color: var(--accent);
+      background: rgba(126,184,247,0.06);
+    }
+    .sem-tab-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--dim);
+      transition: color .2s;
+    }
+    .sem-tab.active .sem-tab-label { color: var(--accent); }
+    .sem-tab-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem; font-weight: 400;
+      color: var(--muted); line-height: 1;
+      transition: color .2s;
+    }
+    .sem-tab.active .sem-tab-name { color: var(--text-bright); }
+    .sem-tab-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px; color: var(--dim);
+      transition: color .2s;
+    }
+    .sem-tab.active .sem-tab-count { color: var(--accent); opacity: .7; }
+
+    /* ══════════════════════════════════════════════════
+       SUBJECT PILLS
+    ══════════════════════════════════════════════════ */
+    .subject-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 32px;
+      scrollbar-width: none;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .subject-row::-webkit-scrollbar { display: none; }
+
+    .subject-pill {
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 7px;
+      padding: 7px 14px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .subject-pill:hover {
+      border-color: var(--border-bright);
+      color: var(--text);
+    }
+    .subject-pill.active {
+      border-color: var(--pill-color, var(--accent));
+      color: var(--pill-color, var(--accent));
+      background: rgba(126,184,247,0.05);
+    }
+    .subject-pill-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--pill-color, var(--accent));
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .subject-pill.active .subject-pill-dot { opacity: 1; }
+
+    /* ══════════════════════════════════════════════════
+       CONTENT PANEL
+    ══════════════════════════════════════════════════ */
+    .content-panel {
+      animation: fadeUp 0.45s ease both;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 22px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ── Professor cards grid ── */
+    .prof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .prof-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 22px 22px 18px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .2s, background .2s, transform .15s;
+      display: flex; flex-direction: column;
+    }
+    .prof-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--card-color, var(--accent)), var(--card-color2, var(--accent2)));
+      opacity: 0; transition: opacity .2s;
+    }
+    .prof-card:hover {
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+    .prof-card:hover::before { opacity: 1; }
+
+    .prof-subject-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 10px;
+    }
+
+    .prof-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem; font-weight: 400;
+      color: var(--text-bright); line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .prof-actions {
+      display: flex; gap: 8px; margin-top: auto;
+    }
+
+    .prof-btn {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+
+    .prof-btn-notes {
+      background: rgba(126,184,247,0.08);
+      border: 1px solid rgba(126,184,247,0.2);
+      color: var(--accent);
+    }
+    .prof-btn-notes:hover {
+      background: rgba(126,184,247,0.15);
+      border-color: rgba(126,184,247,0.4);
+    }
+
+    .prof-btn-rev {
+      background: rgba(167,139,250,0.07);
+      border: 1px solid rgba(167,139,250,0.18);
+      color: var(--accent2);
+    }
+    .prof-btn-rev:hover {
+      background: rgba(167,139,250,0.14);
+      border-color: rgba(167,139,250,0.35);
+    }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      border: 1px dashed var(--soon-border);
+      border-radius: 6px;
+      margin-bottom: 48px;
+    }
+    .empty-state p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--soon-text);
+    }
+
+    /* ── Coming soon cards ── */
+    .coming-soon-section { margin-top: 8px; }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .card-soon {
+      background: var(--soon-bg);
+      border: 1px dashed var(--soon-border);
+      border-radius: 6px;
+      padding: 22px 22px 18px;
+      position: relative; cursor: default;
+    }
+    .card-soon .soon-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--soon-text); margin-bottom: 10px;
+    }
+    .card-soon .soon-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem; font-weight: 300; font-style: italic;
+      color: var(--soon-text); opacity: 0.6; line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .soon-badge {
+      position: absolute; top: 14px; right: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--soon-text); border: 1px solid var(--soon-border);
+      border-radius: 3px; padding: 3px 7px;
+    }
+    .soon-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--soon-text);
+      border-top: 1px solid var(--soon-border); padding-top: 12px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 48px 0 44px;
+      border-top: 1px solid var(--border);
+      margin-top: 56px;
+      animation: fadeIn 0.8s 0.4s ease both;
+    }
+    .footer-row {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: .4rem 1.2rem;
+    }
+    .footer-row span, .footer-row a { white-space: nowrap; }
+    .footer-row {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.15em;
+      color: var(--dim); text-align: center;
+    }
+    .footer-row a {
+      color: var(--accent); text-decoration: none; opacity: 0.7;
+      transition: opacity .2s;
+    }
+    .footer-row a:hover { opacity: 1; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .panel-enter { animation: panelIn 0.3s ease both; }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      header { padding: 48px 0 36px; }
+      .sem-tabs { gap: 8px; margin: 32px 0 24px; }
+      .sem-tab { padding: 12px 14px; }
+      .sem-tab-name { font-size: 1.25rem; }
+      .prof-grid, .cards-grid { grid-template-columns: 1fr; }
+      .prof-card { padding: 18px 18px 14px; }
+      .prof-btn { font-size: 9px; padding: 7px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <div class="wrapper">
+
+    <!-- Header -->
+    <header>
+      <p class="header-eyebrow">B.Sc. Physics · Anuska Dey</p>
+      <h1 class="header-title">Class <em>Notes</em> Hub</h1>
+      <p class="header-sub">Expanded lecture notes, derivations &amp; reference — all in one place</p>
+      <div class="header-rule"></div>
+    </header>
+
+    <!-- Semester tabs -->
+    <div class="sem-tabs" id="semTabs">
+      <div class="sem-tab active" data-sem="sem6">
+        <span class="sem-tab-label">Current</span>
+        <span class="sem-tab-name">Semester VI</span>
+        <span class="sem-tab-count">4 subjects</span>
+      </div>
+      <div class="sem-tab" data-sem="sem4">
+        <span class="sem-tab-label">Previous</span>
+        <span class="sem-tab-name">Semester IV</span>
+        <span class="sem-tab-count">2 subjects</span>
+      </div>
+    </div>
+
+    <!-- Subject pills -->
+    <div class="subject-row" id="subjectRow"></div>
+
+    <!-- Cards panel -->
+    <div class="content-panel" id="contentPanel"></div>
+
+    <!-- Coming soon -->
+    <section class="coming-soon-section" id="comingSoon">
+      <p class="section-label">Coming soon</p>
+      <div class="cards-grid">
+        <div class="card-soon">
+          <span class="soon-badge">Soon</span>
+          <p class="soon-tag">Spectroscopy</p>
+          <h2 class="soon-name">KD Sir<br/>Notes</h2>
+          <p class="soon-status">○ Pending</p>
+        </div>
+        <div class="card-soon">
+          <span class="soon-badge">Soon</span>
+          <p class="soon-tag">Physics</p>
+          <h2 class="soon-name">RR Maam<br/>Notes</h2>
+          <p class="soon-status">○ Pending</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-row">
+        <span>Notes: Anuska Dey</span>
+        <span>Webpage: Arya Naiya</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* ══════════════════════════════════════════════════
+       DATA  — fill in href values as pages go live
+    ══════════════════════════════════════════════════ */
+    const DATA = {
+      sem6: {
+        subjects: [
+          {
+            id: "atomic",
+            label: "Atomic & Molecular",
+            color: "#7eb8f7",
+            color2: "#60a5fa",
+            profs: [
+              { name: "DB Sir",  notes: "https://arrycd.github.io/DB-Sir-Atomic-Physics/", revision: "#" },
+              { name: "SMB Sir", notes: "#", revision: "#" }
+            ]
+          },
+          {
+            id: "nuclear",
+            label: "Nuclear & Particle",
+            color: "#f9a8d4",
+            color2: "#ec4899",
+            profs: [
+              { name: "MM Maam", notes: "#", revision: "#" },
+              { name: "ARD Sir", notes: "#", revision: "#" }
+            ]
+          },
+          {
+            id: "solidstate",
+            label: "Solid State",
+            color: "#fbbf24",
+            color2: "#f59e0b",
+            profs: [
+              { name: "SMB Sir", notes: "#", revision: "#" }
+            ]
+          },
+          {
+            id: "chem",
+            label: "Chemistry",
+            color: "#6ee7b7",
+            color2: "#34d399",
+            profs: [
+              { name: "MM Maam", notes: "#", revision: "#" }
+            ]
+          }
+        ]
+      },
+      sem4: {
+        subjects: [
+          {
+            id: "statmech",
+            label: "Statistical Mechanics",
+            color: "#a78bfa",
+            color2: "#818cf8",
+            profs: [
+              { name: "Prof.", notes: "#", revision: "#" }
+            ]
+          },
+          {
+            id: "thermo",
+            label: "Thermo & KTG",
+            color: "#6ee7b7",
+            color2: "#34d399",
+            profs: [
+              { name: "Prof.", notes: "#", revision: "#" }
+            ]
+          }
+        ]
+      }
+    };
+
+    /* ══════════════════════════════════════════════════
+       STATE
+    ══════════════════════════════════════════════════ */
+    let activeSem     = "sem6";
+    let activeSubject = DATA.sem6.subjects[0].id;
+
+    /* ══════════════════════════════════════════════════
+       RENDER
+    ══════════════════════════════════════════════════ */
+    function renderSubjectPills() {
+      const row      = document.getElementById("subjectRow");
+      const subjects = DATA[activeSem].subjects;
+      row.innerHTML  = "";
+
+      subjects.forEach(sub => {
+        const pill = document.createElement("button");
+        pill.className = "subject-pill" + (sub.id === activeSubject ? " active" : "");
+        pill.style.setProperty("--pill-color", sub.color);
+        pill.innerHTML = `<span class="subject-pill-dot"></span>${sub.label}`;
+        pill.addEventListener("click", () => {
+          activeSubject = sub.id;
+          renderSubjectPills();
+          renderCards();
+        });
+        row.appendChild(pill);
+      });
+    }
+
+    function renderCards() {
+      const panel   = document.getElementById("contentPanel");
+      const subjects = DATA[activeSem].subjects;
+      const sub      = subjects.find(s => s.id === activeSubject);
+
+      panel.innerHTML = "";
+      panel.classList.remove("panel-enter");
+      void panel.offsetWidth; // reflow to restart animation
+      panel.classList.add("panel-enter");
+
+      if (!sub || !sub.profs.length) {
+        panel.innerHTML = `
+          <div class="empty-state">
+            <p>No notes uploaded yet for this subject</p>
+          </div>`;
+        return;
+      }
+
+      const label = document.createElement("p");
+      label.className = "section-label";
+      label.textContent = sub.label;
+      panel.appendChild(label);
+
+      const grid = document.createElement("div");
+      grid.className = "prof-grid";
+
+      sub.profs.forEach(prof => {
+        const card = document.createElement("div");
+        card.className = "prof-card";
+        card.style.setProperty("--card-color",  sub.color);
+        card.style.setProperty("--card-color2", sub.color2);
+
+        const notesDisabled = prof.notes === "#";
+        const revDisabled   = prof.revision === "#";
+
+        card.innerHTML = `
+          <p class="prof-subject-tag">${sub.label}</p>
+          <h3 class="prof-name">${prof.name}</h3>
+          <div class="prof-actions">
+            <a href="${prof.notes}"
+               class="prof-btn prof-btn-notes"
+               ${notesDisabled ? 'style="opacity:.35;pointer-events:none;"' : 'target="_blank"'}>
+              Notes&nbsp;↗
+            </a>
+            <a href="${prof.revision}"
+               class="prof-btn prof-btn-rev"
+               ${revDisabled ? 'style="opacity:.35;pointer-events:none;"' : 'target="_blank"'}>
+              Revision&nbsp;↗
+            </a>
+          </div>`;
+        grid.appendChild(card);
+      });
+
+      panel.appendChild(grid);
+    }
+
+    /* ══════════════════════════════════════════════════
+       SEMESTER TAB EVENTS
+    ══════════════════════════════════════════════════ */
+    document.getElementById("semTabs").addEventListener("click", e => {
+      const tab = e.target.closest(".sem-tab");
+      if (!tab) return;
+      const sem = tab.dataset.sem;
+      if (sem === activeSem) return;
+
+      activeSem     = sem;
+      activeSubject = DATA[sem].subjects[0].id;
+
+      document.querySelectorAll(".sem-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      renderSubjectPills();
+      renderCards();
+    });
+
+    /* ══════════════════════════════════════════════════
+       INIT
+    ══════════════════════════════════════════════════ */
+    renderSubjectPills();
+    renderCards();
+  </script>
+</body>
+</html>
